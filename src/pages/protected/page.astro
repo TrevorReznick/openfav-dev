@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import IsComponent from '../../components/test/MyComponent.astro'
+
+import { email, user_name } from '../../store'
+
+const _email = email.get()
+const _user_name = user_name.get()
+
+---
+
+<Layout title="Login">
+  <IsComponent
+    email={_email}
+    user_name={_user_name}
+    tagline="Reserved area"
+    title="Openfav web app is running"
+    subtitle="Secure with supabase auth flow"
+    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"
+    
+  />
+</Layout>

@@ -1,0 +1,27 @@
+---
+import FormComponent from "../base/Form.astro"
+
+const {
+  inputs,
+  action,
+  title,
+  text,  
+  classes = {}
+} = Astro.props;
+---
+
+--- ---
+
+<div class="flex items-center min-h-screen bg-bgDark1">
+  <div class="mx-auto container">
+    <div class="max-w-md mx-auto my-10">
+      <div class="text-center">
+        <h1 class="my-3 text-3xl font-semibold text-primaryText">Sign in</h1>
+        <p class="text-secondaryText">Sign in to access your account</p>
+      </div>
+      <div class="m-7">
+        <FormComponent inputs={inputs} />
+      </div>
+    </div>
+  </div>
+</div>

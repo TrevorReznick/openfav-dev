@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro'
+import MyForm from '../components/sub-pages/FormSignin.astro'
+---
+
+<Layout title="Opennfav Login" />
+<Fragment>
+  <MyForm 
+    inputs = {[
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+      {
+        type: 'password',
+        name: 'password',
+        label: 'Password',
+      },
+    ]}
+    action = '/api/v1/auth/signin'
+    title = 'Log in'
+    text = 'Sign in to access your account'
+  />
+</Fragment>

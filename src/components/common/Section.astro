@@ -1,0 +1,16 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+interface Props {
+    containerClass?: string
+}
+
+const { containerClass = '' } = Astro.props
+
+const defaultClass = 'w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0';
+---
+
+<section class={twMerge('flex flex-col items-center', defaultClass, containerClass)}>
+    <slot name="component" />
+</section>
+
