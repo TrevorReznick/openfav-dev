@@ -2,16 +2,6 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
-declare namespace App {
-    interface Locals {
-      email: string,
-      id: string,
-      user_name: string,
-      
-
-    }
-}
-
 interface MainFormData {
   id?: number,
   user_id: string,
