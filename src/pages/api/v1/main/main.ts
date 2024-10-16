@@ -122,8 +122,8 @@ export const POST: APIRoute = async ({ request }) => {
   
 
   const payload = {
-    id_src,
-    id_area,
+    id_src: _id_src,
+    id_area: id_area ? id_area : -1,
     id_cat: id_cat ? id_cat : -1,
     tag_3: tag_3 ? tag_3 : -1,    
     tag_4: tag_4 ? tag_4 : -1,
