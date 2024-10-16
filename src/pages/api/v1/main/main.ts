@@ -114,7 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({
           error: __error.message,
         }),
-        { status: 500 },
+        { status: 501 },
       )
     }
   const msg = 'inserimento avvenuto con successo'
@@ -145,7 +145,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({
         error: ___error.message,
       }),
-      { status: 500 },
+      { status: 501 },
     )
   }
 
