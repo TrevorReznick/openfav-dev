@@ -3,7 +3,21 @@ import { supabase } from '../../../../providers/supabase'
 import type { postData } from '../../../../types/postData'
 
 
+export const GET: APIRoute = async () => {
+  console.log("Welcome to our API!");
 
+  return new Response(
+    JSON.stringify({
+      message: "Welcome to our API!",
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+}
 export const POST: APIRoute = async ({ request }) => {
   
     const {
