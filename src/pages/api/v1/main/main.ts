@@ -15,16 +15,16 @@ export const GET: APIRoute = async () => {
       name,
       title,
       url,
-      categories_tags (        
+      categories_tags ( 
         id_area,
         id_cat,
-        id_provider,            
-        ratings,        
         tag_3,
-        tag_4, 
+        tag_4,
         tag_5,
-        AI_Summary,
-        AI_think
+        id_provider,
+        ratings,
+        AI_think,
+        AI_summary
       ),
       sub_main_table (
         user_id,
