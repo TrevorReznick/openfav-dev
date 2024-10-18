@@ -11,7 +11,20 @@ export const GET: APIRoute = async () => {
       name,
       title,
       description,      
-      url
+      url,
+      categories_tags (        
+        id_area,
+        id_cat,
+        tag_3,
+        tag_4,
+        tag_5
+      ),
+      sub_main_table (
+        accessible,
+        status_code,
+        valid_url,
+        type
+      )
     `)   
     //.order("id", { ascending: true });
     
