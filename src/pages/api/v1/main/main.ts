@@ -16,11 +16,11 @@ export const GET: APIRoute = async () => {
       title,
       url,
       categories_tags (        
-        id_area,//
-        id_cat,//
-        id_provider,//               
+        id_area,
+        id_cat,
+        id_provider,            
         ratings,        
-        tag_3, //
+        tag_3,
         tag_4, 
         tag_5,
         AI_Summary,
