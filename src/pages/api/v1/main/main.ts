@@ -4,19 +4,53 @@ import type { postData } from '../../../../types/postData'
 
 
 export const GET: APIRoute = async () => {
-  console.log("Welcome to our API!");
+  
+  const { data, error } = await supabase
+    .from('main_table').select(`
+      id,
+      description,
+      icon,
+      image,
+      logo,
+      name,
+      title,
+      url,
+      categories_tags ( 
+        id_area,
+        id_cat,
+        tag_3,
+        tag_4,
+        tag_5,
+        id_provider,
+        ratings,
+        AI_think,
+        AI_summary
+      ),
+      sub_main_table (
+        user_id,
+        accessible,
+        domain_exists,
+        html_content_exists,
+        is_public,
+        secure, 
+        status_code,
+        valid_url,
+        type,
+        AI
+      )
+    `)   
+    //.order("id", { ascending: true });
+    
+  if (error) {
+    return new Response(
+      JSON.stringify({
+        error: error.message,
+      }),
+      { status: 500 },
+    );
+  }
 
-  return new Response(
-    JSON.stringify({
-      message: "Welcome to our API!",
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  return new Response(JSON.stringify(data))
 }
 export const POST: APIRoute = async ({ request }) => {
   
