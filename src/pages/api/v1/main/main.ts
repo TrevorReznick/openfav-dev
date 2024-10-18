@@ -13,8 +13,12 @@ export const GET: APIRoute = async () => {
       description,      
       url,
       categories_tags (        
-        id_area,
-        id_cat,
+        areas (
+          area
+        ),
+        categories (
+          category
+        ),        
         tag_3,
         tag_4,
         tag_5
