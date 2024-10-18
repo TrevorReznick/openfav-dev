@@ -8,26 +8,35 @@ export const GET: APIRoute = async () => {
   const { data, error } = await supabase
     .from('main_table').select(`
       id,
+      description,
+      icon,
+      image,
+      logo,
       name,
       title,
-      description,      
       url,
       categories_tags (        
-        areas (
-          area
-        ),
-        categories (
-          category
-        ),        
-        tag_3,
-        tag_4,
-        tag_5
+        id_area,//
+        id_cat,//
+        id_provider,//               
+        ratings,        
+        tag_3, //
+        tag_4, 
+        tag_5,
+        AI_Summary,
+        AI_think
       ),
       sub_main_table (
+        user_id,
         accessible,
+        domain_exists,
+        html_content_exists,
+        is_public,
+        secure, 
         status_code,
         valid_url,
-        type
+        type,
+        AI
       )
     `)   
     //.order("id", { ascending: true });
