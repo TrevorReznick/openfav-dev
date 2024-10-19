@@ -1,0 +1,18 @@
+---
+// BlockComponent.astro
+const { IconComponent, text } = Astro.props
+---
+
+<div class="h-36 sm:h-56 flex flex-col justify-center border border-gray-200 rounded-xl text-center p-4 md:p-5 dark:border-neutral-700">
+    <!-- Icon -->
+    <div class="flex justify-center items-center size-12 bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg mx-auto">
+        <IconComponent />
+    </div>
+    <!-- End Icon -->
+
+    <div class="mt-3">
+        <h3 class="mb-2 text-xl font-bold font-heading text-primaryText text-center">
+            {text}
+        </h3>
+    </div>
+</div>

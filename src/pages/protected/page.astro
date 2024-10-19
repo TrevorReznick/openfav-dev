@@ -1,19 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import IsComponent from '../../components/test/MyComponent.astro'
+import { getCategories } from '../../scripts/requests'
 
 import { email, user_name } from '../../store'
+import { numElements } from '../../scripts/oopps'
 
 const _email = email.get()
 const _user_name = user_name.get()
 
 /* fetch db */
-
-/*
 const categories = await getCategories()
-const mainData = await getMain()
-const lists = await getLists()
-*/
+
+/* map results */
+const areas = [...new Set(categories.map(category => category.area))]
+
+/* num elements */
+
+const numAreas = numElements(areas)
+
+console.log('numero aree', numAreas)
 
 ---
 
@@ -24,8 +30,7 @@ const lists = await getLists()
     tagline="Reserved area"
     title="Openfav web app is running"
     subtitle="Secure with supabase auth flow"
-    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"
-    
+    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"    
   />
 
 </Layout>

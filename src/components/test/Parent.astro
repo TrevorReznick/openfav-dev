@@ -1,0 +1,15 @@
+---
+import IconOne from '../../assets/icons/IconConnection.astro'
+import IconTwo from '../../assets/icons/IconCube.astro'
+import BlockComponent from './IconSet.astro'; // Importa il componente figlio
+---
+
+<section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Prima icona -->
+    <BlockComponent IconComponent={IconOne} text="Strong empathy" />
+
+    <!-- Seconda icona -->
+    <BlockComponent IconComponent={IconTwo} text="Effortless updates" />
+
+    <!-- Aggiungi altre icone -->
+</section>
