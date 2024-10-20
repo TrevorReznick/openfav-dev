@@ -11,7 +11,7 @@ metadata:
   title:
     default: Openfav
     template: "%s — Openfav"
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "\U0001F680 Openfav: Modern Web Development Suite Harness the power of Supabase, Astro, and Tailwind for lightning-fast, scalable web applications."
   robots:
     index: true
     follow: true

@@ -1,20 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Features1  from '../components/main/Features1.astro'
-import IsComponent from '../components/dev/MyMainComponent.astro'
+import Layout from "~/layouts/Layout.astro";
+import Features1 from "~/components/main/Features1.astro";
+import IsComponent from "~/components/dev/MyMainComponent.astro";
 
-import '../assets/css/Theme.css'
-import Features2 from '~/components/main/Features2.astro'
-
+import "~/assets/css/Theme.css";
+import Features2 from "~/components/main/Features2.astro";
 ---
 
 <Layout title="Login">
-  <IsComponent    
+  <IsComponent
     tagline="Welome in Openfav Home Page"
     title="Openfav, Workflow Resources Management"
     subtitle="Organize, classify, and manage your resources with AI-driven classificaction."
     content="Organize, classify, and manage your projects with AI-driven precision."
   />
   <Features1 />
-
 </Layout>
