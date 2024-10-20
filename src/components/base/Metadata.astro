@@ -1,0 +1,74 @@
+---
+import { mergeDeepRight, pathOr } from "ramda";
+import { AstroSeo } from "@astrolib/seo";
+
+import type { Props as AstroSeoProps } from "@astrolib/seo";
+
+import { SITE, METADATA, I18N } from "openfav:config";
+import type { MetaData } from "~/types";
+
+import { adaptOpenGraphImages } from "~/scripts/third-parts/images";
+
+export interface Props extends MetaData {
+  dontUseTitleTemplate?: boolean;
+}
+
+const {
+  title,
+  ignoreTitleTemplate = false,
+  robots = {},
+  description,
+  openGraph = {},
+  twitter = {},
+} = Astro.props;
+
+const seoProps: AstroSeoProps = mergeDeepRight(
+  {
+    title: "",
+    titleTemplate: "%s",
+    noindex: true,
+    nofollow: true,
+    description: undefined,
+    openGraph: {
+      site_name: SITE?.name,
+      images: [],
+      locale: I18N?.language || "en",
+      type: "website",
+    },
+    twitter: {
+      cardType: openGraph?.images?.length ? "summary_large_image" : "summary",
+    },
+  },
+  {
+    title: METADATA?.title?.default,
+    titleTemplate: METADATA?.title?.template,
+    noindex:
+      typeof METADATA?.robots?.index !== "undefined"
+        ? !METADATA.robots.index
+        : undefined,
+    nofollow:
+      typeof METADATA?.robots?.follow !== "undefined"
+        ? !METADATA.robots.follow
+        : undefined,
+    description: METADATA?.description,
+    openGraph: METADATA?.openGraph,
+    twitter: METADATA?.twitter,
+  },
+  {
+    title: title,
+    titleTemplate: ignoreTitleTemplate ? "%s" : undefined,
+    noindex: typeof robots?.index !== "undefined" ? !robots.index : undefined,
+    nofollow:
+      typeof robots?.follow !== "undefined" ? !robots.follow : undefined,
+    description: description,
+    twitter: twitter,
+  }
+);
+---
+
+<AstroSeo
+  {...{
+    ...seoProps,
+    openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site),
+  }}
+/>

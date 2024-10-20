@@ -6,27 +6,26 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 
+import { I18N } from "openfav:config";
 import NavBar from "~/components/main/Navbar.astro";
+import Metadata from "~/components/base/Metadata.astro";
 import type { MetaData as MetaDataType } from "~/types";
 
 export interface Props {
   title: string;
+  metadata?: MetaDataType;
 }
 
 const { title } = Astro.props;
+
+const { metadata = {} } = Astro.props;
+const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-bgDark2">
+<html lang={language} dir={textDirection} "bg-bgDark2">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Dark themed website template built on AstroJS, designed for fictional startup"
-    />
+    <Metadata {...metadata} />
     <title>{title}</title>
   </head>
   <body class="bg-bgDark2">
