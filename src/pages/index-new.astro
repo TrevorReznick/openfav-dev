@@ -1,38 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import IsComponent from '../components/dev/MyComponentDev.astro'
-import { getCategories } from '../scripts/requests'
+import Features1  from '../components/main/Features1.astro'
+import IsComponent from '../components/dev/MyMainComponent.astro'
 
 import '../assets/css/Theme.css'
-
-import { email, user_name } from '../store'
-import { numElements } from '../scripts/oopps'
-
-const _email = email.get()
-const _user_name = user_name.get()
-
-/* fetch db */
-const categories = await getCategories()
-
-/* map results */
-const areas = [...new Set(categories.map(category => category.area))]
-
-/* num elements */
-
-const numAreas = numElements(areas)
-
-console.log('numero aree', numAreas)
+import Features2 from '~/components/main/Features2.astro'
 
 ---
 
 <Layout title="Login">
-  <IsComponent
-    email={_email}
-    user_name={_user_name}
-    tagline="Dynamic Icon Grid"
-    title="Openfav, Staging Page"
-    subtitle="Secure with supabase auth flow"
-    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"    
+  <IsComponent    
+    tagline="Welome in Openfav Home Page"
+    title="Openfav, Workflow Resources Management"
+    subtitle="Organize, classify, and manage your resources with AI-driven classificaction."
+    content="Organize, classify, and manage your projects with AI-driven precision."
   />
+  <Features1 />
 
 </Layout>

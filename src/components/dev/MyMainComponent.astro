@@ -1,0 +1,64 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+const {    
+    title = await Astro.slots.render("title"),
+    subtitle = await Astro.slots.render("subtitle"),  
+    tagline = await Astro.props.tagline("tagline"),
+    content = await Astro.props.tagline("content"),
+    classes = {},
+} = Astro.props
+
+const {
+    container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
+    title: titleClass = 'block-big-title text-center mb-6 px-8 sm:px-24 md:px-48',  
+    subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+    content: contentClass = "mb-10 text-secondaryText leading-loose",
+} = classes
+---
+
+<section class={twMerge("flex flex-col items-center", containerClass)}>
+    {
+        tagline && (
+        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+            {tagline}
+        </p>
+        )
+    }
+    {
+        title && (
+        <h1
+            class={twMerge('',
+                titleClass
+            )}
+            set:html={title}
+        />
+        )
+    }
+    {
+        subtitle && (
+        <h2 class={twMerge("mt-0", subtitleClass)} set:html={subtitle} />
+        )
+    }    
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <!-- Button Grid -->
+        <div
+            class="flex flex-col gap-2 sm:flex-row mt-14 mb-24 sm:mb-40 justify-center"
+        >
+            <button
+                class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-primaryColor hover:bg-secondaryColor border-primaryColor transition"
+                aria-label="Get started"
+            >
+                Get Started
+            </button>
+            <button
+                class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-bgDark2 hover:bg-bgDark3 border-primaryColor transition"
+                aria-label="Live demo"
+            >
+                Live demo
+            </button>
+        </div>
+        <!-- End of Button Grid -->                 
+        </section>
+    </div>
+</section>
