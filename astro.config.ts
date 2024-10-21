@@ -5,6 +5,7 @@ import { defineConfig, passthroughImageService } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 import partytown from "@astrojs/partytown";
+import icon from 'astro-icon';
 
 import type { AstroIntegration } from "astro";
 import openfav from "./vendor/integrations";
