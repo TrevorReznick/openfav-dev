@@ -32,6 +32,22 @@ export default defineConfig({
     openfav({
       config: "./src/config.yaml",
     }),
+    icon({
+      include: {
+        tabler: ['*'],
+        'flat-color-icons': [
+          'template',
+          'gallery',
+          'approval',
+          'document',
+          'advertising',
+          'currency-exchange',
+          'voice-presentation',
+          'business-contact',
+          'database',
+        ],
+      },
+    }),
     ...whenExternalScripts(() =>
       partytown({
         config: { forward: ["dataLayer.push"] },
