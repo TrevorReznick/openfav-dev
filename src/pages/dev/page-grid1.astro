@@ -1,0 +1,43 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import IsComponent from "~/components/dev/MyComponentDev.astro";
+import { getCategories } from "~/scripts/requests";
+import type { MetaData } from "~/types";
+
+import "../../assets/css/Theme.css";
+
+import { email, user_name } from "~/store";
+import { numElements } from "~/scripts/oopps";
+
+export interface Props {
+  metadata?: MetaData;
+}
+
+const { metadata } = Astro.props;
+
+const _email = email.get();
+const _user_name = user_name.get();
+
+/* fetch db */
+const categories = await getCategories();
+
+/* map results */
+const areas = [...new Set(categories.map((category) => category.area))];
+
+/* num elements */
+
+const numAreas = numElements(areas);
+
+console.log("numero aree", numAreas);
+---
+
+<Layout title="Login" metadata={metadata}>
+  <IsComponent
+    email={_email}
+    user_name={_user_name}
+    tagline="Dynamic Icon Grid"
+    title="Openfav, Staging Page"
+    subtitle="Secure with supabase auth flow"
+    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"
+  />
+</Layout>

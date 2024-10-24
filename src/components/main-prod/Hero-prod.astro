@@ -1,0 +1,44 @@
+---
+import { twMerge } from 'tailwind-merge'
+import CallToAction from '~/components/main-prod/CallToAction.astro'
+
+const {    
+    title = await Astro.slots.render("title"),
+    subtitle = await Astro.slots.render("subtitle"),  
+    tagline = await Astro.props.tagline("tagline"),
+    content = await Astro.props.tagline("content"),
+    classes = {},
+} = Astro.props
+
+const {
+    title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4"',
+    subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+    content: contentClass = "mb-10 text-secondaryText leading-loose",
+} = classes
+---
+
+<div class="text-center">
+    {
+        tagline && (
+        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+            {tagline}
+        </p>
+        )
+    }
+    {
+        title && (
+        <h1
+            class={twMerge('',
+                titleClass
+            )}
+            set:html={title}
+        />
+        )
+    }
+    {
+        subtitle && (
+            <h2 class={twMerge("mt-0", subtitleClass)} set:html={subtitle} />
+        )
+    }
+    <CallToAction />
+</div>

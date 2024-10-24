@@ -1,0 +1,26 @@
+---
+import Layout from "~/layouts/Layout.astro"
+import IsComponent from "~/components/sub-pages/MyComponent.astro"
+import MySection from "~/components/common/Section.astro"
+---
+
+<Layout title="Test Component">
+  <IsComponent title="hello" subititle="subtitle" tagline="welcome">
+    <Fragment slot="component">
+      <div class="flex flex-col sm:flex-row gap-2 justify-center">
+        <button
+          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-primaryColor hover:bg-secondaryColor border-primaryColor transition"
+          aria-label="Get started"
+        >
+          Get Started
+        </button>
+        <button
+          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-bgDark2 hover:bg-bgDark3 border-primaryColor transition"
+          aria-label="Live demo"
+        >
+          Live demo
+        </button>
+      </div>
+    </Fragment>
+  </IsComponent>
+</Layout>

@@ -1,55 +1,38 @@
 ---
 import Layout from '~/layouts/Layout.astro'
-import Hero from '~/components/main-prod/Hero.astro'
+import Hero from '~/components/main-prod/Hero-prod.astro'
 import Content from '~/components/dev/ContentDev.astro'
+import Section from '~/components/main-prod/SecionContainer.astro'
+import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
 
-import '~/assets/css/Theme.css';
+import { FeaturedItems1 } from '~/config/features'
+
+import '~/assets/css/Theme.css'
 
 ---
 
-<Layout title="Login">
-  <Hero
-    tagline="Welome in Openfav Home Page"
-    title="Openfav, Workflow Resources Management"
-    subtitle="Organize, classify, and manage your resources with AI-driven classificaction."
-    content="Organize, classify, and manage your projects with AI-driven precision."
-  />
-  <!--<Features1 /> -->
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content>
+<Layout title="test">
+    <Section>
+        <Hero 
+            slot="header"
+            tagline="Who Am I Tagline"
+            title="Who Am I Title"
+            subtitle="Discover more about yourself with AI insights."
+            content="Manage your profile and preferences."
+        />
+        <Content 
+            slot="content"
+            isReversed
+            items={FeaturedItems1}
+            image={{
+                src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+                alt: 'Features Image',
+            }}
+        >
+            <Fragment slot="content">
+                <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-2">Main Features</h3>
+            </Fragment>
+        </Content>
+    </Section>
+    <ScrollUpButton />
 </Layout>
