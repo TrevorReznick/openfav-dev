@@ -38,6 +38,7 @@ export default defineConfig({
         tabler: ['*'],
         'flat-color-icons': [
           'template',
+          'bookmark',
           'gallery',
           'approval',
           'document',
