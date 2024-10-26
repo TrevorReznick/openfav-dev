@@ -1,0 +1,47 @@
+---
+import Timeline from '~/components/dev/new/Timeline.astro'
+import Image from '~/components/base/Image.astro'
+import type { Steps as Props } from '~/types/astrowind'
+
+
+const {
+  items = [],  
+  image = await Astro.slots.render('image'),
+  isReversed = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props
+
+---
+
+
+  <div class:list={['flex flex-col gap-8 md:gap-12', { 'md:flex-row-reverse': isReversed }, { 'md:flex-row': image }]}>
+    <div class:list={['md:py-4 md:self-center', { 'md:basis-1/2': image }, { 'w-full': !image }]}>
+      
+      <Timeline
+        items={items} 
+        classes={classes?.items as Record<string, never>} 
+      />
+    </div>
+    {
+      image && (
+        <div class="relative md:basis-1/2">
+          {typeof image === 'string' ? (
+            <Fragment set:html={image} />
+          ) : (
+            <Image
+              class="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
+              widths={[400, 768]}
+              sizes="(max-width: 768px) 100vw, 432px"
+              width={432}
+              height={768}
+              layout="cover"
+              src={image?.src}
+              alt={image?.alt || ''}
+            />
+          )}
+        </div>
+      )
+    }
+  </div>
+
