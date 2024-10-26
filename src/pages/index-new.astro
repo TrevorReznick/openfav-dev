@@ -1,8 +1,8 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import Hero from '~/components/main-prod/Hero-prod.astro'
-import Features from '~/components/dev/FeaturesDev.astro'
-import Services from '~/components/main-prod/Services.astro'
+import Services from '~/components/dev/ServicesDev.astro'
+import Features from '~/components/main-prod/Features.astro'
 import Section from '~/components/main-prod/SecionContainer.astro'
 import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
 import Steps from '~/components/dev/new/Steps.astro'
@@ -24,7 +24,7 @@ import '~/assets/css/Theme.css'
             subtitle="Streamline your production, amplify your creativity."
             content="Manage your profile and preferences."
         />
-        <Features
+        <Services
             slot="features"
             tagline="Workspaces"
             title="What services do we provide?"
@@ -34,8 +34,8 @@ import '~/assets/css/Theme.css'
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
-        </Features>
-        <Services 
+        </Services>
+        <Features 
             slot="content"
             isReversed
             items={FeaturedItems1}
@@ -47,7 +47,7 @@ import '~/assets/css/Theme.css'
             <Fragment slot="content">
                 <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-2">Main Features</h3>
             </Fragment>
-        </Services>
+        </Features>
         <Steps
             slot="steps"
             items={StepItems}
