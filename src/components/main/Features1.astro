@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets'
-import feature1 from '../../assets/images/feature1.jpg'
-import feature2 from '../../assets/images/feature2.jpg'
-import feature3 from '../../assets/images/feature3.jpg'
-import feature4 from '../../assets/images/feature4.jpg'
-import CheckArrowIcon from '../../assets/icons/CheckArrowIcon.astro'
+import feature1 from '~/assets/images/feature1.jpg'
+import feature2 from '~/assets/images/feature2.jpg'
+import feature3 from '~/assets/images/feature3.jpg'
+import feature4 from '~/assets/images/feature4.jpg'
+import CheckArrowIcon from '~/assets/icons/CheckArrowIcon.astro'
+import * as fonts from '~/config/constant-fonts'
 ---
 
 <section
@@ -15,13 +16,13 @@ import CheckArrowIcon from '../../assets/icons/CheckArrowIcon.astro'
     <div class="w-full lg:w-1/2 mb-12 lg:mb-0">
       <div class="mx-auto lg:mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-unset">
         <span class="block-subtitle">What's new in Openfav?</span>
-        <h2 class="mt-6 mb-8 text-4xl lg:text-5xl block-big-title">
+        <h2 class={fonts.SECTION_TITLE}>
           Stop lose track of important resources.
         </h2>
-        <p class="mb-10 text-secondaryText leading-loose">
+        <p class={fonts.SECTION_SUBITITLE}>
           Organize and retrieve them in seconds; say goodbye to endlessly searching for links. Organize, tag, and find your resources with ease.
         </p>
-        <ul class="mb-6 text-primaryText">
+        <ul class={fonts.SECTION_LIST_WHITE}>
           <li class="mb-4 flex">
             <CheckArrowIcon />
             <span>Let the AI classify your resources for you, ensuring everything is organized and easy to find</span>
