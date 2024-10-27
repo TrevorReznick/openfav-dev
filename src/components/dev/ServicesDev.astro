@@ -3,35 +3,11 @@ import { twMerge } from 'tailwind-merge'
 import NewGrid from '~/components/dev/Testimonials.astro'
 
 
-const _items=
-[
-      {
-        title: 'Favourites',
-        description:
-          'Manage and organize your bookmarks following your field of interest; export your lists in the browsers.',
-        icon: 'flat-color-icons:bookmark',
-      },
-      {
-        title: 'Production',
-        description:
-          'Manage and organize your production and developement flow; generate personal blog or project portfolio.',
-        icon: 'flat-color-icons:workflow',
-      },
-      {
-        title: 'AI Assist',
-        description:
-          'Use AI to do tasks for categorize automatically useful resources.',
-        icon: 'tabler:ai',        
-      },
-      
-]
-
 
 const {    
     tagline = await Astro.props.render("tagline"),
     title = await Astro.props.render("title"),
-    subtitle = await Astro.slots.render("subtitle"), 
-    items = _items,
+    subtitle = await Astro.slots.render("subtitle"),    
     columns = 3,
     defaultIcon, 
     classes = {},
