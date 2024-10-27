@@ -9,5 +9,10 @@ export const FAQ_H3_SUBTITLE = 'content-title pt-3 sm:pt-0 pr-8 sm:pr-0'
 export const SECTION_TITLE = 'mt-6 mb-8 text-4xl lg:text-5xl block-big-title'
 export const SECTION_SUBITITLE = 'mb-10 text-secondaryText leading-loose'
 export const SECTION_LIST_WHITE = 'mb-6 text-primaryText'
+export const CARD_TITLE = 'content-text-white font-medium'
+export const CARD_TEXT = 'content-text-gray'
+export const PRICE_CARD_TITLE = 'mb-2 text-xl font-bold font-heading text-primaryText text-left'
+export const PRICE_CARD_LIST = 'mb-2 2xl:mb-6 text-primaryText'
+export const PRICE_CARD_CONTENT = 'mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loose text-left'
 
 

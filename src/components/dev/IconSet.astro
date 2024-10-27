@@ -1,6 +1,6 @@
 ---
-// BlockComponent.astro
 const { IconComponent, text } = Astro.props
+import * as fonts from '~/config/constant-fonts'
 ---
 <!--
     <div
@@ -17,10 +17,10 @@ const { IconComponent, text } = Astro.props
 
     <div class="mt-3">
         <!-- <h3 class="mb-2 text-xl font-bold font-heading text-primaryText text-center">-->
-        <div class="content-text-white font-medium">
+        <div class={fonts.CARD_TITLE}>
             {text}
         </div>
     </div>
-    <p class="content-text-gray">The simplest way to keep your portfolio always up-to-date.</p>
+    <p class={fonts.CARD_TEXT}>The simplest way to keep your portfolio always up-to-date.</p>
 </div>
 
