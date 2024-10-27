@@ -1,6 +1,7 @@
 ---
 import { twMerge } from 'tailwind-merge'
 import CallToAction from '~/components/main-prod/CallToAction.astro'
+import * as fonts from '~/config/constant-fonts'
 
 const {    
     title = await Astro.slots.render("title"),
@@ -11,8 +12,8 @@ const {
 } = Astro.props
 
 const {
-    title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4"',
-    subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+    title: titleClass = fonts.H1_HERO,
+    subtitle: subtitleClass = fonts.H2_SUBTITLE,
     content: contentClass = "mb-10 text-secondaryText leading-loose",
 } = classes
 ---

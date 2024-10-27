@@ -1,4 +1,6 @@
 ---
+import * as fonts from '~/config/constant-fonts'
+
 const FAQData = [
   {
     question: "Can I upgrade or downgrade my plan at any time?",
@@ -28,8 +30,8 @@ const FAQData = [
   <div class="absolute -top-10" id="FAQ"></div>
   <div class="relative z-10 container px-2 sm:px-8 lg:px-4 mx-auto w-11/12 sm:w-full">
     <div class="md:max-w-4xl mx-auto">
-      <p class="mb-7 block-subtitle text-center">Have any questions?</p>
-      <h2 class="mb-16 block-big-title text-center">
+      <p class={fonts.FAQ_HEADLINE}>Have any questions?</p>
+      <h2 class={fonts.FAQ_H2_TITLE}>
         Frequently Asked Questions
       </h2>
       <div class="mb-11 flex flex-wrap -m-1">
