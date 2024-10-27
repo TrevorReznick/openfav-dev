@@ -1,48 +1,15 @@
 ---
-import { twMerge } from 'tailwind-merge'
-import NewGrid from '~/components/dev/Testimonials.astro'
+import Headline from './Headline.astro'
 
+const { tagline, title, subtitle } = Astro.props
 
-
-const {    
-    tagline = await Astro.props.render("tagline"),
-    title = await Astro.props.render("title"),
-    subtitle = await Astro.slots.render("subtitle"),    
-    columns = 3,
-    defaultIcon, 
-    classes = {},
-} = Astro.props
-
-const {
-    title: titleClass = 'block-big-title text-center mb-6 px-8 sm:px-24 md:px-48',
-    subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
-} = classes
 ---
+<Fragment >
+    <Headline 
+        title={title} tagline={tagline} subtitle={subtitle}
+    />
+    <slot/>
+</Fragment>
 
+    
 
-
-<div class="text-center">
-    {
-        tagline && (
-        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
-            {tagline}
-        </p>
-        )
-    }
-    {
-        title && (
-        <h1
-            class={twMerge('',
-                titleClass
-            )}
-            set:html={title}
-        />
-        )
-    }
-    {
-        subtitle && (
-            <h2 class={twMerge("mt-0", subtitleClass)} set:html={subtitle} />
-        )
-    }
-    <NewGrid />
-</div>

@@ -1,17 +1,18 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import Hero from '~/components/main-prod/Hero-prod.astro'
-import Services from '~/components/dev/ServicesDev.astro'
-import Features from '~/components/main-prod/Features.astro'
+import IsComponent from '~/components/dev/ServicesDev.astro'
 import Section from '~/components/main-prod/SecionContainer.astro'
 import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
 import Steps from '~/components/main-prod/Steps.astro'
+
+import NewGrid from '~/components/dev/Testimonials.astro'
+import Features from '~/components/main-prod/Features.astro'
 
 
 import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
 
 import '~/assets/css/Theme.css'
-
 
 ---
 
@@ -24,39 +25,53 @@ import '~/assets/css/Theme.css'
             subtitle="Streamline your production, amplify your creativity."
             content="Manage your profile and preferences."
         />
-        <Services
+        <IsComponent
             slot="features"
             tagline="Workspaces"
             title="What services do we provide?"
             subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."
-            items={FeaturedItems2}
+            
         >
+            <NewGrid />   
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
-        </Services>
-        <Features 
+        </IsComponent>
+        <IsComponent
             slot="content"
-            isReversed
-            items={FeaturedItems1}
-            image={{
-                src: '/astronaut.png',
-                alt: 'Features Image',
-            }}
+            tagline="What's new in Openfav"
+            title="Manage resources efforlessy"
+            subtitle="Get a look as our platform works"
         >
-            <Fragment slot="content">
-                <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-2">Main Features</h3>
+            <Features 
+                items={FeaturedItems1}
+                image={{
+                    src: '/astronaut.png',
+                    alt: 'Features Image',
+                }}    
+            />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
-        </Features>
-        <Steps
+        </IsComponent>
+        <IsComponent
             slot="steps"
-            items={StepItems}
-            title="Get your dream website up and running in no time with AstroWind."
-            image={{
-                src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-                alt: 'Steps image',
-            }}
-        />
+            tagline="How to use Openfav?"
+            title="Simply usage explanation"
+            subtitle="Get you workflow by simply steps"            
+        >
+            <Steps 
+                items={StepItems}
+                title="Get your dream website up and running in no time with AstroWind."
+                image={{
+                    src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+                    alt: 'Steps image',
+                }}
+            />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
     </Section>
     <ScrollUpButton />
 </Layout>

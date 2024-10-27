@@ -1,8 +1,5 @@
 ---
 import { twMerge } from 'tailwind-merge'
-import NewGrid from '~/components/dev/Testimonials.astro'
-
-
 
 const {    
     tagline = await Astro.props.render("tagline"),
@@ -16,9 +13,6 @@ const {
     subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
 } = classes
 ---
-
-
-
 <div class="text-center">
     {
         tagline && (
@@ -42,5 +36,4 @@ const {
             <h2 class={twMerge("mt-0", subtitleClass)} set:html={subtitle} />
         )
     }
-    <NewGrid />
 </div>

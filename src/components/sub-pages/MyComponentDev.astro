@@ -1,0 +1,45 @@
+---
+import { twMerge } from "tailwind-merge";
+/*import myButton from "../base/test-buttons/Button.astro";*/
+
+const {  
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),  
+  tagline = await Astro.props.tagline("tagline"),
+  classes = {},
+} = Astro.props
+
+const {
+  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
+  title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4"',
+  subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+  content: contentClass = "mb-10 text-secondaryText leading-loose",
+} = classes
+---
+
+<section class={twMerge("flex flex-col items-center", containerClass)}>
+    {
+        tagline && (
+        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+            {tagline}
+        </p>
+        )
+    }
+    {
+        title && (
+        <h1
+            class={twMerge(
+            "font-extrabold tracking-tight text-primary",
+            titleClass
+            )}
+            set:html={title}
+        />
+        )
+    }
+    {
+        subtitle && (
+            <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome feetlover`} />
+        )
+    }
+    <slot name="dev-component" />
+</section>
