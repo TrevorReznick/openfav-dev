@@ -1,7 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { twMerge } from 'tailwind-merge';
-import type { Item } from '~/types';
+import { Icon } from 'astro-icon/components'
+import { twMerge } from 'tailwind-merge'
+import type { Item } from '~/types'
+import * as fonts from '~/config/constant-fonts'
 
 export interface Props {
   items?: Array<Item>;
@@ -15,9 +16,9 @@ const {
   container: containerClass = '',
   panel: panelClass = '',
   title: titleClass = '',
-  description: descriptionClass = '',
-  icon: defaultIconClass = 'primaryText border-primary',
-} = classes;
+  description: descriptionClass = fonts.SECTION_LIST_WHITE,
+  icon: defaultIconClass = fonts.ICON_BG,
+} = classes
 ---
 
 {
@@ -37,7 +38,7 @@ const {
                 {(icon || defaultIcon) && (
                   <Icon
                     name={icon || defaultIcon}
-                    class={twMerge('w-10 h-10 p-2 rounded-full border-2 text-white border-white', defaultIconClass, itemClasses?.icon)}
+                    class={twMerge('w-10 h-10 p-2 rounded-full border-1 text-white border-white', defaultIconClass, itemClasses?.icon)}
                   />
                 )}
               </div>
@@ -48,7 +49,7 @@ const {
             {title && <p class={twMerge('text-white font-bold text-xl', titleClass, itemClasses?.title)} set:html={title} />}
             {description && (
               <p
-                class={twMerge('timeline-description mt-2 text-white', descriptionClass, itemClasses?.description)}
+                class={twMerge('timeline-description mt-2', descriptionClass, itemClasses?.description)}
                 set:html={description}
               />
             )}

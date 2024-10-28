@@ -14,5 +14,6 @@ export const CARD_TEXT = 'content-text-gray'
 export const PRICE_CARD_TITLE = 'mb-2 text-xl font-bold font-heading text-primaryText text-left'
 export const PRICE_CARD_LIST = 'mb-2 2xl:mb-6 text-primaryText'
 export const PRICE_CARD_CONTENT = 'mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loose text-left'
+export const ICON_BG = 'bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg'
 
 
