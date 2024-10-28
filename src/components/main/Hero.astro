@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import  InvitationModal  from './InvitationModal.astro'
 import dashboard from '../../assets/images/dashboard.jpg'
+import * as fonts from '~/config/constant-fonts'
 ---
 
 <section
@@ -12,21 +13,21 @@ import dashboard from '../../assets/images/dashboard.jpg'
 <!-- Or, if you prefer using the global function: -->
   <div class="w-full md:w-[800px] xl:w-[900px] flex flex-col justify-center items-center pt-16 md:pt-16 lg:pt-20 text-center">
     <div class="animate-fadeIn">
-      <h3 class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+      <h3 class={fonts.P_TAGLINE}>
         Discover new data flow
       </h3>
     </div>
     <div class="animate-fadeIn">
-      <div class="text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4">
+      <div class={fonts.H1_HERO}>
         <h1 class="inline md:hidden">Openfav</h1>
         <h1 class="hidden md:inline">Openfav: Modern Web</h1>
       </div>
-      <h1 class="mt-2 sm:mt-2 text-4xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-20 md:px-24 lg:px-24">
+      <h1 class={fonts.H1_HERO_SUB}>
         Development Suite
       </h1>
     </div>
     <div class="animate-fadeIn">
-      <h2 class="text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48">
+      <h2 class={fonts.H2_SUBTITLE}>
         Harness the power of Supabase, Astro, and Tailwind for lightning-fast, scalable web applications.
       </h2>
     </div>

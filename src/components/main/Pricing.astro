@@ -1,6 +1,8 @@
 ---
-import  CheckArrowIcon  from '../../assets/icons/CheckArrowIcon.astro'
-import InvitationModal from './InvitationModal.astro'
+import  CheckArrowIcon  from '~/assets/icons/CheckArrowIcon.astro'
+import InvitationModal from '~/components/main/InvitationModal.astro'
+
+import * as fonts from '~/config/constant-fonts'
 
 const pricingData = [
   "Seamless integration",
@@ -61,7 +63,7 @@ const pricingPlans = [
         {pricingPlans.map((plan) => (
           <div class="w-[350px] sm:w-[380px] lg:w-1/3 px-4 mb-8 lg:mb-0">
             <div class="p-8 bg-bgDark3 rounded-3xl">
-              <h3 class="mb-2 text-xl font-bold font-heading text-primaryText text-left">
+              <h3 class={fonts.PRICE_CARD_TITLE}>
                 {plan.title}
               </h3>
               <div class="flex justify-start items-end">
@@ -70,10 +72,10 @@ const pricingPlans = [
                 </div>
                 <div class="text-gray-500 pricing-period">/ month</div>
               </div>
-              <p class="mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loose text-left">
+              <p class={fonts.PRICE_CARD_CONTENT}>
                 {plan.description}
               </p>
-              <ul class="mb-2 2xl:mb-6 text-primaryText">
+              <ul class={fonts.PRICE_CARD_LIST}>
                 {pricingData.map((text) => (
                   <li class="mb-4 flex">
                     <CheckArrowIcon />

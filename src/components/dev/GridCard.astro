@@ -1,13 +1,10 @@
 ---
 import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
-import testimonial1 from '../../assets/images/testimonial1.png'
-import testimonial2 from '../../assets/images/testimonial2.png'
-import testimonial3 from '../../assets/images/testimonial3.png'
 import IconSet from './IconSet.astro'
-import IconSquares from '../../assets/icons/IconSquares.astro'
-import IconEnergy from '../../assets/icons/IconEnergy.astro'
-import IconConnection from '../../assets/icons/IconConnection.astro'
+import IconSquares from '~/assets/icons/IconSquares.astro'
+import IconEnergy from '~/assets/icons/IconEnergy.astro'
+import IconConnection from '~/assets/icons/IconConnection.astro'
 
 const testimonialsData = [
   {
@@ -15,7 +12,6 @@ const testimonialsData = [
     sub_title: "Pantyhose lover",
     content:
       "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
-    image: testimonial1,
     IconComponent: IconSquares
 
   },
@@ -24,7 +20,6 @@ const testimonialsData = [
     sub_title: "Founder of Dashflow",
     content:
       "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
-    image: testimonial2,
     IconComponent: IconConnection
   },
   {
@@ -32,11 +27,10 @@ const testimonialsData = [
     sub_title: "Founder of Dashflow",
     content:
       "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
-    image: testimonial3,
     IconComponent: IconEnergy
   },
   
-];
+]
 ---
 
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

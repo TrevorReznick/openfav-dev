@@ -1,11 +1,11 @@
-export interface FeatureItem1 {
+export interface FeatureItem {
     title: string;
-    description: string;
+    description?: string;
     icon: string;
 }
   
   // Puoi poi usare il tipo nell'array di items
-export const FeaturedItems1: FeatureItem1[] = [
+export const FeaturedItems1: FeatureItem[] = [
     {
         title: 'High-Quality Designs',
         description:
@@ -31,3 +31,50 @@ export const FeaturedItems1: FeatureItem1[] = [
         icon: 'tabler:carousel-horizontal',
     },
 ]
+
+export const FeaturedItems2: FeatureItem[] = [
+    {
+        title: 'Favourites',
+        description:
+            'Manage and organize your bookmarks following your field of interest; export your lists in the browsers.',
+        icon: 'flat-color-icons:bookmark',
+    },
+    {
+        title: 'Production',
+        description:
+            'Manage and organize your production and developement flow; generate personal blog or project portfolio.',
+        icon: 'flat-color-icons:workflow',
+    },
+    {
+        title: 'AI Assist',
+        description:
+            'Use AI to do tasks for categorize automatically useful resources.',
+        icon: 'tabler:ai',        
+    },
+]
+
+export const StepItems: FeatureItem[] = [
+    {
+        title: 'Step 1: <span class="font-medium">Download</span>',
+        description:
+        "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
+        icon: 'tabler:package',
+    },
+    {
+        title: 'Step 2: <span class="font-medium">Add content</span>',
+        description:
+        "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
+        icon: 'tabler:letter-case',
+    },
+    {
+        title: 'Step 3: <span class="font-medium">Customize styles</span>',
+        description:
+        'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
+        icon: 'tabler:paint',
+    },
+    {
+        title: 'Ready!',
+        icon: 'tabler:check',
+    },
+]
+

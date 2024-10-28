@@ -1,0 +1,18 @@
+export const H1_HERO = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4'
+export const H1_HERO_SUB = 'mt-2 sm:mt-2 text-4xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-20 md:px-24 lg:px-24'
+export const H2_SUBTITLE = 'text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48'
+export const P_TAGLINE = 'text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold'                           
+export const FAQ_TITLE = 'mb-7 block-subtitle text-center'
+export const FAQ_HEADLINE = 'mb-7 block-subtitle text-center'
+export const FAQ_H2_TITLE = 'mb-16 block-big-title text-center'
+export const FAQ_H3_SUBTITLE = 'content-title pt-3 sm:pt-0 pr-8 sm:pr-0'
+export const SECTION_TITLE = 'mt-6 mb-8 text-4xl lg:text-5xl block-big-title'
+export const SECTION_SUBITITLE = 'mb-10 text-secondaryText leading-loose'
+export const SECTION_LIST_WHITE = 'mb-6 text-primaryText'
+export const CARD_TITLE = 'content-text-white font-medium'
+export const CARD_TEXT = 'content-text-gray'
+export const PRICE_CARD_TITLE = 'mb-2 text-xl font-bold font-heading text-primaryText text-left'
+export const PRICE_CARD_LIST = 'mb-2 2xl:mb-6 text-primaryText'
+export const PRICE_CARD_CONTENT = 'mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loose text-left'
+
+
