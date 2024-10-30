@@ -8,25 +8,23 @@ import IconConnection from '~/assets/icons/IconConnection.astro'
 
 const testimonialsData = [
   {
-    title: "Manage Favorites",
-    sub_title: "Pantyhose lover",
+    title: "Manage Favorites",    
     content:
-      "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
+      'Organize all your resources, from links to hosting accounts, in one easily accessible place.',
     IconComponent: IconSquares
 
   },
   {
-    title: "Yor Saved Lists",
-    sub_title: "Founder of Dashflow",
+    title: "Yor Saved Lists",    
     content:
-      "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
+      'Create custom lists for specific projects or areas of interest, keeping everything tidy and efficient.',
     IconComponent: IconConnection
   },
   {
     title: "AI Proposals",
     sub_title: "Founder of Dashflow",
     content:
-      "The powerful analytic tools have helped us streamline our processes and make data-driven decisions that positively impact our efficiency. Tailcast has been a game-changer for our business. The platform is easy to use, and the insights we've gained have driven significant improvements.",
+      'Artificial intelligence classifies and suggests relevant resources, helping you discover new tools and optimize your workflow.',
     IconComponent: IconEnergy
   },
   
@@ -42,7 +40,11 @@ const testimonialsData = [
           <div
             class="w-11/12 sm:w-4/5 md:w-[560px] lg:w-1/3 main-border-gray-darker rounded-xl bg-bgDark3 flex flex-col px-6 py-4  text-center"
           >
-             <IconSet IconComponent={testimonial.IconComponent} text={testimonial.title} />
+             <IconSet 
+              IconComponent={testimonial.IconComponent} 
+              title={testimonial.title} 
+              content={testimonial.content}
+            />
           </div>
         ))}
       </div>
