@@ -1,14 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro'
-import Hero from '~/components/main-prod/Hero-prod.astro'
-import IsComponent from '~/components/dev/ServicesDev.astro'
 import Section from '~/components/main-prod/SectionContainer.astro'
+import IsComponent from '~/components/dev/ServicesDev.astro'
 import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
+import Footer from '~/components/main-prod/Footer.astro'
+import Hero from '~/components/main-prod/Hero-prod.astro'
+import Features1 from '~/components/main-prod/Features1.astro'
+import Features2 from '~/components/main-prod/Features2.astro'
 import Steps from '~/components/main-prod/Steps.astro'
-import Footer from "~/components/main-prod/Footer.astro"
-
-import NewGrid from '~/components/dev/GridCard.astro'
-import Features from '~/components/main-prod/Features.astro'
 
 
 import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
@@ -27,24 +26,24 @@ import '~/assets/css/Theme.css'
             content="Manage your profile and preferences."
         />
         <IsComponent
-            slot="features"
+            slot="features-1"
             tagline="Workspaces"
             title="What services do we provide?"
             subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."
             
         >
-            <NewGrid />   
+            <Features1 />   
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
         </IsComponent>
         <IsComponent
-            slot="content"
+            slot="features-2"
             tagline="What's new in Openfav"
             title="Manage resources efforlessy"
             subtitle="Get a look as our platform works"
         >
-            <Features 
+            <Features2 
                 items={FeaturedItems1}
                 image={{
                     src: '/astronaut.png',
