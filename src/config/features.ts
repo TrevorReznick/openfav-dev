@@ -7,29 +7,29 @@ export interface FeatureItem {
   // Puoi poi usare il tipo nell'array di items
 export const FeaturedItems1: FeatureItem[] = [
     {
-        title: 'High-Quality Designs',
+        title: "Stop boring searching something 'i was sure to found here'",
         description:
-            'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
+            'Stop lose track of important resources. Organize and retrieve them in seconds. Say goodbye to endlessly searching for links',
+        icon: 'tabler:carousel-horizontal',
+    },
+    {
+        title: 'Save time letting AI classify for you',
+        description:
+            'Let the AI classify your resources for you, ensuring everything is organized and easy to find',
         icon: 'tabler:wand',
     },
     {
-        title: 'Customization Tools',
+        title: 'Personalize your work and manage the the poor browser bookmarks management',
         description:
-            'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
+            'Create personalized lists and tags for an even more tailored resource management experience. Organize, tag, and find your resources with ease.',
         icon: 'tabler:settings',
     },
     {
-        title: 'Pre-Designed Elements',
+        title: 'Share your resource easily',
         description:
-            'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
+            'Update and organize your favorite resources directly from the app, ensuring you always have quick access to what matters most.',
         icon: 'tabler:presentation',
-    },
-    {
-        title: 'Preview and Mockup Views',
-        description:
-            'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-    },
+    }
 ]
 
 export const FeaturedItems2: FeatureItem[] = [
@@ -55,21 +55,21 @@ export const FeaturedItems2: FeatureItem[] = [
 
 export const StepItems: FeatureItem[] = [
     {
-        title: 'Step 1: <span class="font-medium">Download</span>',
+        title: 'Step 1: <span class="font-medium">Create account</span>',
         description:
-        "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
+            "Create account or use provided social authenticator to log in",
         icon: 'tabler:package',
     },
     {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
+        title: 'Step 2: <span class="font-medium">Download browser extension</span>',
         description:
-        "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
+            'Download our browser extension to save and classify the web resource with one click',
         icon: 'tabler:letter-case',
     },
     {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
+        title: 'Step 3: <span class="font-medium">Customize list</span>',
         description:
-        'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
+            'Since the beginning, you can manage projects, resources, articles, list of tools in your Dashboard',
         icon: 'tabler:paint',
     },
     {
