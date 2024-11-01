@@ -30,24 +30,20 @@ const buttonClasses = twMerge(
   baseClasses,
   variants[variant],
   className
-);
+)
 ---
 
 {
-    url ? (
-        <a
-        href={url}
-            class={buttonClasses}
-            aria-label={ariaLabel || text}
-        >
-        {text}
-        </a>
-    ) : (
-        <button
-            class={buttonClasses}
-            aria-label={ariaLabel || text}
-        >
-        {text}
-        </button>
-    )
+  url ? (
+    <a
+      href={url}
+      class={buttonClasses}
+      aria-label={ariaLabel || text}
+    >{text}</a>
+  ) : (
+    <button
+      class={buttonClasses}
+      aria-label={ariaLabel || text}
+    >{text}</button>
+  )
 }
