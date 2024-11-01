@@ -5,6 +5,7 @@ interface Props {
   text: string;
   variant?: 'getStarted' | 'liveDemo';
   ariaLabel?: string;
+  url?: string;
   className?: string;
 }
 
@@ -12,19 +13,19 @@ const {
   text,
   variant = 'getStarted',
   ariaLabel,
+  url,
   className = ''
-} = Astro.props;
+} = Astro.props
 
-// Mantenendo esattamente l'ordine e le classi dei bottoni originali
 const variants = {
   getStarted: 'bg-primaryColor hover:bg-secondaryColor border-primaryColor',
-  liveDemo: 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor'
-};
+  liveDemo: 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor',
+  Login: 'class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none'
 
-// Classi base ESATTAMENTE come nell'originale
+}
+
 const baseClasses = 'w-64 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer transition';
 
-// Composizione delle classi mantenendo l'ordine originale
 const buttonClasses = twMerge(
   baseClasses,
   variants[variant],
@@ -32,9 +33,21 @@ const buttonClasses = twMerge(
 );
 ---
 
-<button
-  class={buttonClasses}
-  aria-label={ariaLabel || text}
->
-  {text}
-</button>
+{
+    url ? (
+        <a
+        href={url}
+            class={buttonClasses}
+            aria-label={ariaLabel || text}
+        >
+        {text}
+        </a>
+    ) : (
+        <button
+            class={buttonClasses}
+            aria-label={ariaLabel || text}
+        >
+        {text}
+        </button>
+    )
+}
