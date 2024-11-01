@@ -1,31 +1,77 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import Hero from "~/components/main/Hero.astro"; //
-import Features1 from "~/components/main/Features1.astro"; //
-import Features2 from "~/components/main/Features2.astro"; //
-import Testimonials from "~/components/main/Testimonials.astro"; //
-import FeaturesDiagonal from "~/components/main/FeaturesDiagonal.astro"; //
-import Pricing from "~/components/main/Pricing.astro"; //
-import Brands from "~/components/main/Brands.astro"; //
-import FAQ from "~/components/main/FAQ.astro"; //
-import Blog from "~/components/main/Blog.astro"; //
-import ScrollUpButton from "~/components/main/ScrollUpButton.astro"; //
-import Footer from "~/components/main-prod/Footer.astro"
+import Layout from '~/layouts/Layout.astro'
+import Section from '~/components/main-prod/SectionContainer.astro'
+import IsComponent from '~/components/dev/ServicesDev.astro'
+import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
+import Footer from '~/components/main-prod/Footer.astro'
+import Hero from '~/components/main-prod/Hero-prod.astro'
+import Features1 from '~/components/main-prod/Features1.astro'
+import Features2 from '~/components/main-prod/Features2.astro'
+import Steps from '~/components/main-prod/Steps.astro'
 
-import "~/assets/css/Theme.css";
-import "~/assets/css/Diagonals.css";
+
+import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
+
+import '~/assets/css/Theme.css'
+
 ---
 
-<Layout title="welcome">
-  <Hero />
-  <Features1 />
-  <Features2 />
-  <FeaturesDiagonal />
-  <Pricing />
-  <Brands />
-  <Testimonials />
-  <Blog />
-  <FAQ />
-  <Footer />
-  <ScrollUpButton />
+<Layout title="test">
+    <Section>
+        <Hero 
+            slot="header"
+            tagline="Openfav, organize Your Workflow, Effortlessly"
+            title="AI-Powered Workflow Assistant"
+            subtitle="Streamline your production, amplify your creativity."
+            content="Manage your profile and preferences."
+        />
+        <IsComponent
+            slot="features-1"
+            tagline="Workspaces"
+            title="What services do we provide?"
+            subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."            
+        >
+            <Features1 />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+        <IsComponent
+            slot="features-2"
+            tagline="What's new in Openfav"
+            title="Manage resources efforlessy"
+            subtitle="Get a look as our platform works"
+        >
+            <Features2 
+                items={FeaturedItems1}
+                image={{
+                    src: '/astronaut.png',
+                    alt: 'Features Image',
+                }}    
+            />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+        <IsComponent
+            slot="steps"
+            tagline="How to use Openfav?"
+            title="Simply usage explanation"
+            subtitle="Get you workflow by simply steps"            
+        >
+            <Steps 
+                items={StepItems}
+                title="Get your dream website up and running in no time with AstroWind."
+                image={{
+                    src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+                    alt: 'Steps image',
+                }}
+            />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+    </Section>
+    <Footer />
+    <ScrollUpButton />    
 </Layout>
