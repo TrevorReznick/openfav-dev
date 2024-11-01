@@ -1,18 +1,20 @@
+---
+import Button from '~/components/dev/Button-new.astro'
+
+---
 <div class="max-w-[85rem] px-4 py-10 mx-auto">
     <!-- Button Grid -->
     <div class="flex flex-col items-center gap-2 sm:flex-row mt-10 mb-10 justify-center">
-        <button
-            class="w-64 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-primaryColor hover:bg-secondaryColor border-primaryColor transition"
-            aria-label="Get started"
-        >
-            Get Started
-        </button>
-        <button
-            class="w-64 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-bgDark2 hover:bg-bgDark3 border-primaryColor transition"
-            aria-label="Live demo"
-        >
-            Live demo
-        </button>
+        <Button
+            text="Get Started"
+            variant="getStarted"
+            ariaLabel="Get started"
+        />
+        <Button
+            text="Live demo"
+            variant="liveDemo"
+            ariaLabel="Live demo"
+        />
     </div>
     <!-- End of Button Grid -->
 </div>

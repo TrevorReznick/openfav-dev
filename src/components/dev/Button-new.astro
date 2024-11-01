@@ -1,18 +1,40 @@
 ---
-import { twMerge } from 'tailwind-merge'
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  text: string;
+  variant?: 'getStarted' | 'liveDemo';
+  ariaLabel?: string;
+  className?: string;
+}
 
 const {
-    classes = {}
-} = Astro.props
+  text,
+  variant = 'getStarted',
+  ariaLabel,
+  className = ''
+} = Astro.props;
 
-const { inputs, action, title, text, button} = Astro.props
+// Mantenendo esattamente l'ordine e le classi dei bottoni originali
+const variants = {
+  getStarted: 'bg-primaryColor hover:bg-secondaryColor border-primaryColor',
+  liveDemo: 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor'
+};
 
+// Classi base ESATTAMENTE come nell'originale
+const baseClasses = 'w-64 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer transition';
 
-
-
+// Composizione delle classi mantenendo l'ordine originale
+const buttonClasses = twMerge(
+  baseClasses,
+  variants[variant],
+  className
+);
 ---
-<!--
-<section class={twMerge("flex flex-col items-center", containerClass)}>
--->
 
-
+<button
+  class={buttonClasses}
+  aria-label={ariaLabel || text}
+>
+  {text}
+</button>
