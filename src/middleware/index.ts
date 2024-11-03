@@ -1,6 +1,7 @@
 import { defineMiddleware } from 'astro:middleware'
 import { supabase } from '~/providers/supabase'
-import { id, email, user_name, isAuthenticated } from '../store'
+import * as store from '~/store'
+//import { id, email, user_name, isAuthenticated, currentPath, previousPath } from '../store'
 
 const protectedRoutes = ['/protected/page']
 const redirectRoutes = ['/login', '/register']
@@ -8,7 +9,16 @@ const redirectRoutes = ['/login', '/register']
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
 
-    console.log('Current path:', url.pathname)
+    /* manage paths */
+    
+    store.previousPath.set(store.currentPath.get())
+    store.currentPath.set(url.pathname)
+
+    const from = store.previousPath.get()
+    const to = store.currentPath.get()
+
+    console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
+
 
     if (protectedRoutes.includes(url.pathname)) {
       const accessToken = cookies.get('sb-access-token')
@@ -36,12 +46,12 @@ export const onRequest = defineMiddleware(
 
       /* @@ set store @@ */
       const email_ = data.user?.email ?? ''
-      email.set(email_)
-      id.set(data.user?.id ?? '')
-      isAuthenticated.set(true)
-      console.log('authenticated : ', isAuthenticated.get())
+      store.email.set(email_)
+      store.id.set(data.user?.id ?? '')
+      store.isAuthenticated.set(true)
+      console.log('authenticated : ', store.isAuthenticated.get())
       const [extractUsername] = email_.split('@')
-      user_name.set(extractUsername ?? '')
+      store.user_name.set(extractUsername ?? '')
       
       cookies.set('sb-access-token', data?.session?.access_token!, {
         sameSite: 'strict',
