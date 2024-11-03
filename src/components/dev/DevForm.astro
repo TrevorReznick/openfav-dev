@@ -13,6 +13,37 @@ const isLogin = doForm === 'login'
     method="post"
     enctype="application/x-www-form-urlencoded"
 >
+    {!isLogin && (
+        <Fragment>
+            <div class="mb-6">
+                {inputs && inputs.map(
+                    ({ type = null, name, label = '', autocomplete = 'on', placeholder = '' }) =>
+                        name && (
+                            <div class="mb-6">
+                                {label && (
+                                    <label for={name} class="block mb-2 text-sm text-secondaryText">
+                                        {label}
+                                    </label>
+                                )}
+                                <input
+                                    type={type}
+                                    name={name}
+                                    id={name}
+                                    autocomplete={autocomplete}
+                                    placeholder={placeholder}
+                                    class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                                />
+                            </div>
+                        )
+                    )
+                }
+                <div class="mb-6">
+                    <Button />
+                </div>
+            </div>
+            <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
+        </Fragment>
+    )}
     <div class="mb-6">
         <button
             value="google"
@@ -65,35 +96,40 @@ const isLogin = doForm === 'login'
                 Sign in with GitHub
         </button>
     </div>
-    <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">
-        Or
-    </div>
     <!--- HEREEEE -->
-    {inputs &&
-        inputs.map(
-            ({ type = null, name, label = '', autocomplete = 'on', placeholder = '' }) =>
-                name && (
-                    <div class="mb-6">
-                        {label && (
-                            <label for={name} class="block mb-2 text-sm text-secondaryText">
-                                {label}
-                            </label>
-                        )}
-                        <input
-                            type={type}
-                            name={name}
-                            id={name}
-                            autocomplete={autocomplete}
-                            placeholder={placeholder}
-                            class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-                        />
-                    </div>
-            )
-        )
-    }
-    <div class="mb-6">
-        <Button />
-    </div>
-    <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
-        <a href="/register" class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign up</a>.</p>
+    {isLogin && (
+        <Fragment>
+            <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
+            <div class="mb-6">
+                {inputs &&
+                    inputs.map(
+                        ({ type = null, name, label = '', autocomplete = 'on', placeholder = '' }) =>
+                            name && (
+                                <div class="mb-6">
+                                    {label && (
+                                        <label for={name} class="block mb-2 text-sm text-secondaryText">
+                                            {label}
+                                        </label>
+                                    )}
+                                    <input
+                                        type={type}
+                                        name={name}
+                                        id={name}
+                                        autocomplete={autocomplete}
+                                        placeholder={placeholder}
+                                        class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                                    />
+                                </div>
+                        )
+                    )
+                }
+                <div class="mb-6">
+                    <Button />
+                </div>
+                <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
+                    <a href="/register" class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign up</a>.
+                </p>
+            </div>
+        </Fragment>
+    )}        
 </form>
