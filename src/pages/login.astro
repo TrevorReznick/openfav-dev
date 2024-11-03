@@ -12,12 +12,13 @@ let text = ''
 let doForm = ''
 
 
-if(from === '/login') {  
+if(to === '/login') {  
   title = 'Log in'
   action = `${action}/signin`
   text = 'Sign in to access your account'
   doForm = 'login'
-} else if  (from === '/register') {  
+} 
+if (to === '/register') {  
   title = 'Sign up'
   action = `${action}/register`
   text = 'Register a new account'
@@ -27,22 +28,22 @@ if(from === '/login') {
 
 <Layout title = 'Auth Page' />
 <Fragment>
-    <MyForm 
-        inputs = {[
-        {
-            type: 'email',
-            name: 'email',
-            label: 'Email',
-        },
-        {
-            type: 'password',
-            name: 'password',
-            label: 'Password',
-        },
-        ]}
-        action = {action}
-        title = {title}
-        text = {text}
-        doForm = {doForm}
-    />
+  <MyForm 
+    inputs = {[
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+      {
+        type: 'password',
+        name: 'password',
+        label: 'Password',
+      },
+    ]}
+    action = {action}
+    title = {title}
+    text = {text}
+    doForm = {doForm}
+  />
 </Fragment>
