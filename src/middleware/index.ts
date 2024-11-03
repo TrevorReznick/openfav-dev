@@ -17,12 +17,21 @@ export const onRequest = defineMiddleware(
     const from = store.previousPath.get()
     const to = store.currentPath.get()
 
+    if (from === '/' && to === '/login') {
+      return redirect('/login')
+    } 
+    if (from === '/login' && to === '/register') {
+      return redirect('/register')
+    }
+
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
+    /*
     if (url.pathname === '/register') {
       return redirect('/login')
     } else if (url.pathname === '/login') {
       return redirect('/register ')
     }
+    */
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
     }    
