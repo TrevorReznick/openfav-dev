@@ -1,6 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import MyForm from '../components/sub-pages/FormSignin.astro'
+import Layout from '~/layouts/Layout.astro'
+import MyForm from '~/components/sub-pages/FormSignin.astro'
+
+import { previousPath, currentPath } from '~/store'
+
+const to = currentPath.get()
+const from = previousPath.get()
+
+if(to === '/login') {
+  console.log('Tu sei nella pagina di login')
+} else if  (to === '/register') {
+  console.log('Tu sei nella pagina di register')
+}
+console.log(`tu vieni dalla pagine ${from}`)
+
 ---
 
 <Layout title="Opennfav Login" />

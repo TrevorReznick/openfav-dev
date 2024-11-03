@@ -17,7 +17,13 @@ export const onRequest = defineMiddleware(
     const from = store.previousPath.get()
     const to = store.currentPath.get()
 
-    console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
+    //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
+    if (url.pathname === '/login' || url.pathname === '/register') {
+      return redirect('/dev/login-dev')
+    }
+
+    console.log(`tu vieni dalla pagine ${from}`)
+    console.log(`tu sei nella pagina ${to}`)
 
 
     if (protectedRoutes.includes(url.pathname)) {
