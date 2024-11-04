@@ -9,7 +9,7 @@ const redirectRoutes = ['/login', '/register']
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
 
-    /* manage paths */
+    /* @@ manage paths @@ */
     
     store.previousPath.set(store.currentPath.get())
     store.currentPath.set(url.pathname)
@@ -23,6 +23,12 @@ export const onRequest = defineMiddleware(
     if (from === '/login' && to === '/register') {
       return redirect('/register')
     }
+    if(from === '/api/v1/auth/signout') {
+      return redirect('/login')
+    }
+    if(to === '/api/v1/auth/signin') {
+      return redirect('/auth-error')
+    }
 
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
     /*
@@ -32,10 +38,6 @@ export const onRequest = defineMiddleware(
       return redirect('/register ')
     }
     */
-    if(from === '/api/v1/auth/signout') {
-      return redirect('/login')
-    }    
-
     console.log(`tu vieni dalla pagine ${from}`)
     console.log(`tu sei nella pagina ${to}`)
 
