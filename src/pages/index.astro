@@ -1,13 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro'
-import Section from '~/components/main-prod/SectionContainer.astro'
+import Section from '~/components/main/SectionContainer.astro'
 import IsComponent from '~/components/dev/ServicesDev.astro'
-import ScrollUpButton from '~/components/main-prod/ScrollUpButton.astro'
-import Footer from '~/components/main-prod/Footer.astro'
-import Hero from '~/components/main-prod/Hero-prod.astro'
-import Features1 from '~/components/main-prod/Features1.astro'
-import Features2 from '~/components/main-prod/Features2.astro'
-import Steps from '~/components/main-prod/Steps.astro'
+import ScrollUpButton from '~/components/main/ScrollUpButton.astro'
+import Footer from '~/components/main/Footer.astro'
+import Hero from '~/components/main/Hero-prod.astro'
+import Features1 from '~/components/main/Features1.astro'
+import Features2 from '~/components/main/Features2.astro'
+import Steps from '~/components/main/Steps.astro'
 
 
 import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
@@ -29,7 +29,7 @@ import '~/assets/css/Theme.css'
             slot="features-1"
             tagline="Workspaces"
             title="What services do we provide?"
-            subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."            
+            subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."
         >
             <Features1 />   
             <Fragment slot="bg">
@@ -47,7 +47,8 @@ import '~/assets/css/Theme.css'
                 image={{
                     src: '/astronaut.png',
                     alt: 'Features Image',
-                }}    
+                }}
+                id="features"    
             />   
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
