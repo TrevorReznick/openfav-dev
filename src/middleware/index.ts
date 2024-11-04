@@ -26,9 +26,11 @@ export const onRequest = defineMiddleware(
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
     }
+    /*
     if(to === '/api/v1/auth/signin') {
       return redirect('/auth-error')
     }
+    */
 
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
     /*
