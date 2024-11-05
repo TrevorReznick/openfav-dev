@@ -23,13 +23,14 @@ import '~/assets/css/Theme.css'
             title="AI-Powered Workflow Assistant"
             subtitle="Streamline your production, amplify your creativity."
             content="Manage your profile and preferences."
+            id="hero"
         />
         <IsComponent
             slot="features-1"
             tagline="Workspaces"
             title="What services do we provide?"
             subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."
-            id="null"
+            id="main-features"
         >
             <Features1 />
             <Fragment slot="bg">
@@ -41,15 +42,14 @@ import '~/assets/css/Theme.css'
             tagline="What's new in Openfav"
             title="Manage resources efforlessy"
             subtitle="Get a look as our platform works"
-            id="features"
+            id="whats-new"
         >
             <Features2 
                 items={FeaturedItems1}
                 image={{
                     src: '/astronaut.png',
                     alt: 'Features Image',
-                }}
-                id="features"    
+                }}   
             />   
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
@@ -59,7 +59,8 @@ import '~/assets/css/Theme.css'
             slot="steps"
             tagline="How to use Openfav?"
             title="Simply usage explanation"
-            subtitle="Get you workflow by simply steps"            
+            subtitle="Get you workflow by simply steps"
+            id="how-it-works"
         >
             <Steps 
                 items={StepItems}
@@ -78,16 +79,8 @@ import '~/assets/css/Theme.css'
     <ScrollUpButton />    
 </Layout>
 
-<!-- Script per verificare l'elemento con id="features" -->
-<script>
-const test_id = document.getElementById('features')
-if (test_id) {
-    console.log('Elemento #features trovato nel DOM.');
-    // Azioni aggiuntive, ad esempio, aggiungere una classe
-    test_id.classList.add('highlight')
-} else {
-    console.log('Elemento #features non trovato nel DOM.')
-}
-</script>
+
+
+
 
 

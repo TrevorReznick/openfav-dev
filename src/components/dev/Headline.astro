@@ -4,7 +4,8 @@ import { twMerge } from 'tailwind-merge'
 const {    
     tagline = await Astro.props.render("tagline"),
     title = await Astro.props.render("title"),
-    subtitle = await Astro.slots.render("subtitle"),    
+    subtitle = await Astro.slots.render("subtitle"),
+    id,    
     classes = {},
 } = Astro.props
 
@@ -16,7 +17,7 @@ const {
 <div class="text-center">
     {
         tagline && (
-        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold" id={id}>
             {tagline}
         </p>
         )
