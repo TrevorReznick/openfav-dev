@@ -1,0 +1,15 @@
+---
+import Headline from '~/components/dev/Headline.astro'
+
+const { tagline, title, subtitle, id} = Astro.props
+
+---
+<Fragment >
+    <Headline 
+        title={title} tagline={tagline} subtitle={subtitle} id={id}
+    />
+    <slot/>
+</Fragment>
+
+    
+
