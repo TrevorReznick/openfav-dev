@@ -76,3 +76,17 @@ import '~/assets/css/Theme.css'
     <Footer />
     <ScrollUpButton />    
 </Layout>
+
+<!-- Script per verificare l'elemento con id="features" -->
+<script>
+const test_id = document.getElementById('features')
+if (test_id) {
+    console.log('Elemento #features trovato nel DOM.');
+    // Azioni aggiuntive, ad esempio, aggiungere una classe
+    test_id.classList.add('highlight')
+} else {
+    console.log('Elemento #features non trovato nel DOM.')
+}
+</script>
+
+
