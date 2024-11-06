@@ -8,6 +8,7 @@ import Hero from '~/components/main/Hero-prod.astro'
 import Features1 from '~/components/main/Features1.astro'
 import Features2 from '~/components/main/Features2.astro'
 import Steps from '~/components/main/Steps.astro'
+import NewSection from '~/components/dev/NewSection.astro'
 
 import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
 
@@ -70,6 +71,18 @@ import '~/assets/css/Theme.css'
                     alt: 'Steps image',
                 }}
             />   
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+        <IsComponent
+            slot="test"
+            tagline="Test new cards"
+            title="A dummy title for you"
+            subtitle="A dummy content here"
+            id="how-it-works"
+        >
+            <NewSection />   
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
