@@ -14,14 +14,14 @@ import type { MetaData as MetaDataType } from '~/types'
 import CommonMeta from '~/components/base/CommonMeta.astro';
 
 export interface Props {
-  title: string;
-  metadata?: MetaDataType;
+  title: string
+  metadata?: MetaDataType
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
 
-const { metadata = {} } = Astro.props;
-const { language, textDirection } = I18N;
+const { metadata = {} } = Astro.props
+const { language, textDirection } = I18N
 ---
 
 <!doctype html>

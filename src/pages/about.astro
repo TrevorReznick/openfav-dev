@@ -1,0 +1,54 @@
+---
+import { twMerge } from 'tailwind-merge';
+import Layout from '~/layouts/Layout.astro'
+import Section from '~/components/main/SectionContainer.astro'
+import IsComponent from '~/components/main/IsComponent.astro'
+import Image from '~/components/base/Image.astro'
+
+import '~/assets/css/Theme.css'
+
+const { classes = {} } = Astro.props
+
+const {
+  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
+} = classes
+
+
+
+---
+<Layout title="About Us">
+    <section class={twMerge("flex flex-col items-center", containerClass)}>
+        <IsComponent
+            slot="features-1"
+            tagline="About US"
+            title="Passion for Development"
+            subtitle=`
+                With over twenty years of experience in the IT industry, my professional journey has led me from system administration to full-stack development, 
+                embracing the most innovative technologies. My path began with PHP and relational databases, evolving towards JavaScript, Node.js, and modern 
+                frameworks such as Vue.js, React, and Nuxt.js. This evolution reflects my passion for continuous learning and my ability to adapt to new challenges.
+                I have gained solid experience in managing complex systems, including those based on Linux, Oracle, and Java, working with various applications 
+                and relational databases. My full-stack experience has allowed me to develop a comprehensive understanding of the software development lifecycle, 
+                from architecture design to creating intuitive user interfaces.            
+                Currently, my focus is on Python and artificial intelligence, fields that offer enormous potential for innovation. 
+                I believe that AI can revolutionize how we develop and use software, and I am excited to explore its applications in different areas.            
+                My goal is to create efficient and intuitive tools that simplify the work of developers, allowing them to focus on creating high-quality software. 
+                I am convinced that the combination of solid technical skills and a constant search for innovative solutions is the key to success in an ever-evolving 
+                technological landscape.
+            `            
+        >
+            
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+        <div class="relative m-auto max-w-4xl">            
+            <img
+                class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg pb-10"
+                width={500}
+                height={500}                
+                sizes="(max-width: 768px) 100vw, 432px"                
+                src= '/astronaut.png'                
+            />
+        </div>
+    </section>
+</Layout>
