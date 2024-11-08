@@ -7,7 +7,7 @@ const items = [
     {
         title: "Installation Instructions",
         description: "Offer clear instructions on how to download the purchased templates and install them on various website platforms or content management systems.",
-        icon: "flat-color-icons:document",
+        icon: "flat-color-icons:bookmark",
     },
     {
         title: "Demo and Previews",
@@ -22,23 +22,14 @@ const items = [
 ];
 ---
 
-<div class="mx-auto max-w-7xl p-4 md:px-8 text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16">
-    <div class="text-center max-w-3xl mb-8 md:mb-12 md:mx-auto">
-        <h2 class="font-bold font-heading leading-tighter tracking-tighter md:text-4xl text-heading text-3xl">
-            What services do we provide?
-        </h2>
-        <p class="text-muted text-xl mt-4">
-            We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc.
-        </p>
-    </div>
-    
+<div class="mx-auto max-w-7xl p-4 md:px-8 text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16">    
     <ItemGrid
         items={items}
         columns={3}
         defaultIcon="tabler:check"
         classes={{
             container: 'gap-8 md:gap-y-12',
-            panel: 'max-w-none backdrop-blur bg-white border border-[#ffffff29] dark:bg-slate-900 dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]',
+            panel: 'max-w-none backdrop-blur bg-indigo border border-[#ffffff29] dark:bg-slate-900 dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]',
             title: 'text-xl font-bold text-heading ml-2 rtl:ml-0 rtl:mr-2',
             description: `${fonts.SECTION_LIST_WHITE} text-muted mt-2 ml-2 rtl:ml-0 rtl:mr-2`,
             icon: 'h-12 w-12 mb-6 text-primary',
