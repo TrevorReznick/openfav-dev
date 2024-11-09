@@ -14,5 +14,18 @@ import '~/assets/css/Theme.css'
 
 ---
 <Layout title="Feedback">
-    <Contacts />
+    <Section>        
+        <IsComponent
+            slot="features-1"
+            tagline="Contact us"
+            title="Leave a comment"
+            subtitle="We could appreciate your feedback about our work"
+            id="main-features"
+        >
+            <Contacts />
+            <Fragment slot="bg">
+                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+            </Fragment>
+        </IsComponent>
+    </Section>    
 </Layout>
