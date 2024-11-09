@@ -1,36 +1,43 @@
 ---
 import Layout from '~/layouts/Layout.astro'
+import MyForm from '~/components/sub-pages/DoForm.astro'
 
-import Section from '~/components/main/SectionContainer.astro'
-import IsComponent from '~/components/main/IsComponent.astro'
-import IsFeedback from '~/components/dev/Feedback.astro'
+import { previousPath, currentPath } from '~/store'
 
-let title = ''
-let action = '/api/v1/auth'
-let text = ''
-let doForm = ''
-
-
-/*
-import { FeaturedItems1, FeaturedItems2, StepItems } from '~/config/features'
-*/
-
-import '~/assets/css/Theme.css'
+const to = currentPath.get()
+const from = previousPath.get()
+let title = 'Leave a comment'
+let action = import.meta.env.PUBLIC_EMAIL_PROVIDER_URL
+let text = 'You could write some impressions here'
+let doForm = 'feedback'
+let isAuthForm = false
 
 ---
-<Layout title="Feedback">
-    <Section>        
-        <IsComponent
-            slot="features-1"
-            tagline="Contact us"
-            title="Leave a comment"
-            subtitle="We could appreciate your feedback about our work"
-            id="main-features"
-        >
-            <IsFeedback />
-            <Fragment slot="bg">
-                <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-            </Fragment>
-        </IsComponent>
-    </Section>    
-</Layout>
+
+<Layout title = 'Feedback' />
+<Fragment>
+  <MyForm 
+    inputs = {[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+      {
+        type: 'text',
+        name: 'text',
+        label: 'Comment',
+      },
+    ]}
+    action = {action}
+    title = {title}
+    text = {text}
+    doForm = {doForm}
+    isAuthForm = {isAuthForm}
+  />
+</Fragment>

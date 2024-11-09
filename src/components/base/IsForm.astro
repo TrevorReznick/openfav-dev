@@ -43,6 +43,11 @@ console.log(`in form component action is ${action}`)
                 <div class="mb-6">
                     <Button />
                 </div>
+                {isAuthForm && (
+                    <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
+                        <a href="/register" class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign up</a>.
+                    </p>
+                )}
             </div>
             <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
         </Fragment>
@@ -51,7 +56,6 @@ console.log(`in form component action is ${action}`)
     <!--- HEREEEE -->
     {isLogin && (
         <Fragment>
-            <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
             <div class="mb-6">
                 {inputs &&
                     inputs.map(
@@ -78,9 +82,11 @@ console.log(`in form component action is ${action}`)
                 <div class="mb-6">
                     <Button />
                 </div>
-                <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
-                    <a href="/register" class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign up</a>.
-                </p>
+                {isAuthForm && (
+                    <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
+                        <a href="/register" class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign up</a>.
+                    </p>
+                )}                
             </div>
         </Fragment>
     )}        
@@ -88,7 +94,6 @@ console.log(`in form component action is ${action}`)
 <!-- Bottoni Social Fuori dal Form -->
 <!-- New -->
 {isAuthForm && (
-    <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
     <SocialButtons />
 )}
 
