@@ -28,14 +28,23 @@ console.log(`in form component action is ${action}`)
                                         {label}
                                     </label>
                                 )}
-                                <input
-                                    type={type}
-                                    name={name}
-                                    id={name}
-                                    autocomplete={autocomplete}
-                                    placeholder={placeholder}
-                                    class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-                                />
+                                {type === 'textarea' ? (
+                                    <textarea
+                                        id={name}
+                                        name={name}
+                                        placeholder={placeholder}
+                                        rows="4"
+                                        class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                                    />
+                                ) : (
+                                    <input
+                                        type={type}
+                                        name={name}
+                                        id={name}
+                                        placeholder={placeholder}
+                                        class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                                    />
+                                )}
                             </div>
                         )
                     )
