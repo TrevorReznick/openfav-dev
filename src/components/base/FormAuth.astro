@@ -5,6 +5,7 @@ import SocialButtons from '~/components/base/SocialAuthButtons.astro'
 const { inputs, action, title, text, doForm, button} = Astro.props
 
 const isLogin = doForm === 'login'
+console.log(`in form component action is ${action}`)
 
 ---
 
@@ -45,7 +46,7 @@ const isLogin = doForm === 'login'
             <div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
         </Fragment>
     )}
-    <SocialButtons />
+    
     <!--- HEREEEE -->
     {isLogin && (
         <Fragment>
@@ -83,3 +84,6 @@ const isLogin = doForm === 'login'
         </Fragment>
     )}        
 </form>
+<!-- Bottoni Social Fuori dal Form -->
+<div class="py-3 flex items-center text-xs text-secondaryText uppercase before:flex-1 before:border-t before:border-mainBorder before:me-6 after:flex-1 after:border-t after:border-mainBorder after:ms-6">Or</div>
+<SocialButtons />
