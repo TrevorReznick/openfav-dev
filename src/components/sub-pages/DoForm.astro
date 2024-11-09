@@ -1,5 +1,5 @@
 ---
-import FormComponent from '~/components/base/FormAuth.astro'
+import FormComponent from '~/components/base/IsForm.astro'
 
 const {
   inputs,
@@ -8,6 +8,7 @@ const {
   button,  
   text,
   doForm,
+  isAuthForm,
   id,
   classes = {}
 } = Astro.props
@@ -25,7 +26,7 @@ console.log(`action is ${action}`)
         <p class="text-secondaryText">{text}</p>
       </div>
       <div class="m-7">
-        <FormComponent inputs={inputs} action={action}  button={button} doForm={doForm} />
+        <FormComponent inputs={inputs} action={action}  button={button} doForm={doForm} isAuthForm={isAuthForm} />
       </div>
     </div>
   </div>

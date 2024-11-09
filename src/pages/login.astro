@@ -1,6 +1,6 @@
 ---
 import Layout from '~/layouts/Layout.astro'
-import MyForm from '~/components/sub-pages/FormAuth.astro'
+import MyForm from '~/components/sub-pages/DoForm.astro'
 
 import { previousPath, currentPath } from '~/store'
 
@@ -10,19 +10,22 @@ let title = ''
 let action = '/api/v1/auth'
 let text = ''
 let doForm = ''
+let isAuthForm = true
 
 
 if(to === '/login') {  
   title = 'Log in'
   action = `${action}/signin`
   text = 'Sign in to access your account'
-  doForm = 'login'
+  doForm = 'login',
+  isAuthForm
 } 
 if (to === '/register') {  
   title = 'Sign up'
   action = `${action}/register`
   text = 'Register a new account'
-  doForm = 'register'
+  doForm = 'register',
+  isAuthForm
 }
 ---
 
@@ -45,5 +48,6 @@ if (to === '/register') {
     title = {title}
     text = {text}
     doForm = {doForm}
+    isAuthForm
   />
 </Fragment>

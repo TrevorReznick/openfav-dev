@@ -3,7 +3,12 @@ import Layout from '~/layouts/Layout.astro'
 
 import Section from '~/components/main/SectionContainer.astro'
 import IsComponent from '~/components/main/IsComponent.astro'
-import Contacts from '~/components/dev/Feedback.astro'
+import IsFeedback from '~/components/dev/Feedback.astro'
+
+let title = ''
+let action = '/api/v1/auth'
+let text = ''
+let doForm = ''
 
 
 /*
@@ -22,7 +27,7 @@ import '~/assets/css/Theme.css'
             subtitle="We could appreciate your feedback about our work"
             id="main-features"
         >
-            <Contacts />
+            <IsFeedback />
             <Fragment slot="bg">
                 <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
             </Fragment>
