@@ -1,8 +1,8 @@
 ---
 const { action } = Astro.props
 // Estraiamo il base path da action (es: da "/api/v1/auth/register" prendiamo "/api/v1/auth")
-const basePath = action.split('/').slice(0, -1).join('/')
-const socialAction = `${basePath}/signin`
+//const basePath = action.split('/').slice(0, -1).join('/')
+const socialAction = `/api/v1/auth/signin`
 ---
 
 <form
