@@ -15,5 +15,8 @@ export const PRICE_CARD_TITLE = 'mb-2 text-xl font-bold font-heading text-primar
 export const PRICE_CARD_LIST = 'mb-2 2xl:mb-6 text-primaryText'
 export const PRICE_CARD_CONTENT = 'mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loose text-left'
 export const ICON_BG = 'bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg'
+export const BT_GET_STARTED = 'bg-primaryColor hover:bg-secondaryColor border-primaryColor'
+export const BT_DOWLOAD = 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor'
+
 
 

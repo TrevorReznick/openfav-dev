@@ -1,12 +1,13 @@
 ---
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'
+import * as fonts from '~/config/costants'
 
 interface Props {
-  text: string;
-  variant?: 'getStarted' | 'liveDemo';
-  ariaLabel?: string;
-  url?: string;
-  className?: string;
+  text: string
+  variant?: 'getStarted' | 'download'
+  ariaLabel?: string
+  url?: string
+  className?: string
 }
 
 const {
@@ -18,8 +19,8 @@ const {
 } = Astro.props
 
 const variants = {
-  getStarted: 'bg-primaryColor hover:bg-secondaryColor border-primaryColor',
-  liveDemo: 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor',
+  getStarted: fonts.BT_GET_STARTED,
+  download: fonts.BT_DOWLOAD,
   Login: 'class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none'
 }
 
