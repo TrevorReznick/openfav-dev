@@ -1,0 +1,34 @@
+---
+import { twMerge } from 'tailwind-merge'
+import * as fonts from '~/config/costants'
+
+
+
+interface Props {
+    myButton: {
+        text: string
+        variant: string
+        ariaLabel?: string
+        url?: string
+        className?: string
+    } 
+  
+}
+
+const {
+  myButton
+} = Astro.props
+
+const variants = {
+  base: fonts.BT_BASE_CLASS  
+}
+
+// Verifica se myButton è definito e destruttura `text` e `class`
+const { text, variant } = myButton || {}
+
+const buttonClasses = twMerge(fonts.BT_BASE_CLASS || '')
+---
+
+<button type="submit" class={buttonClasses}>
+  {text || 'Default Text'}
+</button>

@@ -1,8 +1,9 @@
 ---
-import Button from '~/components/base/Button.astro'
+//import Button from '~/components/base/Button.astro'
+import Button from '~/components/dev/baseButton.astro'
 import SocialButtons from '~/components/base/SocialAuthButtons.astro'
 
-const { inputs, action, doForm, isAuthForm } = Astro.props
+const { inputs, action, doForm, isAuthForm, myButton } = Astro.props
 
 const isLogin = doForm === 'login'
 
@@ -50,7 +51,7 @@ console.log(`in form component action is ${action}`)
                     )
                 }
                 <div class="mb-6">
-                    <Button />
+                    <Button myButton={myButton} />
                 </div>
                 {isAuthForm && (
                     <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
@@ -89,7 +90,7 @@ console.log(`in form component action is ${action}`)
                     )
                 }
                 <div class="mb-6">
-                    <Button />
+                    <Button myButton={myButton} />
                 </div>
                 {isAuthForm && (
                     <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 

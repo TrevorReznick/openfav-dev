@@ -17,6 +17,7 @@ export const PRICE_CARD_CONTENT = 'mt-4 mb-6 2xl:mb-10 text-gray-500 leading-loo
 export const ICON_BG = 'bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg'
 export const BT_GET_STARTED = 'bg-primaryColor hover:bg-secondaryColor border-primaryColor'
 export const BT_DOWLOAD = 'bg-bgDark2 hover:bg-bgDark3 border-primaryColor'
+export const BT_BASE_CLASS = 'w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none'
 
 
 

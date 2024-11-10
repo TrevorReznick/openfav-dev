@@ -6,31 +6,14 @@ import { previousPath, currentPath } from '~/store'
 
 const to = currentPath.get()
 const from = previousPath.get()
-let title = ''
-let action = '/api/v1/auth'
-let text = ''
-let doForm = ''
-let isAuthForm = true
-
-
-if(to === '/login') {  
-  title = 'Log in'
-  action = `${action}/signin`
-  text = 'Sign in to access your account'
-  doForm = 'login',
-  isAuthForm
-} 
-if (to === '/register') {  
-  title = 'Sign up'
-  action = `${action}/register`
-  text = 'Register a new account'
-  doForm = 'register',
-  isAuthForm
-}
+const title = 'Log in'
+const action = '/api/v1/auth//signin'
+const text = 'Sign in to access your account'
+const doForm = 'login'
+const isAuthForm = true
 
 const myButton = {
-  text: 'Login',
-  class: 'w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none',
+  text: 'Login',  
   variant: 'base'
 }
 
