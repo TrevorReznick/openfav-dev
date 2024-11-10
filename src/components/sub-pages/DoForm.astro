@@ -9,14 +9,14 @@ const {
   text,
   doForm,
   isAuthForm,
-  id,
-  classes = {}
+  myButton
+  
 } = Astro.props
 
 console.log(`action is ${action}`)
----
+console.log('myButton in IsForm:', myButton)
 
---- ---
+---
 
 <div class="flex items-center min-h-screen bg-bgDark1">
   <div class="mx-auto container">
