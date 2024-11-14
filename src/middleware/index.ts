@@ -26,12 +26,7 @@ export const onRequest = defineMiddleware(
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
     }
-    /*
-    if(to === '/api/v1/auth/signin') {
-      return redirect('/auth-error')
-    }
-    */
-
+    
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
     /*
     if (url.pathname === '/register') {
@@ -43,7 +38,6 @@ export const onRequest = defineMiddleware(
     console.log(`tu vieni dalla pagine ${from}`)
     console.log(`tu sei nella pagina ${to}`)
 
-
     if (protectedRoutes.includes(url.pathname)) {
       const accessToken = cookies.get('sb-access-token')
       const refreshToken = cookies.get('sb-refresh-token')
@@ -54,16 +48,18 @@ export const onRequest = defineMiddleware(
 
       const { data, error } = await supabase.auth.setSession({
         refresh_token: refreshToken.value,
-        access_token: accessToken.value,
+        access_token: accessToken.value
       })
 
       if (error) {
+        console.log('entro qui?')
         cookies.delete('sb-access-token', {
           path: '/',
         })
         cookies.delete('sb-refresh-token', {
           path: '/',
         })
+        store.messageStore.set(error.message)
         return redirect('/login')
       }
       console.log('auth data', data)
