@@ -1,11 +1,12 @@
 ---
 import { messageStore } from '~/store'
-import Toast from '~/components/dev/ToastNotification.astro'
+
+import Notifications from '~/components/jsx/Notifications.jsx'
 
 const {errorMessage = messageStore.get()} = Astro.props
 
 ---
 
-<Toast errorMessage={errorMessage} />
+<Notifications errorMessage={errorMessage} client:load />
 
 

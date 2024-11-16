@@ -10,6 +10,8 @@ import icon from 'astro-icon';
 import type { AstroIntegration } from "astro";
 import openfav from "./vendor/integrations";
 
+import react from "@astrojs/react";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const hasExternalScripts = false;
@@ -28,34 +30,29 @@ export default defineConfig({
   image: {
     service: passthroughImageService(),
   },
-  integrations: [
-    tailwind(),
-    openfav({
-      config: "./src/config.yaml",
-    }),
-    icon({
-      include: {
-        tabler: ['*'],
-        'flat-color-icons': [
-          'template',
-          'bookmark',
-          'gallery',
-          'approval',
-          'document',
-          'advertising',
-          'currency-exchange',
-          'voice-presentation',
-          'business-contact',
-          'database',
-        ],
-      },
-    }),
-    ...whenExternalScripts(() =>
-      partytown({
-        config: { forward: ["dataLayer.push"] },
-      })
-    ),
-  ],
+  integrations: [tailwind(), openfav({
+    config: "./src/config.yaml",
+  }), icon({
+    include: {
+      tabler: ['*'],
+      'flat-color-icons': [
+        'template',
+        'bookmark',
+        'gallery',
+        'approval',
+        'document',
+        'advertising',
+        'currency-exchange',
+        'voice-presentation',
+        'business-contact',
+        'database',
+      ],
+    },
+  }), ...whenExternalScripts(() =>
+    partytown({
+      config: { forward: ["dataLayer.push"] },
+    })
+  ), react()],
   vite: {
     resolve: {
       alias: {
