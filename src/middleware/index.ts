@@ -4,7 +4,7 @@ import * as store from '~/store'
 //import { id, email, user_name, isAuthenticated, currentPath, previousPath } from '../store'
 
 const protectedRoutes = ['/protected/page']
-const redirectRoutes = ['/login', '/register']
+const redirectRoutes = ['/login', '/register', '/auth-error-page']
 
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
@@ -25,6 +25,10 @@ export const onRequest = defineMiddleware(
     }
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
+    }
+    if (url.pathname === '/error-email-password') {
+      store.messageStore.set('Email and password are required')
+      return redirect('/auth-error-page')
     }
     
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
