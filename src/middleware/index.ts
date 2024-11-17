@@ -28,6 +28,10 @@ export const onRequest = defineMiddleware(
     }
     
     /* @@ email auth error  @@ */
+    
+    console.log(`debug 6: tu vieni dalla pagine ${from}`)
+    console.log(`debug 6: tu sei nella pagina ${to}`)
+    
     if(to === '/error-email-password') {
       console.log(`debug 5: you come from ${to}`)
     }
