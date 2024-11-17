@@ -26,10 +26,24 @@ export const onRequest = defineMiddleware(
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
     }
+    
+    /* @@ email auth error  @@ */
+
+    console.log(`debug 6: tu vieni dalla pagine ${from}`)
+    console.log(`debug 6: tu sei nella pagina ${to}`)
+    
+    if(to === '/error-email-password') {
+      console.log(`debug 5: you come from ${to}`)
+    }
+    if(to === '/api/v1/auth/signin') {
+      console.log(`debug 5: you come from ${from}`)
+    }
+    /*
     if (url.pathname === '/error-email-password') {
       store.messageStore.set('Email and password are required')
       return redirect('/auth-error-page')
     }
+    */
     
     //console.log(`Tu sta venendo dalla pagina ${from} e stai andando nella pagine ${to}`)
     /*
