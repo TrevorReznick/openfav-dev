@@ -28,7 +28,7 @@ export const onRequest = defineMiddleware(
     }
     
     /* @@ email auth error  @@ */
-
+    
     console.log(`debug 6: tu vieni dalla pagine ${from}`)
     console.log(`debug 6: tu sei nella pagina ${to}`)
     
@@ -53,8 +53,10 @@ export const onRequest = defineMiddleware(
       return redirect('/register ')
     }
     */
+    /*
     console.log(`tu vieni dalla pagine ${from}`)
     console.log(`tu sei nella pagina ${to}`)
+    */
 
     if (protectedRoutes.includes(url.pathname)) {
       const accessToken = cookies.get('sb-access-token')
