@@ -26,6 +26,12 @@ export const onRequest = defineMiddleware(
     if(from === '/api/v1/auth/signout') {
       return redirect('/login')
     }
+    
+    /* @@ email auth error  @@ */
+    if(from === '/api/v1/auth/signin') {
+      console.log(`debug 5: you come from ${from}`)
+    }
+    
     if (url.pathname === '/auth-error-page') {
       console.log('debug 2: middleware works!')
       ////store.messageStore.set('Email and password are required')
