@@ -1,9 +1,7 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import MyForm from "~/components/sub-pages/DoForm.astro";
-import { messageStore } from "~/store";
-
-import { previousPath, currentPath } from "~/store";
+import { previousPath, currentPath, messageStore } from "~/store";
 import Notifications from "~/components/jsx/Notifications.jsx";
 const { errorMessage = messageStore.get() } = Astro.props;
 
