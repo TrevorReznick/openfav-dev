@@ -24,7 +24,9 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     }
 
     if (error) {
-      return new Response(error.message, { status: 500 });
+      store.messageStore.set(`OAuth error: ${error.message}`);
+      //return new Response(error.message, { status: 500 });
+      return redirect("/login");
     }
     console.log("auth response data: ", data);
     return redirect(data.url);
@@ -34,7 +36,6 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     //return new Response('Email and password are required', { status: 400 })
     //return redirect('/auth-error-page')
     store.messageStore.set("Email and password are required");
-    console.log("debug 10: signign redirect");
     return redirect("/login");
   }
 
@@ -44,7 +45,9 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   });
 
   if (error) {
-    return new Response(error.message, { status: 500 });
+    store.messageStore.set(error.message);
+    //return new Response(error.message, { status: 500 });
+    return redirect("/login");
   }
 
   const { access_token, refresh_token } = data.session;
