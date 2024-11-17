@@ -33,7 +33,8 @@ export const onRequest = defineMiddleware(
     console.log(`debug 6: tu sei nella pagina ${to}`)
     
     if(to === '/error-email-password') {
-      console.log(`debug 5: you come from ${to}`)
+      console.log(`debug 7: you come from ${to}`)
+      console.log(`debug 7: tu sei nella pagina ${to}`)
     }
     if(to === '/api/v1/auth/signin') {
       console.log(`debug 5: you come from ${from}`)
