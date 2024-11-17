@@ -31,7 +31,7 @@ export const onRequest = defineMiddleware(
       ////store.messageStore.set('Email and password are required')
       //return redirect('/auth-error-page')
     }
-    if (url.pathname === '/error-email-password') {
+    if (url.pathname === '/email-password-error') {
       console.log('debug 1: middleware')
       store.messageStore.set('Email and password are required')
       return redirect('/auth-error-page')
