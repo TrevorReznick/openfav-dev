@@ -59,8 +59,10 @@ export const onRequest = defineMiddleware(
       return redirect('/register ')
     }
     */
+    /*
     console.log(`tu vieni dalla pagine ${from}`)
     console.log(`tu sei nella pagina ${to}`)
+    */
 
     if (protectedRoutes.includes(url.pathname)) {
       const accessToken = cookies.get('sb-access-token')
