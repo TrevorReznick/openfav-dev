@@ -1,44 +1,45 @@
 ---
-import Layout from '~/layouts/Layout.astro'
-import MyForm from '~/components/sub-pages/DoForm.astro'
+import Layout from "~/layouts/Layout.astro";
+import MyForm from "~/components/sub-pages/DoForm.astro";
+import Notifications from "~/components/jsx/Notifications.jsx";
+import { previousPath, currentPath, messageStore } from "~/store";
+const { errorMessage = messageStore.get() } = Astro.props;
 
-import { previousPath, currentPath } from '~/store'
-
-const to = currentPath.get()
-const from = previousPath.get()
-const title = 'Sign Up'
-const action = '/api/v1/auth/register'
-const text = 'Register a new account'
-const doForm = 'register'
-const isAuthForm = true
+const to = currentPath.get();
+const from = previousPath.get();
+const title = "Sign Up";
+const action = "/api/v1/auth/register";
+const text = "Register a new account";
+const doForm = "register";
+const isAuthForm = true;
 
 const myButton = {
-  text: 'Sign Up',  
-  variant: 'base',
-  url: null
-}
-
+  text: "Sign Up",
+  variant: "base",
+  url: null,
+};
 ---
 
-<Layout title = 'Auth Page' />
+<Layout title="Auth Page" />
+{errorMessage && <Notifications errorMessage={errorMessage} client:load />}
 <Fragment>
-  <MyForm 
-    inputs = {[
+  <MyForm
+    inputs={[
       {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
+        type: "email",
+        name: "email",
+        label: "Email",
       },
       {
-        type: 'password',
-        name: 'password',
-        label: 'Password',
+        type: "password",
+        name: "password",
+        label: "Password",
       },
     ]}
-    action = {action}
-    title = {title}
-    text = {text}
-    doForm = {doForm}
+    action={action}
+    title={title}
+    text={text}
+    doForm={doForm}
     isAuthForm
     myButton={myButton}
   />
