@@ -13,36 +13,11 @@ export const onRequest = defineMiddleware(
     store.previousPath.set(store.currentPath.get());
     store.currentPath.set(url.pathname);
 
-<<<<<<< HEAD
-    if (from === '/' && to === '/login') {
-      return redirect('/login')
-    } 
-    if (from === '/login' && to === '/register') {
-      return redirect('/register')
-    }
-    if(from === '/api/v1/auth/signout') {
-      return redirect('/login')
-    }
-    
-    /* @@ email auth error  @@ */
-    
-    console.log(`debug 8: tu vieni dalla pagine ${from}`)
-    console.log(`debug 8: tu sei nella pagina ${to}`)
-    console.log(`debug 8: page is: ${url.pathname}`)
-    
-    if(to === '/error-email-password') {
-      console.log(`debug 7: you come from ${to}`)
-      console.log(`debug 7: tu sei nella pagina ${to}`)
-    }
-    if(to === '/api/v1/auth/signin') {
-      console.log(`debug 5: you come from ${from}`)
-=======
     const from = store.previousPath.get();
     const to = store.currentPath.get();
 
     if (from === "/" && to === "/login") {
       return redirect("/login");
->>>>>>> origin/main
     }
     if (from === "/login" && to === "/register") {
       return redirect("/register");
