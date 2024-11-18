@@ -1,4 +1,3 @@
-// store.ts
 import { atom } from 'nanostores'
 
 //export const userId = atom<string | null>(null)
@@ -14,3 +13,4 @@ export const previousPath = atom<string>('/')
 export const notifications = atom([])
 //userId.set('123')
 //isLoggedIn.set(true)
+export const messageStore = atom<string>('')

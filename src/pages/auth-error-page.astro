@@ -1,0 +1,12 @@
+---
+import { messageStore } from '~/store'
+
+import Notifications from '~/components/jsx/Notifications.jsx'
+
+const {errorMessage = messageStore.get()} = Astro.props
+
+---
+
+<Notifications errorMessage={errorMessage} client:load />
+
+
