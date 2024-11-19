@@ -1,0 +1,17 @@
+---
+
+import Layout from '~/layouts/Layout.astro'
+import IsComponent from '~/components/dev/Main.astro'
+import '~/assets/css/Theme.css'
+
+---
+<Layout title="Login">
+  <IsComponent
+    email="hello@hello.com"
+    user_name="dummy user"
+    tagline="Your workspace"
+    title="Openfav, Staging Page"
+    subtitle="Secure with supabase auth flow"
+    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"
+  />
+</Layout>
