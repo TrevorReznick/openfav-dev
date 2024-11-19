@@ -1,17 +1,27 @@
 ---
-
-import Layout from '~/layouts/Layout.astro'
-import IsComponent from '~/components/dev/Main.astro'
-import '~/assets/css/Theme.css'
-
+import Layout from "~/layouts/Layout.astro"
+import IsComponent from "~/components/sub-pages/MyComponent.astro"
+import ItemGridDev from "~/components/dev/ItemGridDev.astro"
 ---
-<Layout title="Login">
-  <IsComponent
-    email="hello@hello.com"
-    user_name="dummy user"
-    tagline="Your workspace"
-    title="Openfav, Staging Page"
-    subtitle="Secure with supabase auth flow"
-    content="Some words can change the content of this page, you want to try? Enjoy the features of Openfav"
-  />
+
+<Layout title="Test Component">
+  <IsComponent title="hello" subititle="subtitle" tagline="welcome">
+    <Fragment slot="component">
+      <div class="flex flex-col sm:flex-row gap-2 justify-center">
+        <button
+          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-primaryColor hover:bg-secondaryColor border-primaryColor transition"
+          aria-label="Get started"
+        >
+          Get Started
+        </button>
+        <button
+          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-bgDark2 hover:bg-bgDark3 border-primaryColor transition"
+          aria-label="Live demo"
+        >
+          Live demo
+        </button>
+      </div>
+    </Fragment>
+    <ItemGridDev />
+  </IsComponent>
 </Layout>
