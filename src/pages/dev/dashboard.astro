@@ -1,27 +1,53 @@
 ---
-import Layout from "~/layouts/Layout.astro"
-import IsComponent from "~/components/sub-pages/MyComponent.astro"
-import ItemGridDev from "~/components/dev/ItemGridDev.astro"
+import Layout from '~/layouts/Layout.astro'
+import SectionContainer from '~/components/dev/MySectionComponent.astro'
+import CallToAction from '~/components/main/CallToAction.astro'
+import MainHeader from '~/components/dev/MainHeader.astro'
+import MainHero from '~/components/dev/MainHero.astro'
+
+let username = 'Doublefacessss'
+
+const metricsData = [{
+    title: "Total Sales",
+    value: "$9850.90",
+    upward: true,
+    percent: "1.8%",
+  },
+  {
+    title: "Net Revenue",
+    value: "$7520.50",
+    upward: false,
+    percent: "2.5%",
+  },
+  {
+    title: "Customers",
+    value: "1375",
+    upward: true,
+    percent: "5.2%",
+  },
+  {
+    title: "MRR",
+    value: "$250.00",
+    upward: true,
+    percent: "2.2%",
+  },
+]
 ---
 
 <Layout title="Test Component">
-  <IsComponent title="hello" subititle="subtitle" tagline="welcome">
-    <Fragment slot="component">
-      <div class="flex flex-col sm:flex-row gap-2 justify-center">
-        <button
-          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-primaryColor hover:bg-secondaryColor border-primaryColor transition"
-          aria-label="Get started"
-        >
-          Get Started
-        </button>
-        <button
-          class="w-64 sm:w-52 h-12 rounded-xl font-bold text-primaryText border border-solid flex justify-center items-center cursor-pointer bg-bgDark2 hover:bg-bgDark3 border-primaryColor transition"
-          aria-label="Live demo"
-        >
-          Live demo
-        </button>
-      </div>
-    </Fragment>
-    <ItemGridDev />
-  </IsComponent>
+  <SectionContainer>    
+    <MainHero
+      slot="MainHero"
+      title="hello"
+      subititle="subtitle"
+      user_name={username}
+      tagline={`${username}'s Dashboard`}
+    />
+    <div slot="CTA">
+      <CallToAction />
+    </div>
+    <div slot="MainHeader">
+      <MainHeader />
+    </div>
+  </SectionContainer>
 </Layout>
