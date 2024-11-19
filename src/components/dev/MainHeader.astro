@@ -1,54 +1,95 @@
-<div class="flex items-center bg-gray-100 dark:bg-gray-900">
+---
+import { twMerge } from 'tailwind-merge'
+import * as fonts from '~/config/costants'
+
+const {    
+    classes = {},
+} = Astro.props
+
+const {
+    title: titleClass = fonts.CARD_TITLE,
+    subtitle: subtitleClass = fonts.H2_SUBTITLE,
+    content: contentClass = "mb-10 text-secondaryText leading-loose",
+} = classes
+
+const items = [
+    {
+        title: "Your Lists",
+        value: "+3",
+        percentage: "1.8%",
+        percentageColor: "text-emerald-800 bg-emerald-300",
+        percentageIconDirection: "up",
+    },
+    {
+        title: "Your Sites",
+        value: "+11",
+        percentage: "2.5%",
+        percentageColor: "text-red-800 bg-red-300",
+        percentageIconDirection: "down",
+    },
+    {
+        title: "Your Favorites",
+        value: "1375",
+        percentage: "5.2%",
+        percentageColor: "text-indigo-800 bg-indigo-300",
+        percentageIconDirection: "up",
+    },
+    {
+        title: "AI Sites",
+        value: "$250.00",
+        percentage: "2.2%",
+        percentageColor: "text-indigo-800 bg-indigo-300",
+        percentageIconDirection: "up",
+    },
+];
+
+
+---
+
+<div class="flex items-center">
     <div class="container max-w-6xl px-5 mx-auto my-28">
         <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="p-5 bg-white rounded shadow-sm dark:bg-gray-800">
-                <div class="text-base text-gray-400 dark:text-gray-300">Total Sales</div>
-                <div class="flex items-center pt-1">
-                    <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">$9850.90</div>
-                    <span class="flex items-center px-2 py-0.5 mx-2 text-sm rounded-full text-green-600 bg-green-100 dark:bg-green-900 dark:text-emerald-400">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>1.8%</span>
-                    </span>
+            {items.map((item) => (
+                <div class="p-5 bg-bgDark3 rounded shadow-sm">
+                    {/*<div class="text-base text-gray-400 dark:text-gray-300"></div> */}
+                    <div 
+                        class={twMerge('text-white', titleClass)} 
+                        set:html={item.title}
+                    />
+                    <div class="flex items-center pt-1">
+                        <div class="text-2xl font-bold text-gray-400 dark:text-gray-100">{item.value}</div>
+                        <span
+                            class={`flex items-center px-2 py-0.5 mx-2 text-sm rounded-full ${item.percentageColor}`}
+                        >
+                            <svg
+                                class="w-4 h-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                {item.percentageIconDirection === "up" ? (
+                                <path
+                                    d="M18 15L12 9L6 15"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                ) : (
+                                <path
+                                    d="M6 9L12 15L18 9"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                )}
+                            </svg>
+                        <span>{item.percentage}</span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="p-5 bg-white rounded shadow-sm dark:bg-gray-800">
-                <div class="text-base text-gray-400 dark:text-gray-300">Net Revenue</div>
-                <div class="flex items-center pt-1">
-                    <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">$7520.50</div>
-                    <span class="flex items-center px-2 py-0.5 mx-2 text-sm rounded-full text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>2.5%</span>
-                    </span>
-                </div>
-            </div>
-            <div class="p-5 bg-white rounded shadow-sm dark:bg-gray-800">
-                <div class="text-base text-gray-400 dark:text-gray-300">Customers</div>
-                <div class="flex items-center pt-1">
-                    <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">1375</div>
-                    <span class="flex items-center px-2 py-0.5 mx-2 text-sm rounded-full text-green-600 bg-green-100 dark:bg-green-900 dark:text-emerald-400">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>5.2%</span>
-                    </span>
-                </div>
-            </div>
-            <div class="p-5 bg-white rounded shadow-sm dark:bg-gray-800">
-                <div class="text-base text-gray-400 dark:text-gray-300">MRR</div>
-                <div class="flex items-center pt-1">
-                    <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">$250.00</div>
-                    <span class="flex items-center px-2 py-0.5 mx-2 text-sm rounded-full text-green-600 bg-green-100 dark:bg-green-900 dark:text-emerald-400">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>2.2%</span>
-                    </span>
-                </div>
-            </div>
+            ))}
         </div>
     </div>
 </div>
