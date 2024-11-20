@@ -1,13 +1,15 @@
 ---
 import Button from '~/components/dev/Button.astro'
+import { SPACING, LAYOUT } from '~/config/styleCostants'
+import { twMerge} from 'tailwind-merge'
 
 ---
 <div 
     id="cta-wrapper-id"
-    class="max-w-[85rem] px-4 py-10 mx-auto"
+    class={twMerge(`max-w-[85rem] ${SPACING.PADDING.BASE} mx-auto ${SPACING.VERTICAL.SECTION}`)}
 >
     <!-- Button Grid -->
-    <div class="flex flex-col items-center gap-2 sm:flex-row mt-10 mb-10 justify-center">
+    <div class={twMerge(`${LAYOUT.FLEX.CENTER}, ${SPACING.GAP.LG} !important, ${SPACING.MARGIN.SECTION_TOP}`)}>
         <Button
             text="Get Started"
             variant="getStarted"

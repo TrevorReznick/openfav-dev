@@ -11,8 +11,6 @@ const {
   classes = {},
 } = Astro.props
 
-
-
 const {
   container: containerClass = styles.combineResponsive(
     styles.RESPONSIVE.CONTAINER.BASE,
@@ -23,7 +21,7 @@ const {
     styles.RESPONSIVE.CONTAINER['2XL'],
     styles.PATTERNS.HERO.WRAPPER
   )
-} = classes;
+} = classes
 
 const heroBackground = styles.combineResponsive(
   'w-screen',
@@ -40,6 +38,6 @@ const heroBackground = styles.combineResponsive(
 
 <section class={twMerge('flex flex-col items-center', containerClass, heroBackground)}>
     <slot name="MainHero"/>
-    <slot name="CTA" />
     <slot name="MainHeader" />
+    <slot name="CTA" />    
 </section>
