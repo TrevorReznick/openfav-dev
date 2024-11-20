@@ -1,0 +1,70 @@
+---
+// components/CustomLists.astro
+const lists = [
+  { name: 'Progetti Web', description: 'Link utili per lo sviluppo web' },
+  { name: 'Risorse AI', description: 'Articoli e tutorial sull\'intelligenza artificiale' },
+  // Altre liste...
+];
+---
+
+<div class="custom-lists">
+  {lists.length > 0 ? (
+    <ul>
+      {lists.map(list => (
+        <li>
+          <h3>{list.name}</h3>
+          <p>{list.description}</p>
+          <div class="actions">
+            <button>Aggiungi Link</button>
+            <button>Modifica</button>
+            <button>Elimina</button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="ai-suggestions">
+      <p>Non hai ancora creato liste. Ecco alcuni suggerimenti:</p>
+      <ul>
+        <li>Lista dei progetti in corso</li>
+        <li>Risorse per l'apprendimento</li>
+        <li>Idee per nuovi progetti</li>
+      </ul>
+    </div>
+  )}
+</div>
+
+<style>
+  .custom-lists ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .custom-lists li {
+    background: #f9f9f9;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  button {
+    padding: 0.25rem 0.5rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .ai-suggestions {
+    background: #e9ecef;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+</style>

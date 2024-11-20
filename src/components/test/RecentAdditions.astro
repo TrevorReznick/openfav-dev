@@ -1,0 +1,64 @@
+---
+// components/RecentAdditions.astro
+const recentLinks = [
+  { title: "Astro Documentation", url: "https://docs.astro.build", tags: ["astro", "docs"] },
+  { title: "React Hooks Guide", url: "https://reactjs.org/docs/hooks-intro.html", tags: ["react", "hooks"] },
+  { title: "TypeScript Handbook", url: "https://www.typescriptlang.org/docs/handbook/intro.html", tags: ["typescript", "guide"] },
+];
+---
+
+<div class="recent-additions">
+  {recentLinks.length > 0 ? (
+    <ul>
+      {recentLinks.map(link => (
+        <li>
+          <a href={link.url} target="_blank" rel="noopener noreferrer">{link.title}</a>
+          <div class="tags">
+            {link.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>Non hai ancora aggiunto link. Inizia a salvare le tue risorse preferite!</p>
+  )}
+</div>
+
+<style>
+  .recent-additions ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .recent-additions li {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .recent-additions a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .recent-additions a:hover {
+    text-decoration: underline;
+  }
+
+  .tags {
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+  }
+</style>

@@ -37,7 +37,8 @@ const heroBackground = styles.combineResponsive(
 ---
 
 <section class={twMerge('flex flex-col items-center', containerClass, heroBackground)}>
-    <slot name="MainHero"/>
-    <slot name="MainHeader" />
-    <slot name="CTA" />    
+  <slot name="MainSearch"/>  
+  <slot name="MainHero"/>
+  <slot name="MainHeader" />
+  <slot name="CTA" />    
 </section>

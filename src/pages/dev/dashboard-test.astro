@@ -1,0 +1,70 @@
+---
+
+// dashboard.astro
+import Layout from '~/layouts/Layout.astro';
+import WelcomeMessage from '~/components/test/WelcomeMessage.astro'
+import ActivityOverview from '~/components/test/ActivityOverview.astro'
+
+import CustomLists from '~/components/test/CustomLists.astro';
+import RecentAdditions from '~/components/test/RecentAdditions.astro';
+import AIRecommendations from '~/components/test/AIRecommendations.astro';
+import QuickAccess from '~/components/test/QuickAccess.astro'
+
+const userName = "Mario"; // Questo potrebbe essere recuperato da un database o da un'API
+---
+
+<Layout title="Dashboard OpenFavs">
+  <main class="dashboard">
+    <WelcomeMessage name={userName} />
+    
+    <div class="dashboard-grid">
+      <section class="activity-overview">
+        <h2>Panoramica Attività</h2>
+        <ActivityOverview />
+      </section>
+      
+      <section class="custom-lists">
+        <h2>Le Tue Liste</h2>
+        <CustomLists />
+      </section>
+      
+      <section class="recent-additions">
+        <h2>Ultimi Inserimenti</h2>
+        <RecentAdditions />
+      </section>
+      
+      <section class="ai-recommendations">
+        <h2>Consigli Personalizzati</h2>
+        <AIRecommendations />
+      </section>
+    </div>
+    
+    <QuickAccess />
+  </main>
+</Layout>
+
+<style>
+  .dashboard {
+    padding: 2rem;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+</style>

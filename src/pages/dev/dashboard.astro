@@ -4,6 +4,7 @@ import SectionContainer from '~/components/dev/MySectionComponent.astro'
 import CallToAction from '~/components/main/CallToAction.astro'
 import MainHeader from '~/components/dev/MainHeader.astro'
 import MainHero from '~/components/dev/MainHero.astro'
+import MainSearch from '~/components/dev/HeroSearch.astro'
 
 let username = 'Doublefacessss'
 
@@ -13,6 +14,9 @@ let username = 'Doublefacessss'
   <SectionContainer
     id="section-container"
   >    
+  <div slot="MainSearch">
+    <MainSearch />
+  </div>
     <MainHero
       id="main-hero"
       slot="MainHero"

@@ -1,0 +1,41 @@
+---
+// components/ActivityOverview.astro
+const recentActivity = {
+  newLinks: 5,
+  updatedLists: 2,
+  lastActive: "2 ore fa"
+};
+---
+
+<div class="activity-overview">
+  <ul>
+    <li><strong>{recentActivity.newLinks}</strong> nuovi link aggiunti</li>
+    <li><strong>{recentActivity.updatedLists}</strong> liste aggiornate</li>
+    <li>Ultima attività: <strong>{recentActivity.lastActive}</strong></li>
+  </ul>
+</div>
+
+<style>
+  .activity-overview {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #4a4a4a;
+  }
+
+  strong {
+    color: #2c3e50;
+  }
+</style>
