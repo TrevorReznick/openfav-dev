@@ -10,8 +10,11 @@ let username = 'Doublefacessss'
 ---
 
 <Layout title="Test Component">
-  <SectionContainer>    
+  <SectionContainer
+    id="section-container"
+  >    
     <MainHero
+      id="main-hero"
       slot="MainHero"
       title="hello"
       subititle="subtitle"
@@ -19,10 +22,14 @@ let username = 'Doublefacessss'
       tagline={`${username}'s Dashboard`}
     />
     <div slot="CTA">
-      <CallToAction />
+      <CallToAction 
+        id="call-to-action"
+      />
     </div>
     <div slot="MainHeader">
-      <MainHeader />
+      <MainHeader 
+        id="main-header"
+      />
     </div>
   </SectionContainer>
 </Layout>
