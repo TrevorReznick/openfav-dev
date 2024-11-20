@@ -1,6 +1,7 @@
 ---
-import { twMerge } from 'tailwind-merge'
-/*import myButton from "../base/test-buttons/Button.astro";*/
+
+import { twMerge } from 'tailwind-merge';
+import * as styles from '~/config/styleCostants';
 
 const {  
   user_name,
@@ -10,12 +11,34 @@ const {
   classes = {},
 } = Astro.props
 
+
+
 const {
-  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0"
-} = classes
+  container: containerClass = styles.combineResponsive(
+    styles.RESPONSIVE.CONTAINER.BASE,
+    styles.RESPONSIVE.CONTAINER.SM,
+    styles.RESPONSIVE.CONTAINER.MD,
+    styles.RESPONSIVE.CONTAINER.LG,
+    styles.RESPONSIVE.CONTAINER.XL,
+    styles.RESPONSIVE.CONTAINER['2XL'],
+    styles.PATTERNS.HERO.WRAPPER
+  )
+} = classes;
+
+const heroBackground = styles.combineResponsive(
+  'w-screen',
+  'flex',
+  'justify-center',
+  'items-center',
+  'bg-bgDark1',
+  'mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60',
+  'hero-bg-gradient',
+  'pb-24 sm:pb-32 md:pb-44 lg:pb-0'
+)
+
 ---
 
-<section class={twMerge("flex flex-col items-center", containerClass)}>
+<section class={twMerge('flex flex-col items-center', containerClass, heroBackground)}>
     <slot name="MainHero"/>
     <slot name="CTA" />
     <slot name="MainHeader" />
