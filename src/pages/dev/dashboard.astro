@@ -5,6 +5,7 @@ import CallToAction from '~/components/main/CallToAction.astro'
 import MainHeader from '~/components/dev/MainHeader.astro'
 import MainHero from '~/components/dev/MainHero.astro'
 import MainSearch from '~/components/dev/HeroSearch.astro'
+import { combineResponsive, RESPONSIVE, SPACING, COMPONENTS, LAYOUT } from '~/config/styleCostants'
 
 let username = 'Doublefacessss'
 
@@ -13,10 +14,11 @@ let username = 'Doublefacessss'
 <Layout title="Test Component">
   <SectionContainer
     id="section-container"
-  >    
-  <div slot="MainSearch">
-    <MainSearch />
-  </div>
+  > 
+    <MainSearch 
+      id="main-hero"  
+      slot="MainSearch"
+    />  
     <MainHero
       id="main-hero"
       slot="MainHero"
@@ -25,11 +27,10 @@ let username = 'Doublefacessss'
       user_name={username}
       tagline={`${username}'s Dashboard`}
     />
-    <div slot="MainHeader">
-      <MainHeader 
-        id="main-header"
-      />
-    </div>
+    <MainHeader 
+      slot="MainHeader"
+      id="main-header"
+    />
     <div slot="CTA">
       <CallToAction 
         id="call-to-action"        

@@ -1,14 +1,10 @@
 ---
 
-import { twMerge } from 'tailwind-merge';
-import * as styles from '~/config/styleCostants';
+import { twMerge } from 'tailwind-merge'
+import * as styles from '~/config/styleCostants'
 
 const {  
-  user_name,
-  title,
-  subtitle,  
-  tagline,
-  classes = {},
+  classes = {}
 } = Astro.props
 
 const {
@@ -26,6 +22,7 @@ const {
 const heroBackground = styles.combineResponsive(
   'w-screen',
   'flex',
+  'flex-col',
   'justify-center',
   'items-center',
   'bg-bgDark1',
@@ -36,9 +33,9 @@ const heroBackground = styles.combineResponsive(
 
 ---
 
-<section class={twMerge('flex flex-col items-center', containerClass, heroBackground)}>
+<section class={twMerge(containerClass, heroBackground)}>
   <slot name="MainSearch"/>  
-  <slot name="MainHero"/>
+  <slot name="MainHero"/>  
   <slot name="MainHeader" />
   <slot name="CTA" />    
 </section>
