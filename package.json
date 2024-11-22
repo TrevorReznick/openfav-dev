@@ -30,6 +30,7 @@
     "astro": "^4.15.11",
     "astro-icon": "^1.1.2",
     "esbuild": "^0.24.0",
+    "lucide-react": "^0.460.0",
     "nanostores": "^0.11.3",
     "npm": "^10.8.1",
     "npm-check-updates": "^16.14.20",
