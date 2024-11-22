@@ -1,0 +1,70 @@
+---
+import ItemGrid from '~/components/dev/ItemGridDev.astro'
+import { twMerge } from 'tailwind-merge'
+import { Icon } from 'astro-icon/components'
+import * as fonts from '~/config/costants'
+import ActivityFeed from '~/components/dev/ActivityFeed.astro'
+
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+
+const {
+  container: containerClass = '',
+  panel: panelClass = '',
+  title: titleClass = '',
+  description: descriptionClass = '',
+  icon: defaultIconClass = 'text-primary',
+  action: actionClass = '',
+} = classes;
+
+const updatedItems = [
+  { type: 'activityFeed' },
+  ...items,
+];
+---
+
+{
+  updatedItems && (
+    <div
+      class={twMerge(
+        `grid mx-auto gap-8 md:gap-y-12 ${
+          columns === 4
+          ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+          : columns === 3
+              ? 'lg:grid-cols-3 sm:grid-cols-2'
+              : columns === 2
+                  ? 'sm:grid-cols-2 '
+                  : ''
+        }`,
+        containerClass
+      )}
+    >
+        {updatedItems.map((item) => (
+            <div>
+            {item.type === 'activityFeed' ? (
+                <ActivityFeed />
+            ) : (
+                <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
+                <div class="flex justify-center">
+                    {(item.icon || defaultIcon) && (
+                    <Icon
+                        name={item.icon || defaultIcon}
+                        class={twMerge('w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2', defaultIconClass, item.classes?.icon)}
+                    />
+                    )}
+                </div>
+                <div class="mt-0.5">
+                    {item.title && <h3 class={twMerge('text-xl font-bold', titleClass, item.classes?.title)}>{item.title}</h3>}
+                    {item.description && (
+                    <p
+                        class={twMerge(`${item.title ? 'mt-3' : ''} text-muted`, descriptionClass, item.classes?.description)}
+                        set:html={item.description}
+                    />
+                    )}
+                </div>
+                </div>
+            )}
+            </div>
+      ))}
+    </div>
+  )
+}
