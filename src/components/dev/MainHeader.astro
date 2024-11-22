@@ -29,10 +29,10 @@ const items = [
     },
     {
         title: "Your Favorites",
-        value: "1375",
-        percentage: "5.2%",
+        value: "95",
+        percentage: "4",
         percentageColor: "text-indigo-800 bg-indigo-300",
-        percentageIconDirection: "up",
+        percentageIconDirection: "="
     },
     {
         title: "AI Sites",
@@ -78,7 +78,7 @@ const items = [
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                 ></path>
-                                ) : (
+                                ) : item.percentageIconDirection === "down" ? (
                                 <path
                                     d="M6 9L12 15L18 9"
                                     stroke="currentColor"
@@ -86,6 +86,23 @@ const items = [
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                 ></path>
+                                ) : (
+                                <>
+                                    <path
+                                        d="M6 9H18"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    ></path>
+                                    <path
+                                        d="M6 15H18"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    ></path>
+                                </>
                                 )}
                             </svg>
                         <span>{item.percentage}</span>
