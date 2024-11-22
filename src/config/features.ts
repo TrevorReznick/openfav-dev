@@ -78,3 +78,63 @@ export const StepItems: FeatureItem[] = [
     },
 ]
 
+export interface Card {
+    id: number;
+    title: string;
+    subtitle: string;
+    url: string;
+    tags: string[];
+    image: string;
+  }
+  
+  export const cards: Card[] = [
+    {
+      id: 1,
+      title: "Modern Architecture",
+      subtitle: "Contemporary design principles",
+      url: "https://architecture.example",
+      tags: ["Design", "Modern", "Innovation"],
+      image: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: 2,
+      title: "Digital Photography",
+      subtitle: "Capturing moments in pixels",
+      url: "https://photography.example",
+      tags: ["Art", "Digital", "Creative"],
+      image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: 3,
+      title: "Urban Planning",
+      subtitle: "Creating sustainable cities",
+      url: "https://urban.example",
+      tags: ["City", "Planning", "Future"],
+      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: 4,
+      title: "Tech Innovation",
+      subtitle: "Next-gen solutions",
+      url: "https://tech.example",
+      tags: ["Technology", "Innovation", "Future"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: 5,
+      title: "Nature Explorer",
+      subtitle: "Discovering Earth's beauty",
+      url: "https://nature.example",
+      tags: ["Nature", "Adventure", "Travel"],
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: 6,
+      title: "Art & Culture",
+      subtitle: "Global creative expressions",
+      url: "https://art.example",
+      tags: ["Art", "Culture", "Global"],
+      image: "https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+  ]
+
