@@ -5,6 +5,8 @@ import CallToAction from '~/components/main/CallToAction.astro'
 import MainHeader from '~/components/dev/MainHeader.astro'
 import MainHero from '~/components/dev/MainHero.astro'
 import MainSearch from '~/components/dev/HeroSearch.astro'
+import NewSection from '~/components/dev/NewSection.astro'
+
 import { combineResponsive, RESPONSIVE, SPACING, COMPONENTS, LAYOUT } from '~/config/styleCostants'
 
 let username = 'Doublefacessss'
@@ -35,6 +37,7 @@ let username = 'Doublefacessss'
       <CallToAction 
         id="call-to-action"        
       />
-    </div>    
+    </div>
+    <NewSection slot="MainCards" />
   </SectionContainer>
 </Layout>
