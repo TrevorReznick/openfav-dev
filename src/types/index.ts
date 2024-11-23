@@ -14,6 +14,13 @@ export interface RecentActivity {
     updatesFavorites: number,
     lastActive: string
 }
+
+export interface UserActivity  {
+    id: number,
+    user: string,
+    action: string,
+    timestamp: string
+}
 		
 
 /* @@ Metadata @@ */

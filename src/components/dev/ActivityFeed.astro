@@ -1,44 +1,10 @@
 ---
 import { Logs, Clock } from 'lucide-react'
 
-const activities = [
-  {
-    id: 1,
-    user: 'Sarah Chen',
-    action: 'deployed new features to dashboard.example.com',
-    timestamp: '10 minutes ago'
-  },
-  {
-    id: 2,
-    user: 'Alex Morgan',
-    action: 'updated blog platform theme',
-    timestamp: '2 hours ago'
-  },
-  {
-    id: 3,
-    user: 'Jamie Wilson',
-    action: 'added new portfolio projects',
-    timestamp: '5 hours ago'
-  },
-  {
-    id: 4,
-    user: 'Sarah Chen',
-    action: 'deployed new features to dashboard.example.com',
-    timestamp: '10 minutes ago'
-  },
-  {
-    id: 5,
-    user: 'Alex Morgan',
-    action: 'updated blog platform theme',
-    timestamp: '2 hours ago'
-  },
-  {
-    id: 6,
-    user: 'Jamie Wilson',
-    action: 'added new portfolio projects',
-    timestamp: '5 hours ago'
-  }
-];
+import {ExampleUserActivities} from '~/config/features'
+
+const activities = ExampleUserActivities
+ 
 ---
 
 <div class="bg-white rounded-xl shadow-sm p-6">
