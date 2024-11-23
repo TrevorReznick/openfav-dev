@@ -2,13 +2,11 @@
 import Layout from '~/layouts/Layout.astro'
 import SectionContainer from '~/components/main/MySectionComponent.astro'
 import CallToAction from '~/components/main/CallToAction.astro'
-import MainHeader from '~/components/dev/MainHeader.astro'
 import MainHero from '~/components/dev/MainHero.astro'
 import MainSearch from '~/components/dev/HeroSearch.astro'
 import NewSection from '~/components/dev/MainCardsGridSection.astro'
-import StatsCard from '~/components/dev/StatsCards.astro'
+import MainHeader from '~/components/dashboard/MainHeader.astro'
 
-import { combineResponsive, RESPONSIVE, SPACING, COMPONENTS, LAYOUT } from '~/config/styleCostants'
 
 let username = 'Doublefacessss'
 
@@ -29,20 +27,8 @@ let username = 'Doublefacessss'
       subititle="subtitle"
       user_name={username}
       tagline={`${username}'s Dashboard`}
-    />
-    <div 
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-      slot="MainHeader1"
-    >
-      <StatsCard title="Total Projects" value="12" change="+2.5%" type="increase" />
-      <StatsCard title="Active Tasks" value="48" change="-4%" type="decrease" />
-      <StatsCard title="Team Members" value="9" change="+12%" type="increase" />
-      <StatsCard title="Completion Rate" value="87%" change="+3.2%" type="increase" />
-    </div>
-    <MainHeader 
-      slot="MainHeader"
-      id="main-header"
-    />
+    />    
+    <MainHeader slot="MainHeader" />
     <CallToAction
       slot="CTA"
       id="call-to-action"        
