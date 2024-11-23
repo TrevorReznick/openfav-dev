@@ -1,27 +1,50 @@
 ---
-// components/ActivityOverview.astro
-const recentActivity = {
-  newLinks: 5,
-  updatedLists: 2,
-  lastActive: "2 ore fa"
-};
----
+import { Activity, Clock } from 'lucide-react'
 
-<div class="activity-overview">
-  <ul>
-    <li><strong>{recentActivity.newLinks}</strong> nuovi link aggiunti</li>
-    <li><strong>{recentActivity.updatedLists}</strong> liste aggiornate</li>
-    <li>Ultima attività: <strong>{recentActivity.lastActive}</strong></li>
-  </ul>
+import {ExampleActivities} from '~/config/features'
+
+const recentActivity = ExampleActivities
+
+---
+<div class="bg-white rounded-xl shadow-sm p-6">
+  <div class="flex items-center gap-2 mb-6">
+    <Activity className="w-5 h-5 text-indigo-600" />
+    <h2 class="text-xl font-semibold text-gray-900">Recent Activity</h2>
+  </div>
+  <div class="relative">
+    {/*
+      Timeline line
+      <div class="absolute left-2.5 top-0 h-full w-px bg-gray-200"></div>
+    */}    
+    <div class="space-y-8">      
+        <div class="relative pl-10">
+          {/* 
+            Timeline dot
+            <div class="absolute left-0 top-1.5 h-5 w-5 rounded-full border-2 border-indigo-600 bg-white"></div>          
+          */}
+          
+          <div class="flex flex-col">
+            <ul>
+              <li><strong>{recentActivity.newLinks}</strong> nuovi links aggiunti</li>
+              <li><strong>{recentActivity.updatedLists}</strong> liste aggiornate</li>
+              <li>Ultima attività: <strong>{recentActivity.lastActive}</strong></li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
 
-<style>
-  .activity-overview {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem;
+
+<style>  
+
+  
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #333;
   }
+
 
   ul {
     list-style-type: none;

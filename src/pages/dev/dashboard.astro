@@ -1,12 +1,11 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import SectionContainer from '~/components/main/MySectionComponent.astro'
-import CallToAction from '~/components/main/CallToAction.astro'
-import MainHero from '~/components/dev/MainHero.astro'
 import MainSearch from '~/components/dev/HeroSearch.astro'
-import NewSection from '~/components/dev/MainCardsGridSection.astro'
+import MainHero from '~/components/dev/MainHero.astro'
 import MainHeader from '~/components/dashboard/MainHeader.astro'
-
+import MainCards from '~/components/dev/MainCardsGridSection.astro'
+import CallToAction from '~/components/main/CallToAction.astro'
 
 let username = 'Doublefacessss'
 
@@ -33,6 +32,6 @@ let username = 'Doublefacessss'
       slot="CTA"
       id="call-to-action"        
     />
-    <NewSection slot="MainCards" />    
+    <MainCards slot="MainCards" />    
   </SectionContainer>
 </Layout>

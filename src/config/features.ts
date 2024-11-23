@@ -1,8 +1,8 @@
-export interface FeatureItem {
-    title: string;
-    description?: string;
-    icon: string;
-}
+
+import type {FeatureItem, RecentActivity} from '~/types'
+
+
+/* @@ home featured items @@ */
   
   // Puoi poi usare il tipo nell'array di items
 export const FeaturedItems1: FeatureItem[] = [
@@ -77,4 +77,32 @@ export const StepItems: FeatureItem[] = [
         icon: 'tabler:check',
     },
 ]
+
+/* @@ dashboard featured items @@ */
+
+export const ExampleItems: FeatureItem[] = [
+    {
+        title: "Installation Instructions",
+        description: "Offer clear instructions on how to download the purchased templates and install them on various website platforms or content management systems.",
+        icon: "flat-color-icons:bookmark",
+    },
+    {
+        title: "Demo and Previews",
+        description: "Provide interactive demos and previews that allow customers to see how their chosen template will look and function before making a purchase.",
+        icon: "flat-color-icons:template",
+    },
+    {
+        title: "Technical Support",
+        description: "Providing customer support for any technical issues related to the templates or their implementation.",
+        icon: "flat-color-icons:voice-presentation",
+    }
+]
+
+export const ExampleActivities: RecentActivity = {
+    newLinks: 5,
+    updatedLists: 2,
+    lastActive: "2 ore fa"
+}
+
+
 

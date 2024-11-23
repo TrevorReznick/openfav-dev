@@ -1,4 +1,18 @@
-import type { HTMLAttributes } from 'astro/types'	
+import type { HTMLAttributes } from 'astro/types'
+
+/* @@ site types @@ */
+
+export interface FeatureItem {
+    title: string;
+    description?: string;
+    icon: string;
+}
+
+export interface RecentActivity {
+    newLinks: number,
+    updatedLists: number,
+    lastActive: string
+}
 		
 
 /* @@ Metadata @@ */

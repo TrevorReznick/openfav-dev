@@ -1,38 +1,81 @@
 ---
-import ItemGrid from '~/components/dev/test.astro'
-import { Icon } from 'astro-icon/components'
-import * as fonts from '~/config/costants'
+import { twMerge } from 'tailwind-merge'
+import ItemGrid from '~/components/dev/MainCard.astro'
+import { Icon } from 'astro-icon/components';
+import * as fonts from '~/config/styleConstantsNew'
+import { ExampleItems } from '~/config/features'
 
-const items = [
-    {
-        title: "Installation Instructions",
-        description: "Offer clear instructions on how to download the purchased templates and install them on various website platforms or content management systems.",
-        icon: "flat-color-icons:bookmark",
-    },
-    {
-        title: "Demo and Previews",
-        description: "Provide interactive demos and previews that allow customers to see how their chosen template will look and function before making a purchase.",
-        icon: "flat-color-icons:template",
-    },
-    {
-        title: "Technical Support",
-        description: "Providing customer support for any technical issues related to the templates or their implementation.",
-        icon: "flat-color-icons:voice-presentation",
-    }
-];
+const items = ExampleItems
+
+const containerClasses = twMerge(
+    'mx-auto',
+    'max-w-7xl',
+    'p-4',
+    'md:px-8',
+    'text-secondaryColor',
+    'text-sm',
+    'sm:text-base',
+    'mb-6',
+    fonts.RESPONSIVE.SPACING.HERO_MARGIN
+);
+
+const gridContainerClasses = twMerge(
+    'gap-8',
+    'md:gap-y-12',
+    fonts.RESPONSIVE.LAYOUT.GRID.BASE,
+    fonts.RESPONSIVE.LAYOUT.GAP.BASE
+);
+
+const panelClasses = twMerge(
+    'max-w-none',
+    'backdrop-blur',
+    'bg-indigo',
+    'border',
+    'border-[#ffffff29]',
+    'dark:bg-slate-900',
+    'dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)]',
+    'p-6',
+    'rounded-lg',
+    'shadow-[0_4px_30px_rgba(0,0,0,0.1)]'
+);
+
+const titleClasses = twMerge(
+    'text-xl',
+    'font-bold',
+    'text-heading',
+    'ml-2',
+    'rtl:ml-0',
+    'rtl:mr-2'
+);
+
+const descriptionClasses = twMerge(
+    fonts.TYPOGRAPHY.COLORS.SECTION_LIST_WHITE,
+    'text-muted',
+    'mt-2',
+    'ml-2',
+    'rtl:ml-0',
+    'rtl:mr-2'
+);
+
+const iconClasses = twMerge(
+    'h-12',
+    'w-12',
+    'mb-6',
+    'text-primary'
+);
 ---
 
-<div class="mx-auto max-w-7xl p-4 md:px-8 text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16">    
+<div class={containerClasses}>
     <ItemGrid
         items={items}
         columns={3}
         defaultIcon="tabler:check"
         classes={{
-            container: 'gap-8 md:gap-y-12',
-            panel: 'max-w-none backdrop-blur bg-indigo border border-[#ffffff29] dark:bg-slate-900 dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]',
-            title: 'text-xl font-bold text-heading ml-2 rtl:ml-0 rtl:mr-2',
-            description: `${fonts.SECTION_LIST_WHITE} text-muted mt-2 ml-2 rtl:ml-0 rtl:mr-2`,
-            icon: 'h-12 w-12 mb-6 text-primary',
+            container: gridContainerClasses,
+            panel: panelClasses,
+            title: titleClasses,
+            description: descriptionClasses,
+            icon: iconClasses,
         }}
     />
 </div>
