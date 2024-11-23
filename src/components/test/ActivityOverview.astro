@@ -7,7 +7,7 @@ const recentActivity = ExampleActivities
 
 ---
 <div class="bg-white rounded-xl shadow-sm p-6">
-  <div class="flex items-center gap-2 mb-6">
+  <div class="flex gap-2 mb-3">
     <Activity className="w-5 h-5 text-indigo-600" />
     <h2 class="text-xl font-semibold text-gray-900">Recent Activity</h2>
   </div>
@@ -27,6 +27,7 @@ const recentActivity = ExampleActivities
             <ul>
               <li><strong>{recentActivity.newLinks}</strong> nuovi links aggiunti</li>
               <li><strong>{recentActivity.updatedLists}</strong> liste aggiornate</li>
+              <li><strong>{recentActivity.updatesFavorites}</strong> favoriti modificati</li>
               <li>Ultima attività: <strong>{recentActivity.lastActive}</strong></li>
             </ul>
           </div>

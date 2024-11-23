@@ -4,7 +4,7 @@ import SectionContainer from '~/components/main/MySectionComponent.astro'
 import MainSearch from '~/components/dev/HeroSearch.astro'
 import MainHero from '~/components/dev/MainHero.astro'
 import MainHeader from '~/components/dashboard/MainHeader.astro'
-import MainCards from '~/components/dev/MainCardsGridSection.astro'
+import MainCards from '~/components/dashboard/MainCardsGridSection.astro'
 import CallToAction from '~/components/main/CallToAction.astro'
 
 let username = 'Doublefacessss'
@@ -28,10 +28,10 @@ let username = 'Doublefacessss'
       tagline={`${username}'s Dashboard`}
     />    
     <MainHeader slot="MainHeader" />
+    <MainCards slot="MainCards" />    
     <CallToAction
       slot="CTA"
       id="call-to-action"        
     />
-    <MainCards slot="MainCards" />    
   </SectionContainer>
 </Layout>
