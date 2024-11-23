@@ -11,6 +11,7 @@ export interface FeatureItem {
 export interface RecentActivity {
     newLinks: number,
     updatedLists: number,
+    updatesFavorites: number,
     lastActive: string
 }
 		

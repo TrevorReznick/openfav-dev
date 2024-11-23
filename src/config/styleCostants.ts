@@ -48,7 +48,8 @@ export const TYPOGRAPHY = {
         TAGLINE: 'text-sm sm:text-base',
         SUBTITLE: 'text-sm lg:text-base xl:text-lg',
         BODY: 'text-base leading-loose',
-        CARD: 'text-sm'
+        CARD: 'text-sm',
+        HERO_TEXT_CARLD: 'content-text-gray'
     },
     COLORS: {
         PRIMARY: 'text-primaryText',

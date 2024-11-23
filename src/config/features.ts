@@ -101,6 +101,7 @@ export const ExampleItems: FeatureItem[] = [
 export const ExampleActivities: RecentActivity = {
     newLinks: 5,
     updatedLists: 2,
+    updatesFavorites: 4,
     lastActive: "2 ore fa"
 }
 

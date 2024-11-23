@@ -224,6 +224,7 @@ export const combineResponsive = (...classes: string[]) => classes.join(' ');
 
 // Function to get friendly name constants
 export const getFriendlyNames = () => ({
+    show: RESPONSIVE.UTILITIES.SHOW,
     spacing: {
         section: SPACING.VERTICAL.SECTION,
         subsection: SPACING.VERTICAL.SUBSECTION,
