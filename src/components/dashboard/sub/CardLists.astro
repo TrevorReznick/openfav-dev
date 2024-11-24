@@ -1,11 +1,9 @@
 ---
 // src/components/dashboard/sub/CardList.astro
 
-import { Folder, Bot, Book, Star, FolderHeart } from 'lucide-react';
-import { ExampleUserActivities } from '~/config/features';
-import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro';
-
-const activities = ExampleUserActivities;
+import { Folder, Bot, Book, Star, FolderHeart } from 'lucide-react'
+import {ListsCardsitems} from '~/config/features'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
 
 const lists = [
   { name: 'Progetti Web', description: 'Link utili per lo sviluppo web', icon: Folder },
@@ -15,7 +13,7 @@ const lists = [
 ];
 ---
 
-<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
+<div class="bg-white rounded-lg shadow-sm pl-8 pt-4 pb-4 pr-4 flex flex-col justify-between h-full">
   <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
     <FolderHeart className="w-5 h-5 text-indigo-600" />
     <h2 class="text-xl font-semibold text-gray-900">Last Created Lists</h2>

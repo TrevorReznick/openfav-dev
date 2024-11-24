@@ -1,10 +1,29 @@
 
-import type {FeatureItem, RecentActivity, UserActivity} from '~/types'
+import type {FeatureItem, RecentActivity, UserActivity, personalCardListItem} from '~/types'
 
 
 /* @@ home featured items @@ */
   
   // Puoi poi usare il tipo nell'array di items
+
+export const ListsCardsitems: personalCardListItem[] = [
+    { 
+        name: 'Progetti Web', 
+        description: 'Link utili per lo sviluppo web', 
+        icon: 'Folder' 
+    },
+    { 
+        name: 'Risorse AI', 
+        description: 'Articoli e tutorial sull\'intelligenza artificiale', 
+        icon: 'Bot' 
+    },
+    { 
+        name: 'Scholl Links', 
+        description: 'Links per produttività', 
+        icon: 'Book' 
+    },
+]
+
 export const FeaturedItems1: FeatureItem[] = [
     {
         title: "Stop boring searching something 'i was sure to found here'",
@@ -98,7 +117,7 @@ export const ExampleItems: FeatureItem[] = [
     }
 ]
 
-export const ExampleActivities: RecentActivity = {
+export const ExampleActivities: RecentActivity = {    
     newLinks: 5,
     updatedLists: 2,
     updatesFavorites: 4,
@@ -125,6 +144,15 @@ export const ExampleUserActivities: UserActivity[] = [
       timestamp: '5 hours ago'
     }
 ]
+
+export const ExampleActivitiesTest: RecentActivity = {
+    newLinks: 5,
+    updatedLists: 2,
+    updatesFavorites: 4,
+    lastActive: "2 ore fa"
+}
+
+
 
 
 

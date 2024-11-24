@@ -10,33 +10,35 @@ const recentLinks = [
 ];
 ---
 
-<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
+<div class="bg-white rounded-lg shadow-sm pl-8 pt-4 pb-4 pr-4 flex flex-col justify-between h-full">
     <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
-    <Bookmark className="w-5 h-5 text-indigo-600" />
-    <h2 class="text-xl font-semibold text-gray-900">Last Inserted Links</h2>
-  </div>
-  <div class="relative">    
-    <div class="space-y-8">
-        {recentLinks.map((link, index) => (
-            <div class="flex items-start gap-3">
-                <div class="flex-shrink-0">
-                    <Link className="w-5 h-5 text-indigo-600" />            
-                </div>
-                <div class="flex flex-col">
-                    <p class="text-sm text-gray-900">                         
-                        <a href={link.url} class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">{link.title}</a>
-                    </p>
-                    <div class="tags">
-                        {link.tags.map((tag) => (
-                            <span class="tag">{tag}</span>
-                        ))}
+        <Bookmark className="w-5 h-5 text-indigo-600" aria-label="Bookmark icon" />
+        <h2 class="text-xl font-semibold text-gray-900">Last Inserted Links</h2>
+    </div>
+    <div class="relative flex flex-col flex-1 justify-between">
+        <div class="flex flex-col justify-start space-y-4">
+            {recentLinks.map((link, index) => (
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0">
+                        <Link className="w-5 h-5 text-indigo-600" aria-label="Link icon" />
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-sm text-gray-900">
+                            <a href={link.url} class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" aria-label={`Visit ${link.title}`}>{link.title}</a>
+                        </p>
+                        <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
+                            {link.tags.map((tag) => (
+                                <span class="inline-block bg-gray-200 text-gray-700 px-2 py-0.5 rounded mr-1 text-xs">{tag}</span>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        ))}
-        <LinkViewAll />
+            ))}
+        </div>
+        <div class="mt-4">
+            <LinkViewAll />
+        </div>
     </div>
-  </div>
 </div>
 
 <style>

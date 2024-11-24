@@ -2,25 +2,55 @@ import type { HTMLAttributes } from 'astro/types'
 
 /* @@ site types @@ */
 
-export interface FeatureItem {
+export interface genericCardItem {
+    card_name?: string
+    card_icon?: any
+}
+
+/*
+export interface genericCardItem_ {
+    action?: string,
+    description?: string
+    icon: string
+    id?: number
+    
+    lastActive?: string
+    newLinks?: number
+    timestamp?: string
+    title: string
+    updatedLists?: number
+    updatesFavorites?: number    
+    user?: string    
+}
+*/
+
+export interface personalCardListItem extends genericCardItem {
+    name?: string
+    description?: string
+    icon?: string
+}
+
+export interface FeatureItem extends genericCardItem {
     title: string;
     description?: string;
     icon: string;
 }
 
-export interface RecentActivity {
+export interface RecentActivity extends genericCardItem {
     newLinks: number,
     updatedLists: number,
     updatesFavorites: number,
     lastActive: string
 }
 
-export interface UserActivity  {
+export interface UserActivity extends genericCardItem {
     id: number,
     user: string,
     action: string,
     timestamp: string
 }
+
+export type GeneralCardItemType = personalCardListItem[] | FeatureItem[] | RecentActivity[] | UserActivity[]
 		
 
 /* @@ Metadata @@ */

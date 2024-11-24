@@ -1,23 +1,32 @@
 ---
 
-import { FolderHeart } from 'lucide-react';
-import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro';
+import { Activity, Clock, Link, List, FolderHeart, Folder, Bot, Book, Star, Bookmark, Logs} from 'lucide-react'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
 
-const { items, title, icon: Icon, itemText, descriptionText, viewAllLink } = Astro.props;
+const { 
+  card_name, 
+  card_text, 
+  items, 
+  title, 
+  icon: Icon, 
+  itemText, 
+  descriptionText, 
+  viewAllLink 
+} = Astro.props
 
 const formatItemText = (item) => {
   if (typeof itemText === 'function') {
-    return itemText(item);
+    return itemText(item)
   }
   return itemText || 'You created the list';
-};
+}
 
 const formatDescriptionText = (item) => {
   if (typeof descriptionText === 'function') {
     return descriptionText(item);
   }
   return descriptionText || item.description;
-};
+}
 ---
 
 <div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
