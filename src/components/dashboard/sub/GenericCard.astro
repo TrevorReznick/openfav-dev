@@ -1,0 +1,50 @@
+---
+
+import { FolderHeart } from 'lucide-react';
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro';
+
+const { items, title, icon: Icon, itemText, descriptionText, viewAllLink } = Astro.props;
+
+const formatItemText = (item) => {
+  if (typeof itemText === 'function') {
+    return itemText(item);
+  }
+  return itemText || 'You created the list';
+};
+
+const formatDescriptionText = (item) => {
+  if (typeof descriptionText === 'function') {
+    return descriptionText(item);
+  }
+  return descriptionText || item.description;
+};
+---
+
+<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
+  <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
+    <Icon className="w-5 h-5 text-indigo-600" />
+    <h2 class="text-xl font-semibold text-gray-900">{title}</h2>
+  </div>
+  <div class="relative flex flex-col flex-1 justify-between">
+    <div class="flex flex-col justify-start space-y-4">
+      {items.map((item) => (
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            {item.icon && <item.icon className="w-5 h-5 text-indigo-600" />}
+          </div>
+          <div class="flex flex-col">
+            <p class="text-sm text-gray-900">
+              <span class="font-medium">You</span> {formatItemText(item)}
+            </p>
+            <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
+              <span>{formatDescriptionText(item)}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-4">
+      <LinkViewAll href={viewAllLink} />
+    </div>
+  </div>
+</div>
