@@ -1,5 +1,4 @@
 ---
-// src/components/dashboard/sub/ActivityFeed.astro
 import { Activity, Clock, Link, List, Star } from 'lucide-react';
 import { ExampleActivities } from '~/config/features';
 
@@ -10,46 +9,52 @@ const iconMap = {
   lastActive: Clock
 };
 
-const activities = Object.entries(ExampleActivities)
-  .map(([key, value]) => {
-    if (key === 'lastActive') {
-      return {
-        icon: iconMap[key],
-        action: `r Last activity ${value}`,
-        value: value
-      };
-    }
-    return {
-      icon: iconMap[key as keyof typeof iconMap],
-      action: `${key === 'newLinks' ? 'Added' : 'Updated'}`,
-      value: value,
-      item: `${key.replace(/([A-Z])/g, ' $1').trim().toLowerCase()}`
-    };
-  });
+const formatActivityKey = (key) => {
+  return key.replace(/([A-Z])/g, ' $1').trim().toLowerCase();
+};
+
+const getActionText = (key) => {
+  if (key === 'newLinks') {
+    return 'Added';
+  } else if (key === 'updatedLists' || key === 'updatesFavorites') {
+    return 'Updated';
+  } else {
+    return '';
+  }
+};
+
+const activities = Object.entries(ExampleActivities).map(([key, value]) => {
+  return {
+    icon: iconMap[key as keyof typeof iconMap],
+    action: getActionText(key),
+    value: value,
+    item: key === 'lastActive' ? null : formatActivityKey(key)
+  };
+});
 ---
 
-<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
-    <div class="flex flex-row justify-center items-center gap-2 mb-6">
-        <Activity className="w-5 h-5 text-indigo-600" />
-        <h2 class="text-xl font-semibold text-gray-900">Recent Activity</h2>
-    </div>    
-    <div class="relative flex flex-col justify-between h-full">
-        <div class="space-y-4 flex flex-col justify-start pl-4">
-        {activities.map((item) => (
-            <div class="flex items-start gap-3">
-            <div class="flex-shrink-0">
-                <item.icon className="w-5 h-5 text-indigo-600" />
-            </div>
-            <p class="text-sm text-gray-900">
-                <span class="font-medium">You</span> {item.action} 
-                {item.value !== undefined && <span class="font-bold">{item.value}</span>}
-                {item.item && ` ${item.item}`}
-            </p>
-            </div>
-        ))}
+<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full mt-auto">
+  <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
+    <Activity className="w-5 h-5 text-indigo-600" aria-label="Activity Icon" />
+    <h2 class="text-xl font-semibold text-gray-900">Recent Activity</h2>
+  </div>
+  <div class="relative flex flex-col justify-between h-full">
+    <div class="space-y-4 flex flex-col justify-start pl-8">
+      {activities.map((item) => (
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            <item.icon className="w-5 h-5 text-indigo-600" aria-label={`${item.action} Icon`} />
+          </div>
+          <p class="text-sm text-gray-900">
+            <span class="font-medium">You</span> {item.action} 
+            {item.value !== undefined && <span class="font-bold">{item.value}</span>}
+            {item.item && ` ${item.item}`}
+          </p>
         </div>
-        <div class="mt-auto flex justify-center items-center text-center">
-        <a href="/all-activities" class="text-blue-500 hover:underline">View All</a>
-        </div>
+      ))}
     </div>
+    <div class="mt-auto flex justify-center items-center text-center">
+      <a href="/all-activities" class="text-blue-500 hover:underline">View All</a>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,9 @@
 ---
-import { Folder, Bot, Book, Star, FolderHeart } from 'lucide-react'
-import { ExampleUserActivities } from '~/config/features'
-import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
+// src/components/dashboard/sub/CardList.astro
+
+import { Folder, Bot, Book, Star, FolderHeart } from 'lucide-react';
+import { ExampleUserActivities } from '~/config/features';
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro';
 
 const activities = ExampleUserActivities;
 
@@ -14,32 +16,30 @@ const lists = [
 ---
 
 <div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
-    <div class="flex flex-row justify-center items-center gap-2 mb-6">
-      <FolderHeart className="w-5 h-5 text-indigo-600" />
-      <h2 class="text-xl font-semibold text-gray-900">Last Created Lists</h2>
-    </div>
-    <div class="relative">    
-        <div class="flex flex-col justify-start space-y-8">
-            {lists.map((item) => (
-                <div class="flex items-start gap-3">
-                    <div class="flex-shrink-0">
-                        <item.icon className="w-5 h-5 text-indigo-600" />
-                    </div>
-                    <div class="flex flex-col">
-                        <p class="text-sm text-gray-900">
-                            <span class="font-medium">You</span> {item.description}
-                        </p>
-                        <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
-                            <span>{item.name}</span>
-                        </div>
-                    </div>
-                </div>
-            ))}
-            <LinkViewAll />
+  <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
+    <FolderHeart className="w-5 h-5 text-indigo-600" />
+    <h2 class="text-xl font-semibold text-gray-900">Last Created Lists</h2>
+  </div>
+  <div class="relative flex flex-col flex-1 justify-between"> <!-- Aggiunto flex-1 e justify-between -->
+    <div class="flex flex-col justify-start space-y-4">
+      {lists.map((item) => (
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            <item.icon className="w-5 h-5 text-indigo-600" />
+          </div>
+          <div class="flex flex-col">
+            <p class="text-sm text-gray-900">
+              <span class="font-medium">You</span> created the list "{item.name}"
+            </p>
+            <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
+              <span>{item.description}</span>
+            </div>
+          </div>
         </div>
+      ))}
     </div>
-</div>
-
+    <div class="mt-4"> <!-- Aggiunto uno spazio in basso -->
+      <LinkViewAll />
     </div>
   </div>
 </div>
