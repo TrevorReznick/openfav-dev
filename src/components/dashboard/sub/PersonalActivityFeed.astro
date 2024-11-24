@@ -1,14 +1,14 @@
 ---
-import { Logs, Clock } from 'lucide-react'
-
+import { Logs, Clock, Link } from 'lucide-react'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
 import {ExampleUserActivities} from '~/config/features'
 
 const activities = ExampleUserActivities
  
 ---
 
-<div class="bg-white rounded-xl shadow-sm p-6">
-  <div class="flex items-center gap-2 mb-6">
+<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
+  <div class="flex flex-row justify-center items-center gap-2 mb-6">
     <Logs className="w-5 h-5 text-indigo-600" />
     <h2 class="text-xl font-semibold text-gray-900">Last Actions</h2>
   </div>
@@ -33,6 +33,7 @@ const activities = ExampleUserActivities
           </div>
         </div>
       ))}
+     <LinkViewAll />
     </div>
   </div>
 </div>

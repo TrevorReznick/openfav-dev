@@ -1,6 +1,7 @@
 ---
 // src/components/LastInsertedLinks.astro
 import { Star, Link, Bookmark } from 'lucide-react'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
 
 const recentLinks = [
   { title: "Astro Documentation", url: "https://docs.astro.build", tags: ["astro", "docs"] },
@@ -9,8 +10,8 @@ const recentLinks = [
 ];
 ---
 
-<div class="bg-white rounded-xl shadow-sm p-6">
-  <div class="flex items-center gap-2 mb-6">
+<div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
+    <div class="flex flex-row justify-center items-center gap-2 mb-6">
     <Bookmark className="w-5 h-5 text-indigo-600" />
     <h2 class="text-xl font-semibold text-gray-900">Last Inserted Links</h2>
   </div>
@@ -33,6 +34,7 @@ const recentLinks = [
                 </div>
             </div>
         ))}
+        <LinkViewAll />
     </div>
   </div>
 </div>

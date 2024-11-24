@@ -123,26 +123,8 @@ export const ExampleUserActivities: UserActivity[] = [
       user: 'Jamie Wilson',
       action: 'added new portfolio projects',
       timestamp: '5 hours ago'
-    },
-    {
-      id: 4,
-      user: 'Sarah Chen',
-      action: 'deployed new features to dashboard.example.com',
-      timestamp: '10 minutes ago'
-    },
-    {
-      id: 5,
-      user: 'Alex Morgan',
-      action: 'updated blog platform theme',
-      timestamp: '2 hours ago'
-    },
-    {
-      id: 6,
-      user: 'Jamie Wilson',
-      action: 'added new portfolio projects',
-      timestamp: '5 hours ago'
     }
-  ];
+]
 
 
 
