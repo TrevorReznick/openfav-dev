@@ -32,6 +32,27 @@ const recentActivityData: CardProps = {
   ]
 };
 
+const newGenericActivityData: CardProps = {
+  cardName: 'New Generic Activity',
+  cardIcon: 'Activity',
+  activities: [
+    {
+      action: 'Created List',
+      actionIcon: 'Folder',
+      timestamp: '1 hour ago',
+      name: 'newuser@example.com'
+    },
+    {
+      action: 'Added link',
+      actionIcon: 'Link',
+      timestamp: '2 hours ago',
+      name: 'newuser@example.com'
+    }
+  ]
+};
+
+
+
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
 const {
@@ -49,7 +70,8 @@ const updatedItems = [
   { type: 'LastInsetions' },
   { type: 'PersonalActivityFeed' },
   ...items,
-  { type: 'TestDynamic' }
+  { type: 'TestDynamic' },
+  { type: 'NewGenericActivityCard' }
 ]
 ---
 
