@@ -1,0 +1,51 @@
+---
+import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react';
+import type { CardProps, ActivityItem } from './types';
+
+const iconMap = {
+  Activity,
+  Bot,
+  Book,
+  Bookmark,
+  Clock,
+  Folder,
+  Link,
+  List,
+  Logs,
+  FolderHeart,
+  Star
+};
+
+interface Props extends CardProps {}
+
+const { cardName, cardIcon, activities } = Astro.props;
+
+const CardIcon = iconMap[cardIcon];
+---
+
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+  <div class="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
+    <h3 class="text-sm font-medium">{cardName}</h3>
+    <CardIcon class="h-4 w-4 text-muted-foreground" />
+  </div>
+  <div class="p-6 pt-0">
+    <div class="space-y-4">
+      {activities.map((activity: ActivityItem) => {
+        const ActionIcon = iconMap[activity.actionIcon];
+        return (
+          <div class="flex items-center">
+            <ActionIcon class="mr-2 h-4 w-4 text-muted-foreground" />
+            <div class="ml-2 space-y-1">
+              <p class="text-sm font-medium leading-none">
+                {activity.name && `${activity.name}: `}{activity.action}
+              </p>
+              <p class="text-sm text-muted-foreground">
+                {activity.timestamp}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
