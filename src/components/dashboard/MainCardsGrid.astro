@@ -72,7 +72,7 @@ const updatedItems = [
   { type: 'PersonalActivityFeed' },
   ...items,
   { type: 'TestDynamic' },
-  { type: 'NewGenericActivityCard' }
+  { type: 'GenericCardNew ' }
 ]
 ---
 
@@ -104,8 +104,8 @@ const updatedItems = [
             <PersonalActivityFeed item={item} />
           ) : item.type === 'TestDynamic' ? (
             <TestDynamic item={item} />
-          ) : item.type === 'NewGenericActivityCard' ? (
-            <NewGenericActivityCard {...recentActivityData} />
+          ) : item.type === 'GenericCardNew ' ? (
+            <GenericCardNew  {...recentActivityData} />
           ) : (
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
               <div class="flex justify-center">
