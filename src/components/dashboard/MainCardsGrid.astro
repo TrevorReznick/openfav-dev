@@ -11,8 +11,8 @@ import GenericCardNew from '~/components/dashboard/sub/GenericCardNew.astro'
 import * as fonts from '~/config/costants'
 
 /* new generic card */
-import GenericCard from './GenericCard.astro';
-import type { CardProps } from './types';
+
+import type { CardProps } from '~/types'
 
 const recentActivityData: CardProps = {
   cardName: 'Recent Activity',
@@ -34,7 +34,7 @@ const recentActivityData: CardProps = {
 };
 
 const newGenericActivityData: CardProps = {
-  cardName: 'New Generic Activity',
+  cardName: 'New Recent Activity',
   cardIcon: 'Activity',
   activities: [
     {
