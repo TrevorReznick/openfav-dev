@@ -9,6 +9,29 @@ import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
 import TestDynamic from '~/components/dashboard/sub/CardListNew.astro'
 import * as fonts from '~/config/costants'
 
+/* new generic card */
+import GenericCard from './GenericCard.astro';
+import type { CardProps } from './types';
+
+const recentActivityData: CardProps = {
+  cardName: 'Recent Activity',
+  cardIcon: 'Activity',
+  activities: [
+    {
+      action: 'Created List',
+      actionIcon: 'Folder',
+      timestamp: '2 hours ago',
+      name: 'enzonax@example.com'
+    },
+    {
+      action: 'Added link',
+      actionIcon: 'Link',
+      timestamp: '3 hours ago',
+      name: 'enzonax@example.com'
+    }
+  ]
+};
+
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
 const {
