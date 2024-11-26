@@ -1,0 +1,49 @@
+---
+
+import { Activity, Clock, Link, List, FolderHeart, Folder, Bot, Book, Star, Bookmark, Logs} from 'lucide-react'
+import type { CardProps, ActivityItem } from '~/types'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
+
+const iconMap = {
+    Activity,
+    Bot,
+    Book,
+    Bookmark,
+    Clock,
+    Folder,
+    Link,
+    List,
+    Logs,
+    FolderHeart,
+    Star
+}
+
+interface Props extends CardProps {}
+
+const { cardName, cardIcon, activities} = Astro.props
+
+const CardIcon = iconMap[cardIcon]
+
+const test = cardName
+
+const newGenericActivityData: CardProps = {
+  cardName: 'New Generic Activity',
+  cardIcon: 'Activity',
+  activities: [
+    {
+      action: 'Created List',
+      actionIcon: 'Folder',
+      timestamp: '1 hour ago',
+      name: 'newuser@example.com'
+    },
+    {
+      action: 'Added link',
+      actionIcon: 'Link',
+      timestamp: '2 hours ago',
+      name: 'newuser@example.com'
+    }
+  ]
+}
+
+---
+

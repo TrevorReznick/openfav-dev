@@ -9,10 +9,11 @@ export type IconType = typeof Activity | typeof Bot | typeof Book | typeof Bookm
 export type ActionType = 'Created List' | 'Updated List' | 'Deleted List' | 'Added link' | 'Deleted link'
 
 export interface ActivityItem {
-  action: ActionType;
-  actionIcon: keyof typeof iconMap;
-  timestamp: string;
-  name?: string;
+  action: ActionType
+  actionIcon: keyof typeof iconMap
+  timestamp: string
+  name?: string | null
+  description?: string | null
 }
 
 export interface CardProps {
@@ -22,7 +23,7 @@ export interface CardProps {
 }
 
 export const iconMap = {
-  Activity,
+  Activity
   Bot,
   Book,
   Bookmark,
@@ -33,7 +34,7 @@ export const iconMap = {
   Logs,
   FolderHeart,
   Star
-};
+}
 
 /* end new */
 
