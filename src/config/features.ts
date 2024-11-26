@@ -9,6 +9,7 @@ import type {
 
 /* @@ Dashboard Main Card Activies @@ */
 export const recentActivityData: CardProps = {
+    typeList: 'lists',
     cardName: 'Recent Activity',
     cardIcon: 'Activity',
     activities: [
