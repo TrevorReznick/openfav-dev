@@ -1,8 +1,43 @@
 
-import type {FeatureItem, RecentActivity, UserActivity, personalCardListItem} from '~/types'
+import type {
+    CardProps,
+    FeatureItem, 
+    RecentActivity, 
+    UserActivity, 
+    personalCardListItem
+} from '~/types'
 
-
+/* @@ Dashboard Main Card Activies @@ */
+export const recentActivityData: CardProps = {
+    cardName: 'Recent Activity',
+    cardIcon: 'Activity',
+    activities: [
+      {
+        action: 'Created List',
+        actionIcon: 'Folder',
+        timestamp: null,
+        description: 'Today is a great day',
+        name: 'enzonax'
+      },
+      {
+        action: 'Added link',
+        actionIcon: 'Link',
+        timestamp: '3 hours ago',
+        description: null,
+        name: 'enzonax'
+      },
+      {
+        action: 'Deleted List',
+        actionIcon: 'Folder',
+        description: null,
+        timestamp: '3 hours ago',
+        name: 'enzonax'
+      }
+  
+    ]
+  }
 /* @@ home featured items @@ */
+
   
   // Puoi poi usare il tipo nell'array di items
 

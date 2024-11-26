@@ -11,7 +11,7 @@ export type ActionType = 'Created List' | 'Updated List' | 'Deleted List' | 'Add
 export interface ActivityItem {
   action: ActionType
   actionIcon: keyof typeof iconMap
-  timestamp: string
+  timestamp?: string | null
   name?: string | null
   description?: string | null
 }
@@ -40,27 +40,6 @@ export const iconMap = {
 
 
 
-export interface genericCardItem {
-    card_name?: string
-    card_icon?: any
-}
-
-/*
-export interface genericCardItem_ {
-    action?: string,
-    description?: string
-    icon: string
-    id?: number
-    
-    lastActive?: string
-    newLinks?: number
-    timestamp?: string
-    title: string
-    updatedLists?: number
-    updatesFavorites?: number    
-    user?: string    
-}
-*/
 
 export interface personalCardListItem extends genericCardItem {
     name?: string
