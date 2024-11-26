@@ -1,4 +1,98 @@
-import type { HTMLAttributes } from 'astro/types'	
+import type { HTMLAttributes } from 'astro/types'
+import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
+
+/* @@ site types @@ */
+
+/* new */
+export type IconType = typeof Activity | typeof Bot | typeof Book | typeof Bookmark | typeof Clock | typeof Folder | typeof Link | typeof List | typeof Logs | typeof FolderHeart | typeof Star
+
+export type ActionType = 
+    'Created List' 
+    | 'Updated List' 
+    | 'Deleted List' 
+    | 'Added link' 
+    | 'Deleted link'
+
+export type ListType =
+    'urls'
+    | 'lists'
+    | 'favourites'
+    | 'suggestions'
+    | 'activities'
+
+export interface ActivityItem {
+  action: ActionType
+  actionIcon: keyof typeof iconMap
+  timestamp?: string | null
+  name?: string | null
+  description?: string | null,
+  url?: string | null
+}
+
+export interface CardProps {
+    typeList: ListType
+    cardName: string;
+    cardIcon: keyof typeof iconMap
+    activities: ActivityItem[],
+    action_url?: string
+}
+
+/*
+interface ListsUrls extends CardProps {
+    url: string
+}
+*/
+
+
+export const iconMap = {
+  Activity
+  Bot,
+  Book,
+  Bookmark,
+  Clock,
+  Folder,
+  Link,
+  List,
+  Logs,
+  FolderHeart,
+  Star
+}
+
+/* end new */
+
+
+
+export interface genericCardItem {
+    card_name?: string
+    card_icon?: any
+}
+export interface personalCardListItem extends genericCardItem {
+    name?: string
+    description?: string
+    icon?: string
+}
+
+export interface FeatureItem extends genericCardItem {
+    title: string;
+    description?: string;
+    icon: string;
+}
+
+export interface RecentActivity extends genericCardItem {
+    newLinks: number,
+    updatedLists: number,
+    updatesFavorites: number,
+    lastActive: string
+}
+
+export interface UserActivity extends genericCardItem {
+    id: number,
+    user: string,
+    action: string,
+    timestamp: string
+}
+
+export type GeneralCardItemType = personalCardListItem[] | FeatureItem[] | RecentActivity[] | UserActivity[]
 		
 
 /* @@ Metadata @@ */

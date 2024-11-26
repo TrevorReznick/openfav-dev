@@ -1,0 +1,36 @@
+---
+import { Star, Logs, Clock, Link, Bookmark } from 'lucide-react'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
+import { ExampleUserActivities } from '~/config/features'
+
+const activities = ExampleUserActivities
+---
+
+<div class="bg-white rounded-lg shadow-sm pl-8 pt-4 pb-4 pr-4 flex flex-col justify-between h-full">
+    <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
+        <Logs className="w-5 h-5 text-indigo-600" aria-label="Bookmark icon" />
+        <h2 class="text-xl font-semibold text-gray-900">Last Actions</h2>
+    </div>
+    <div class="relative flex flex-col flex-1 justify-between">
+        <div class="flex flex-col justify-start space-y-4">
+            {activities.map((item, index) => (
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0">
+                        <Clock className="w-5 h-5 text-indigo-600" aria-label="Link icon" />
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-sm text-gray-900">
+                            <span class="font-medium">{item.user}</span> {item.action}
+                        </p>
+                        <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
+                            <span>{item.timestamp}</span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+        <div class="mt-4">
+            <LinkViewAll />
+        </div>
+    </div>
+</div>

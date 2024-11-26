@@ -1,0 +1,43 @@
+---
+// src/components/dashboard/sub/CardList.astro
+
+import { Folder, Bot, Book, Star, FolderHeart } from 'lucide-react'
+import {ListsCardsitems} from '~/config/features'
+import LinkViewAll from '~/components/dashboard/sub/LinkViewAll.astro'
+
+const lists = [
+  { name: 'Progetti Web', description: 'Link utili per lo sviluppo web', icon: Folder },
+  { name: 'Risorse AI', description: 'Articoli e tutorial sull\'intelligenza artificiale', icon: Bot },
+  { name: 'Scholl Links', description: 'Links per produttività', icon: Book },
+  // Altre liste...
+];
+---
+
+<div class="bg-white rounded-lg shadow-sm pl-8 pt-4 pb-4 pr-4 flex flex-col justify-between h-full">
+  <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
+    <FolderHeart className="w-5 h-5 text-indigo-600" />
+    <h2 class="text-xl font-semibold text-gray-900">Last Created Lists</h2>
+  </div>
+  <div class="relative flex flex-col flex-1 justify-between"> <!-- Aggiunto flex-1 e justify-between -->
+    <div class="flex flex-col justify-start space-y-4">
+      {lists.map((item) => (
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0">
+            <item.icon className="w-5 h-5 text-indigo-600" />
+          </div>
+          <div class="flex flex-col">
+            <p class="text-sm text-gray-900">
+              <span class="font-medium">You</span> created the list "{item.name}"
+            </p>
+            <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
+              <span>{item.description}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-4"> <!-- Aggiunto uno spazio in basso -->
+      <LinkViewAll />
+    </div>
+  </div>
+</div>

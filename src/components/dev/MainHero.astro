@@ -1,31 +1,53 @@
 ---
 import { twMerge } from 'tailwind-merge'
-/*import myButton from "../base/test-buttons/Button.astro";*/
+import { SPACING, TYPOGRAPHY, LAYOUT } from '~/config/styleCostants' // Assicurati di importare il percorso corretto
 
 const {  
   user_name,
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),  
-  tagline = await Astro.props.tagline("tagline"),
+  tagline = Astro.props.tagline, // Assicurati che tagline sia una stringa, non una funzione
   classes = {},
 } = Astro.props
 
 const {
-  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
-  title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4"',
-  subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",  
+  container: containerClass = twMerge(
+    'w-screen',
+    LAYOUT.FLEX.CENTER,
+    'bg-bgDark1',
+    'mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60',
+    'hero-bg-gradient',
+    SPACING.PADDING.HERO,
+    SPACING.VERTICAL.SECTION
+  ),
+  title: titleClass = twMerge(
+    TYPOGRAPHY.HEADING.HERO,
+    SPACING.PADDING.HERO,
+    'text-white'
+  ),
+  subtitle: subtitleClass = twMerge(
+    TYPOGRAPHY.TEXT.SUBTITLE,
+    SPACING.MARGIN.SECTION_TOP,
+    SPACING.PADDING.CONTENT
+  ),
 } = classes
+
+const taglineClass = twMerge(
+  "text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold mx-auto",
+  SPACING.MARGIN.SECTION_TOP,
+  SPACING.MARGIN.SECTION_BOTTOM
+)
 ---
 
 {
     tagline && (
-        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold mx-auto">
+        <p class={taglineClass}>
             {tagline}
         </p>
     )
 }
 {
-    title && (
+    title ? (
         <h1
             class={twMerge(
                 "font-extrabold tracking-tight text-primary",
@@ -33,10 +55,15 @@ const {
             )}
             set:html={title}
         />
-    )
+    ): (<div></div>)
 }
 {
     subtitle && (
-        <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome ${user_name}`} />
+        <h2 class={twMerge(
+            subtitleClass,
+            SPACING.MARGIN.SECTION_TOP
+        )}>
+            {`welcome ${user_name}`}
+        </h2>
     )
 }

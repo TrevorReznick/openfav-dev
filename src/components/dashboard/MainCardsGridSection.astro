@@ -1,0 +1,81 @@
+---
+import { twMerge } from 'tailwind-merge'
+import * as fonts from '~/config/styleConstantsNew'
+import MainCardsGrid from '~/components/dashboard/MainCardsGrid.astro'
+import { ExampleItems } from '~/config/features'
+import { Icon } from 'astro-icon/components';
+
+const items = ExampleItems
+
+const containerClasses = twMerge(
+    'mx-auto',
+    'max-w-7xl',
+    'p-4',
+    'md:px-8',
+    'text-secondaryColor',
+    'text-sm',
+    'sm:text-base',
+    'mb-6',
+    fonts.RESPONSIVE.SPACING.HERO_MARGIN
+);
+
+const gridContainerClasses = twMerge(
+    'gap-8',
+    'md:gap-y-12',
+    fonts.RESPONSIVE.LAYOUT.GRID.BASE,
+    fonts.RESPONSIVE.LAYOUT.GAP.BASE
+);
+
+const panelClasses = twMerge(
+    'max-w-none',
+    'backdrop-blur',
+    'bg-indigo',
+    'border',
+    'border-[#ffffff29]',
+    'dark:bg-slate-900',
+    'dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)]',
+    'p-6',
+    'rounded-lg',
+    'shadow-[0_4px_30px_rgba(0,0,0,0.1)]'
+);
+
+const titleClasses = twMerge(
+    'text-xl',
+    'font-bold',
+    'text-heading',
+    'ml-2',
+    'rtl:ml-0',
+    'rtl:mr-2'
+);
+
+const descriptionClasses = twMerge(
+    fonts.TYPOGRAPHY.COLORS.SECTION_LIST_WHITE,
+    'text-muted',
+    'mt-2',
+    'ml-2',
+    'rtl:ml-0',
+    'rtl:mr-2'
+);
+
+const iconClasses = twMerge(
+    'h-12',
+    'w-12',
+    'mb-6',
+    'text-primary'
+);
+---
+
+<div class={containerClasses}>
+    <MainCardsGrid
+        items={items}
+        columns={3}
+        defaultIcon="tabler:check"
+        classes={{
+            container: gridContainerClasses,
+            panel: panelClasses,
+            title: titleClasses,
+            description: descriptionClasses,
+            icon: iconClasses,
+        }}
+    />
+</div>

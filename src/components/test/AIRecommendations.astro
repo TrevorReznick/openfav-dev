@@ -1,0 +1,54 @@
+---
+// components/AIRecommendations.astro
+const aiRecommendations = [
+  { title: "Machine Learning Basics", url: "https://example.com/ml-basics", category: "AI/ML" },
+  { title: "Web Performance Optimization", url: "https://example.com/web-perf", category: "Web Development" },
+  { title: "Data Structures in Python", url: "https://example.com/python-ds", category: "Programming" },
+];
+---
+
+<div class="ai-recommendations">
+  <ul>
+    {aiRecommendations.map(rec => (
+      <li>
+        <a href={rec.url} target="_blank" rel="noopener noreferrer">{rec.title}</a>
+        <span class="category">{rec.category}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .ai-recommendations ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .ai-recommendations li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f4f8;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ai-recommendations a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .ai-recommendations a:hover {
+    text-decoration: underline;
+  }
+
+  .category {
+    font-size: 0.8rem;
+    color: #6c757d;
+    background-color: #e9ecef;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+</style>

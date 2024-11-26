@@ -1,0 +1,42 @@
+---
+
+import { twMerge } from 'tailwind-merge'
+import * as styles from '~/config/styleCostants'
+
+const {  
+  classes = {}
+} = Astro.props
+
+const {
+  container: containerClass = styles.combineResponsive(
+    styles.RESPONSIVE.CONTAINER.BASE,
+    styles.RESPONSIVE.CONTAINER.SM,
+    styles.RESPONSIVE.CONTAINER.MD,
+    styles.RESPONSIVE.CONTAINER.LG,
+    styles.RESPONSIVE.CONTAINER.XL,
+    styles.RESPONSIVE.CONTAINER['2XL'],
+    styles.PATTERNS.HERO.WRAPPER
+  )
+} = classes
+
+const heroBackground = styles.combineResponsive(
+  'w-screen',
+  'flex',
+  'flex-col',
+  'justify-center',
+  'items-center',
+  'bg-bgDark1',
+  'mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60',
+  'hero-bg-gradient',
+  'pb-24 sm:pb-32 md:pb-44 lg:pb-0'
+)
+
+---
+
+<section class={twMerge(containerClass, heroBackground)}>
+  <slot name="MainSearch"/>  
+  <slot name="MainHero"/>
+  <slot name="MainHeader" />  
+  <slot name="MainCards" />
+  <slot name="CTA" />
+</section>
