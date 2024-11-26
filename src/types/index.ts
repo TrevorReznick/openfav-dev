@@ -45,7 +45,7 @@ interface ListsUrls extends CardProps {
 
 
 export const iconMap = {
-  Activity
+  Activity,
   Bot,
   Book,
   Bookmark,
