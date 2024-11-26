@@ -10,14 +10,10 @@ import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
 import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
 import GenericCardNew from '~/components/dashboard/dev/GenericCardNew.astro'
 import GenericCardModified from '~/components/dashboard/dev/GenericCardModified.astro'
-import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
+//import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
+import {recentActivityData} from '~/config/features'
 
-/* data */
-import * as fonts from '~/config/costants'
-import {recentActivityData}  from '~/config/features'
-/* new generic card */
-import type { CardProps } from '~/types'
-
+import {recentListsData, myActivityData, myLatActivityData, urlListData} from '~/config/cardFeatures'
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
@@ -38,7 +34,12 @@ const updatedItems = [
   ...items,
   { type: 'TestDynamic' },
   { type: 'GenericCardNew'},
-  { type: 'GenericCardModified' }
+  { type: 'GenericCardModified' },
+  { type: 'recentListsData' },
+  { type: 'myActivityData' },
+  { type: 'myLatActivityData' },
+  { type: 'urlListData' }  
+
 ]
 ---
 
@@ -73,10 +74,16 @@ const updatedItems = [
           ) : item.type === 'GenericCardNew' ? (
             <GenericCardNew  {...recentActivityData} />
           ) : item.type === 'GenericCardModified' ? (
-            <GenericCardModified  {...recentActivityData} />
-          ) : item.type === 'GenericCardModifiedTest' ? (
-            <GenericCardModifiedTest  {...recentActivityData} />
-          )
+            <GenericCardModified  {...myActivityData} />
+          ) : item.type === 'recentListsData' ? (
+            <GenericCardModified  {...recentListsData} />
+          ) : item.type === 'myActivityData' ? (
+            <GenericCardModified  {...myActivityData} />
+          ) : item.type === 'myLatActivityData' ? (
+            <GenericCardModified  {...myLatActivityData} />
+          ) : item.type === 'urlListData' ? (
+            <GenericCardModified  {...urlListData} />
+          ) 
           : (
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
               <div class="flex justify-center">

@@ -8,8 +8,31 @@ import type {
 } from '~/types'
 
 /* @@ Dashboard Main Card Activies @@ */
-export const recentActivityData: CardProps = {
+
+export const recentListsData: CardProps = {
     typeList: 'lists',
+    cardName: 'Your Personal Lists',
+    cardIcon: 'FolderHeart',
+    activities: [
+        {
+            action: 'Created List',
+            actionIcon: 'Folder',
+            timestamp: null,
+            description: 'Today is a great day',
+            name: 'enzonax'
+        },
+        {
+            action: 'Deleted List',
+            actionIcon: 'Folder',
+            timestamp: null,
+            description: 'Today is a anther great day',
+            name: 'enzonax'
+        },
+    ]
+}
+
+export const recentActivityData: CardProps = {
+    typeList: 'activities',
     cardName: 'Recent Activity',
     cardIcon: 'Activity',
     activities: [

@@ -6,7 +6,13 @@ import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, Fo
 /* new */
 export type IconType = typeof Activity | typeof Bot | typeof Book | typeof Bookmark | typeof Clock | typeof Folder | typeof Link | typeof List | typeof Logs | typeof FolderHeart | typeof Star
 
-export type ActionType = 'Created List' | 'Updated List' | 'Deleted List' | 'Added link' | 'Deleted link'
+export type ActionType = 
+    'Created List' 
+    | 'Updated List' 
+    | 'Deleted List' 
+    | 'Added link' 
+    | 'Deleted link'
+
 export type ListType =
     'urls'
     | 'lists'
@@ -19,23 +25,24 @@ export interface ActivityItem {
   actionIcon: keyof typeof iconMap
   timestamp?: string | null
   name?: string | null
-  description?: string | null
+  description?: string | null,
+  url?: string | null
 }
 
 export interface CardProps {
     typeList: ListType
     cardName: string;
     cardIcon: keyof typeof iconMap
-    activities: ActivityItem[]
+    activities: ActivityItem[],
+    action_url?: string
 }
 
+/*
 interface ListsUrls extends CardProps {
     url: string
 }
+*/
 
-interface DoListsUrl extends ListsUrls {
-    
-}
 
 export const iconMap = {
   Activity
