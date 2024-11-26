@@ -7,6 +7,12 @@ import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, Fo
 export type IconType = typeof Activity | typeof Bot | typeof Book | typeof Bookmark | typeof Clock | typeof Folder | typeof Link | typeof List | typeof Logs | typeof FolderHeart | typeof Star
 
 export type ActionType = 'Created List' | 'Updated List' | 'Deleted List' | 'Added link' | 'Deleted link'
+export type ListType =
+    'urls'
+    | 'lists'
+    | 'favourites'
+    | 'suggestions'
+    | 'activities'
 
 export interface ActivityItem {
   action: ActionType
@@ -17,9 +23,10 @@ export interface ActivityItem {
 }
 
 export interface CardProps {
-  cardName: string;
-  cardIcon: keyof typeof iconMap;
-  activities: ActivityItem[];
+    typeList: ListType
+    cardName: string;
+    cardIcon: keyof typeof iconMap
+    activities: ActivityItem[]
 }
 
 export const iconMap = {
@@ -40,7 +47,10 @@ export const iconMap = {
 
 
 
-
+export interface genericCardItem {
+    card_name?: string
+    card_icon?: any
+}
 export interface personalCardListItem extends genericCardItem {
     name?: string
     description?: string

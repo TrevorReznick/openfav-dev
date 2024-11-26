@@ -12,6 +12,25 @@ const { cardName, cardIcon, activities} = Astro.props
 
 const CardIcon = iconMap[cardIcon]
 
+const test = cardName
+
+const formatActivities = (activityData) => {
+  return activityData.activities.map((activity) => {
+    const ActionIcon = iconMap[activity.actionIcon];
+    return {
+      icon: ActionIcon,
+      action: activity.action,
+      name: activity.name,
+      timestamp: activity.timestamp,
+      description: activity.description
+    };
+  });
+};
+
+// Esempio di utilizzo
+const formattedActivities = formatActivities(recentActivityData);
+console.log(formattedActivities);
+
 ---
 
 <div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
@@ -42,10 +61,17 @@ const CardIcon = iconMap[cardIcon]
             </div>
           </div>
         )
+
+
+
+
+
+
+
       })}
-    </div>
-    <div class="mt-auto flex justify-center items-center text-center">
-      <a href="/all-activities" class="text-blue-500 hover:underline">View All</a>
+
+
+
     </div>
   </div>
 </div>

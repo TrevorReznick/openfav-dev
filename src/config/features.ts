@@ -32,6 +32,13 @@ export const recentActivityData: CardProps = {
         description: null,
         timestamp: '3 hours ago',
         name: 'enzonax'
+      },
+      {
+        action: 'Deleted List',
+        actionIcon: 'Bot',
+        description: null,
+        timestamp: '3 hours ago',
+        name: 'enzonax'
       }
   
     ]
