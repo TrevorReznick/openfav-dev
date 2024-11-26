@@ -10,6 +10,7 @@ import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
 import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
 import GenericCardNew from '~/components/dashboard/dev/GenericCardNew.astro'
 import GenericCardModified from '~/components/dashboard/dev/GenericCardModified.astro'
+import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
 
 /* data */
 import * as fonts from '~/config/costants'
@@ -73,7 +74,10 @@ const updatedItems = [
             <GenericCardNew  {...recentActivityData} />
           ) : item.type === 'GenericCardModified' ? (
             <GenericCardModified  {...recentActivityData} />
-          ) : (
+          ) : item.type === 'GenericCardModifiedTest' ? (
+            <GenericCardModifiedTest  {...recentActivityData} />
+          )
+          : (
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
               <div class="flex justify-center">
                 {(item.icon || defaultIcon) && (

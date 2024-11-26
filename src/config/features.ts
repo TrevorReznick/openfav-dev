@@ -43,7 +43,7 @@ export const recentActivityData: CardProps = {
       }
   
     ]
-  }
+}
 /* @@ home featured items @@ */
 
   

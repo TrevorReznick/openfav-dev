@@ -29,6 +29,14 @@ export interface CardProps {
     activities: ActivityItem[]
 }
 
+interface ListsUrls extends CardProps {
+    url: string
+}
+
+interface DoListsUrl extends ListsUrls {
+    
+}
+
 export const iconMap = {
   Activity
   Bot,

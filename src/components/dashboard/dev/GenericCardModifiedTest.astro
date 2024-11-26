@@ -8,13 +8,14 @@ const iconMap = {Activity,Bot,Book,Bookmark,Clock,Folder,Link,List,Logs,FolderHe
 
 interface Props extends CardProps {}
 
-const { cardName, cardIcon, activities} = Astro.props
+const { typeList, cardName, cardIcon, activities} = Astro.props
 
 const CardIcon = iconMap[cardIcon]
 
 const test = cardName
 
-const formatActivities = (activityData) => {
+
+/*const formatActivities = (activityData) => {
   return activityData.activities.map((activity) => {
     const ActionIcon = iconMap[activity.actionIcon];
     return {
@@ -26,6 +27,7 @@ const formatActivities = (activityData) => {
     };
   });
 };
+*/
 
 // Esempio di utilizzo
 const formattedActivities = formatActivities(recentActivityData);
