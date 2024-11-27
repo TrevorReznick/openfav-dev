@@ -1,5 +1,4 @@
-import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
-import type { ActionType, ListType, ActivityItem, CardProps, iconMap} from '~/types'
+import type { ActionType, ActivityItem, CardProps, iconMap} from '~/types'
 
 // Costanti per i tipi di lista
 const ListTypes = {
