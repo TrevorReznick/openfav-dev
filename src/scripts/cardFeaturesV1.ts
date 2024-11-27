@@ -71,7 +71,7 @@ class CardManager {
 
 export const ExampleUsage = () => {
     // Ottieni l'istanza del CardManager
-    const cardManager = CardManager.getInstance();
+    const cardManager = CardManager.getInstance()
 
     // Crea una nuova card
     cardManager.createCard('myFavorites', {

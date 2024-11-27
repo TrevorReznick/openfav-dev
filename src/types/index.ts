@@ -43,8 +43,7 @@ interface ListsUrls extends CardProps {
 }
 */
 
-
-export const iconMap = {
+export const iconMap: IconType = {
   Activity,
   Bot,
   Book,
