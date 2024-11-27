@@ -1,19 +1,21 @@
 import type { HTMLAttributes } from 'astro/types'
 import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
 
-export type IconType = 
-    typeof Activity 
-    | typeof Bot 
-    | typeof Book 
-    | typeof Bookmark 
-    | typeof Clock 
-    | typeof Folder 
-    | typeof Link 
-    | typeof List 
-    | typeof Logs 
-    | typeof FolderHeart 
-    | typeof Star
 
+    
+export const iconMap = {
+    activity: Activity,
+    bot: Bot,
+    book: Book,
+    bookmark: Bookmark,
+    clock: Clock,
+    folder: Folder,
+    link: Link,
+    list: List,    
+    logs: Logs,
+    folderHeart: FolderHeart,
+    star: Star
+}
 
 export interface IconDefinition {
     IconName : IconType        
