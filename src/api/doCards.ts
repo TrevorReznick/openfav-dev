@@ -66,7 +66,7 @@ const cardManager = CardManager.getInstance()
 export const allActions = cardManager.createCard('allActions', {
     typeList: 'activities' as ListType,
     cardName: 'Users actions',
-    cardIcon: iconMap[name],
+    cardIcon: 'folder',
     action_url: '/activity'
 }) 
 

@@ -41,7 +41,7 @@ export interface ActivityItem {
 export interface CardProps {
     typeList: ListType
     cardName: string
-    cardIcon: MyIconType
+    cardIcon: string | MyIconType
     activities: ActivityItem[]
     action_url?: string
 }
