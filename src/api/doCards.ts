@@ -3,7 +3,7 @@ import { CardManager } from '~/scripts/cardGenerator'
 
 import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
 
-import type { LucideProps } from 'lucide-react';
+import type { LucideProps } from 'lucide-react'
 
 export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
     activity: Activity,
@@ -19,54 +19,15 @@ export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
     star: Star
 }
 
-const name: MyIconType = 'folder'
+type MyNewIconType = keyof typeof iconMap
 
-/*
-function renderIcon(iconName: MyIconType, props?: LucideProps) {
-    const IconComponent = iconMap[iconName];
-    return <IconComponent {...props} />
-}
-
-
-export const iconMap: Record<MyIconType, 
-    typeof Activity 
-    | typeof Bot|  typeof Book 
-    | typeof Bookmark| typeof Clock 
-    | typeof Folder 
-    | typeof Link 
-    | typeof List 
-    | typeof Logs 
-    | typeof FolderHeart 
-    | typeof Star
-> = {
-    activity: Activity,
-    bot: Bot,
-    book: Book,
-    bookmark: Bookmark,
-    clock: Clock,
-    folder: Folder,
-    link: Link,
-    list: List,
-    logs: Logs,
-    folderHeart: FolderHeart,
-    star: Star
-}
-*/
-
-/*
-function renderIcon(iconName: string, props?: any) {
-    const IconComponent = iconMap[iconName]
-    if (!IconComponent) return null;
-    return <IconComponent {...props} />;
-}
-*/
 
 const cardManager = CardManager.getInstance()
 
 export const allActions = cardManager.createCard('allActions', {
     typeList: 'activities' as ListType,
     cardName: 'Users actions',
-    cardIcon: 'folder',
+    cardIcon: 'star',
     action_url: '/activity'
 }) 
 
