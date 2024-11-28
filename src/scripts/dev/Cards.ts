@@ -1,5 +1,5 @@
-import type { ActionType, ActivityItem, CardProps} from '~/types/cards'
-import type {IconType} from '~/types'
+import type { ActionType, ActivityItem, CardProps} from '~/types'
+import type {MyIconType} from '~/types'
 
 export class Card {
     private config: CardProps
@@ -13,7 +13,7 @@ export class Card {
 
     addActivity(
         action: ActionType,
-        actionIcon: IconType,
+        actionIcon: MyIconType,
         details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon' | 'timestamp'>>
     ): void {
         this.config.activities.push({

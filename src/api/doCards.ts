@@ -108,4 +108,8 @@ export const allActivities = cardManager.createCard('allActivities', {
     action_url: '/personal-activity'
 })
 
+const myCard = 
+
+console.log()
+
 
