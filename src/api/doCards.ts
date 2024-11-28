@@ -5,34 +5,15 @@ import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderH
 
 import type { LucideProps } from 'lucide-react'
 
-export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
-    activity: Activity,
-    bot: Bot,
-    book: Book,
-    bookmark: Bookmark,
-    clock: Clock,
-    folder: Folder,
-    link: Link,
-    list: List,
-    logs: Logs,
-    folderHeart: FolderHeart,
-    star: Star
-}
-
-type MyNewIconType = keyof typeof iconMap
-
-
 const cardManager = CardManager.getInstance()
 
 export const allActions = cardManager.createCard('allActions', {
     typeList: 'activities' as ListType,
     cardName: 'Users actions',
-    cardIcon: 'star',
+    cardIcon: 'folderHeart',
     action_url: '/activity'
-}) 
+})
 
-
-// Aggiungi alcune attività di esempio
 cardManager.addActivity('allActions', 'Created List', 'folder', {
         description: 'Card creata da Mario Rossi'
     }
@@ -46,7 +27,18 @@ cardManager.addActivity('allActions', 'Updated List', 'folder', {
 cardManager.addActivity('allActions', 'Deleted List', 'star', {
         description: 'Card creata da Mario Rossi'
     }
-)  
+)
+
+const test = cardManager.getCard('allActions')
+
+if(test) {
+    console.log('card exists!')
+    if(test.cardIcon) {
+        console.log(test.cardIcon)
+    } else {
+        ('are you serious?')
+    }
+} else console.log('are you serious?')
   
 export const cardLists = cardManager.createCard('cardLists', {
     typeList: 'lists' as ListType,
@@ -68,9 +60,5 @@ export const allActivities = cardManager.createCard('allActivities', {
     cardIcon: 'folder',
     action_url: '/personal-activity'
 })
-
-const myCard = 
-
-console.log()
 
 

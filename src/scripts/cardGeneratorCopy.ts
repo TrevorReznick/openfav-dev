@@ -1,4 +1,6 @@
-import type { CardProps, ActivityItem, MyIconType } from '~/types'
+// File: ~/utils/cardManager.ts
+
+import type { CardProps, ListType, ActivityItem, MyIconType } from '~/types'
 
 interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
   cardIcon: MyIconType
@@ -17,14 +19,17 @@ export class CardManager {
     if (!CardManager.instance) {
       CardManager.instance = new CardManager()
     }
-    return CardManager.instance;
+    return CardManager.instance
   }
 
   createCard(name: string, config: Omit<ModifiedCardProps, 'activities'>): ModifiedCardProps {
     const newCard: ModifiedCardProps = {
       ...config,
       activities: []
-    };
+    }
+    if (!config.cardIcon) {
+      throw new Error('cardIcon è obbligatorio');
+  }
     this.cards.set(name, newCard)
     return newCard
   }
