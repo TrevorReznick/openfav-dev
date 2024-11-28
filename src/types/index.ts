@@ -1,25 +1,6 @@
 import type { HTMLAttributes } from 'astro/types'
-import type { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
+//import { Activity, type Bot, type Book, type Bookmark, type Clock, type Folder, type Link, type List, type Logs, type FolderHeart, type Star } from 'lucide-react'
 
-
-    
-export const iconMap = {
-    activity: Activity,
-    bot: Bot,
-    book: Book,
-    bookmark: Bookmark,
-    clock: Clock,
-    folder: Folder,
-    link: Link,
-    list: List,    
-    logs: Logs,
-    folderHeart: FolderHeart,
-    star: Star
-}
-
-export interface IconDefinition {
-    IconName : IconType        
-}
 
 export type ActionType = 
     'Created List' 
@@ -35,23 +16,33 @@ export type ListType =
     | 'suggestions'
     | 'activities'
 
-    
-
+export type MyIconType = 
+    'activity'
+    | 'bot'
+    | 'book'
+    | 'bookmark'
+    | 'clock'
+    | 'folder'
+    | 'link'
+    | 'list'
+    | 'logs'
+    | 'folderHeart'
+    | 'star'
 
 export interface ActivityItem {
   action: ActionType
-  actionIcon: any
+  actionIcon: MyIconType
   timestamp?: string | null
   name?: string | null
-  description?: string | null,
+  description?: string | null
   url?: string | null
 }
 
 export interface CardProps {
     typeList: ListType
-    cardName: string;
-    cardIcon: keyof typeof iconMap
-    activities: ActivityItem[],
+    cardName: string
+    cardIcon: MyIconType
+    activities: ActivityItem[]
     action_url?: string
 }
 

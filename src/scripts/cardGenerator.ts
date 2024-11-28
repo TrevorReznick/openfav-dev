@@ -1,11 +1,11 @@
 // File: ~/utils/cardManager.ts
 
-import type { CardProps, ListType, ActivityItem } from '~/types';
-import { iconMap } from '~/types'
+import type { CardProps, ListType, ActivityItem, MyIconType } from '~/types'
+
 
 // Update the CardProps interface to use string for cardIcon
 interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
-  cardIcon: keyof typeof iconMap
+  cardIcon: MyIconType
 }
 
 export class CardManager {
@@ -35,7 +35,7 @@ export class CardManager {
   addActivity(
     cardName: string,
     action: ActivityItem['action'],
-    actionIcon: keyof typeof iconMap,
+    actionIcon: MyIconType,
     details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon' | 'timestamp'>>
   ): void {
     const card = this.cards.get(cardName);

@@ -1,9 +1,11 @@
-import type { IconType, ListType } from '~/types'
+import type { MyIconType, ListType } from '~/types'
 import { CardManager } from '~/scripts/cardGenerator'
 
 import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
 
-export const iconMap: Record<string, IconType> = {
+import type { LucideProps } from 'lucide-react';
+
+export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
     activity: Activity,
     bot: Bot,
     book: Book,
@@ -11,27 +13,52 @@ export const iconMap: Record<string, IconType> = {
     clock: Clock,
     folder: Folder,
     link: Link,
-    list: List,    
+    list: List,
     logs: Logs,
     folderHeart: FolderHeart,
     star: Star
 }
 
+const name: MyIconType = 'folder'
 
-/*const ListTypes = {
-    urls: 'urls',
-    lists: 'lists',
-    favourites: 'favourites',
-    suggestions: 'suggestions',
-    activities: 'activities'
-} as const
+/*
+function renderIcon(iconName: MyIconType, props?: LucideProps) {
+    const IconComponent = iconMap[iconName];
+    return <IconComponent {...props} />
+}
 
-export type ActionType = 
-    'Created List' 
-    | 'Updated List' 
-    | 'Deleted List' 
-    | 'Added link' 
-    | 'Deleted link'
+
+export const iconMap: Record<MyIconType, 
+    typeof Activity 
+    | typeof Bot|  typeof Book 
+    | typeof Bookmark| typeof Clock 
+    | typeof Folder 
+    | typeof Link 
+    | typeof List 
+    | typeof Logs 
+    | typeof FolderHeart 
+    | typeof Star
+> = {
+    activity: Activity,
+    bot: Bot,
+    book: Book,
+    bookmark: Bookmark,
+    clock: Clock,
+    folder: Folder,
+    link: Link,
+    list: List,
+    logs: Logs,
+    folderHeart: FolderHeart,
+    star: Star
+}
+*/
+
+/*
+function renderIcon(iconName: string, props?: any) {
+    const IconComponent = iconMap[iconName]
+    if (!IconComponent) return null;
+    return <IconComponent {...props} />;
+}
 */
 
 const cardManager = CardManager.getInstance()
@@ -39,49 +66,45 @@ const cardManager = CardManager.getInstance()
 export const allActions = cardManager.createCard('allActions', {
     typeList: 'activities' as ListType,
     cardName: 'Users actions',
-    cardIcon: iconMap.logs,
+    cardIcon: iconMap[name],
     action_url: '/activity'
 }) 
 
 
 // Aggiungi alcune attività di esempio
-cardManager.addActivity('allActions', 'Created List', 'Folder', {
+cardManager.addActivity('allActions', 'Created List', 'folder', {
         description: 'Card creata da Mario Rossi'
     }
 )
 
-cardManager.addActivity('allActions', 'Updated List', 'Folder', {
+cardManager.addActivity('allActions', 'Updated List', 'folder', {
         description: 'Card creata da Mario Rossi'
     }
 )
 
-cardManager.addActivity('allActions', 'Deleted List', 'Folder', {
-    description: 'Card creata da Mario Rossi'
-}
-)
-
-
-
-  
+cardManager.addActivity('allActions', 'Deleted List', 'star', {
+        description: 'Card creata da Mario Rossi'
+    }
+)  
   
 export const cardLists = cardManager.createCard('cardLists', {
     typeList: 'lists' as ListType,
     cardName: 'Card Activities',
-    cardIcon: 'FolderHeart',
+    cardIcon: 'folderHeart',
     action_url: '/lists'
 })
   
 export const urlInsertions = cardManager.createCard('urlInsertions', {
     typeList: 'urls' as ListType,
     cardName: 'Last Insertions',
-    cardIcon: 'Link',
+    cardIcon: 'link',
     action_url: '/last-insertions'
 })
   
 export const allActivities = cardManager.createCard('allActivities', {
     typeList: 'activities' as ListType,
     cardName: 'Personal Activity Feed',
-    cardIcon: 'Folder',
+    cardIcon: 'folder',
     action_url: '/personal-activity'
 })
 
