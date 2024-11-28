@@ -32,7 +32,7 @@ export type MyIconType =
 export interface CardProps {
     typeList: ListType
     cardName: string
-    cardIcon: MyIconType
+    cardIcon?: MyIconType
     activities: ActivityItem[]
     action_url?: string
 }
