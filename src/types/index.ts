@@ -29,22 +29,22 @@ export type MyIconType =
     | 'folderHeart'
     | 'star'
 
-export interface ActivityItem {
-  action: ActionType
-  actionIcon: MyIconType
-  timestamp?: string | null
-  name?: string | null
-  description?: string | null
-  url?: string | null
-}
-
 export interface CardProps {
     typeList: ListType
     cardName: string
-    cardIcon: string | MyIconType
+    cardIcon: MyIconType
     activities: ActivityItem[]
     action_url?: string
 }
+
+export interface ActivityItem {
+    action: ActionType
+    actionIcon: MyIconType
+    timestamp?: string | null
+    name?: string | null
+    description?: string | null
+    url?: string | null
+  }
 
 /* end new */
 

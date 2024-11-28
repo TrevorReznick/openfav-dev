@@ -2,10 +2,11 @@ import type { ActionType, ActivityItem, CardProps} from '~/types'
 import type {MyIconType} from '~/types'
 
 export class Card {
+    
     private config: CardProps
 
     constructor(config: Omit<CardProps, 'activities'>) {
-        this.config = {
+        this.config = {            
             ...config,
             activities: []
         }
