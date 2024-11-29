@@ -8,20 +8,20 @@ const obj: ModifiedCardProps = {
     typeList: undefined,
     cardTitle: null,
     action_url: null,
-    cardIcon: undefined,
+    cardIcon: 'folder',
     activities: []
 }
 
 const cardManager = CardManager.getInstance()
 
-const initCard = (arg: string, obj: ModifiedCardProps): ModifiedCardProps => {
+const initCard = (arg: string, cardobj: ModifiedCardProps): ModifiedCardProps => {
     switch (arg) {
         case 'urls':
             obj.cardName = arg
             obj.typeList = 'urls'
             obj.cardTitle = 'Last Insertions'
             obj.action_url = '/last-insertions'
-            obj.cardIcon = 'bookmark'
+            obj.cardIcon = 'bookmark'            
             break;
         default:
             // Gestisci altri casi o lanci un errore
@@ -34,6 +34,49 @@ const initCard = (arg: string, obj: ModifiedCardProps): ModifiedCardProps => {
         cardIcon: obj.cardIcon,
         action_url: obj.action_url        
     })
+
+    cardManager.addActivity(obj.cardName, 'Created List', 'folder', {
+        description: 'Card creata da Mario Rossi',
+        name: 'Enzo',
+        timestamp: new Date().toISOString()
+    }
+
+    /*
+    export interface ActivityItem {
+        action: ActionType
+        actionIcon: MyIconType        
+        timestamp?: string | null
+        description?: string | null
+        name?: string | null
+        url?: string | null
+    }   
+
+    const doAction = () => {
+        let x = obj.activities
+        x.timestamp
+
+    }
+
+    */
+    
+)
+
+    const doActions = () => {
+        switch (obj.typeList) {
+            default:
+                let a = 1
+                break
+        }
+    }
+
+    const getActionCard = (typeList, actionType, ) => {
+        switch (typeList) {
+            case 'urls':
+                
+                break
+        }
+    }
+
 
     return card
 }

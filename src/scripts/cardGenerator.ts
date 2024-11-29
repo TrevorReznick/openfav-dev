@@ -33,19 +33,18 @@ export class CardManager {
     cardName: string,
     action: ActivityItem['action'],
     actionIcon: MyIconType,
-    details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon' | 'timestamp'>>
+    details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon'>>
   ): void {
-    const card = this.cards.get(cardName);
+    const card = this.cards.get(cardName)
     if (!card) {
-      throw new Error(`Card "${cardName}" not found`);
+      throw new Error(`Card "${cardName}" not found`)
     }
 
     card.activities.push({
       action,
       actionIcon,
-      timestamp: new Date().toISOString(),
       ...details
-    });
+    })
   }
 
   getCard(name: string): ModifiedCardProps | undefined {

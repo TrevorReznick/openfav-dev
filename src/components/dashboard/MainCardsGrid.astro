@@ -5,6 +5,7 @@ import { Icon } from 'astro-icon/components'
 import GenericCardModified from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
 import {urlsCard} from '~/api/doCardsNew'
+import { CardManager} from '~/scripts/cardGenerator'
 
 //import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
 //import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
@@ -19,6 +20,7 @@ import {urlsCard} from '~/api/doCardsNew'
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
 
 console.log('CardUrlInserted:', urlsCard)
+
 
 const {
   container: containerClass = '',

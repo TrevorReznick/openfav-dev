@@ -48,7 +48,7 @@ export interface ActivityItem {
     name?: string | null
     description?: string | null
     url?: string | null
-  }
+}
 
 /* end new */
 
