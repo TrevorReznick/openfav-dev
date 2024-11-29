@@ -1,9 +1,5 @@
-import type { MyIconType, ListType } from '~/types'
+import type { ListType } from '~/types'
 import { CardManager } from '~/scripts/cardGenerator'
-
-import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
-
-import type { LucideProps } from 'lucide-react'
 
 const cardManager = CardManager.getInstance()
 
