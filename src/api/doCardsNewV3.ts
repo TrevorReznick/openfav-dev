@@ -13,7 +13,19 @@ export const obj: ModifiedCardProps = {
 
 const cardManager = CardManager.getInstance()
 
+class Card {
+
+    private cardManager: CardManager
+    private cardData: ModifiedCardProps
+  
+    constructor(name: string, type: ListType) {      
+        this.cardManager = CardManager.getInstance()
+    }
+    
+}
+
 export const initCard = (type: ListType, name: string): ModifiedCardProps => {
+
     switch (type) {
         case 'urls':
             obj.cardName = name

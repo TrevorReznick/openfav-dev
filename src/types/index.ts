@@ -33,7 +33,7 @@ export type MyIconType =
     | 'star'
 
 export interface CardProps {
-    cardName?: string | null
+    cardName?: string
     typeList: ListType | undefined
     cardTitle: string | null
     cardIcon?: MyIconType | undefined

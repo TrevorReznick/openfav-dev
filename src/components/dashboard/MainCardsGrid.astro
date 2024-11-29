@@ -4,8 +4,10 @@ import { twMerge } from 'tailwind-merge'
 import { Icon } from 'astro-icon/components'
 import GenericCardModified from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
-import {urlsCard} from '~/api/doCardsNew'
+//optional if cards declared here 
 import { CardManager} from '~/scripts/cardGenerator'
+import {initCard, obj} from '~/api/doCardsNew'
+
 
 //import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
 //import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
@@ -19,7 +21,16 @@ import { CardManager} from '~/scripts/cardGenerator'
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
 
+const urlsCard = initCard('urls', 'my cardname', { ...obj })
 console.log('CardUrlInserted:', urlsCard)
+
+
+const listsCard = initCard('lists', 'another cardname', { ...obj })
+console.log('ListsInserted:', listsCard)
+
+
+
+
 
 
 const {
