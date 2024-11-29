@@ -7,7 +7,7 @@ import type {MyIconType} from '~/types'
 import type { LucideProps } from 'lucide-react'
 
 interface Props extends CardProps {}
-const { cardName, cardIcon, activities} = Astro.props
+const { cardTitle, cardIcon, activities} = Astro.props
 
 export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
     activity: Activity,
@@ -32,7 +32,7 @@ const IconComponent = iconMap[cardIcon as MyIconType] || iconMap.link
 <div class="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between h-full">
   <div class="flex flex-row justify-center items-center gap-2 pt-4 mb-6">
     <IconComponent className="w-5 h-5 text-indigo-600" />
-    <h2 class="text-xl font-semibold text-gray-900">{cardName}</h2>
+    <h2 class="text-xl font-semibold text-gray-900">{cardTitle}</h2>
   </div>
   <div class="relative flex flex-col flex-1 justify-between">
     <div class="flex flex-col justify-start space-y-4">
