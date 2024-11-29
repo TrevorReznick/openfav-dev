@@ -1,16 +1,12 @@
-import type { MyIconType, ListType } from '~/types'
+import type { ListType } from '~/types'
 import { CardManager } from '~/scripts/cardGenerator'
-
-import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
-
-import type { LucideProps } from 'lucide-react'
 
 const cardManager = CardManager.getInstance()
 
 export const allActions = cardManager.createCard('allActions', {
     typeList: 'activities' as ListType,
-    cardName: 'Users actions',
-    cardIcon: 'folderHeart',
+    cardTitle: 'Users actions',
+    cardIcon: 'activity',
     action_url: '/activity'
 })
 
@@ -42,21 +38,21 @@ if(test) {
   
 export const cardLists = cardManager.createCard('cardLists', {
     typeList: 'lists' as ListType,
-    cardName: 'Card Activities',
+    cardTitle: 'Card Activities',
     cardIcon: 'folderHeart',
     action_url: '/lists'
 })
   
 export const urlInsertions = cardManager.createCard('urlInsertions', {
     typeList: 'urls' as ListType,
-    cardName: 'Last Insertions',
+    cardTitle: 'Last Insertions',
     cardIcon: 'link',
     action_url: '/last-insertions'
 })
   
 export const allActivities = cardManager.createCard('allActivities', {
     typeList: 'activities' as ListType,
-    cardName: 'Personal Activity Feed',
+    cardTitle: 'Personal Activity Feed',
     cardIcon: 'folder',
     action_url: '/personal-activity'
 })

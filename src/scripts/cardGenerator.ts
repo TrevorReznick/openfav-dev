@@ -1,6 +1,6 @@
 import type { CardProps, ActivityItem, MyIconType } from '~/types'
 
-interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
+export interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
   cardIcon: MyIconType
 }
 

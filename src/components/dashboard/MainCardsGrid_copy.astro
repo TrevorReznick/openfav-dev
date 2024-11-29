@@ -1,24 +1,22 @@
 ---
-//import ItemGrid from '~/components/dev/ItemGridDev.astro'
+import ItemGrid from '~/components/dev/ItemGridDev.astro'
 import { twMerge } from 'tailwind-merge'
 import { Icon } from 'astro-icon/components'
-import GenericCardModified from '~/components/dashboard/sub/MainHeaderCard.astro'
+import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
+import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
+import CardLists from '~/components/dashboard/sub/CardLists.astro'
+import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
+/* test */
+import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
+import GenericCardNew from '~/components/dashboard/sub/GenericCardNew.astro'
+import GenericCardModified from '~/components/dashboard/dev/GenericCardModified.astro'
 import {allActions} from '~/api/doCards'
-import {urlsCard} from '~/api/doCardsNew'
-
-//import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
-//import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
-//import CardLists from '~/components/dashboard/sub/CardLists.astro'
-//import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
-//import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
-//import GenericCardNew from '~/components/dashboard/sub/GenericCardNew.astro'
 //import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
-//import {recentActivityData} from '~/config/features'
-//import {recentListsData, myActivityData, myLatActivityData, urlListData} from '~/config/cardFeatures'
+import {recentActivityData} from '~/config/features'
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
+import {recentListsData, myActivityData, myLatActivityData, urlListData} from '~/config/cardFeatures'
 
-console.log('CardUrlInserted:', urlsCard)
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
 const {
   container: containerClass = '',
@@ -30,16 +28,11 @@ const {
 } = classes;
 
 const updatedItems = [
-  { type: 'allActions'},
-  ...items,
-  /*
   { type: 'ActivityFeed' },
   { type: 'CardLists' },
   { type: 'LastInsetions' },
   { type: 'PersonalActivityFeed' },
-  */
-  
-  /*
+  ...items,
   { type: 'TestDynamic' },
   { type: 'GenericCardNew'},
   { type: 'GenericCardModified' },
@@ -47,8 +40,7 @@ const updatedItems = [
   { type: 'myActivityData' },
   { type: 'myLatActivityData' },
   { type: 'urlListData' },
-  */
-  
+  { type: 'allActions'}
 
 ]
 ---
@@ -71,7 +63,29 @@ const updatedItems = [
     >
       {updatedItems.map((item) => (
         <div>
-         {item.type === 'allActions' ? (
+         {item.type === 'ActivityFeed' ? (
+            <ActivityFeed />
+          ) : item.type === 'CardLists' ? (
+            <CardLists item={item} />
+          ) : item.type === 'LastInsetions' ? (
+            <LastInsetions item={item} />
+          ) : item.type === 'PersonalActivityFeed' ? (
+            <PersonalActivityFeed item={item} />
+          ) : item.type === 'TestDynamic' ? (
+            <TestDynamic item={item} />
+          ) : item.type === 'GenericCardNew' ? (
+            <GenericCardNew  {...recentActivityData} />
+          ) : item.type === 'GenericCardModified' ? (
+            <GenericCardModified  {...myActivityData} />
+          ) : item.type === 'recentListsData' ? (
+            <GenericCardModified  {...recentListsData} />
+          ) : item.type === 'myActivityData' ? (
+            <GenericCardModified  {...myActivityData} />
+          ) : item.type === 'myLatActivityData' ? (
+            <GenericCardModified  {...myLatActivityData} />
+          ) : item.type === 'urlListData' ? (
+            <GenericCardModified  {...urlListData} />
+          ) : item.type === 'allActions' ? (
             <GenericCardModified  {...allActions} />
           ) : (
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>

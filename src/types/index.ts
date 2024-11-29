@@ -6,8 +6,10 @@ export type ActionType =
     'Created List' 
     | 'Updated List' 
     | 'Deleted List' 
-    | 'Added link' 
+    | 'Added link'
+    | 'Updated link'
     | 'Deleted link'
+    | undefined
 
 export type ListType =
     'urls'
@@ -15,6 +17,7 @@ export type ListType =
     | 'favourites'
     | 'suggestions'
     | 'activities'
+    | undefined
 
 export type MyIconType = 
     'activity'
@@ -30,11 +33,12 @@ export type MyIconType =
     | 'star'
 
 export interface CardProps {
-    typeList: ListType
-    cardName: string
-    cardIcon?: MyIconType
+    cardName?: string | null
+    typeList: ListType | undefined
+    cardTitle: string | null
+    cardIcon?: MyIconType | undefined
     activities: ActivityItem[]
-    action_url?: string
+    action_url?: string | null
 }
 
 export interface ActivityItem {
