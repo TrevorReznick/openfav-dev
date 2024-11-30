@@ -4,20 +4,20 @@ export interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
   cardIcon: MyIconType
 }
 
-export class CardManager {
+export class CardGenerator {
 
-  private static instance: CardManager
+  private static instance: CardGenerator
   private cards: Map<string, ModifiedCardProps>
 
   private constructor() {
     this.cards = new Map()
   }
 
-  public static getInstance(): CardManager {
-    if (!CardManager.instance) {
-      CardManager.instance = new CardManager()
+  public static getInstance(): CardGenerator {
+    if (!CardGenerator.instance) {
+      CardGenerator.instance = new CardGenerator()
     }
-    return CardManager.instance;
+    return CardGenerator.instance;
   }
 
   createCard(name: string, config: Omit<ModifiedCardProps, 'activities'>): ModifiedCardProps {
