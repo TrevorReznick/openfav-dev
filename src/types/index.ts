@@ -20,7 +20,8 @@ export type ListType =
     | undefined
 
 export type MyIconType = 
-    'activity'
+    'default'
+    | 'activity'
     | 'bot'
     | 'book'
     | 'bookmark'
@@ -33,7 +34,7 @@ export type MyIconType =
     | 'star'
 
 export interface CardProps {
-    cardName?: string
+    cardName: string
     typeList: ListType | undefined
     cardTitle: string | null
     cardIcon?: MyIconType | undefined

@@ -1,4 +1,4 @@
-import type { ListType, MyIconType } from '~/types'
+import type { ListType, MyIconType, ActionType } from '~/types'
 import { CardManager } from '~/scripts/cardGenerator'
 import type { ModifiedCardProps } from '~/scripts/cardGenerator'
 
@@ -12,19 +12,17 @@ export const obj: ModifiedCardProps = {
     activities: []
 }*/
 
-const name = 'default'
-
-
 class Card {
 
   private cardManager: CardManager
   private cardData: ModifiedCardProps
 
-  constructor(name: string, type: ListType) {
+  constructor(cardName: string, type: ListType) {
 
     this.cardManager = CardManager.getInstance()
 
-    this.cardData = {      
+    this.cardData = {  
+      cardName: cardName,    
       typeList: type,
       cardTitle: null,
       action_url: null,
@@ -35,8 +33,8 @@ class Card {
   }
 
   private createCard() {
-    this.cardManager.createCard(name, {
-      cardName: name,
+    this.cardManager.createCard(this.cardData.cardName, {
+      cardName: this.cardData.cardName,
       typeList: this.cardData.typeList,
       cardTitle: this.cardData.cardTitle,
       cardIcon: this.cardData.cardIcon,
@@ -44,7 +42,7 @@ class Card {
     })
   }
 
-  addActivity(action: string, actionIcon: MyIconType, details: { description: string, name: string }) {
+  addActivity(action: ActionType, actionIcon: MyIconType, details: { description: string, name: string }) {
     this.cardManager.addActivity(
         this.cardData.cardName,
         action,
@@ -56,12 +54,12 @@ class Card {
     )
   }
 
-  getCardData(): ModifiedCardProps {
+  getCardData() {
     return this.cardManager.getCard(this.cardData.cardName)
   }
 }
 
-export const initCard = (type: ListType, name: string): (() => Card) => {
+export const initCardTest = (type: ListType, name: string): (() => Card) => {
 
     const card = new Card(name, type)
 
@@ -70,8 +68,9 @@ export const initCard = (type: ListType, name: string): (() => Card) => {
     }
 }
 
-const urlsCard = initCard('urls', 'my cardname')
-const listsCard = initCard('lists', 'another cardname')
+/*
+const urlsCard = initCardTest('urls', 'my cardname')
+const listsCard = initCardTest('lists', 'another cardname')
 
 // Add activities
 urlsCard().addActivity('Created List', 'folder', {
@@ -87,3 +86,4 @@ listsCard().addActivity('Updated List', 'clock', {
 // Get the card data
 console.log(urlsCard().getCardData())
 console.log(listsCard().getCardData())
+*/

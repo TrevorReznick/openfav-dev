@@ -4,6 +4,9 @@ import { twMerge } from 'tailwind-merge'
 import { Icon } from 'astro-icon/components'
 import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
+//optional if cards declared here 
+//import { CardManager} from '~/scripts/cardGenerator'
+import {initCard, obj} from '~/api/doCardsNew'
 import {initCardTest} from '~/api/doCardsNewV1'
 
 const urlsCardNew = initCardTest('urls', 'my cardname')
@@ -29,10 +32,26 @@ console.log(urlsCardNew().getCardData())
 console.log(urlsCardNew().getCardData())
 
 
+//import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
+//import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
+//import CardLists from '~/components/dashboard/sub/CardLists.astro'
+//import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
+//import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
+//import GenericCardNew from '~/components/dashboard/sub/GenericCardNew.astro'
+//import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
+//import {recentActivityData} from '~/config/features'
+//import {recentListsData, myActivityData, myLatActivityData, urlListData} from '~/config/cardFeatures'
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
 
+/*
+const urlsCard = initCard('urls', 'my cardname', { ...obj })
+console.log('CardUrlInserted:', urlsCard)
 
+
+const listsCard = initCard('lists', 'another cardname', { ...obj })
+console.log('ListsInserted:', listsCard)
+*/
 
 
 
@@ -51,6 +70,24 @@ const {
 const updatedItems = [
   { type: 'allActions'},
   ...items,
+  /*
+  { type: 'ActivityFeed' },
+  { type: 'CardLists' },
+  { type: 'LastInsetions' },
+  { type: 'PersonalActivityFeed' },
+  */
+  
+  /*
+  { type: 'TestDynamic' },
+  { type: 'GenericCardNew'},
+  { type: 'GenericCardModified' },
+  { type: 'recentListsData' },
+  { type: 'myActivityData' },
+  { type: 'myLatActivityData' },
+  { type: 'urlListData' },
+  */
+  
+
 ]
 ---
 
