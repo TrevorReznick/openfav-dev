@@ -6,93 +6,27 @@ import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
 import {doCard} from '~/api/doCardsV1'
 import {featuredCards} from '~/api/doCardsV2'
+/* test */
 import {printFullObject} from '~/scripts/utils'
 
 console.log(printFullObject(featuredCards))
 
-//const my_card = 'my cardname'
-/*
-const urlsCardNew = doCard('urls', my_card)
-const listsCardnew = doCard('lists', 'another cardname')
-
-// Esempio di utilizzo
-
-
-
-console.log('getting card', urlsCardNew().getCardData())
-
-const listsCardNew = doCard('lists', 'another cardname')
-
-console.log('getting card', urlsCardNew().getCardData())
-
-urlsCardNew().updateCardTitle('Nuovo Titolo')
-console.log('card after title update', urlsCardNew().getCardData())
-
-urlsCardNew().updateCard({
-  cardIcon: 'link',
-  action_url: 'https://example.com'
-})
-urlsCardNew().addActivity('Created List', 'folder', {
-  description: 'Card creata da Vincenzo Navarra',
-  name: 'Enzo'
-})
-urlsCardNew().addActivity('Created List', 'clock', {
-  description: 'Card creata da Luigi Frisco',
-  name: 'Enzo'
+const cardToItem = (card) => ({
+  type: 'feature',
+  title: card.cardTitle || card.cardName,
+  icon: card.cardIcon || defaultIcon,
+  description: `${card.activities.length} activities`,
+  action: card.action_url ? { text: 'View', href: card.action_url } : undefined,
 })
 
-listsCardnew().addActivity('Updated List', 'clock', {
-  description: 'Lista aggiornata da Dino di Piazza',
-  name: 'Maria'
-})
-console.log('card after full update', urlsCardNew().getCardData())
+// Estrai le cards da featuredCards e convertile in items
+const cardItems = Object.entries(featuredCards).map(([key, card]) => cardToItem(card))
+const test = cardItems.map((item) => item.type == 'urls')
 
-// Aggiornamento del cardTitle
-/*const set_title = urlsCardNew().updateCardTitle
-console.log('card after title update', set_title('piedi'))*/
-
-// Aggiornamento di altri campi della card
-
-/*urlsCardNew().updateCard({
-  cardIcon: 'link',
-  action_url: 'https://example.com'
-})*/
-//console.log('card after full update', urlsCardNew().getCardData())
-
-/*
-console.log('getting card', urlsCardNew().getCardData())
-
-// Add activities
-urlsCardNew().addActivity('Created List', 'folder', {
-  description: 'Card creata da Vincenzo Navarra',
-  name: 'Enzo'
-})
-urlsCardNew().addActivity('Created List', 'clock', {
-  description: 'Card creata da Luigi Frisco',
-  name: 'Enzo'
-})
-
-listsCardnew().addActivity('Updated List', 'clock', {
-  description: 'Lista aggiornata da Dino di Piazza',
-  name: 'Maria'
-})
-
-// Get the card data
-console.log(urlsCardNew().getCardData())
-console.log(urlsCardNew().getCardData())
-
-*/
-
+console.log('my cards ', featuredCards)
 
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
-
-
-
-
-
-
-
 
 const {
   container: containerClass = '',
@@ -101,11 +35,12 @@ const {
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
   action: actionClass = '',
-} = classes;
+} = classes
+
 
 const updatedItems = [
   { type: 'allActions'},
-  ...items,
+  ...items
 ]
 ---
 

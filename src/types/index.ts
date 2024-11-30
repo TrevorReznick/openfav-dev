@@ -19,8 +19,7 @@ export type ListType =
     | 'activities'
     | undefined
 
-export type MyIconType = 
-    'default'
+export type MyIconType =     
     | 'activity'
     | 'bot'
     | 'book'

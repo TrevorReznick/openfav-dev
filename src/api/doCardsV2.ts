@@ -36,7 +36,7 @@ urlsCard.addActivity('Created List', 'clock', {
   description: 'Card creata da Luigi Frisco',
   name: 'Enzo'
 })
-
+urlsCard.updateCardTitle('Nuovo Titolo 1')
 listsCard.addActivity('Updated List', 'clock', {
   description: 'Lista aggiornata da Dino di Piazza',
   name: 'Maria'
