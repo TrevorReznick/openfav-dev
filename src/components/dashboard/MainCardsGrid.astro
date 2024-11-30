@@ -17,16 +17,42 @@ const listsCardnew = doCard('lists', 'another cardname')
 
 console.log('getting card', urlsCardNew().getCardData())
 
-// Aggiornamento del cardTitle
-const set_title = urlsCardNew().updateCardTitle
-console.log('card after title update', set_title('piedi'))
+const listsCardNew = doCard('lists', 'another cardname')
 
-// Aggiornamento di altri campi della card
+console.log('getting card', urlsCardNew().getCardData())
+
+urlsCardNew().updateCardTitle('Nuovo Titolo')
+console.log('card after title update', urlsCardNew().getCardData())
 
 urlsCardNew().updateCard({
   cardIcon: 'link',
   action_url: 'https://example.com'
 })
+urlsCardNew().addActivity('Created List', 'folder', {
+  description: 'Card creata da Vincenzo Navarra',
+  name: 'Enzo'
+})
+urlsCardNew().addActivity('Created List', 'clock', {
+  description: 'Card creata da Luigi Frisco',
+  name: 'Enzo'
+})
+
+listsCardnew().addActivity('Updated List', 'clock', {
+  description: 'Lista aggiornata da Dino di Piazza',
+  name: 'Maria'
+})
+console.log('card after full update', urlsCardNew().getCardData())
+
+// Aggiornamento del cardTitle
+/*const set_title = urlsCardNew().updateCardTitle
+console.log('card after title update', set_title('piedi'))*/
+
+// Aggiornamento di altri campi della card
+
+/*urlsCardNew().updateCard({
+  cardIcon: 'link',
+  action_url: 'https://example.com'
+})*/
 console.log('card after full update', urlsCardNew().getCardData())
 
 /*

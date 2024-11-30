@@ -51,17 +51,18 @@ class Card {
     this.doCard.updateCard(this.cardData.cardName, updates)
   }
 
-  updateCardTitle(newTitle: string | null) {    
+  updateCardTitle(newTitle: string | null) {
     if (newTitle !== null) {
       this.cardData.cardTitle = newTitle
       this.doCard.updateCard(this.cardData.cardName, { cardTitle: newTitle })
     }
   }
 
-  getCardData() {
-    return this.doCard.getCard(this.cardData.cardName)
-  }
+  getCardData(): ModifiedCardProps | undefined {
+      return this.doCard.getCard(this.cardData.cardName)
+    }
 }
+
 
 export const initCard = (type: ListType, name: string): (() => Card) => {
 
