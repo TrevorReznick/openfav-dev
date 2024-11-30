@@ -4,10 +4,14 @@ import { twMerge } from 'tailwind-merge'
 import { Icon } from 'astro-icon/components'
 import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
-import {initCardTest} from '~/api/doCardsNewV1'
+import {doCard} from '~/api/doCardsV1'
 
-const urlsCardNew = initCardTest('urls', 'my cardname')
-const listsCardnew = initCardTest('lists', 'another cardname')
+const my_card = 'my cardname'
+
+const urlsCardNew = doCard('urls', my_card)
+const listsCardnew = doCard('lists', 'another cardname')
+
+console.log('getting card', urlsCardNew().getCardData())
 
 // Add activities
 urlsCardNew().addActivity('Created List', 'folder', {

@@ -1,4 +1,4 @@
-import {initCardTest} from '~/api/doCardsNewV1'
+import {initCardTest} from '~/api/doCardsV1'
 
 const urlsCardNew = initCardTest('urls', 'my cardname')
 const listsCardnew = initCardTest('lists', 'another cardname')
