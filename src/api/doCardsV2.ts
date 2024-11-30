@@ -18,6 +18,7 @@ const listsCard = createCardWithActivities('lists', 'another cardname')
 
 // Aggiornamento e aggiunta di attività alle card
 urlsCard.updateCardTitle('Nuovo Titolo')
+
 urlsCard.updateCard({
   cardIcon: 'link',
   action_url: 'https://stinkyfeet.com'
@@ -36,8 +37,12 @@ listsCard.addActivity('Updated List', 'clock', {
   description: 'Lista aggiornata da Dino di Piazza',
   name: 'Maria'
 })
+listsCard.addActivity('Updated List', 'link', {
+  description: 'Lista aggiornata da Dino di Piazza',
+  name: 'Enzo'
+})
 listsCard.updateCard({
-  cardIcon: 'star',
+  cardIcon: 'folderHeart',
   action_url: 'https://example.com'
 })
 
