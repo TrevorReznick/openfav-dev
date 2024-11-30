@@ -9,22 +9,35 @@ import {featuredCards} from '~/api/doCardsV2'
 /* test */
 import {printFullObject} from '~/scripts/utils'
 
-console.log(printFullObject(featuredCards))
 
-const cardToItem = (card) => ({
+//const card1 = featuredCards.listsCard
+
+const card1 = featuredCards.listsCard
+
+const card2 = featuredCards.urlsCard
+
+/*type UrlCardWithoutName = Omit<typeof featuredCards.listsCard, 'cardName'>
+
+const card1_: UrlCardWithoutName = (() => {
+  const { ...rest } = featuredCards.listsCard
+  return rest
+})()*/
+
+
+
+
+/*const cardToItem = (card) => ({
   type: 'feature',
   title: card.cardTitle || card.cardName,
   icon: card.cardIcon || defaultIcon,
   description: `${card.activities.length} activities`,
   action: card.action_url ? { text: 'View', href: card.action_url } : undefined,
 })
+*/
 
 // Estrai le cards da featuredCards e convertile in items
-const cardItems = Object.entries(featuredCards).map(([key, card]) => cardToItem(card))
-const test = cardItems.map((item) => item.type == 'urls')
-
-console.log('my cards ', featuredCards)
-
+//const cardItems = Object.entries(featuredCards).map(([key, card]) => cardToItem(card))
+//const test = cardItems.map((item) => item.type == 'urls')
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
 
@@ -37,10 +50,16 @@ const {
   action: actionClass = '',
 } = classes
 
+console.log('card 0 ', allActions)
+console.log('card 1 ', card1)
+console.log('card 2 ', card2)
 
 const updatedItems = [
   { type: 'allActions'},
-  ...items
+  ...items,
+  { type: 'card1'},
+  { type: 'card2'},
+
 ]
 ---
 
@@ -64,7 +83,9 @@ const updatedItems = [
         <div>
          {item.type === 'allActions' ? (
             <MainHeaderCard  {...allActions} />
-          ) : (
+          ) : item.type === 'card1' ? (
+            <MainHeaderCard  {...card1} />
+          ) :(
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
               <div class="flex justify-center">
                 {(item.icon || defaultIcon) && (

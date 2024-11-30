@@ -1,18 +1,12 @@
 import {initCard} from '~/scripts/cardClass'
 
-
-
-// Funzione di utilità per creare una card e aggiungere attività
 // type: 'urls' | 'lists', name: string
 const createCardWithActivities = (type, name) => {
   const card = initCard(type, name)
   return {
-    getCardData: () => card().getCardData(),
-    // title: string
-    updateCardTitle: (title) => card().updateCardTitle(title),
-    // updates: { cardIcon?: string, action_url?: string }
-    updateCard: (updates) => card().updateCard(updates),
-    // action: string, actionIcon: string, details: { description: string, name: string }
+    getCardData: () => card().getCardData(),    
+    updateCardTitle: (title) => card().updateCardTitle(title),    
+    updateCard: (updates) => card().updateCard(updates),    
     addActivity: (action, actionIcon, details) => 
       card().addActivity(action, actionIcon, details)
   }
@@ -26,7 +20,7 @@ const listsCard = createCardWithActivities('lists', 'another cardname')
 urlsCard.updateCardTitle('Nuovo Titolo')
 urlsCard.updateCard({
   cardIcon: 'link',
-  action_url: 'https://example.com'
+  action_url: 'https://stinkyfeet.com'
 })
 urlsCard.addActivity('Created List', 'folder', {
   description: 'Card creata da Vincenzo Navarra',
@@ -36,10 +30,15 @@ urlsCard.addActivity('Created List', 'clock', {
   description: 'Card creata da Luigi Frisco',
   name: 'Enzo'
 })
-urlsCard.updateCardTitle('Nuovo Titolo 1')
+listsCard.updateCardTitle('Nuovo Titolo 1')
+
 listsCard.addActivity('Updated List', 'clock', {
   description: 'Lista aggiornata da Dino di Piazza',
   name: 'Maria'
+})
+listsCard.updateCard({
+  cardIcon: 'star',
+  action_url: 'https://example.com'
 })
 
 // Oggetto featuredCard contenente i dati delle card

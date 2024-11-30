@@ -46,6 +46,8 @@ class Card {
     )
   }
 
+
+
   updateCard(updates: Partial<ModifiedCardProps>) {
     Object.assign(this.cardData, updates)
     this.doCard.updateCard(this.cardData.cardName, updates)
