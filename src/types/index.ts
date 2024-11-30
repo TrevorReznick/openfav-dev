@@ -42,8 +42,8 @@ export interface CardProps {
 }
 
 export interface ActivityItem {
-    action: ActionType
-    actionIcon: MyIconType
+    action?: ActionType
+    actionIcon?: MyIconType
     timestamp?: string | null
     name?: string | null
     description?: string | null
