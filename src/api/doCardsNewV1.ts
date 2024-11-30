@@ -1,25 +1,14 @@
 import type { ListType, MyIconType, ActionType } from '~/types'
-import { CardManager } from '~/scripts/cardGenerator'
+import { CardGenerator } from '~/scripts/cardGenerator'
 import type { ModifiedCardProps } from '~/scripts/cardGenerator'
-
-/*
-export const obj: ModifiedCardProps = {
-    cardName: null,
-    typeList: undefined,
-    cardTitle: null,
-    action_url: null,
-    cardIcon: 'folder',
-    activities: []
-}*/
-
 class Card {
 
-  private cardManager: CardManager
+  private CardGenerator: CardGenerator
   private cardData: ModifiedCardProps
 
   constructor(cardName: string, type: ListType) {
 
-    this.cardManager = CardManager.getInstance()
+    this.CardGenerator = CardGenerator.getInstance()
 
     this.cardData = {  
       cardName: cardName,    
@@ -33,7 +22,7 @@ class Card {
   }
 
   private createCard() {
-    this.cardManager.createCard(this.cardData.cardName, {
+    this.CardGenerator.createCard(this.cardData.cardName, {
       cardName: this.cardData.cardName,
       typeList: this.cardData.typeList,
       cardTitle: this.cardData.cardTitle,
@@ -43,7 +32,7 @@ class Card {
   }
 
   addActivity(action: ActionType, actionIcon: MyIconType, details: { description: string, name: string }) {
-    this.cardManager.addActivity(
+    this.CardGenerator.addActivity(
         this.cardData.cardName,
         action,
         actionIcon,
@@ -55,7 +44,7 @@ class Card {
   }
 
   getCardData() {
-    return this.cardManager.getCard(this.cardData.cardName)
+    return this.CardGenerator.getCard(this.cardData.cardName)
   }
 }
 
