@@ -46,6 +46,18 @@ class Card {
     )
   }
 
+  updateCard(updates: Partial<ModifiedCardProps>) {
+    Object.assign(this.cardData, updates)
+    this.doCard.updateCard(this.cardData.cardName, updates)
+  }
+
+  updateCardTitle(newTitle: string | null) {    
+    if (newTitle !== null) {
+      this.cardData.cardTitle = newTitle
+      this.doCard.updateCard(this.cardData.cardName, { cardTitle: newTitle })
+    }
+  }
+
   getCardData() {
     return this.doCard.getCard(this.cardData.cardName)
   }

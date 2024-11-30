@@ -20,6 +20,13 @@ export class CardGenerator {
     return CardGenerator.instance;
   }
 
+  public updateCard(cardName: string, updates: Partial<ModifiedCardProps>) {
+    const card = this.cards.get(cardName)
+    if (card) {
+      Object.assign(card, updates)
+    }
+  }
+
   createCard(name: string, config: Omit<ModifiedCardProps, 'activities'>): ModifiedCardProps {
     const newCard: ModifiedCardProps = {
       ...config,
