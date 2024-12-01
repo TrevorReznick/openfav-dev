@@ -6,75 +6,93 @@ import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
 import {allActions} from '~/api/doCards'
 import {doCard} from '~/api/doCardsV1'
 import {featuredCards} from '~/api/doCardsV2'
-/* test */
 import {printFullObject} from '~/scripts/utils'
-import {initializeCards} from '~/api/doCardsV3'
-import {createCard} from '~/scripts/cardClassV1'
-import { createUrlsCard, createListsCard } from '~/scripts/cardClassV1'
 
-const urlsCard = createUrlsCard('My URLs Card')
-const listsCard = createListsCard('My Lists Card')
+console.log(printFullObject(featuredCards))
 
-urlsCard.updateCard({
-  cardTitle: 'Favorite URLs',
-  action_url: '/favorite-urls',
-  cardIcon: 'link'
+//const my_card = 'my cardname'
+/*
+const urlsCardNew = doCard('urls', my_card)
+const listsCardnew = doCard('lists', 'another cardname')
+
+// Esempio di utilizzo
+
+
+
+console.log('getting card', urlsCardNew().getCardData())
+
+const listsCardNew = doCard('lists', 'another cardname')
+
+console.log('getting card', urlsCardNew().getCardData())
+
+urlsCardNew().updateCardTitle('Nuovo Titolo')
+console.log('card after title update', urlsCardNew().getCardData())
+
+urlsCardNew().updateCard({
+  cardIcon: 'link',
+  action_url: 'https://example.com'
+})
+urlsCardNew().addActivity('Created List', 'folder', {
+  description: 'Card creata da Vincenzo Navarra',
+  name: 'Enzo'
+})
+urlsCardNew().addActivity('Created List', 'clock', {
+  description: 'Card creata da Luigi Frisco',
+  name: 'Enzo'
 })
 
-urlsCard.addActivity('Added link', 'Added a new favorite URL', 'https://example.com')
-
-listsCard.updateCard({
-  cardTitle: 'Todo Lists',
-  action_url: '/todo-lists',
-  cardIcon: 'link'
+listsCardnew().addActivity('Updated List', 'clock', {
+  description: 'Lista aggiornata da Dino di Piazza',
+  name: 'Maria'
 })
+console.log('card after full update', urlsCardNew().getCardData())
 
-listsCard.addActivity('Created List', 'Created a new todo list', null)
+// Aggiornamento del cardTitle
+/*const set_title = urlsCardNew().updateCardTitle
+console.log('card after title update', set_title('piedi'))*/
 
-console.log(urlsCard.getCardData())
-console.log(listsCard.getCardData())
+// Aggiornamento di altri campi della card
 
-
-const card1 = featuredCards.listsCard
-
-const card2 = featuredCards.urlsCard
-
-const initCards = initializeCards()
+/*urlsCardNew().updateCard({
+  cardIcon: 'link',
+  action_url: 'https://example.com'
+})*/
+//console.log('card after full update', urlsCardNew().getCardData())
 
 /*
-console.log('card 0 ', allActions)
-console.log('card 1 ', card1)
-console.log('card 2 ', card2)
-*/
+console.log('getting card', urlsCardNew().getCardData())
 
-//console.log('hello', initCards)
-
-
-
-/*type UrlCardWithoutName = Omit<typeof featuredCards.listsCard, 'cardName'>
-
-const card1_: UrlCardWithoutName = (() => {
-  const { ...rest } = featuredCards.listsCard
-  return rest
-})()*/
-
-
-
-
-/*const cardToItem = (card) => ({
-  type: 'feature',
-  title: card.cardTitle || card.cardName,
-  icon: card.cardIcon || defaultIcon,
-  description: `${card.activities.length} activities`,
-  action: card.action_url ? { text: 'View', href: card.action_url } : undefined,
+// Add activities
+urlsCardNew().addActivity('Created List', 'folder', {
+  description: 'Card creata da Vincenzo Navarra',
+  name: 'Enzo'
 })
+urlsCardNew().addActivity('Created List', 'clock', {
+  description: 'Card creata da Luigi Frisco',
+  name: 'Enzo'
+})
+
+listsCardnew().addActivity('Updated List', 'clock', {
+  description: 'Lista aggiornata da Dino di Piazza',
+  name: 'Maria'
+})
+
+// Get the card data
+console.log(urlsCardNew().getCardData())
+console.log(urlsCardNew().getCardData())
+
 */
 
-// Estrai le cards da featuredCards e convertile in items
-//const cardItems = Object.entries(featuredCards).map(([key, card]) => cardToItem(card))
-//const test = cardItems.map((item) => item.type == 'urls')
+
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
+
+
+
+
+
+
+
 
 const {
   container: containerClass = '',
@@ -83,14 +101,11 @@ const {
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
   action: actionClass = '',
-} = classes
+} = classes;
 
 const updatedItems = [
   { type: 'allActions'},
   ...items,
-  { type: 'card1'},
-  { type: 'card2'},
-
 ]
 ---
 
@@ -114,9 +129,7 @@ const updatedItems = [
         <div>
          {item.type === 'allActions' ? (
             <MainHeaderCard  {...allActions} />
-          ) : item.type === 'card1' ? (
-            <MainHeaderCard  {...card1} />
-          ) :(
+          ) : (
             <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
               <div class="flex justify-center">
                 {(item.icon || defaultIcon) && (

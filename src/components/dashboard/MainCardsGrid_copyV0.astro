@@ -1,0 +1,139 @@
+---
+//import ItemGrid from '~/components/dev/ItemGridDev.astro'
+import { twMerge } from 'tailwind-merge'
+import { Icon } from 'astro-icon/components'
+import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
+import {allActions} from '~/api/doCards'
+//optional if cards declared here 
+//import { CardManager} from '~/scripts/cardGenerator'
+import {initCard, obj} from '~/api/doCardsNew'
+import {initCardTest} from '~/api/doCardsV1'
+
+const urlsCardNew = initCardTest('urls', 'my cardname')
+const listsCardnew = initCardTest('lists', 'another cardname')
+
+// Add activities
+urlsCardNew().addActivity('Created List', 'folder', {
+  description: 'Card creata da Vincenzo Navarra',
+  name: 'Enzo'
+})
+urlsCardNew().addActivity('Created List', 'clock', {
+  description: 'Card creata da Luigi Frisco',
+  name: 'Enzo'
+})
+
+listsCardnew().addActivity('Updated List', 'clock', {
+  description: 'Lista aggiornata da Dino di Piazza',
+  name: 'Maria'
+})
+
+// Get the card data
+console.log(urlsCardNew().getCardData())
+console.log(urlsCardNew().getCardData())
+
+
+//import PersonalActivityFeed from '~/components/dashboard/sub/PersonalActivityFeed.astro'
+//import ActivityFeed from '~/components/dashboard/sub/ActivityFeed.astro'
+//import CardLists from '~/components/dashboard/sub/CardLists.astro'
+//import LastInsetions from '~/components/dashboard/sub/LastInsetions.astro'
+//import TestDynamic from '~/components/dashboard/dev/CardListContainer.astro'
+//import GenericCardNew from '~/components/dashboard/sub/GenericCardNew.astro'
+//import GenericCardModifiedTest from '~/components/dashboard/dev/GenericCardModifiedTest.astro'
+//import {recentActivityData} from '~/config/features'
+//import {recentListsData, myActivityData, myLatActivityData, urlListData} from '~/config/cardFeatures'
+
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
+
+/*
+const urlsCard = initCard('urls', 'my cardname', { ...obj })
+console.log('CardUrlInserted:', urlsCard)
+
+
+const listsCard = initCard('lists', 'another cardname', { ...obj })
+console.log('ListsInserted:', listsCard)
+*/
+
+
+
+
+
+
+const {
+  container: containerClass = '',
+  panel: panelClass = '',
+  title: titleClass = '',
+  description: descriptionClass = '',
+  icon: defaultIconClass = 'text-primary',
+  action: actionClass = '',
+} = classes;
+
+const updatedItems = [
+  { type: 'allActions'},
+  ...items,
+  /*
+  { type: 'ActivityFeed' },
+  { type: 'CardLists' },
+  { type: 'LastInsetions' },
+  { type: 'PersonalActivityFeed' },
+  */
+  
+  /*
+  { type: 'TestDynamic' },
+  { type: 'GenericCardNew'},
+  { type: 'GenericCardModified' },
+  { type: 'recentListsData' },
+  { type: 'myActivityData' },
+  { type: 'myLatActivityData' },
+  { type: 'urlListData' },
+  */
+  
+
+]
+---
+
+{
+  updatedItems && (
+    <div
+      class={twMerge(
+        `grid mx-auto gap-8 md:gap-y-12 ${
+          columns === 4
+          ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+          : columns === 3
+              ? 'lg:grid-cols-3 sm:grid-cols-2'
+              : columns === 2
+                  ? 'sm:grid-cols-2 '
+                  : ''
+        }`,
+        containerClass
+      )}
+    >
+      {updatedItems.map((item) => (
+        <div>
+         {item.type === 'allActions' ? (
+            <MainHeaderCard  {...allActions} />
+          ) : (
+            <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
+              <div class="flex justify-center">
+                {(item.icon || defaultIcon) && (
+                  <Icon
+                    name={item.icon || defaultIcon}
+                    class={twMerge('w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2', defaultIconClass, item.classes?.icon)}
+                  />
+                )}
+              </div>
+              <div class="mt-0.5">
+                {item.title && <h3 class={twMerge('text-xl font-bold', titleClass, item.classes?.title)}>{item.title}</h3>}
+                {item.description && (
+                  <p
+                    class={twMerge(`${item.title ? 'mt-3' : ''} text-muted`, descriptionClass, item.classes?.description)}
+                    set:html={item.description}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}

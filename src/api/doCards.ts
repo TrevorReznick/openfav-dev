@@ -1,35 +1,31 @@
-import type { MyIconType, ListType } from '~/types'
-import { CardManager } from '~/scripts/cardGenerator'
+import type { ListType } from '~/types'
+import { CardGenerator } from '~/scripts/cardGenerator'
 
-import { Activity, Bot, Book, Bookmark, Clock, Folder, Link, List, Logs, FolderHeart, Star } from 'lucide-react'
+const doCard = CardGenerator.getInstance()
 
-import type { LucideProps } from 'lucide-react'
-
-const cardManager = CardManager.getInstance()
-
-export const allActions = cardManager.createCard('allActions', {
+export const allActions = doCard.createCard('allActions', {
     typeList: 'activities' as ListType,
-    cardName: 'Users actions',
-    cardIcon: 'folderHeart',
+    cardTitle: 'Users test',
+    cardIcon: 'activity',
     action_url: '/activity'
 })
 
-cardManager.addActivity('allActions', 'Created List', 'folder', {
+doCard.addActivity('allActions', 'Created List', 'folder', {
         description: 'Card creata da Mario Rossi'
     }
 )
 
-cardManager.addActivity('allActions', 'Updated List', 'folder', {
+doCard.addActivity('allActions', 'Updated List', 'folder', {
         description: 'Card creata da Mario Rossi'
     }
 )
 
-cardManager.addActivity('allActions', 'Deleted List', 'star', {
+doCard.addActivity('allActions', 'Deleted List', 'star', {
         description: 'Card creata da Mario Rossi'
     }
 )
 
-const test = cardManager.getCard('allActions')
+const test = doCard.getCard('allActions')
 
 if(test) {
     console.log('card exists!')
@@ -40,23 +36,23 @@ if(test) {
     }
 } else console.log('are you serious?')
   
-export const cardLists = cardManager.createCard('cardLists', {
+export const cardLists = doCard.createCard('cardLists', {
     typeList: 'lists' as ListType,
-    cardName: 'Card Activities',
+    cardTitle: 'Card Activities',
     cardIcon: 'folderHeart',
     action_url: '/lists'
 })
   
-export const urlInsertions = cardManager.createCard('urlInsertions', {
+export const urlInsertions = doCard.createCard('urlInsertions', {
     typeList: 'urls' as ListType,
-    cardName: 'Last Insertions',
+    cardTitle: 'Last Insertions',
     cardIcon: 'link',
     action_url: '/last-insertions'
 })
   
-export const allActivities = cardManager.createCard('allActivities', {
+export const allActivities = doCard.createCard('allActivities', {
     typeList: 'activities' as ListType,
-    cardName: 'Personal Activity Feed',
+    cardTitle: 'Personal Activity Feed',
     cardIcon: 'folder',
     action_url: '/personal-activity'
 })

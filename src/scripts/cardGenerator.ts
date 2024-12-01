@@ -1,23 +1,30 @@
 import type { CardProps, ActivityItem, MyIconType } from '~/types'
 
-interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
+export interface ModifiedCardProps extends Omit<CardProps, 'cardIcon'> {
   cardIcon: MyIconType
 }
 
-export class CardManager {
+export class CardGenerator {
 
-  private static instance: CardManager
+  private static instance: CardGenerator
   private cards: Map<string, ModifiedCardProps>
 
   private constructor() {
     this.cards = new Map()
   }
 
-  public static getInstance(): CardManager {
-    if (!CardManager.instance) {
-      CardManager.instance = new CardManager()
+  public static getInstance(): CardGenerator {
+    if (!CardGenerator.instance) {
+      CardGenerator.instance = new CardGenerator()
     }
-    return CardManager.instance;
+    return CardGenerator.instance;
+  }
+
+  public updateCard(cardName: string, updates: Partial<ModifiedCardProps>) {
+    const card = this.cards.get(cardName)
+    if (card) {
+      Object.assign(card, updates)
+    }
   }
 
   createCard(name: string, config: Omit<ModifiedCardProps, 'activities'>): ModifiedCardProps {
@@ -33,19 +40,18 @@ export class CardManager {
     cardName: string,
     action: ActivityItem['action'],
     actionIcon: MyIconType,
-    details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon' | 'timestamp'>>
+    details?: Partial<Omit<ActivityItem, 'action' | 'actionIcon'>>
   ): void {
-    const card = this.cards.get(cardName);
+    const card = this.cards.get(cardName)
     if (!card) {
-      throw new Error(`Card "${cardName}" not found`);
+      throw new Error(`Card "${cardName}" not found`)
     }
 
     card.activities.push({
       action,
       actionIcon,
-      timestamp: new Date().toISOString(),
       ...details
-    });
+    })
   }
 
   getCard(name: string): ModifiedCardProps | undefined {
