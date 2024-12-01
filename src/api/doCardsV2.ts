@@ -1,4 +1,5 @@
 import {initCard} from '~/scripts/cardClass'
+import type { ListType, MyIconType, ActionType, ActivityItem } from '~/types'
 
 // type: 'urls' | 'lists', name: string
 const createCardWithActivities = (type, name) => {

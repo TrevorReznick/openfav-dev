@@ -8,6 +8,7 @@ import {doCard} from '~/api/doCardsV1'
 import {featuredCards} from '~/api/doCardsV2'
 /* test */
 import {printFullObject} from '~/scripts/utils'
+import {initializeCards} from '~/api/doCardsV3'
 
 
 //const card1 = featuredCards.listsCard
@@ -15,6 +16,12 @@ import {printFullObject} from '~/scripts/utils'
 const card1 = featuredCards.listsCard
 
 const card2 = featuredCards.urlsCard
+
+const initCards = initializeCards()
+
+console.log('hello', initCards)
+
+
 
 /*type UrlCardWithoutName = Omit<typeof featuredCards.listsCard, 'cardName'>
 

@@ -1,41 +1,54 @@
-import type {ModifiedCardProps} from '~/scripts/cardGenerator'
+import {initCard} from '~/scripts/cardClass'
+import type {CardProps, ListType, ActionType, MyIconType, ActivityItem} from '~/types'
 import { CardGenerator } from '~/scripts/cardGenerator'
-import type { ListType, MyIconType, ActionType, ActivityItem } from '~/types'
+import type { ModifiedCardProps } from '~/scripts/cardGenerator'
 
 
-const cardGenerator = CardGenerator.getInstance()
 
-export const createCardWithActivities = (type: ListType, name: string) => {
+const doHeaderMainCard = (type: ListType, name: string) => {
+    
+    const card = initCard(type, name)
 
-  const card = cardGenerator.createCard(name, { typeList: type, cardName: name })
+    return {
 
-  return {
-    getCardData: () => cardGenerator.getCard(name),
-    updateCardTitle: (title: string) => cardGenerator.updateCard(name, { cardTitle: title }),
-    updateCard: (updates: Partial<ModifiedCardProps>) => cardGenerator.updateCard(name, updates),
-    addActivity: (action: ActionType, actionIcon: MyIconType, details: { description: string, name: string }) => 
-      cardGenerator.addActivity(name, action, actionIcon, {
-        ...details,
-        timestamp: new Date().toISOString()
-      })
-  }
+        getCardData: () => card().getCardData(),    
+        updateCardTitle: (title: string) => card().updateCardTitle(title),
+        updateCard: (updates: Partial<ModifiedCardProps>) => card().updateCard(updates),
+        //updateCard: (updates) => card().updateCard(updates),    
+        addActivity: (action: ActionType, actionIcon: MyIconType, details: Partial<ActivityItem>) => {
+            card().addActivity(
+                action,
+                actionIcon,
+                {
+                    description: details.description || '',
+                    name: details.name || '',
+                    ...(details.timestamp && { timestamp: details.timestamp })
+                }
+            )
+        }       
+        
+    }
 }
 
 export const initializeCards = () => {
-  const urlsCard = createCardWithActivities('urls', 'my cardname')
-  const listsCard = createCardWithActivities('lists', 'another cardname')
-
-  // Initialize cards with default values
-  urlsCard.updateCard({
-    cardIcon: 'link',
-    action_url: '/last-insertions'
-  })
-
-  listsCard.updateCard({
-    cardTitle: 'My Lists',
-    cardIcon: 'bookmark',
-    action_url: '/my-lists'
-  })
-
-  return { urlsCard, listsCard }
+    const urlsCard = doHeaderMainCard('urls', 'my cardname')
+    const listsCard = doHeaderMainCard('lists', 'another cardname')
+  
+    // Initialize cards with default values
+    urlsCard.updateCard({
+      cardIcon: 'link',
+      action_url: '/last-insertions'
+    })
+  
+    listsCard.updateCard({
+      cardTitle: 'My Lists',
+      cardIcon: 'bookmark',
+      action_url: '/my-lists'
+    })
+  
+    return { urlsCard, listsCard }
 }
+
+
+
+

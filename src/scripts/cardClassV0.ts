@@ -2,8 +2,8 @@ import type { ListType, MyIconType, ActionType, ActivityItem } from '~/types'
 import { CardGenerator } from '~/scripts/cardGenerator'
 import type { ModifiedCardProps } from '~/scripts/cardGenerator'
 
-export interface AddMethodToType extends Omit<ModifiedCardProps, 'cardName'> {    
-    addActivity?: () => ActivityItem; //
+export interface AddMethodToType extends ModifiedCardProps {    
+    addActivity?: () => ActivityItem
   }
 class Card {
 
@@ -23,7 +23,7 @@ class Card {
             action_url: null,
             cardIcon: 'folder' as MyIconType,
             activities: [],
-            addActivity: () => this.myClosure1
+            addActivity: () => {}
         }
 
         
