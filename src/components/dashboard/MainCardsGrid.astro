@@ -1,17 +1,18 @@
 ---
 //import ItemGrid from '~/components/dev/ItemGridDev.astro'
-import { twMerge } from 'tailwind-merge'
-import { Icon } from 'astro-icon/components'
-import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
-import {allActions} from '~/api/doCards'
-import {doCard} from '~/api/doCardsV1'
-import {featuredCards} from '~/api/doCardsV2'
+import { twMerge } from "tailwind-merge";
+import { Icon } from "astro-icon/components";
+import MainHeaderCard from "~/components/dashboard/sub/MainHeaderCard.astro";
+import { allActions } from "~/api/doCards";
+import { doCard } from "~/api/doCardsV1";
+import { featuredCards } from "~/api/doCardsV2";
 /* test */
-import {printFullObject} from '~/scripts/utils'
-import {initializeCards} from '~/api/doCardsV3'
-import {createCard} from '~/scripts/cardClassV1'
-import { createUrlsCard, createListsCard } from '~/scripts/cardClassV1'
+import { printFullObject } from "~/scripts/utils";
+import { initializeCards } from "~/api/doCardsV3";
+import { createCard } from "~/scripts/cardClassV1";
+import { createUrlsCard, createListsCard } from "~/scripts/cardClassV1";
 
+/*
 const urlsCard = createUrlsCard('My URLs Card')
 const listsCard = createListsCard('My Lists Card')
 
@@ -34,12 +35,12 @@ listsCard.addActivity('Created List', 'Created a new todo list', null)
 console.log(urlsCard.getCardData())
 console.log(listsCard.getCardData())
 
+*/
+const card1 = featuredCards.listsCard;
 
-const card1 = featuredCards.listsCard
+const card2 = featuredCards.urlsCard;
 
-const card2 = featuredCards.urlsCard
-
-const initCards = initializeCards()
+const initCards = initializeCards();
 
 /*
 console.log('card 0 ', allActions)
@@ -49,17 +50,12 @@ console.log('card 2 ', card2)
 
 //console.log('hello', initCards)
 
-
-
 /*type UrlCardWithoutName = Omit<typeof featuredCards.listsCard, 'cardName'>
 
 const card1_: UrlCardWithoutName = (() => {
   const { ...rest } = featuredCards.listsCard
   return rest
 })()*/
-
-
-
 
 /*const cardToItem = (card) => ({
   type: 'feature',
@@ -74,24 +70,23 @@ const card1_: UrlCardWithoutName = (() => {
 //const cardItems = Object.entries(featuredCards).map(([key, card]) => cardToItem(card))
 //const test = cardItems.map((item) => item.type == 'urls')
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
+const { items = [], columns, defaultIcon = "", classes = {} } = Astro.props;
 
 const {
-  container: containerClass = '',
-  panel: panelClass = '',
-  title: titleClass = '',
-  description: descriptionClass = '',
-  icon: defaultIconClass = 'text-primary',
-  action: actionClass = '',
-} = classes
+  container: containerClass = "",
+  panel: panelClass = "",
+  title: titleClass = "",
+  description: descriptionClass = "",
+  icon: defaultIconClass = "text-primary",
+  action: actionClass = "",
+} = classes;
 
 const updatedItems = [
-  { type: 'allActions'},
+  { type: "allActions" },
   ...items,
-  { type: 'card1'},
-  { type: 'card2'},
-
-]
+  { type: "card1" },
+  { type: "card2" },
+];
 ---
 
 {
@@ -100,37 +95,61 @@ const updatedItems = [
       class={twMerge(
         `grid mx-auto gap-8 md:gap-y-12 ${
           columns === 4
-          ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
-          : columns === 3
-              ? 'lg:grid-cols-3 sm:grid-cols-2'
-              : columns === 2
-                  ? 'sm:grid-cols-2 '
-                  : ''
+            ? "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+            : columns === 3
+            ? "lg:grid-cols-3 sm:grid-cols-2"
+            : columns === 2
+            ? "sm:grid-cols-2 "
+            : ""
         }`,
         containerClass
       )}
     >
       {updatedItems.map((item) => (
         <div>
-         {item.type === 'allActions' ? (
-            <MainHeaderCard  {...allActions} />
-          ) : item.type === 'card1' ? (
-            <MainHeaderCard  {...card1} />
-          ) :(
-            <div class={twMerge('flex flex-row max-w-md', panelClass, item.classes?.panel)}>
+          {item.type === "allActions" ? (
+            <MainHeaderCard {...allActions} />
+          ) : item.type === "card1" ? (
+            <MainHeaderCard {...card1} />
+          ) : (
+            <div
+              class={twMerge(
+                "flex flex-row max-w-md",
+                panelClass,
+                item.classes?.panel
+              )}
+            >
               <div class="flex justify-center">
                 {(item.icon || defaultIcon) && (
                   <Icon
                     name={item.icon || defaultIcon}
-                    class={twMerge('w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2', defaultIconClass, item.classes?.icon)}
+                    class={twMerge(
+                      "w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2",
+                      defaultIconClass,
+                      item.classes?.icon
+                    )}
                   />
                 )}
               </div>
               <div class="mt-0.5">
-                {item.title && <h3 class={twMerge('text-xl font-bold', titleClass, item.classes?.title)}>{item.title}</h3>}
+                {item.title && (
+                  <h3
+                    class={twMerge(
+                      "text-xl font-bold",
+                      titleClass,
+                      item.classes?.title
+                    )}
+                  >
+                    {item.title}
+                  </h3>
+                )}
                 {item.description && (
                   <p
-                    class={twMerge(`${item.title ? 'mt-3' : ''} text-muted`, descriptionClass, item.classes?.description)}
+                    class={twMerge(
+                      `${item.title ? "mt-3" : ""} text-muted`,
+                      descriptionClass,
+                      item.classes?.description
+                    )}
                     set:html={item.description}
                   />
                 )}
