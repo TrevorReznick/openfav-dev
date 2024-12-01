@@ -89,6 +89,7 @@ const updatedItems = [
   ...items,
   { type: "card1" },
   { type: "card2" },
+  { type: "my_test_card" },
 ];
 ---
 
@@ -114,6 +115,8 @@ const updatedItems = [
             <MainHeaderCard {...allActions} />
           ) : item.type === "card1" ? (
             <MainHeaderCard {...card1} />
+          ) : item.type === "my_test_card" ? (
+            <MainHeaderCard {...my_test_card} />
           ) : (
             <div
               class={twMerge(

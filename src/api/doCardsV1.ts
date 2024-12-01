@@ -6,6 +6,8 @@ import { getEvents } from "~/scripts/requests";
 
 const my_events: any = await getEvents();
 
+console.log("db", my_events);
+
 const urlsCard = createUrlsCard("my-url-card");
 
 urlsCard.updateCard({
@@ -14,18 +16,24 @@ urlsCard.updateCard({
   cardIcon: "link",
 });
 
+/*
 urlsCard.addActivity(
   "Added link",
   "Added a new favorite URL",
   "https://example.com"
 );
+*/
 
 const urlsEvents = my_events.filter((event) => {
-  event.event_type.event_type === "urls";
+  return event.event_type.event_type === "urls";
+});
+
+urlsEvents.forEach((event) => {
   urlsCard.addActivity(
     event.event_type.event_description,
-    "Added a new favorite URL",
-    "my_url"
+    "action",
+    "action 1",
+    "enzonav"
   );
 });
 
