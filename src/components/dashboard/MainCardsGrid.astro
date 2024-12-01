@@ -9,9 +9,31 @@ import {featuredCards} from '~/api/doCardsV2'
 /* test */
 import {printFullObject} from '~/scripts/utils'
 import {initializeCards} from '~/api/doCardsV3'
+import {createCard} from '~/scripts/cardClassV1'
+import { createUrlsCard, createListsCard } from '~/scripts/cardClassV1'
 
+const urlsCard = createUrlsCard('My URLs Card')
+const listsCard = createListsCard('My Lists Card')
 
-//const card1 = featuredCards.listsCard
+urlsCard.updateCard({
+  cardTitle: 'Favorite URLs',
+  action_url: '/favorite-urls',
+  cardIcon: 'link'
+})
+
+urlsCard.addActivity('Added link', 'Added a new favorite URL', 'https://example.com')
+
+listsCard.updateCard({
+  cardTitle: 'Todo Lists',
+  action_url: '/todo-lists',
+  cardIcon: 'link'
+})
+
+listsCard.addActivity('Created List', 'Created a new todo list', null)
+
+console.log(urlsCard.getCardData())
+console.log(listsCard.getCardData())
+
 
 const card1 = featuredCards.listsCard
 
@@ -19,7 +41,13 @@ const card2 = featuredCards.urlsCard
 
 const initCards = initializeCards()
 
-console.log('hello', initCards)
+/*
+console.log('card 0 ', allActions)
+console.log('card 1 ', card1)
+console.log('card 2 ', card2)
+*/
+
+//console.log('hello', initCards)
 
 
 
@@ -56,10 +84,6 @@ const {
   icon: defaultIconClass = 'text-primary',
   action: actionClass = '',
 } = classes
-
-console.log('card 0 ', allActions)
-console.log('card 1 ', card1)
-console.log('card 2 ', card2)
 
 const updatedItems = [
   { type: 'allActions'},
