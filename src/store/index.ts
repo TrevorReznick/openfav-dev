@@ -9,6 +9,8 @@ export const isAuthenticated = atom<boolean>(false)
 
 export const currentPath = atom<string>('/')
 export const previousPath = atom<string>('/')
+
+export const notifications = atom([])
 //userId.set('123')
 //isLoggedIn.set(true)
 export const messageStore = atom<string>('')

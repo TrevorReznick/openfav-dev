@@ -32,8 +32,13 @@ const { language, textDirection } = I18N
     <title>{title}</title>
   </head>
   <body class="bg-bgDark2">
-    <main aria-label="Main content">
-      <NavBar />
+    <main 
+      id="main-layout"  
+      aria-label="Main content"
+    >
+      <NavBar 
+        id="navbar"
+      />
       <slot />
     </main>
     <style is:global>

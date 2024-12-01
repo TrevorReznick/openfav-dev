@@ -1,0 +1,12 @@
+---
+import HeroStatsCard from '~/components/dashboard/sub/StatsCards.astro'
+---
+
+<Fragment>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <HeroStatsCard title="Total Links" value="12" change="+2.5%" type="increase" />
+        <HeroStatsCard title="Your Lists" value="48" change="-4%" type="decrease" />
+        <HeroStatsCard title="Your Favorites" value="9" change="+12%" type="increase" />
+        <HeroStatsCard title="AI searchs" value="87%" change="+3.2%" type="increase" />
+    </div>
+</Fragment>

@@ -1,0 +1,37 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import SectionContainer from '~/components/main/MySectionComponent.astro'
+import MainSearch from '~/components/dev/HeroSearch.astro'
+import MainHero from '~/components/dev/MainHero.astro'
+import MainHeader from '~/components/dashboard/MainHeader.astro'
+import MainCards from '~/components/dashboard/MainCardsGridSection.astro'
+import CallToAction from '~/components/main/CallToAction.astro'
+
+let username = 'Doublefacessss'
+
+---
+
+<Layout title="Test Component">
+  <SectionContainer
+    id="section-container"
+  > 
+    <MainSearch 
+      id="main-hero"  
+      slot="MainSearch"
+    />  
+    <MainHero
+      id="main-hero"
+      slot="MainHero"
+      title=""
+      subititle="subtitle"
+      user_name={username}
+      tagline={`${username}'s Dashboard`}
+    />    
+    <MainHeader slot="MainHeader" />
+    <MainCards slot="MainCards" />    
+    <CallToAction
+      slot="CTA"
+      id="call-to-action"        
+    />
+  </SectionContainer>
+</Layout>

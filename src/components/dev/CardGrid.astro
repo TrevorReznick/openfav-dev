@@ -1,0 +1,10 @@
+---
+import Card from '~/components/dev/CardItem.astro'
+import { cards } from '~/config/features'
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+  {cards.map((card) => (
+    <Card {...card} />
+  ))}
+</div>

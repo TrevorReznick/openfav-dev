@@ -1,0 +1,132 @@
+---
+import { twMerge } from 'tailwind-merge'
+import * as fonts from '~/config/costants'
+import { SPACING, LAYOUT, COMPONENTS, TYPOGRAPHY } from '~/config/styleCostants' // Assicurati di importare il percorso corretto
+
+const {    
+    classes = {},
+} = Astro.props
+
+const {
+    title: titleClass = fonts.CARD_TITLE,
+    subtitle: subtitleClass = fonts.H2_SUBTITLE,
+    content: contentClass = twMerge(TYPOGRAPHY.TEXT.BODY, SPACING.MARGIN.MD, "text-secondaryText"),
+} = classes
+
+const items = [
+    {
+        title: "Your Lists",
+        value: "+3",
+        percentage: "1.8%",
+        percentageColor: "text-emerald-800 bg-emerald-300",
+        percentageIconDirection: "up",
+    },
+    {
+        title: "Your Sites",
+        value: "+11",
+        percentage: "2.5%",
+        percentageColor: "text-red-800 bg-red-300",
+        percentageIconDirection: "down",
+    },
+    {
+        title: "Your Favorites",
+        value: "95",
+        percentage: "4",
+        percentageColor: "text-indigo-800 bg-indigo-300",
+        percentageIconDirection: "="
+    },
+    {
+        title: "AI Sites",
+        value: "$250.00",
+        percentage: "2.2%",
+        percentageColor: "text-indigo-800 bg-indigo-300",
+        percentageIconDirection: "up",
+    },
+];
+---
+
+<div class="flex items-center">
+    <div 
+        id="main-header"
+        class={twMerge(
+            "container max-w-6xl",
+        )}
+    >
+        <div class={twMerge(
+            LAYOUT.GRID.TWO,
+            LAYOUT.GRID.THREE,
+            LAYOUT.GRID.FOUR,
+            SPACING.GAP.MD
+        )}>
+            {items.map((item) => (
+                <div class={twMerge(
+                    COMPONENTS.CARD.BASE,
+                    SPACING.PADDING.COMPONENT
+                )}>
+                    <div 
+                        class={twMerge(
+                            'text-white',
+                            titleClass
+                        )} 
+                        set:html={item.title}
+                    />
+                    <div class={twMerge(
+                        LAYOUT.FLEX.CENTER,
+                        SPACING.MARGIN.COMPONENT
+                    )}>
+                        <div class="text-2xl font-bold text-gray-400 dark:text-gray-100">{item.value}</div>
+                        <span
+                            class={twMerge(
+                                "flex items-center px-2 py-0.5 mx-2 text-sm rounded-full",
+                                item.percentageColor
+                            )}
+                        >
+                            <svg
+                                class="w-4 h-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                {item.percentageIconDirection === "up" ? (
+                                <path
+                                    d="M18 15L12 9L6 15"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                ) : item.percentageIconDirection === "down" ? (
+                                <path
+                                    d="M6 9L12 15L18 9"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                ) : (
+                                <>
+                                    <path
+                                        d="M6 9H18"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    ></path>
+                                    <path
+                                        d="M6 15H18"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    ></path>
+                                </>
+                                )}
+                            </svg>
+                            <span>{item.percentage}</span>
+                        </span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>

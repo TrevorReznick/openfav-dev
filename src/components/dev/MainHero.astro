@@ -1,0 +1,69 @@
+---
+import { twMerge } from 'tailwind-merge'
+import { SPACING, TYPOGRAPHY, LAYOUT } from '~/config/styleCostants' // Assicurati di importare il percorso corretto
+
+const {  
+  user_name,
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),  
+  tagline = Astro.props.tagline, // Assicurati che tagline sia una stringa, non una funzione
+  classes = {},
+} = Astro.props
+
+const {
+  container: containerClass = twMerge(
+    'w-screen',
+    LAYOUT.FLEX.CENTER,
+    'bg-bgDark1',
+    'mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60',
+    'hero-bg-gradient',
+    SPACING.PADDING.HERO,
+    SPACING.VERTICAL.SECTION
+  ),
+  title: titleClass = twMerge(
+    TYPOGRAPHY.HEADING.HERO,
+    SPACING.PADDING.HERO,
+    'text-white'
+  ),
+  subtitle: subtitleClass = twMerge(
+    TYPOGRAPHY.TEXT.SUBTITLE,
+    SPACING.MARGIN.SECTION_TOP,
+    SPACING.PADDING.CONTENT
+  ),
+} = classes
+
+const taglineClass = twMerge(
+  "text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold mx-auto",
+  SPACING.MARGIN.SECTION_TOP,
+  SPACING.MARGIN.SECTION_BOTTOM
+)
+---
+
+{
+    tagline && (
+        <p class={taglineClass}>
+            {tagline}
+        </p>
+    )
+}
+{
+    title ? (
+        <h1
+            class={twMerge(
+                "font-extrabold tracking-tight text-primary",
+                titleClass
+            )}
+            set:html={title}
+        />
+    ): (<div></div>)
+}
+{
+    subtitle && (
+        <h2 class={twMerge(
+            subtitleClass,
+            SPACING.MARGIN.SECTION_TOP
+        )}>
+            {`welcome ${user_name}`}
+        </h2>
+    )
+}

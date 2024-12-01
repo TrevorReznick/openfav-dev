@@ -1,0 +1,21 @@
+---
+
+import GenericCard from '~/components/dashboard/dev/GenericCard.astro'
+import { Link, Folder } from 'lucide-react';
+//import { ExampleInsertions } from '~/config/features';
+
+const insertions = [{ name: 'Nuovo Link', description: 'https://example.com/progetto-web', icon: Link },
+  { name: 'Altro Link', description: 'https://example.com/risorse-ai', icon: Link },
+  { name: 'Link di Scuola', description: 'https://example.com/scholl-links', icon: Folder },
+];
+
+---
+
+<GenericCard
+  items={insertions}
+  title="Last Insertions"
+  icon={Link}
+  itemText={(item) => `added the link "${item.name}"`}
+  descriptionText="description"
+  viewAllLink="/all-insertions"
+/>

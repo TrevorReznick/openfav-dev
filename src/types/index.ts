@@ -1,4 +1,86 @@
-import type { HTMLAttributes } from 'astro/types'	
+import type { HTMLAttributes } from 'astro/types'
+//import { Activity, type Bot, type Book, type Bookmark, type Clock, type Folder, type Link, type List, type Logs, type FolderHeart, type Star } from 'lucide-react'
+
+
+export type ActionType = 
+    'Created List' 
+    | 'Updated List' 
+    | 'Deleted List' 
+    | 'Added link' 
+    | 'Deleted link'
+
+export type ListType =
+    'urls'
+    | 'lists'
+    | 'favourites'
+    | 'suggestions'
+    | 'activities'
+
+export type MyIconType = 
+    'activity'
+    | 'bot'
+    | 'book'
+    | 'bookmark'
+    | 'clock'
+    | 'folder'
+    | 'link'
+    | 'list'
+    | 'logs'
+    | 'folderHeart'
+    | 'star'
+
+export interface CardProps {
+    typeList: ListType
+    cardName: string
+    cardIcon?: MyIconType
+    activities: ActivityItem[]
+    action_url?: string
+}
+
+export interface ActivityItem {
+    action: ActionType
+    actionIcon: MyIconType
+    timestamp?: string | null
+    name?: string | null
+    description?: string | null
+    url?: string | null
+  }
+
+/* end new */
+
+
+
+export interface genericCardItem {
+    card_name?: string
+    card_icon?: any
+}
+export interface personalCardListItem extends genericCardItem {
+    name?: string
+    description?: string
+    icon?: string
+}
+
+export interface FeatureItem extends genericCardItem {
+    title: string;
+    description?: string;
+    icon: string;
+}
+
+export interface RecentActivity extends genericCardItem {
+    newLinks: number,
+    updatedLists: number,
+    updatesFavorites: number,
+    lastActive: string
+}
+
+export interface UserActivity extends genericCardItem {
+    id: number,
+    user: string,
+    action: string,
+    timestamp: string
+}
+
+export type GeneralCardItemType = personalCardListItem[] | FeatureItem[] | RecentActivity[] | UserActivity[]
 		
 
 /* @@ Metadata @@ */

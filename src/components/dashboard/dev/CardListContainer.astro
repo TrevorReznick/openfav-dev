@@ -1,0 +1,21 @@
+---
+import { Folder, Bot, Book, FolderHeart} from 'lucide-react'
+import GenericCard from '~/components/dashboard/dev/GenericCard.astro';
+import { ExampleUserActivities } from '~/config/features'
+
+const lists = [
+  { name: 'Progetti Web', description: 'Link utili per lo sviluppo web', icon: Folder },
+  { name: 'Risorse AI', description: 'Articoli e tutorial sull\'intelligenza artificiale', icon: Bot },
+  { name: 'Scholl Links', description: 'Links per produttività', icon: Book },
+  // Altre liste...
+];
+---
+
+<GenericCard
+  items={lists}
+  title="Last Created Lists"
+  icon={FolderHeart}
+  itemText={(item) => `created the list "${item.name}"`}
+  descriptionText="description"
+  viewAllLink="/all-lists"
+/>
