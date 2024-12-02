@@ -1,96 +1,87 @@
-import type { ListType, MyIconType, ActionType } from '~/types'
-import { CardGenerator } from '~/scripts/cardGenerator'
-import type { ModifiedCardProps } from '~/scripts/cardGenerator'
+import type { ListType, MyIconType, ActionType, ActivityItem } from "~/types";
+import { CardGenerator } from "~/scripts/cardGenerator";
+import type { ModifiedCardProps } from "~/scripts/cardGenerator";
 
-class Card {
+const cardGenerator = CardGenerator.getInstance();
 
-  private doCard: CardGenerator
-  private cardData: ModifiedCardProps
+type CardData = {
+  cardName: string;
+  typeList: ListType;
+  cardTitle: string | null;
+  action_url: string | null;
+  cardIcon: MyIconType;
+  activities: ActivityItem[];
+};
 
-  constructor(cardName: string, type: ListType) {
+const createCardClosure = (initialCardData: CardData) => {
+  let cardData = { ...initialCardData };
 
-    this.doCard = CardGenerator.getInstance()
+  const addActivity = (
+    action: ActionType,
+    description: string | null,
+    _url: string | null,
+    username: string | null
+  ) => {
+    let actionIcon: MyIconType;
+    let url: string | null = null;
 
-    this.cardData = {  
-      cardName: cardName,    
-      typeList: type,
-      cardTitle: null,
-      action_url: null,
-      cardIcon: 'folder' as MyIconType,
-      activities: []
+    switch (cardData.typeList) {
+      case "urls":
+        actionIcon = "link";
+        url = _url;
+        break;
+      case "lists":
+        actionIcon = "folder";
+        break;
+      default:
+        actionIcon = "folder";
     }
-    this.createCard()
-  }
 
-  private createCard() {
-    this.doCard.createCard(this.cardData.cardName, {
+    const activity: ActivityItem = {
+      action,
+      description,
+      actionIcon,
+      url,
+      name: username, // Assuming we want to use cardName as the activity name
+      timestamp: new Date().toISOString(),
+    };
 
-      cardName: this.cardData.cardName,
-      typeList: this.cardData.typeList,
-      cardTitle: this.cardData.cardTitle,
-      cardIcon: this.cardData.cardIcon,
-      action_url: this.cardData.action_url
+    cardData.activities.push(activity);
+    return activity;
+  };
 
-    })
-  }
+  return {
+    getCardData: () => ({ ...cardData }),
+    updateCardTitle: (title: string) => {
+      cardData.cardTitle = title;
+      cardGenerator.updateCard(cardData.cardName, { cardTitle: title });
+    },
+    updateCard: (updates: Partial<ModifiedCardProps>) => {
+      Object.assign(cardData, updates);
+      cardGenerator.updateCard(cardData.cardName, updates);
+    },
+    addActivity,
+  };
+};
 
-  addActivity(action: ActionType, actionIcon: MyIconType, details: { description: string, name: string }) {
-    this.doCard.addActivity(
-        this.cardData.cardName,
-        action,
-        actionIcon,
-        {
-            ...details,
-            timestamp: new Date().toISOString()
-        }
-    )
-  }
+export const createCard = (
+  cardName: string,
+  type: ListType
+): ReturnType<typeof createCardClosure> => {
+  const initialCardData: CardData = {
+    cardName,
+    typeList: type,
+    cardTitle: null,
+    action_url: null,
+    cardIcon: "folder",
+    activities: [],
+  };
 
+  cardGenerator.createCard(cardName, initialCardData);
 
+  return createCardClosure(initialCardData);
+};
 
-  updateCard(updates: Partial<ModifiedCardProps>) {
-    Object.assign(this.cardData, updates)
-    this.doCard.updateCard(this.cardData.cardName, updates)
-  }
-
-  updateCardTitle(newTitle: string | null) {
-    if (newTitle !== null) {
-      this.cardData.cardTitle = newTitle
-      this.doCard.updateCard(this.cardData.cardName, { cardTitle: newTitle })
-    }
-  }
-
-  getCardData(): ModifiedCardProps | undefined {
-      return this.doCard.getCard(this.cardData.cardName)
-    }
-}
-
-
-export const initCard = (type: ListType, name: string): (() => Card) => {
-
-    const card = new Card(name, type)
-
-    return () => {
-        return card
-    }
-}
-
-/*
-const urlsCard = initCardTest('urls', 'my cardname')
-const listsCard = initCardTest('lists', 'another cardname')
-
-// Add activities
-urlsCard().addActivity('Created List', 'folder', {
-  description: 'Card creata da Mario Rossi',
-  name: 'Enzo'
-})
-
-listsCard().addActivity('Updated List', 'clock', {
-  description: 'Lista aggiornata da Luigi Verdi',
-  name: 'Maria'
-})
-
-// Get the card data
-console.log(urlsCard().getCardData())
-console.log(listsCard().getCardData())
-*/
+// Example usage:
+export const createUrlsCard = (name: string) => createCard(name, "urls");
+export const createListsCard = (name: string) => createCard(name, "lists");

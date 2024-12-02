@@ -1,4 +1,4 @@
 export const printFullObject = (obj) => {
-    const fullString = JSON.stringify(obj, null, 2)
-    console.log(fullString)
-  }
+  const fullString = JSON.stringify(obj, null, 2)
+  console.log(fullString)
+}

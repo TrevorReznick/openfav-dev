@@ -1,60 +1,70 @@
-import type { ListType } from '~/types'
-import { CardGenerator } from '~/scripts/cardGenerator'
+import type { ListType, MyIconType, ActionType } from "~/types";
+import { createUrlsCard, createListsCard } from "~/scripts/cardClass";
+import { getEvents } from "~/scripts/requests";
 
-const doCard = CardGenerator.getInstance()
+/* get @@ remote data @@ */
 
-export const allActions = doCard.createCard('allActions', {
-    typeList: 'activities' as ListType,
-    cardTitle: 'Users test',
-    cardIcon: 'activity',
-    action_url: '/activity'
+const my_events: any = await getEvents();
+
+console.log("db", my_events);
+
+const urlsCard = createUrlsCard("my-url-card");
+
+urlsCard.updateCard({
+  cardTitle: "Last Insertions",
+  action_url: "/last-insertions",
+  cardIcon: "link",
+});
+
+/*
+urlsCard.addActivity(
+  "Added link",
+  "Added a new favorite URL",
+  "https://example.com"
+);
+*/
+
+const urlsEvents = my_events.filter((event) => {
+  return event.event_type.event_type === "urls";
+});
+
+urlsEvents.forEach((event) => {
+  urlsCard.addActivity(
+    event.event_type.event_description,
+    "action",
+    "action 1",
+    "enzonav"
+  );
 })
 
-doCard.addActivity('allActions', 'Created List', 'folder', {
-        description: 'Card creata da Mario Rossi'
-    }
-)
+export const my_test_card = urlsCard.getCardData();
 
-doCard.addActivity('allActions', 'Updated List', 'folder', {
-        description: 'Card creata da Mario Rossi'
-    }
-)
+const listsCard = createListsCard("my-list-card")
 
-doCard.addActivity('allActions', 'Deleted List', 'star', {
-        description: 'Card creata da Mario Rossi'
-    }
-)
-
-const test = doCard.getCard('allActions')
-
-if(test) {
-    console.log('card exists!')
-    if(test.cardIcon) {
-        console.log(test.cardIcon)
-    } else {
-        ('are you serious?')
-    }
-} else console.log('are you serious?')
-  
-export const cardLists = doCard.createCard('cardLists', {
-    typeList: 'lists' as ListType,
-    cardTitle: 'Card Activities',
-    cardIcon: 'folderHeart',
-    action_url: '/lists'
-})
-  
-export const urlInsertions = doCard.createCard('urlInsertions', {
-    typeList: 'urls' as ListType,
-    cardTitle: 'Last Insertions',
-    cardIcon: 'link',
-    action_url: '/last-insertions'
-})
-  
-export const allActivities = doCard.createCard('allActivities', {
-    typeList: 'activities' as ListType,
-    cardTitle: 'Personal Activity Feed',
-    cardIcon: 'folder',
-    action_url: '/personal-activity'
+listsCard.updateCard({
+  cardTitle: "Personal Lists",
+  action_url: "/todo-lists",
+  cardIcon: "folderHeart",
 })
 
+const listsEvents = my_events.filter((event) => {
+  return event.event_type.event_type === "lists";
+});
 
+listsEvents.forEach((event) => {
+  listsCard.addActivity(
+    event.event_type.event_description,
+    "action",
+    "action 1",
+    "enzonav"
+  );
+})
+
+export const my_test_card1 = listsCard.getCardData();
+
+//listsCard.addActivity("Created List", "Created a new todo list", null);
+
+/*
+console.log(urlsCard.getCardData());
+console.log(listsCard.getCardData());
+*/
