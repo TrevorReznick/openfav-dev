@@ -1,5 +1,6 @@
 import { initCard } from "~/scripts/cardClass";
 import type { ListType, MyIconType, ActionType, ActivityItem } from "~/types";
+import { getEvents } from "~/scripts/requests";
 
 // type: 'urls' | 'lists', name: string
 const createCardWithActivities = (type, name) => {
@@ -13,8 +14,35 @@ const createCardWithActivities = (type, name) => {
   };
 };
 
-// Creazione delle card
+/* get @@ remote data @@ */
+
+const my_events: any = await getEvents();
+console.log("good night", my_events);
+
+/* @@ Creazione delle card @@ */
+
 const urlsCard = createCardWithActivities("urls", "my cardname");
+
+urlsCard.updateCardTitle("Last Insertions");
+
+urlsCard.updateCard({
+  cardIcon: "link",
+  action_url: "https://example.com",
+});
+//urlsCard.addActivity('Added link', 'Added a new favorite URL', 'https://example.com')
+const urlsEvents = my_events.filter((event) => {
+  event.event_type.event_type === "urls";
+  urlsCard.addActivity(
+    event.event_type.event_description,
+    "Added a new favorite URL",
+    "https://example.com"
+  );
+});
+
+() => urlsEvents;
+
+console.log("i am right? ", urlsCard.getCardData());
+
 const listsCard = createCardWithActivities("lists", "another cardname");
 
 // Aggiornamento e aggiunta di attività alle card
@@ -22,7 +50,7 @@ urlsCard.updateCardTitle("Nuovo Titolo");
 
 urlsCard.updateCard({
   cardIcon: "link",
-  action_url: "https://stinkyfeet.com",
+  action_url: "https://example.com",
 });
 urlsCard.addActivity("Created List", "folder", {
   description: "Card creata da Vincenzo Navarra",
