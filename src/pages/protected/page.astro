@@ -1,10 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import IsComponent from '../../components/sub-pages/MyComponent.astro'
-import { getCategories } from '../../scripts/requests'
+import Layout from '~/layouts/Layout.astro'
+import IsComponent from '~/components/sub-pages/MyComponent.astro'
+import { getCategories } from '~/scripts/requests'
 
-import { email, user_name } from '../../store'
-import { numElements } from '../../scripts/oopps'
+import { email, user_name } from '~/store'
+import { numElements } from '~/scripts/oopps'
 
 const _email = email.get()
 const _user_name = user_name.get()
