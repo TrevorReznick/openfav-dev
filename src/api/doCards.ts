@@ -1,5 +1,4 @@
-import type { ListType, MyIconType, ActionType } from "~/types";
-import { createUrlsCard, createListsCard } from "~/scripts/cardClass";
+import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
 import { getEvents } from "~/scripts/requests";
 
 /* get @@ remote data @@ */
