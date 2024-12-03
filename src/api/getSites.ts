@@ -11,12 +11,14 @@ let error = null
 if (categoriesResponse.success) {
     categories = categoriesResponse.data
 } else {
-  error = categoriesResponse.error
+    error = categoriesResponse.error
 }
 
 if (mainResponse.success) {
-  mainData = mainResponse.data;
+    mainData = mainResponse.data;
 } else {
-  error = error || mainResponse.error
+    error = error || mainResponse.error
 }
+
+export { categoriesResponse, mainResponse }
 
