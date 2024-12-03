@@ -13,19 +13,11 @@ urlsCard.updateCard({
   cardTitle: "Last Insertions",
   action_url: "/last-insertions",
   cardIcon: "link",
-});
-
-/*
-urlsCard.addActivity(
-  "Added link",
-  "Added a new favorite URL",
-  "https://example.com"
-);
-*/
+})
 
 const urlsEvents = my_events.filter((event) => {
   return event.event_type.event_type === "urls";
-});
+})
 
 urlsEvents.forEach((event) => {
   urlsCard.addActivity(
