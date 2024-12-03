@@ -1,7 +1,7 @@
 ---
-import { fetchSites } from '~/api/getSitesV1'
+import { fetchSites } from '~/api/getSitesV0'
 
-const { categories, mainData, error } = await fetchSites()
+const { categories, mainData, mainDataV0, error } = await fetchSites()
 
 if (error) {
   console.error('Error fetching data:', error)
@@ -30,7 +30,7 @@ if (error) {
 
     <h2 class="text-xl font-semibold mb-2">Dati Principali:</h2>
     <pre class="bg-gray-100 p-2 rounded mb-4">
-      {JSON.stringify(mainData, null, 2)}
+      {JSON.stringify(mainDataV0, null, 2)}
     </pre>
 
     <h2 class="text-xl font-semibold mb-2">Invia Nuovi Dati:</h2>

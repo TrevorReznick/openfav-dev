@@ -52,14 +52,25 @@ interface SubMainFormData {
 }
 
 // Funzioni API specifiche
+export const getMain = () => 
+  makeRequest<any>('main/main')
+
+export const getMainV0 = () => 
+  makeRequest<any>('dev/doQueriesV2')
+
+export const getCategories = () => 
+  makeRequest<any>('main/categories')
+
+export const getEvents = () => 
+  makeRequest<any>('main/events')
+/*
 export const sendData = (data: PostData) => 
   makeRequest<PostData>('main', 'POST', data)
 
 export const updateData = (data: SubMainFormData) => 
   makeRequest<SubMainFormData>('update_sub_table', 'POST', { data })
 
-export const getCategories = () => 
-  makeRequest<any>('main/categories')
+
 
 export const getInfo = (url: string) => 
   makeRequest<any>(`info?url=${encodeURIComponent(url)}`)
@@ -70,15 +81,14 @@ export const getItem = (id: number) =>
 export const getLists = () => 
   makeRequest<any>('lists')
 
-export const getMain = () => 
-  makeRequest<any>('main/main')
+
 
 export const getSubCategories = () => 
   makeRequest<any>('sub-category')
 
 export const getProviders = () => 
   makeRequest<any>('providers')
+*/
 
-export const getEvents = () => 
-  makeRequest<any>('main/events')
+
 

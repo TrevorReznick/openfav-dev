@@ -1,6 +1,7 @@
 import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
 import { getEvents } from "~/scripts/requests";
 
+
 /* get @@ remote data @@ */
 
 const my_events: any = await getEvents();

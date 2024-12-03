@@ -1,10 +1,12 @@
 // src/api/getSites.js
 
-import { getCategories, getMain } from '~/scripts/dev/apiBuilderV0'
+import { getCategories, getMain, getMainV0, getEvents } from '~/scripts/dev/apiBuilderV0'
 
 export async function fetchSites() {
     let categories = []
     let mainData = null
+    let mainDataV0 = null
+    let events = null
     let error = null
 
     try {
@@ -29,6 +31,28 @@ export async function fetchSites() {
         error = error || mainError.message || 'Main fetch failed'
     }
 
-    return { categories, mainData, error }
+    try {
+        const mainResponse = await getMainV0();
+        if (mainResponse.success) {
+            mainDataV0 = mainResponse.data;
+        } else {
+            error = error || mainResponse.error;
+        }
+    } catch (mainError) {
+        error = error || mainError.message || 'Main fetch failed'
+    }
+
+    try {
+        const mainResponse = await getEvents()
+        if (mainResponse.success) {
+            mainDataV0 = mainResponse.data;
+        } else {
+            error = error || mainResponse.error;
+        }
+    } catch (mainError) {
+        error = error || mainError.message || 'Main fetch failed'
+    }
+
+    return { categories, mainData, mainDataV0, events, error }
 }
 
