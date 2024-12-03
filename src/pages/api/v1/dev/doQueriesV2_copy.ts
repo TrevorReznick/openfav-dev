@@ -40,7 +40,7 @@ type QueryOptions = {
   filter?: (query: PostgrestFilterBuilder<any, any, any>) => PostgrestFilterBuilder<any, any, any>
 }
 
-export async function supabaseQuery(tableName: string, options: QueryOptions = {}) {
+async function supabaseQuery(tableName: string, options: QueryOptions = {}) {
   try {
     let query = supabase.from(tableName).select(options.select || '*');
 

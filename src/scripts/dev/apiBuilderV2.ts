@@ -1,5 +1,3 @@
-// api.ts
-
 const api_prod = import.meta.env.PUBLIC_PROD_API_URL;
 const api_dev = import.meta.env.PUBLIC_DEV_API_URL;
 const api_url = import.meta.env.MODE === 'production' ? api_prod : api_dev;
@@ -10,19 +8,20 @@ interface ApiResponse<T = unknown> {
   error?: any;
 }
 
-async function makeRequest<T>(endpoint: string, method: 'GET' | 'POST' = 'GET', data?: unknown): Promise<ApiResponse<T>> {
+export async function makeRequest<T = unknown>(
+  endpoint: string,
+  type: string,
+  params?: Record<string, any>
+): Promise<ApiResponse<T>> {
   try {
-    const url = `${api_url}${endpoint}`;
+    const urlParams = new URLSearchParams(params).toString();
+    const url = `${api_url}${endpoint}?type=${type}&${urlParams}`;
     const options: RequestInit = {
-      method,
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     };
-
-    if (data) {
-      options.body = JSON.stringify(data);
-    }
 
     const response = await fetch(url, options);
 
@@ -33,17 +32,7 @@ async function makeRequest<T>(endpoint: string, method: 'GET' | 'POST' = 'GET', 
     const result = await response.json();
     return { success: true, data: result };
   } catch (error) {
-    console.error(`There was a problem with the ${method} operation:`, error);
+    console.error(`There was a problem with the request:`, error);
     return { success: false, error: (error as Error).message };
   }
 }
-
-// Definisci i tipi per i tuoi dati
-interface PostData {
-  // Definisci la struttura dei tuoi dati qui
-}
-
-interface SubMainFormData {
-  // Definisci la struttura dei tuoi dati qui
-}
-
