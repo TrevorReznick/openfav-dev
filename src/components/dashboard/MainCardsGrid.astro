@@ -4,9 +4,7 @@ import { twMerge } from "tailwind-merge"
 import { Icon } from 'astro-icon/components'
 import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
 import { my_test_card, my_test_card1} from '~/api/doCards'
-import {events, sites} from '~/api/getSitesV3'
 
-console.log("Featured Events:", events)
 
 //console.log(my_test_card, )
 
@@ -24,9 +22,8 @@ const {
 const updatedItems = [  
   ...items,
   { type: 'my_test_card' },
-  { type: 'my_test_card1' },
-  { type: 'events' }
-];
+  { type: 'my_test_card1' }
+]
 ---
 
 {
