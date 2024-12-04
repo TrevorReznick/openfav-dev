@@ -2,6 +2,8 @@ import { makeRequest } from '~/scripts/dev/apiBuilderV2'
 
 const api_endpoint = 'dev/doQueriesV3'
 
+/* @@ init functions @@ */
+
 const getSites = () => 
   makeRequest(api_endpoint, 'getSites');
 
@@ -21,6 +23,8 @@ const getEventsTest = () =>
 const getSitesTest = () => 
   makeRequest(api_endpoint, 'getSitesTest')
 
+/* @@ execute the api builder @@ */
+
 export const fetchEventsAndSites = async (fetchFunc) => {
   try {
     const response = await fetchFunc();
@@ -36,6 +40,8 @@ export const fetchEventsAndSites = async (fetchFunc) => {
     throw error; // Rilancia l'errore per gestirlo ulteriormente se necessario
   }
 }
+ /* @@ exports the results @@ */
+ 
 export const events = await fetchEventsAndSites(getEventsTest)
 export const sites = await fetchEventsAndSites(getSitesTest)
 

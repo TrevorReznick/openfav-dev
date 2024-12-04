@@ -1,6 +1,7 @@
 ---
 // pages/data-fetcher.astro
-import { categoriesResponse, mainResponse} from '~/api/getSites'
+
+import { sites } from '~/api/getSitesV3'
 // Fetch dei dati
 
 
@@ -9,16 +10,10 @@ let categories = []
 let mainData = null
 let error = null
 
-if (categoriesResponse.success) {
-  categories = categoriesResponse.data
+if (sites.success) {
+  mainData = sites.data
 } else {
-  error = categoriesResponse.error
-}
-
-if (mainResponse.success) {
-  mainData = mainResponse.data
-} else {
-  error = error || mainResponse.error
+  error = error || sites.error
 }
 ---
 
