@@ -1,19 +1,12 @@
 import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
-//import { getEvents } from "~/scripts/requests"
-import {events} from '~/api/getSitesV3'
+
+import {events} from '~/api/doApis'
 
 console.log("Featured Events:", events)
 
 
 /* get @@ remote data @@ */
 const my_events: any = events
-/*
-
-
-console.log("db", my_events);
-console.log("eventsTests", await getEventsTest())
-console.log('getSitesTest', await getSitesTest())
-*/
 
 const urlsCard = createUrlsCard("my-url-card")
 
