@@ -1,9 +1,7 @@
 // src/utils/api.ts
 
 import { createClient } from '@supabase/supabase-js'
-import { supabaseQuery } from '~/providers/supabaseQuery';
-import type { PostgrestFilterBuilder } from '@supabase/postgrest-js'
-import type { APIRoute } from 'astro'
+import { supabaseQuery } from '~/providers/supabaseQuery'
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
@@ -34,8 +32,10 @@ const handleApiRequest = async (type, params) => {
       return await getCategories()
     case 'getInfo':
       return await getInfo(params.url)    
-    case 'getEvents':
-      return await getEvents()
+    case 'getEventsTest':
+      return await getEventsTest()
+      case 'getSitesTest':
+        return await getSitesTest()
     default:
       throw new Error('Unknown API request type');
   }
@@ -68,7 +68,7 @@ const getInfo = async (url) => {
   })
 }
 
-const getEvents = async () => {
+const getEventsTest = async () => {
   return supabaseQuery('event_log', {
     select: `
       id,      
@@ -78,6 +78,44 @@ const getEvents = async () => {
       ),
       event_family (
         event_family
+      )
+    `
+  })
+}
+
+const getSitesTest = async () => {
+  return supabaseQuery('main_table', {
+    select: `
+      id,
+      description,
+      icon,
+      image,
+      logo,
+      name,
+      title,
+      url,
+      categories_tags ( 
+        id_area,
+        id_cat,
+        tag_3,
+        tag_4,
+        tag_5,
+        id_provider,
+        ratings,
+        AI_think,
+        AI_summary
+      ),
+      sub_main_table (
+        user_id,
+        accessible,
+        domain_exists,
+        html_content_exists,
+        is_public,
+        secure, 
+        status_code,
+        valid_url,
+        type,
+        AI
       )
     `
   })

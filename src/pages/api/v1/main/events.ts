@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { supabase } from "~/providers/supabase";
+import { supabase } from "~/providers/supabase"
 
 export const GET: APIRoute = async () => {
   const { data, error } = await supabase.from("event_log").select(

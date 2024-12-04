@@ -2,20 +2,46 @@ import { makeRequest } from '~/scripts/dev/apiBuilderV2'
 
 const api_endpoint = 'dev/doQueriesV3'
 
-export const getSites = () => 
+const getSites = () => 
   makeRequest(api_endpoint, 'getSites');
 
-export const getSite = (id) => 
+const getSite = (id) => 
   makeRequest(api_endpoint, 'getSite', { id })
 
-export const getCategories = () => 
+const getCategories = () => 
   makeRequest(api_endpoint, 'getCategories')
 
 
-export const getInfo = (url) => 
+const getInfo = (url) => 
   makeRequest(api_endpoint, 'getInfo', { url })
 
-export const getEvents = () => 
-  makeRequest(api_endpoint, 'getEvents')
+const getEventsTest = () => 
+  makeRequest(api_endpoint, 'getEventsTest')
+
+const getSitesTest = () => 
+  makeRequest(api_endpoint, 'getSitesTest')
+
+export const fetchEventsAndSites = async (fetchFunc) => {
+  try {
+    const response = await fetchFunc();
+
+    // Assumiamo che la risposta abbia sempre la struttura { success: true, data: { success: true, data: [Object] } }
+    if (response.success && response.data.success) {
+      return response.data.data;
+    } else {
+      throw new Error("Errore nella risposta dell'API");
+    }
+  } catch (error) {
+    console.error("Errore durante la fetch dei dati:", error);
+    throw error; // Rilancia l'errore per gestirlo ulteriormente se necessario
+  }
+}
+
+export const events = await fetchEventsAndSites(getEventsTest)
+export const sites = await fetchEventsAndSites(getSitesTest)
+
+console.log("Events:", events)
+//console.log("Sites:", sites)
+
 
 

@@ -1,14 +1,18 @@
 import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
-import { getEvents } from "~/scripts/requests";
-
+import { getEvents } from "~/scripts/requests"
+import { getEventsTest, getSitesTest} from '~/api/getSitesV3'
 
 /* get @@ remote data @@ */
+const my_events: any = await getEvents()
+/*
 
-const my_events: any = await getEvents();
 
 console.log("db", my_events);
+console.log("eventsTests", await getEventsTest())
+console.log('getSitesTest', await getSitesTest())
+*/
 
-const urlsCard = createUrlsCard("my-url-card");
+const urlsCard = createUrlsCard("my-url-card")
 
 urlsCard.updateCard({
   cardTitle: "Last Insertions",
@@ -17,7 +21,7 @@ urlsCard.updateCard({
 })
 
 const urlsEvents = my_events.filter((event) => {
-  return event.event_type.event_type === "urls";
+  return event.event_type.event_type === "urls"
 })
 
 urlsEvents.forEach((event) => {
@@ -26,7 +30,7 @@ urlsEvents.forEach((event) => {
     "action",
     "action 1",
     "enzonav"
-  );
+  )
 })
 
 export const my_test_card = urlsCard.getCardData();
@@ -41,7 +45,7 @@ listsCard.updateCard({
 
 const listsEvents = my_events.filter((event) => {
   return event.event_type.event_type === "lists";
-});
+})
 
 listsEvents.forEach((event) => {
   listsCard.addActivity(
@@ -52,9 +56,7 @@ listsEvents.forEach((event) => {
   );
 })
 
-export const my_test_card1 = listsCard.getCardData();
-
-//listsCard.addActivity("Created List", "Created a new todo list", null);
+export const my_test_card1 = listsCard.getCardData()
 
 /*
 console.log(urlsCard.getCardData());
