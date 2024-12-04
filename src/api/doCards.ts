@@ -1,9 +1,12 @@
 import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
-import { getEvents } from "~/scripts/requests"
-import { getEventsTest, getSitesTest} from '~/api/getSitesV3'
+//import { getEvents } from "~/scripts/requests"
+import {events} from '~/api/getSitesV3'
+
+console.log("Featured Events:", events)
+
 
 /* get @@ remote data @@ */
-const my_events: any = await getEvents()
+const my_events: any = events
 /*
 
 

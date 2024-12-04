@@ -36,11 +36,10 @@ export const fetchEventsAndSites = async (fetchFunc) => {
     throw error; // Rilancia l'errore per gestirlo ulteriormente se necessario
   }
 }
-
 export const events = await fetchEventsAndSites(getEventsTest)
 export const sites = await fetchEventsAndSites(getSitesTest)
 
-console.log("Events:", events)
+//console.log("Events:", events)*/
 //console.log("Sites:", sites)
 
 
