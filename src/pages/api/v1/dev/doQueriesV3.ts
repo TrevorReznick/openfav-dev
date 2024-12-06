@@ -11,11 +11,11 @@ const supabase = createClient(supabaseUrl, supabaseKey)
  // Assicurati di importare correttamente la funzione
 
 export async function GET({ request }) {
-  
+
   const { type, ...params } = Object.fromEntries(new URL(request.url).searchParams)
 
   try {
-    const response = await handleApiRequest(type, params);
+    const response = await handleApiRequest(type, params)    
     return new Response(JSON.stringify(response), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
