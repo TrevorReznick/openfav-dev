@@ -1,106 +1,119 @@
-// file: src/utils/api.ts
+import type { APIRoute } from 'astro'
+import { Operation, supabaseQuery } from '~/providers/supabaseQueryV0'
 
-import { createClient } from '@supabase/supabase-js';
-import type { PostgrestFilterBuilder } from '@supabase/postgrest-js';
+const insertEvent = () => {}
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const handleApiRequest = async (type, params) => {
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+    switch (type) {
+        case 'insertEvent':
+            return await insertEvent()
+        default:
+            throw new Error('Unknown API request type');
+    }
+}
 
-type QueryOptions = {
-  select?: string;
-  order?: { column: string; ascending: boolean };
-  filter?: (query: PostgrestFilterBuilder<any, any, any>) => PostgrestFilterBuilder<any, any, any>;
-};
+const handleRequest = function (request) {
 
-async function supabaseQuery(tableName: string, options: QueryOptions = {}) {
-  try {
-    let query = supabase.from(tableName).select(options.select || '*');
+    const { type, ...params } = Object.fromEntries(new URL(request.url).searchParams)
+    
+    const tableName = request.url.searchParams.get('table') || 'main_table'
+    const select = request.url.searchParams.get('select') || 'id, url, description, name, title, logo, image, icon'
+    const orderColumn = request.url.searchParams.get('order_column') || 'id'
+    const orderAscending = request.url.searchParams.get('order_ascending') === 'true'
+}
 
-    if (options.filter) {
-      query = options.filter(query);
+
+export const GET: APIRoute = async ({ url }) => {
+
+    const tableName = url.searchParams.get('table') || 'main_table'
+
+    const select = url.searchParams.get('select') || 'id, url, description, name, title, logo, image, icon'
+
+    const orderColumn = url.searchParams.get('order_column') || 'id'
+
+    const orderAscending = url.searchParams.get('order_ascending') === 'true'
+
+
+    const result = await supabaseQuery(tableName, Operation.GET, {
+
+        select: select,
+
+        order: { 
+            column: orderColumn, 
+            ascending: orderAscending 
+        },
+        // Puoi aggiungere filtri personalizzati se necessario
+        // filter: (query) => query.eq('some_column', 'some_value')
+    })
+
+    if (!result.success) {
+        return new Response(JSON.stringify({ error: result.error }), { status: 500 })
     }
 
-    if (options.order) {
-      query = query.order(options.order.column, { ascending: options.order.ascending });
+    return new Response(JSON.stringify(result.data), { status: 200 })
+}
+
+export const POST: APIRoute = async ({ request, url }) => {    
+
+    const tableName = url.searchParams.get('table') || 'main_table'
+
+    const body = await request.json()
+    
+    const result = await supabaseQuery(tableName, Operation.POST, {
+        data: body
+    })
+
+    if (!result.success) {
+        return new Response(JSON.stringify({ error: result.error }), { status: 500 })
     }
 
-    const { data, error } = await query;
-
-    if (error) throw error;
-
-    return { success: true, data };
-  } catch (error) {
-    console.error('Supabase query error:', error);
-    return { success: false, error: (error as Error).message };
-  }
+    return new Response(JSON.stringify(result.data), { status: 201 });
 }
 
-export async function sendData(data: PostData) {
-  try {
-    const { data: result, error } = await supabase
-      .from('main')
-      .insert(data)
-      .select();
+// Gestione delle richieste PUT
+export const PUT: APIRoute = async ({ request, url }) => {
 
-    if (error) throw error;
+    const tableName = url.searchParams.get('table') || 'main_table'
 
-    return { success: true, data: result };
-  } catch (error) {
-    console.error('There was a problem with the sendData operation:', error);
-    return { success: false, error: (error as Error).message };
-  }
-}
+    const body = await request.json()
 
-export async function updateData(data: SubMainFormData) {
-  try {
-    const { data: result, error } = await supabase
-      .from('update_sub_table')
-      .upsert(data)
-      .select();
+    const id = url.searchParams.get('id')
 
-    if (error) throw error;
+    if (!id) {
+        return new Response(JSON.stringify({ error: 'ID is required' }), { status: 400 })
+    }
 
-    return { success: true, data: result };
-  } catch (error) {
-    console.error('There was a problem with the update operation:', error);
-    return { success: false, error: (error as Error).message };
-  }
-}
+    const result = await supabaseQuery(tableName, Operation.PUT, {
+        id: id,
+        data: body
+    })
 
-export async function getCategories() {
-  return supabaseQuery('main_table', {
-    select: 'id, name',
-    order: { column: 'name', ascending: true }
-  });
-}
+    if (!result.success) {
+        return new Response(JSON.stringify({ error: result.error }), { status: 500 });
+    }
 
-export async function getInfo(url: string) {
-  return supabaseQuery('main_table', {
-    select: 'id, url, description, name, title, logo, image, icon',
-    filter: (query) => query.eq('url', url)
-  });
-}
-
-export async function getItem(id: number) {
-  return supabaseQuery('main_table', {
-    select: 'id, url, description, name, title, logo, image, icon',
-    filter: (query) => query.eq('id', id)
-  });
-}
-
-// Define your types here
-type PostData = {
-  // Define the structure of your data here
-  title: string;
-  description: string;
-  // Add other fields as necessary
+    return new Response(JSON.stringify(result.data), { status: 200 });
 };
 
-type SubMainFormData = {
-  // Define the structure of your data here
-  id?: number;
-  name: string;
-  // Add other fields as necessary
+export const DELETE: APIRoute = async ({ url }) => {
+    
+    const tableName = url.searchParams.get('table') || 'main_table'
+
+    const id = url.searchParams.get('id')
+
+    if (!id) {
+        return new Response(JSON.stringify({ error: 'ID is required' }), { status: 400 })
+    }
+
+    const result = await supabaseQuery(tableName, Operation.DELETE, {
+        id: id
+    })
+
+    if (!result.success) {
+        return new Response(JSON.stringify({ error: result.error }), { status: 500 })
+    }
+
+    return new Response(JSON.stringify(result.data), { status: 204 })
 }
+
