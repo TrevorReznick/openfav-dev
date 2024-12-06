@@ -6,11 +6,11 @@ const BASE_URL = api_url
 
 export async function makeRequest(endpoint, method = 'GET', params = {}, headers = {}, body = null) {
 
-  console.log('enter make request')
+  //console.log('enter make request')
 
   const url = new URL(`${BASE_URL}${endpoint}`)
 
-  console.log('api url', url)
+  //console.log('api url', url)
     
   if (method === 'GET') {
 

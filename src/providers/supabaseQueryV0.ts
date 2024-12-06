@@ -27,6 +27,7 @@ export enum Operation {
 export async function supabaseQuery(tableName: string, operation: Operation, options: QueryOptions = {}) {
     try {
         switch (operation) {
+            
             case Operation.GET:
 
                 let query = supabase.from(tableName).select(options.select || '*');
@@ -63,7 +64,7 @@ export async function supabaseQuery(tableName: string, operation: Operation, opt
                 if (!options.id) {
                     throw new Error('ID richiesto per la query PUT/UPDATE');
                 }
-                
+
                 if (!options.data) {
                     throw new Error('Dati richiesti per la query PUT/UPDATE');
                 }
