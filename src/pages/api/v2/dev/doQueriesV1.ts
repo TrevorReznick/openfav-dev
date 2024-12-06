@@ -1,6 +1,6 @@
 // ~/api/doQueries.ts
 
-import type { APIRoute } from 'astro'
+import type { APIRoute } from 'astro';
 import { Operation, supabaseQuery } from '~/providers/supabaseQueryV0'
 
 console.log('hello from api route')
@@ -39,8 +39,6 @@ export const GET: APIRoute = async ({ url }) => {
 
 // Gestione delle richieste POST
 export const POST: APIRoute = async ({ request, url }) => {
-
-    console.log('right api request')
 
     const tableName = url.searchParams.get('table') || 'main_table'
 
