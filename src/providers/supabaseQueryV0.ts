@@ -28,6 +28,7 @@ export async function supabaseQuery(tableName: string, operation: Operation, opt
     try {
         switch (operation) {
             case Operation.GET:
+
                 let query = supabase.from(tableName).select(options.select || '*');
 
                 if (options.filter) {
@@ -45,6 +46,7 @@ export async function supabaseQuery(tableName: string, operation: Operation, opt
                 return { success: true, data };
 
             case Operation.POST:
+
                 if (!options.data) {
                     throw new Error('Dati richiesti per la query POST');
                 }
@@ -57,9 +59,11 @@ export async function supabaseQuery(tableName: string, operation: Operation, opt
 
             case Operation.PUT:
             case Operation.UPDATE:
+
                 if (!options.id) {
                     throw new Error('ID richiesto per la query PUT/UPDATE');
                 }
+                
                 if (!options.data) {
                     throw new Error('Dati richiesti per la query PUT/UPDATE');
                 }
@@ -71,6 +75,7 @@ export async function supabaseQuery(tableName: string, operation: Operation, opt
                 return { success: true, data: updateData };
 
             case Operation.DELETE:
+
                 if (!options.id) {
                     throw new Error('ID richiesto per la query DELETE');
                 }

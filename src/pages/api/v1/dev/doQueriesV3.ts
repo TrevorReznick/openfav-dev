@@ -11,7 +11,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
  // Assicurati di importare correttamente la funzione
 
 export async function GET({ request }) {
-  const { type, ...params } = Object.fromEntries(new URL(request.url).searchParams);
+  
+  const { type, ...params } = Object.fromEntries(new URL(request.url).searchParams)
 
   try {
     const response = await handleApiRequest(type, params);
@@ -39,7 +40,7 @@ const handleApiRequest = async (type, params) => {
     default:
       throw new Error('Unknown API request type');
   }
-};
+}
 
 const getSites = async () => {
     return supabaseQuery('main_table', {

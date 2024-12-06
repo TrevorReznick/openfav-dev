@@ -3,10 +3,18 @@
 import type { APIRoute } from 'astro'
 import { Operation, supabaseQuery } from '~/providers/supabaseQueryV0'
 
-console.log('hello from api route')
+const insertEvent = () => {}
 
+const handleApiRequest = async (type, params) => {
 
-// Gestione delle richieste GET
+    switch (type) {
+        case 'insertEvent':
+            return await insertEvent()
+        default:
+            throw new Error('Unknown API request type');
+    }
+}
+
 export const GET: APIRoute = async ({ url }) => {
 
     const tableName = url.searchParams.get('table') || 'main_table'
@@ -28,19 +36,16 @@ export const GET: APIRoute = async ({ url }) => {
         },
         // Puoi aggiungere filtri personalizzati se necessario
         // filter: (query) => query.eq('some_column', 'some_value')
-    });
+    })
 
     if (!result.success) {
         return new Response(JSON.stringify({ error: result.error }), { status: 500 })
     }
 
     return new Response(JSON.stringify(result.data), { status: 200 })
-};
+}
 
-// Gestione delle richieste POST
-export const POST: APIRoute = async ({ request, url }) => {
-
-    console.log('right api request')
+export const POST: APIRoute = async ({ request, url }) => {    
 
     const tableName = url.searchParams.get('table') || 'main_table'
 
@@ -55,7 +60,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     }
 
     return new Response(JSON.stringify(result.data), { status: 201 });
-};
+}
 
 // Gestione delle richieste PUT
 export const PUT: APIRoute = async ({ request, url }) => {
@@ -73,7 +78,7 @@ export const PUT: APIRoute = async ({ request, url }) => {
     const result = await supabaseQuery(tableName, Operation.PUT, {
         id: id,
         data: body
-    });
+    })
 
     if (!result.success) {
         return new Response(JSON.stringify({ error: result.error }), { status: 500 });
@@ -82,22 +87,23 @@ export const PUT: APIRoute = async ({ request, url }) => {
     return new Response(JSON.stringify(result.data), { status: 200 });
 };
 
-// Gestione delle richieste DELETE
 export const DELETE: APIRoute = async ({ url }) => {
-    const tableName = url.searchParams.get('table') || 'main_table';
+    
+    const tableName = url.searchParams.get('table') || 'main_table'
+
     const id = url.searchParams.get('id')
 
     if (!id) {
-        return new Response(JSON.stringify({ error: 'ID is required' }), { status: 400 });
+        return new Response(JSON.stringify({ error: 'ID is required' }), { status: 400 })
     }
 
     const result = await supabaseQuery(tableName, Operation.DELETE, {
         id: id
-    });
+    })
 
     if (!result.success) {
-        return new Response(JSON.stringify({ error: result.error }), { status: 500 });
+        return new Response(JSON.stringify({ error: result.error }), { status: 500 })
     }
 
-    return new Response(JSON.stringify(result.data), { status: 204 });
-};
+    return new Response(JSON.stringify(result.data), { status: 204 })
+}
