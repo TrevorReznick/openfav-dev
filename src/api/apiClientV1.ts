@@ -30,6 +30,7 @@ const newEvent = {
 }
   
 const updatedEventData = {
+    id: 5,
     event_type: 7,
     event_family: 2
 }
@@ -39,9 +40,13 @@ const createPostEvent = async () => {
 }
 
 const createUpdateEvent = async () => {
-    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
-}
+    return makeRequest(api_endpoint, 'updateEvent', {id: updatedEventData.id }, 'PUT', updatedEventData)
+};
 
 export const insertEvent = await fetchEventsAndSites(createPostEvent)
 export const updateEvent = await fetchEventsAndSites(createPostEvent)
+
+const createUpdateEventOld = async () => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
+}
 
