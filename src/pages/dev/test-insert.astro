@@ -1,9 +1,11 @@
 ---
 import { createEvent } from '~/api/old/apiClientV0'
-import { insertEvent } from '~/api/apiClientV1'
+import { insertEvent, updateEvent } from '~/api/apiClientV1'
 
-console.log(await createEvent())
-console.log('hello from client api', await insertEvent)
+//console.log(await createEvent())
+console.log(await updateEvent)
+
+
 
 
 ---

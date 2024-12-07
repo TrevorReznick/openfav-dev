@@ -41,21 +41,18 @@ const handleRequest = async (method: string, url: URL, request?: Request) => {
 }
 
 const handleApiRequest = async (method: string, type: string, params: any, request?: Request) => {
-
-    switch (type) {
-
-        case 'insertEvent':
-
-        if (method !== 'POST') throw new Error('Invalid method for insertEvent')
-
-        const data = request ? await request.json() : {}
-
-        return insertEvent(data)
-
-        default:
-
-        throw new Error('Unknown API request type')
-        
+  
+  switch (type) {        
+    case 'insertEvent':
+      if (method !== 'POST') throw new Error('Invalid method for insertEvent')
+        const insertData = request ? await request.json() : {}
+        return insertEvent(insertData)
+    case 'updateEvent':
+      if (method !== 'PUT') throw new Error('Invalid method for updateEvent')
+        const updateData = request ? await request.json() : {}
+        return updateEvent(updateData, updateData.id)
+    default:
+      throw new Error('Unknown API request type')
     }
 }
 
@@ -73,7 +70,9 @@ const insertEvent = async (data: any) => {
 }
 
 const updateEvent = async (data: any, id: string) => {
+
   const tableName = 'event_log'; // Assumiamo che la tabella per gli eventi si chiami 'event_log'
+  
   const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
 
   if (!result.success) {
