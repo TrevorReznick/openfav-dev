@@ -38,5 +38,10 @@ const createPostEvent = async () => {
     return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
 }
 
+const createUpdateEvent = async () => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
+}
+
 export const insertEvent = await fetchEventsAndSites(createPostEvent)
+export const updateEvent = await fetchEventsAndSites(createPostEvent)
 

@@ -1,6 +1,6 @@
 import { makeRequest } from '~/scripts/old/apiBuilder'
 
-const api_endpoint = 'dev/doQueriesV3'
+const api_endpoint = 'main/old/doQueriesV3'
 
 /* @@ init functions @@ */
 

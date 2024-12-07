@@ -2,7 +2,7 @@
 
 import { doGet, doPost, doPut, doDel } from '~/scripts/new-dev/apiBuilder'
 
-const api_endpoint = 'dev/doQueriesV1'
+const api_endpoint = 'main/old/doQueriesV1'
 
 const newEvent = {
     id_event_type: 1,
