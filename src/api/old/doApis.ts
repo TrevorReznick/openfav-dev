@@ -1,4 +1,4 @@
-import { makeRequest } from '~/scripts/apiBuilder'
+import { makeRequest } from '~/scripts/old/apiBuilder'
 
 const api_endpoint = 'dev/doQueriesV3'
 

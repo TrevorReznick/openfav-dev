@@ -1,6 +1,6 @@
 import { createUrlsCard, createListsCard } from "~/scripts/cardClass"
 
-import {events} from '~/api/doApis'
+import {events} from '~/api/old/doApis'
 
 console.log("Featured Events:", events)
 

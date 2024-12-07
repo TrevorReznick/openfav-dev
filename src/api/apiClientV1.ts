@@ -1,6 +1,6 @@
 import { makeRequest } from '~/scripts/new-dev/apiBuilderV0'
 
-const api_endpoint = 'dev/doQueriesNew'
+const api_endpoint = 'main/doQueries'
 
 export const fetchEventsAndSites = async (fetchFunc) => {
 
