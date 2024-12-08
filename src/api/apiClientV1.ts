@@ -37,26 +37,39 @@ const createUpdateEvent = async () => {
     return makeRequest(api_endpoint, 'updateEvent', {id: updatedEventData.id }, 'PUT', updatedEventData)
 }
 
-const getEventsTest = () => 
-    makeRequest(api_endpoint, 'getEventsTest')
+const fetchEvents = () => 
+    makeRequest(api_endpoint, 'getEvents') //TODO
   
-const getSitesTest = () => 
-    makeRequest(api_endpoint, 'getSitesTest')
+const fetchSites = () => 
+    makeRequest(api_endpoint, 'getSites')
+
+const fetchCategories = () => 
+    makeRequest(api_endpoint, 'getCategories')
+
+
+const fetchSubCategories = () => 
+    makeRequest(api_endpoint, 'getSubCategories')
+
+const fetchTags = () => 
+    makeRequest(api_endpoint, 'getTags')
+
+const fetchAreas = () => 
+    makeRequest(api_endpoint, 'getAreas')
 
 /* @@ get valuse using api system 0.6.0 @@ */
 
-export const insertEvent = await sendApiRequest(createPostEvent)
-export const updateEvent = await sendApiRequest(createUpdateEvent)
-
-
+//export const insertEvent = await sendApiRequest(createPostEvent)
+//export const updateEvent = await sendApiRequest(createUpdateEvent)
+//export const getSites = await sendApiRequest(fetchSites)  
   
-  /* @@ execute the api builder @@ */
-  
-  
-   /* @@ exports the results @@ */
+/* @@ exports the results @@ */
    
-  export const events = await sendApiRequest(getEventsTest)
-  export const sites = await sendApiRequest(getSitesTest)
+//export const events = await sendApiRequest(fetchEvents) //TODO
+export const sites = await sendApiRequest(fetchSites)
+export const tags = await sendApiRequest(fetchTags)
+export const areas = await sendApiRequest(fetchAreas)
+export const categories = await sendApiRequest(fetchCategories)
+export const sub_categories = await sendApiRequest(fetchSubCategories)
   
 
 /* @@ old @@ */
