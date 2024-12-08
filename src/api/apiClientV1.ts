@@ -2,7 +2,7 @@ import { makeRequest } from '~/scripts/apiBuilderV0'
 
 const api_endpoint = 'main/doQueries'
 
-export const fetchEventsAndSites = async (fetchFunc) => {
+export const sendApiRequest = async (fetchFunc) => {
 
     try {
         const response = await fetchFunc()
@@ -37,10 +37,27 @@ const createUpdateEvent = async () => {
     return makeRequest(api_endpoint, 'updateEvent', {id: updatedEventData.id }, 'PUT', updatedEventData)
 }
 
+const getEventsTest = () => 
+    makeRequest(api_endpoint, 'getEventsTest')
+  
+const getSitesTest = () => 
+    makeRequest(api_endpoint, 'getSitesTest')
+
 /* @@ get valuse using api system 0.6.0 @@ */
 
-export const insertEvent = await fetchEventsAndSites(createPostEvent)
-export const updateEvent = await fetchEventsAndSites(createUpdateEvent)
+export const insertEvent = await sendApiRequest(createPostEvent)
+export const updateEvent = await sendApiRequest(createUpdateEvent)
+
+
+  
+  /* @@ execute the api builder @@ */
+  
+  
+   /* @@ exports the results @@ */
+   
+  export const events = await sendApiRequest(getEventsTest)
+  export const sites = await sendApiRequest(getSitesTest)
+  
 
 /* @@ old @@ */
 

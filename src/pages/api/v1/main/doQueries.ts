@@ -5,7 +5,7 @@ import { supabaseUpdate, supabaseQuery, supabaseInsert } from '~/providers/supab
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 export const GET: APIRoute = async ({ url }) => {
   return handleRequest('GET', url);
@@ -42,7 +42,11 @@ const handleRequest = async (method: string, url: URL, request?: Request) => {
 
 const handleApiRequest = async (method: string, type: string, params: any, request?: Request) => {
   
-  switch (type) {        
+  switch (type) {  
+    case 'getSites':
+      if (method !== 'GET') throw new Error('Invalid method for get event')
+          const insertSitesData = request ? await request.json() : {}
+          return getSites()
     case 'insertEvent':
       if (method !== 'POST') throw new Error('Invalid method for insertEvent')
         const insertData = request ? await request.json() : {}
@@ -72,7 +76,7 @@ const insertEvent = async (data: any) => {
 const updateEvent = async (data: any, id: string) => {
 
   const tableName = 'event_log'; // Assumiamo che la tabella per gli eventi si chiami 'event_log'
-  
+
   const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
 
   if (!result.success) {
@@ -80,4 +84,42 @@ const updateEvent = async (data: any, id: string) => {
   }
 
   return result.data;
+}
+
+const getSites = async () => {
+  return await supabaseQuery('main_table', {
+    select: `
+      id,
+      description,
+      icon,
+      image,
+      logo,
+      name,
+      title,
+      url,
+      categories_tags ( 
+        id_area,
+        id_cat,
+        tag_3,
+        tag_4,
+        tag_5,
+        id_provider,
+        ratings,
+        AI_think,
+        AI_summary
+      ),
+      sub_main_table (
+        user_id,
+        accessible,
+        domain_exists,
+        html_content_exists,
+        is_public,
+        secure, 
+        status_code,
+        valid_url,
+        type,
+        AI
+      )
+    `
+  })
 }
