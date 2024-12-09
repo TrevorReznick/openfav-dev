@@ -2,100 +2,75 @@
 import { createEvent } from '~/api/old/apiClientV0'
 import * as f from '~/api/apiClientV1'
 
-
-//console.log(await insertEvent)
-//console.log(await updateEvent)
-//console.log('log 2', f.sites.data.categories_tags)
-//console.log(JSON.stringify(sites), null, 2)
-
-/*
-console.log('sites',f.sites.data, f.sites.success)
-console.log('tags', f.tags.data, f.tags.success)
-console.log('areas', f.areas.data, f.areas.success)
-console.log('categories', f.categories.data, f.categories.success)
-console.log('sub-categories', f.categories.data, f.sub_categories.success)
-*/
-
-
 const sites = f.sites.data
 const areas = f.areas.data
 const categories = f.categories.data
-const sub_categories = f.categories.data
+const sub_categories = f.sub_categories.data // Assicurati che sub_categories sia correttamente definito
 
-
-
-// Funzione per trovare l'area in base all'id_area
 function findAreaById(id) {
   if (id === -1) {
-    return 'Non Specificata';
+    return { id: -1, area: 'Non Specificata' };
   }
   const area = areas.find(area => area.id_area === id);
   console.log(`findAreaById(${id}) => ${area ? area.area : 'Unknown Area'}`);
-  return area ? area.area : 'Unknown Area';
+  return area ? { id: area.id_area, area: area.area } : { id: -1, area: 'Unknown Area' };
 }
 
-// Funzione per trovare la categoria in base all'id_cat
 function findCategoryById(id) {
   if (id === -1) {
-    return 'Non Specificata';
+    return { id: -1, category: 'Non Specificata' };
   }
   const category = categories.find(category => category.id === id);
   console.log(`findCategoryById(${id}) => ${category ? category.category : 'Unknown Category'}`);
-  return category ? category.category : 'Unknown Category';
+  return category ? { id: category.id, category: category.category } : { id: -1, category: 'Unknown Category' };
 }
 
-// Funzione per trovare la sottocategoria in base all'id della sottocategoria
 function findSubCategoryById(id) {
   if (id === -1) {
-    return 'Non Specificata';
+    return { id: -1, sub_category: 'Non Specificata' };
   }
   const subCategory = sub_categories.find(sub_category => sub_category.id === id);
   console.log(`findSubCategoryById(${id}) => ${subCategory ? subCategory.sub_category : 'Unknown Subcategory'}`);
-  return subCategory ? subCategory.sub_category : 'Unknown Subcategory';
+  return subCategory ? { id: subCategory.id, sub_category: subCategory.sub_category } : { id: -1, sub_category: 'Unknown Subcategory' };
 }
 
-// Mappaggio dei siti con aggiunta di debug
 const updatedSites = sites.map(site => {
-  const categoriesTags = site.categories_tags;
-  
+  const categoriesTags = site.categories_tags; // Ora stai mappando correttamente per ogni sito
+
   if (!categoriesTags) {
     console.log(`Site with id ${site.id} has no categories_tags`);
     return {
-      ...site,
-      categories_tags: {
-        area: 'Non Specificata',
-        categoria: 'Non Specificata',
-        tags: [],
-        id_area: -1,
-        id_cat: -1,
-        ratings: null,
-        AI_think: null,
-        AI_summary: null,
-        id_provider: null
-      }
+      id: site.id,
+      description: site.description,
+      icon: site.icon,
+      image: site.image,
+      logo: site.logo,
+      name: site.name,
+      title: site.title,
+      url: site.url,
+      area: { id: -1, area: 'Non Specificata' },
+      categoria: { id: -1, category: 'Non Specificata' },
+      tags: [],
+      ratings: categoriesTags ? categoriesTags.ratings : null,
+      AI_think: categoriesTags ? categoriesTags.AI_think : null,
+      AI_summary: categoriesTags ? categoriesTags.AI_summary : null,
+      id_provider: categoriesTags ? categoriesTags.id_provider : null
     };
   }
 
   const area = findAreaById(categoriesTags.id_area);
   const category = findCategoryById(categoriesTags.id_cat);
 
-  const siteCategories = [];
-  for (const key in categoriesTags) {
-    if (key.startsWith('id_tag_')) {
-      const categoryId = categoriesTags[key];
-      if (categoryId !== -1) {
-        const subCategory = findSubCategoryById(categoryId);
-        siteCategories.push(subCategory);
-      }
-    }
-  }
+  const siteCategories = [
+    findSubCategoryById(categoriesTags.tag_3),
+    findSubCategoryById(categoriesTags.tag_4),
+    findSubCategoryById(categoriesTags.tag_5)
+  ].filter(tag => tag.sub_category !== 'Non Specificata');
 
   console.log(`Site with id ${site.id}:`, {
     area: area,
     categoria: category,
     tags: siteCategories,
-    id_area: categoriesTags.id_area,
-    id_cat: categoriesTags.id_cat,
     ratings: categoriesTags.ratings,
     AI_think: categoriesTags.AI_think,
     AI_summary: categoriesTags.AI_summary,
@@ -103,21 +78,27 @@ const updatedSites = sites.map(site => {
   });
 
   return {
-    ...site,
-    categories_tags: {
-      area: area,
-      categoria: category,
-      tags: siteCategories,
-      id_area: categoriesTags.id_area,
-      id_cat: categoriesTags.id_cat,
-      ratings: categoriesTags.ratings,
-      AI_think: categoriesTags.AI_think,
-      AI_summary: categoriesTags.AI_summary,
-      id_provider: categoriesTags.id_provider
-    }
+    id: site.id,
+    description: site.description,
+    icon: site.icon,
+    image: site.image,
+    logo: site.logo,
+    name: site.name,
+    title: site.title,
+    url: site.url,
+    area: area,
+    categoria: category,
+    tags: siteCategories, // Ecco il cambio: ora tags è un array di oggetti
+    ratings: categoriesTags.ratings,
+    AI_think: categoriesTags.AI_think,
+    AI_summary: categoriesTags.AI_summary,
+    id_provider: categoriesTags.id_provider
   };
 });
 
-console.log(updatedSites);
----
+console.log('sites refactored', updatedSites)
 
+const tags = updatedSites.map((item) => {return item.tags})
+
+console.log('debug tags', tags)
+---

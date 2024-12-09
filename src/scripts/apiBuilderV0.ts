@@ -31,7 +31,7 @@ export async function makeRequest<T = unknown>(
 
         const response = await fetch(url, options)
 
-        console.log('debugging response', response)
+        //console.log('debugging response', response)
         const result = await response.json()
         if (!response.ok) {
             //throw new Error('Server responded but give an errror')
