@@ -1,6 +1,6 @@
 // ~/scripts/clientApi.js
 
-import { doGet, doPost, doPut, doDel } from '~/scripts/new-dev/apiBuilder'
+import { doGet, doPost, doPut, doDel } from '~/scripts/old/new-dev/apiBuilder'
 
 const api_endpoint = 'main/old/doQueriesV1'
 

@@ -1,5 +1,4 @@
----
-import { createEvent } from '~/api/old/apiClientV0'
+
 import * as f from '~/api/apiClient'
 import { record } from 'astro:schema'
 import {analyzeObject} from '~/scripts/utils'
@@ -13,21 +12,6 @@ interface SubCategory {
 interface CategoriesTags {
   [key: string]: number;
 }
-
-
-//console.log(await insertEvent)
-//console.log(await updateEvent)
-//console.log('log 2', f.sites.data.categories_tags)
-//console.log(JSON.stringify(sites), null, 2)
-
-/*
-console.log('sites',f.sites.data, f.sites.success)
-console.log('tags', f.tags.data, f.tags.success)
-console.log('areas', f.areas.data, f.areas.success)
-console.log('categories', f.categories.data, f.categories.success)
-console.log('sub-categories', f.categories.data, f.sub_categories.success)
-*/
-
 
 const sites = f.sites.data
 const areas = f.areas.data
@@ -61,7 +45,7 @@ function findSubCategoryById(id) {
   return subCategory ? subCategory.sub_category : 'Unknown Subcategory';
 }
 
-const updatedSites = sites.map(site => {
+export const mergeSitesObj = sites.map(site => {
   const categoriesTags: CategoriesTags = site.categories_tags;
   
   if (!categoriesTags) {
@@ -125,12 +109,11 @@ const updatedSites = sites.map(site => {
   }
 })
 
-console.log(updatedSites)
+//console.log(mergeSitesObj)
 //console.log(f.site)
-
 /* debug 
-console.log("Analisi di updatedSites:");
-analyzeObject(updatedSites, 'updatedSites');
+console.log("Analisi di mergeSitesObj:");
+analyzeObject(mergeSitesObj, 'mergeSitesObj');
 
 console.log("\nAnalisi di f.site:");
 analyzeObject(f.site, 'f.site');
@@ -140,10 +123,10 @@ function areObjectsEqual(obj1: any, obj2: any): boolean {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
 
-console.log("\nSono identici?", areObjectsEqual(updatedSites, f.site))
+console.log("\nSono identici?", areObjectsEqual(mergeSitesObj, f.site))
 
-console.log(analyzeObject(updatedSites))
+console.log(analyzeObject(mergeSitesObj))
 */
----
+
 
 
