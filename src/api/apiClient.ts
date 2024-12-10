@@ -75,7 +75,7 @@ export const tags = await sendApiRequest(fetchTags)
 export const areas = await sendApiRequest(fetchAreas)
 export const categories = await sendApiRequest(fetchCategories)
 export const sub_categories = await sendApiRequest(fetchSubCategories)//FIXME
-export const site = await sendApiRequest(fetchSiteById)//FIXME
+export const site = await sendApiRequest(fetchSiteById)
   
 
 /* @@ old @@ */

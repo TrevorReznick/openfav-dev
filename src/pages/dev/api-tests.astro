@@ -1,6 +1,18 @@
 ---
 import { createEvent } from '~/api/old/apiClientV0'
-import * as f from '~/api/apiClientV1'
+import * as f from '~/api/apiClient'
+import { record } from 'astro:schema'
+import {analyzeObject} from '~/scripts/utils'
+
+interface SubCategory {
+  id: number;
+  name: string;
+  // Add other properties your subcategory has
+}
+
+interface CategoriesTags {
+  [key: string]: number;
+}
 
 
 //console.log(await insertEvent)
@@ -50,7 +62,7 @@ function findSubCategoryById(id) {
 }
 
 const updatedSites = sites.map(site => {
-  const categoriesTags = site.categories_tags;
+  const categoriesTags: CategoriesTags = site.categories_tags;
   
   if (!categoriesTags) {
     console.log(`Site with id ${site.id} has no categories_tags`);
@@ -74,17 +86,17 @@ const updatedSites = sites.map(site => {
   const category = findCategoryById(categoriesTags.id_cat);
 
   const siteCategories = [];
-  for (const key in categoriesTags) {
+  for (const key  in categoriesTags) {
     if (key.startsWith('id_tag_')) {
       const categoryId = categoriesTags[key];
       if (categoryId !== -1) {
-        const subCategory: any | never = findSubCategoryById(categoryId)
-        siteCategories.push(subCategory);
+        const subCategory = findSubCategoryById(categoryId)
+        siteCategories.push(subCategory)
       }
     }
   }
 
-  console.log(`Site with id ${site.id}:`, {
+  /*console.log(`Site with id ${site.id}:`, {
     area: area,
     categoria: category,
     tags: siteCategories,
@@ -94,7 +106,8 @@ const updatedSites = sites.map(site => {
     AI_think: categoriesTags.AI_think,
     AI_summary: categoriesTags.AI_summary,
     id_provider: categoriesTags.id_provider
-  });
+  })
+  */
 
   return {
     ...site,
@@ -109,11 +122,28 @@ const updatedSites = sites.map(site => {
       AI_summary: categoriesTags.AI_summary,
       id_provider: categoriesTags.id_provider
     }
-  };
-});
+  }
+})
 
-console.log(updatedSites)
-console.log(f.site)
+//console.log(updatedSites)
+//console.log(f.site)
+
+/* debug 
+console.log("Analisi di updatedSites:");
+analyzeObject(updatedSites, 'updatedSites');
+
+console.log("\nAnalisi di f.site:");
+analyzeObject(f.site, 'f.site');
+
+// Per confrontare i due oggetti
+function areObjectsEqual(obj1: any, obj2: any): boolean {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
+console.log("\nSono identici?", areObjectsEqual(updatedSites, f.site))
+
+console.log(analyzeObject(updatedSites))
+*/
 ---
 
 
