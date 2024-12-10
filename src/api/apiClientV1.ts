@@ -18,6 +18,8 @@ export const sendApiRequest = async (fetchFunc) => {
     }
 }
 
+const my_id = 49
+
 const newEvent = {
     id_event_type: 1,
     id_event_family: 2
@@ -42,6 +44,9 @@ const fetchEvents = () =>
   
 const fetchSites = () => 
     makeRequest(api_endpoint, 'getSites')
+
+const fetchSiteById = (id: number) =>
+    makeRequest(api_endpoint, 'getSiteById', { id: my_id })
 
 const fetchCategories = () => 
     makeRequest(api_endpoint, 'getCategories')
@@ -70,6 +75,7 @@ export const tags = await sendApiRequest(fetchTags)
 export const areas = await sendApiRequest(fetchAreas)
 export const categories = await sendApiRequest(fetchCategories)
 export const sub_categories = await sendApiRequest(fetchSubCategories)//FIXME
+export const site = await sendApiRequest(fetchSiteById)//FIXME
   
 
 /* @@ old @@ */

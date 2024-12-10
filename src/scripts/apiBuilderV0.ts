@@ -3,9 +3,11 @@ const api_dev = import.meta.env.PUBLIC_DEV_API_URL;
 const api_url = import.meta.env.MODE === 'production' ? api_prod : api_dev;
 
 interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  error?: any;
+
+  success: boolean
+  data?: T
+  error?: any
+  
 }
 
 export async function makeRequest<T = unknown>(
@@ -44,6 +46,6 @@ export async function makeRequest<T = unknown>(
     } catch (error) {
         
         console.error(`There was a problem with the request:`, error);
-        return { success: false, error: (error as Error).message };
+        return { success: false, error: (error as Error).message }
     }
 }

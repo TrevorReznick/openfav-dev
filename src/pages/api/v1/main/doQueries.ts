@@ -62,7 +62,14 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
     case 'getSites':
       if (method !== 'GET') throw new Error('Invalid method for get event')
         const insertSitesData = request ? await request.json() : {}
-        return getSites()
+        return getSites()//getSiteById
+     case 'getSiteById': {
+      if (method !== 'GET') throw new Error('Invalid method for getSiteById')
+        const { id } = params; // Ottieni l'id dai parametri
+        if (!id) throw new Error('ID is required for getSiteById')
+        return getSite(id); // Chiama la funzione getSite con l'id
+      }
+    
     case 'insertEvent':
       if (method !== 'POST') throw new Error('Invalid method for insertEvent')
         const insertData = request ? await request.json() : {}
@@ -192,4 +199,21 @@ const getSites = async () => {
     `
   })
 }
+const getSite = async (id: string | number) => {
+  return await supabaseQuery('main_table', {
+    select: `
+      id,
+      description,
+      icon,
+      image,
+      logo,
+      name,
+      title,
+      url
+      )
+    `,
+    filter: (query) => query.eq('id', id)
+  })
+}
+
 
