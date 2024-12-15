@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro'
 import SiteCard from '~/components/dev/SiteCard.astro'
+import {getSites} from '~/scripts/getSites'
 
 const sites = [
   {
@@ -35,7 +36,7 @@ const sites = [
         <div class="lg:col-span-2">
           <div class="grid gap-6">
             {
-              sites.map((site) => <SiteCard site={site} />)
+              getSites.map((getSites) => <SiteCard site={getSites} />)
             }
           </div>
         </div>
