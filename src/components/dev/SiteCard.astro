@@ -1,0 +1,55 @@
+---
+import { Globe, Clock, Tag, ExternalLink } from 'lucide-react';
+
+interface Props {
+  site: {
+    thumbnail: string;
+    title: string;
+    url: string;
+    tags: string[];
+    lastUpdated: string;
+  };
+}
+
+const { site } = Astro.props;
+---
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+  <div class="flex flex-col md:flex-row">
+    <div class="md:w-48 h-48 md:h-auto">
+      <img
+        src={site.thumbnail}
+        alt={site.title}
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="flex-1 p-6">
+      <div class="flex justify-between items-start">
+        <h3 class="text-xl font-semibold text-gray-900">{site.title}</h3>
+        <button class="text-gray-400 hover:text-gray-600">
+          <ExternalLink className="w-5 h-5" />
+        </button>
+      </div>
+      <div class="flex items-center gap-2 mt-2 text-gray-600">
+        <Globe className="w-4 h-4" />
+        <span class="text-sm">{site.url}</span>
+      </div>
+      <div class="flex items-center gap-2 mt-4">
+        <Tag className="w-4 h-4 text-gray-400" />
+        <div class="flex flex-wrap gap-2">
+          {site.tags.map((tag) => (
+            <span
+              class="px-3 py-1 text-sm bg-indigo-50 text-indigo-600 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="flex items-center gap-2 mt-4 text-sm text-gray-500">
+        <Clock className="w-4 h-4" />
+        <span>Last updated {site.lastUpdated}</span>
+      </div>
+    </div>
+  </div>
+</div>
