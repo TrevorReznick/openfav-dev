@@ -1,13 +1,21 @@
 ---
-import { createEvent } from '~/api/old/apiClientV0'
 import * as f from '~/api/apiClient'
 
+import {getSites, tags} from '~/scripts/getSites'
+
+console.log('firts log', f.all_categories)
+
+console.log('sites refactored', getSites)
+
+console.log('debug tags', tags)
+
+/*
 const sites = f.sites.data
 const areas = f.areas.data
 const categories = f.categories.data
 const sub_categories = f.sub_categories.data // Assicurati che sub_categories sia correttamente definito
 
-console.log('firts log', f.all_categories)
+
 
 function findAreaById(id) {
   if (id === -1) {
@@ -98,9 +106,5 @@ const updatedSites = sites.map(site => {
   }
 })
 
-console.log('sites refactored', updatedSites)
-
-const tags = updatedSites.map((item) => {return item.tags})
-
-console.log('debug tags', tags)
+*/
 ---
