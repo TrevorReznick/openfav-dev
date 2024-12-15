@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 import { createClient } from '@supabase/supabase-js'
-import { supabaseUpdate, supabaseQuery, supabaseInsert } from '~/providers/supabaseQueryV1'
+import { supabaseUpdate, supabaseQuery, supabaseInsert, supabaseDelete } from '~/providers/supabaseQueryV1'
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
@@ -95,6 +95,13 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
       if (method !== 'PUT') throw new Error('Invalid method for updateEvent')
       const updateData = request ? await request.json() : {}
       return updateEvent(updateData, updateData.id)
+
+    /* @@ -- DEL methods -- @@ */
+
+    case 'deleteEvent':
+      if (method !== 'DELETE') throw new Error('Invalid method for updateEvent')
+      const deletData = request ? await request.json() : {}
+      return deleteEvent(deletData, deletData.id)
   
     default:
       throw new Error('Unknown API request type')
@@ -254,6 +261,19 @@ const updateEvent = async (data: any, id: string) => {
   const tableName = 'event_log'
   const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
   if (!result.success) {
+    throw new Error(result.error)
+  }
+  return result.data
+}
+
+/* @@ -- DEL methods -- @@ */
+
+const deleteEvent = async (data: any, id: string) => {
+  const tableName = 'event_log'
+  const my_id = BigInt(id)
+  const result = await supabaseDelete(tableName, (query) => query.eq('id', parseInt(id)))//FIXME
+  if (!result.success) {
+    console.log('iddddd', id)
     throw new Error(result.error)
   }
   return result.data

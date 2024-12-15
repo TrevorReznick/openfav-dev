@@ -39,7 +39,6 @@ export async function makeRequest<T = unknown>(
             //throw new Error('Server responded but give an errror')
             console.log('Server responded but give an errror', result)
         }
-
         
         return { success: true, data: result }
 

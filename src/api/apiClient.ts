@@ -19,6 +19,7 @@ export const sendApiRequest = async (fetchFunc) => {
 }
 
 const my_id = 49
+const my_id_new = 66
 
 const ids = [66, 65 , 64]
 
@@ -50,7 +51,7 @@ const fetchEvents = () =>
 const fetchSites = () => 
     makeRequest(api_endpoint, 'getSites')
 
-const fetchSiteById = (id: number) =>
+const fetchSiteById = () =>
     makeRequest(api_endpoint, 'getSiteById', { id: my_id })
 
 const fetchSubCategories = () => 
@@ -73,8 +74,8 @@ const createUpdateEvent = async () => {
 
 /* @@ -- DEL methods -- @@ */
 
-const delEvent = async (id: number) => {
-    return makeRequest(api_endpoint, 'deleteEvent', {id: id }, 'DELETE', {})
+const delEvent = async () => {
+    return makeRequest(api_endpoint, 'deleteEvent', {id: my_id_new }, 'DELETE')
 }
   
    

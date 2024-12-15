@@ -15,14 +15,14 @@ type QueryOptions = {
   
 export async function supabaseQuery(tableName: string, options: QueryOptions = {}) {
     try {
-        let query = supabase.from(tableName).select(options.select || '*');
+        let query = supabase.from(tableName).select(options.select || '*')
   
         if (options.filter) {
             query = options.filter(query);
         }
     
         if (options.order) {
-            query = query.order(options.order.column, { ascending: options.order.ascending });
+            query = query.order(options.order.column, { ascending: options.order.ascending })
         }
     
         const { data, error } = await query
@@ -31,7 +31,9 @@ export async function supabaseQuery(tableName: string, options: QueryOptions = {
     
         return { success: true, data }
     } catch (error) {
+
         console.error('Supabase query error:', error);
         return { success: false, error: (error as Error).message }
+        
     }
 }
