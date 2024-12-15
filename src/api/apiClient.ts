@@ -61,6 +61,9 @@ const fetchTags = () =>
 const fetchAreas = () => 
     makeRequest(api_endpoint, 'getAreas')
 
+const fetchAreasCategoriesSubCategories = () => 
+    makeRequest(api_endpoint, 'getCategoriesJson')
+
 /* @@ get valuse using api system 0.6.0 @@ */
 
 //export const insertEvent = await sendApiRequest(createPostEvent)
@@ -76,6 +79,7 @@ export const areas = await sendApiRequest(fetchAreas)
 export const categories = await sendApiRequest(fetchCategories)
 export const sub_categories = await sendApiRequest(fetchSubCategories)//FIXME
 export const site = await sendApiRequest(fetchSiteById)
+export const all_categories = await sendApiRequest(fetchAreasCategoriesSubCategories)
   
 
 /* @@ old @@ */
