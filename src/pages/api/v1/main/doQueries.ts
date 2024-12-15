@@ -199,7 +199,11 @@ const getSites = async () => {
         type,
         AI
       )
-    `
+    `,
+    order: {
+      column: 'id',
+      ascending: false
+    }
   })
 }
 
