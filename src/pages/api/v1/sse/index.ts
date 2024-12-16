@@ -1,30 +1,41 @@
 // File: src/pages/sse.ts
 
-export async function GET() {
+export async function GET(request) {
+
+  const url = new URL(request.url)
+
+  const message = url.searchParams.get('message') || 'Deploy To Koyeb'
+
+  console.log('Received message from db server:', message)
   const encoder = new TextEncoder()
-  const message = 'Deploy To Koyeb'
+  
     
-  // Create a streaming response
   const customReadable = new ReadableStream({
     async start(controller) {
-      // Emit three notifications after 1 second each
-      controller.enqueue(encoder.encode(`data: ${message}\n\n`))
+      // Emissione di tre notifiche dopo 1 secondo ciascuna
+      controller.enqueue(encoder.encode(`data: ${message}\n\n`));
+      console.log('Sent message:', message)
       await new Promise((r) => setTimeout(r, 1000))
+      
       controller.enqueue(encoder.encode(`data: ${message}\n\n`))
+      console.log('Sent message:', message); // Log della seconda notifica inviata
       await new Promise((r) => setTimeout(r, 1000))
+      
       controller.enqueue(encoder.encode(`data: ${message}\n\n`))
-      // Close the stream after sending the three notifications
+      console.log('Sent message:', message) // Log della terza notifica inviata
+      // Chiusura dello stream dopo l'invio delle tre notifiche
       controller.close()
-    },
+    }
   })
-  // Return the stream response and keep the connection alive
+  
+  // Restituzione della risposta di flusso e mantenimento della connessione attiva
   return new Response(customReadable, {
-    // Set the headers for Server-Sent Events (SSE)
+    // Impostazione delle intestazioni per gli Eventi Server-Sent (SSE)
     headers: {
       Connection: 'keep-alive',
       'Content-Encoding': 'none',
       'Cache-Control': 'no-cache, no-transform',
       'Content-Type': 'text/event-stream; charset=utf-8',
     },
-  })
+  });
 }
