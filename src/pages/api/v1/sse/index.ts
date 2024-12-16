@@ -1,4 +1,4 @@
-// File: src/pages/sse.ts
+import * as store from '~/store'
 
 export async function GET(request) {
 
@@ -15,14 +15,17 @@ export async function GET(request) {
       // Emissione di tre notifiche dopo 1 secondo ciascuna
       controller.enqueue(encoder.encode(`data: ${message}\n\n`));
       console.log('Sent message:', message)
+      store.messageStore.set(message);
       await new Promise((r) => setTimeout(r, 1000))
       
+      /*
       controller.enqueue(encoder.encode(`data: ${message}\n\n`))
       console.log('Sent message:', message); // Log della seconda notifica inviata
       await new Promise((r) => setTimeout(r, 1000))
       
       controller.enqueue(encoder.encode(`data: ${message}\n\n`))
       console.log('Sent message:', message) // Log della terza notifica inviata
+      */
       // Chiusura dello stream dopo l'invio delle tre notifiche
       controller.close()
     }
