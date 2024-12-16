@@ -15,7 +15,8 @@ export async function GET(request) {
       // Emissione di tre notifiche dopo 1 secondo ciascuna
       controller.enqueue(encoder.encode(`data: ${message}\n\n`));
       console.log('Sent message:', message)
-      store.messageStore.set(message);
+      store.messageStore.set(message)
+      console.log('store', store.messageStore.get())
       await new Promise((r) => setTimeout(r, 1000))
       
       /*
