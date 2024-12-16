@@ -8,12 +8,14 @@ import MainHeader from '~/components/dashboard/MainHeader.astro'
 import MainCards from '~/components/dashboard/MainCardsGridSection.astro'
 import CallToAction from '~/components/main/CallToAction.astro'
 import Notifications from "~/components/jsx/Notifications.jsx";
-const { dbMessage = messageStore.get() } = Astro.props
+let { dbMessage } = Astro.props
 
 messageStore.subscribe((newValue) => {
-  console.log('Dashboard notification:', newValue);
-  // Esegui altre azioni qui
+  console.log('Dashboard notification:', newValue)
+  dbMessage = messageStore.get() // Esegui altre azioni qui
+  messageStore.set('')
 })
+
 let username = 'Doublefacessss'
 ---
 

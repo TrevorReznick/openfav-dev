@@ -6,7 +6,7 @@ export async function GET(request) {
 
   const message = url.searchParams.get('message') || 'Deploy To Koyeb'
 
-  console.log('Received message from db server:', message)
+  console.log('Notification from SSE:', message)
   const encoder = new TextEncoder()
   
     
