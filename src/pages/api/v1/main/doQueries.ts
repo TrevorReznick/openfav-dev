@@ -23,7 +23,7 @@ export const DELETE: APIRoute = async ({ url }) => {
   return handleRequest('DELETE', url)
 }
 
-const handleRequest = async (method: string, url: URL, request?: Request) => {
+const handleRequestNew = async (method: string, url: URL, request?: Request) => {
   // Log dei parametri ricevuti per debug
   console.log('URL params:', url.searchParams.toString())
   
@@ -69,7 +69,7 @@ const handleRequest = async (method: string, url: URL, request?: Request) => {
   }
 }
 
-const handleRequestOld = async (method: string, url: URL, request?: Request) => {
+const handleRequest = async (method: string, url: URL, request?: Request) => {
 
     const { type, ...params } = Object.fromEntries(url.searchParams)
 
@@ -377,7 +377,7 @@ const deleteEvent= async (data: any, id: any) => {
   const numericId = Number(id)
   const result = await supabaseDelete(tableName, (query) => query.eq('id', data))
   if (!result.success) {
-    console.log('iddddd', data)
+    //console.log('iddddd', data)
     throw new Error(result.error)
   }
   return result.data
