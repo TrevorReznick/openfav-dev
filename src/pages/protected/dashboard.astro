@@ -10,6 +10,7 @@ import CallToAction from '~/components/main/CallToAction.astro'
 import Notifications from "~/components/jsx/Notifications.jsx";
 const { dbMessage = messageStore.get() } = Astro.props
 
+console.log('dashboard store message', dbMessage)
 let username = 'Doublefacessss'
 ---
 
