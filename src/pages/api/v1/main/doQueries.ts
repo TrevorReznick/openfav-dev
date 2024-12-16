@@ -19,11 +19,57 @@ export const PUT: APIRoute = async ({ request, url }) => {
   return handleRequest('PUT', url, request)
 };
 
-export const DELETE: APIRoute = async ({ url }) => {
+export const DELETE: APIRoute = async ({ url }) => {  
   return handleRequest('DELETE', url)
-};
+}
 
 const handleRequest = async (method: string, url: URL, request?: Request) => {
+  // Log dei parametri ricevuti per debug
+  console.log('URL params:', url.searchParams.toString())
+  
+  // Estraiamo type e gli altri parametri
+  const { type, ...params } = Object.fromEntries(url.searchParams)
+  
+  console.log('Extracted type:', type)
+  console.log('Extracted params:', params)//FIXME
+  
+  try {
+    // Verifichiamo che l'ID sia presente per le operazioni di delete
+    if (method === 'DELETE' && type === 'deleteEvent') {
+      if (!params.id) {
+        throw new Error('ID is required for delete operation')
+      }
+      // Convertiamo l'ID in numero
+      let id = Number(params.id)
+      if (isNaN(id)) {
+        throw new Error('Invalid ID format')
+      }
+    }    
+    const response = await handleApiRequest(method, type, params, request)    
+    return new Response(JSON.stringify(response), { 
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  } catch (error) {
+    console.error('Request error:', error)
+    return new Response(
+        JSON.stringify({ 
+        error: error.message,
+        details: params // Include i parametri ricevuti per debug
+      }), 
+      { 
+        status: 400, // Usiamo 400 per errori di validazione
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+}
+
+const handleRequestOld = async (method: string, url: URL, request?: Request) => {
 
     const { type, ...params } = Object.fromEntries(url.searchParams)
 
@@ -99,9 +145,10 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
     /* @@ -- DEL methods -- @@ */
 
     case 'deleteEvent':
-      if (method !== 'DELETE') throw new Error('Invalid method for updateEvent')
-      const deletData = request ? await request.json() : {}
-      return deleteEvent(deletData, deletData.id)
+      if (method !== 'DELETE') throw new Error('Invalid method for deleteEvent')
+      const deleteData = params ?  params.id : {}
+      console.log('uhmm', deleteData)
+      return deleteEvent(deleteData, deleteData.id)
   
     default:
       throw new Error('Unknown API request type')
@@ -246,6 +293,7 @@ const getTags = async () => {
 }
 
 /* @@ -- POST methods -- @@ */
+
 const insertEvent = async (data: any) => {
   const tableName = 'event_log'
   const result = await supabaseInsert(tableName, data)
@@ -268,12 +316,68 @@ const updateEvent = async (data: any, id: string) => {
 
 /* @@ -- DEL methods -- @@ */
 
-const deleteEvent = async (data: any, id: string) => {
+export const deleteEventNew = async (id: any) => {
+
+  console.log('deleteEvent called with id:', id) //FIXME
+
+  if (!id) {
+    throw new Error('ID parameter is required but was undefined')
+  }
+
+  const numericId = Number(id)
+  console.log('Converted numericId:', numericId) // Debug log
+
+  if (isNaN(numericId)) {
+    throw new Error(`Invalid ID format: ${id}`)
+  }
+
   const tableName = 'event_log'
-  const my_id = BigInt(id)
-  const result = await supabaseDelete(tableName, (query) => query.eq('id', parseInt(id)))//FIXME
+  console.log('siamo arrivati fino a qui')
+  const result = await supabaseDelete(tableName, (query) => {
+    console.log('Building query with ID:', numericId) // Debug log
+    return query.eq('id', numericId)
+  })
+
+  return result.data
+}
+
+const deleteEventOld1 = async (data: any) => {
+
+  let id = data.id
+  console.log('deleteEvent called with id:', id); // Debug log 1
+  //console.log('deleteEvent data param:', data);   // Debug log 2
+  
+  const tableName = 'event_log'
+  
+  // Guard clause for undefined id
+  if (!id) {
+    throw new Error('ID parameter is required but was undefined')
+  }
+  
+  const numericId = Number(id);
+  console.log('Converted numericId:', numericId) // Debug log 3
+  
+  if (isNaN(numericId)) {
+    throw new Error(`Invalid ID format: ${id}`)
+  }
+
+  const result = await supabaseDelete(tableName, (query) => {
+    console.log('Building query with ID:', numericId)// Debug log 4
+    return query.eq('id', numericId)
+  });
+
+  return result.data
+}
+
+
+const deleteEvent= async (data: any, id: any) => {
+  console.log(data, id)
+  const tableName = 'event_log'
+  //const my_id = BigInt(id)
+  const numericId = Number(id)
+  const result = await supabaseDelete(tableName, (query) => query.eq('id', data))
   if (!result.success) {
-    console.log('iddddd', id)
+    console.log('iddddd', data)
     throw new Error(result.error)
   }
   return result.data

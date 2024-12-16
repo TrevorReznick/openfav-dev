@@ -19,7 +19,7 @@ export const sendApiRequest = async (fetchFunc) => {
 }
 
 const my_id = 49
-const my_id_new = 66
+const my_id_new: number = 101
 
 const ids = [66, 65 , 64]
 
@@ -74,7 +74,26 @@ const createUpdateEvent = async () => {
 
 /* @@ -- DEL methods -- @@ */
 
-const delEvent = async () => {
+const delEvent = async (id: number) => {
+    console.log('Client id:', id) // Debug log 5
+    
+    if (!id) {
+      throw new Error('ID is required for deletion')
+    }
+    
+    // Make sure we're passing the id in the correct format
+    const response = await makeRequest(
+      api_endpoint, 
+      'deleteEvent', 
+      { id }, // Simplified object passing
+      'DELETE'
+    );
+    
+    console.log('Client api delEvent response:', response) // Debug log 6
+    return response
+}
+
+const delEventOld = async () => {
     return makeRequest(api_endpoint, 'deleteEvent', {id: my_id_new }, 'DELETE')
 }
   
@@ -98,7 +117,19 @@ export const insertEvent = await sendApiRequest(createPostEvent)
 export const updateEvent = await sendApiRequest(createUpdateEvent)
 
 /* @@ -- DEL methods -- @@ */
-export const deleteEvent = await sendApiRequest(delEvent)
+//export const deleteEvent = await sendApiRequest(delEvent)
+//export const deleteEvent = (id: number) => sendApiRequest(() => delEvent(id))
+//await deleteEvent(66)
+
+export const deleteEvent = async (id: number) => {
+    if (!id || isNaN(id)) {
+        throw new Error('Valid ID is required for deletion')
+    }
+    return sendApiRequest(() => delEvent(id))
+}
+
+await deleteEvent(my_id_new) // Pass the ID when calling
+
   
 
 
