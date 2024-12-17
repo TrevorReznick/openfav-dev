@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 const SSEClient = ({ url }) => {
-  const [lastMessage, setLastMessage] = useState('');
+    const [lastMessage, setLastMessage] = useState('');
 
   useEffect(() => {
     console.log('Connecting to SSE endpoint:', url);
@@ -13,14 +13,14 @@ const SSEClient = ({ url }) => {
     };
 
     eventSource.onmessage = (event) => {
-      const message = event.data;
-      console.log('Client SSE received message:', message);
-      setLastMessage(message);
+        const message = event.data;
+        console.log('Client SSE received message:', message);
+        setLastMessage(message);
 
-      // Controlla se il messaggio inizia con "ALERT: "
-      if (message.startsWith('ALERT: ')) {
-        alert(message.replace('ALERT: ', ''));
-      }
+        // Controlla se il messaggio inizia con "ALERT: "
+        if (message.startsWith('ALERT: ')) {
+            alert(message.replace('ALERT: ', ''));
+        }
     };
 
     eventSource.onerror = (error) => {
@@ -34,12 +34,12 @@ const SSEClient = ({ url }) => {
     };
   }, [url]);
 
-  return (
-    <div>
-      <h2>SSE Client</h2>
-      <p>Last Message: {lastMessage}</p>
-    </div>
-  );
+    return (
+        <div>
+        <h2>SSE Client</h2>
+        <p>Last Message: {lastMessage}</p>
+        </div>
+    );
 };
 
 export default SSEClient;
