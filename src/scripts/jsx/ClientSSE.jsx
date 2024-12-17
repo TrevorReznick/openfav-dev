@@ -1,4 +1,3 @@
-// ~/components/SSEClient.jsx
 import { useEffect, useState } from 'react';
 
 const SSEClient = ({ url }) => {
@@ -36,4 +35,4 @@ const SSEClient = ({ url }) => {
   );
 };
 
-export default SSEClient;
+export default SSEClient

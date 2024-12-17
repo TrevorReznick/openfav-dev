@@ -6,7 +6,7 @@ export async function GET(request) {
 
   const message = url.searchParams.get('message') || 'Deploy To Koyeb'
 
-  console.log('Notification from SSE:', message)
+  console.log('SSE caught message:', message)
   const encoder = new TextEncoder()
   
     
@@ -14,7 +14,8 @@ export async function GET(request) {
     async start(controller) {
       // Emissione di tre notifiche dopo 1 secondo ciascuna
       controller.enqueue(encoder.encode(`data: ${message}\n\n`));
-      console.log('Sent message:', message)
+      console.log('Try sent message:', message)
+      console.log('SSE setting store')
       store.messageStore.set(message)
       console.log('store', store.messageStore.get())
       await new Promise((r) => setTimeout(r, 1000))

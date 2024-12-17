@@ -6,7 +6,7 @@ import { processMessage } from '~/scripts/utils' // Importa la funzione processM
 export async function GET(request) {
     const url = new URL(request.url);
     const message = url.searchParams.get('message') || 'Deploy To Koyeb';
-    console.log('Notification from SSE:', message);
+    console.log('SSE caugth message:', message);
 
     const processedMessage = processMessage(message) // Elabora il messaggio
     store.messageStore.set(processedMessage) // Aggiorna lo store con il messaggio elaborato
@@ -17,9 +17,10 @@ export async function GET(request) {
         async start(controller) {
         try {
             controller.enqueue(encoder.encode(`data: ${processedMessage}\n\n`));
-            console.log('Sent message:', processedMessage)
+            console.log('Try Sent message:', processedMessage)
             await new Promise((r) => setTimeout(r, 1000))
 
+            /*
             controller.enqueue(encoder.encode(`data: ${processedMessage}\n\n`))
             console.log('Sent message:', processedMessage)
             await new Promise((r) => setTimeout(r, 1000))
@@ -27,6 +28,7 @@ export async function GET(request) {
             controller.enqueue(encoder.encode(`data: ${processedMessage}\n\n`))
             console.log('Sent message:', processedMessage)
             await new Promise((r) => setTimeout(r, 1000))
+            */
 
             controller.close()
         } catch (error) {
