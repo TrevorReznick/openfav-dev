@@ -1,15 +1,16 @@
 // ~/components/SSEClient.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
+import * as store from '~/store'
 
 const SSEClient = ({ url }) => {
-    const [lastMessage, setLastMessage] = useState('');
+    const [lastMessage, setLastMessage] = useState('')
 
   useEffect(() => {
-    console.log('Connecting to SSE endpoint:', url);
-    const eventSource = new EventSource(url);
+    console.log('Connecting to SSE endpoint:', url)
+    const eventSource = new EventSource(url)
 
     eventSource.onopen = () => {
-      console.log('SSE connection opened');
+      console.log('SSE connection opened')
     };
 
     eventSource.onmessage = (event) => {
@@ -24,13 +25,13 @@ const SSEClient = ({ url }) => {
     };
 
     eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error);
-      eventSource.close();
+      console.error('EventSource failed:', error)
+      eventSource.close()
     };
 
     return () => {
-      console.log('Closing SSE connection');
-      eventSource.close();
+      console.log('Closing SSE connection')
+      eventSource.close()
     };
   }, [url]);
 
@@ -38,8 +39,9 @@ const SSEClient = ({ url }) => {
         <div>
         <h2>SSE Client</h2>
         <p>Last Message: {lastMessage}</p>
+        <p>Store Message: {store.messageStore.get()}</p>
         </div>
     );
 };
 
-export default SSEClient;
+export default SSEClient

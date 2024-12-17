@@ -1,6 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
 import { supabase } from '~/providers/supabase';
-import * as store from '~/store';
+import * as store from '~/store'
 //import { id, email, user_name, isAuthenticated, currentPath, previousPath } from '../store'
 
 const protectedRoutes = ['/protected/page', '/protected/dashboard'];

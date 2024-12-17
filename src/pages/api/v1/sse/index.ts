@@ -7,13 +7,14 @@ export async function GET(request) {
   const message = url.searchParams.get('message') || 'Deploy To Koyeb'
 
   console.log('SSE caught message:', message)
+
   const encoder = new TextEncoder()
   
     
   const customReadable = new ReadableStream({
     async start(controller) {
       // Emissione di tre notifiche dopo 1 secondo ciascuna
-      controller.enqueue(encoder.encode(`data: ${message}\n\n`));
+      controller.enqueue(encoder.encode(`data: ${message}\n\n`))
       console.log('Try sent message:', message)
       console.log('SSE setting store')
       store.messageStore.set(message)

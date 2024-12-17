@@ -1,14 +1,14 @@
 ---
 import * as f from '~/api/apiClient'
-
 import SSEClient from '~/scripts/jsx/ClientSSE'
-
+import * as store from "~/store";
 import {getSites, tags} from '~/scripts/getSites'
 
+//store.messageStore.set('test')
+
+/* testing apis */
 console.log('firts log', f.all_categories)
-
 console.log('sites refactored', getSites)
-
 console.log('debug tags', tags)
 
 
