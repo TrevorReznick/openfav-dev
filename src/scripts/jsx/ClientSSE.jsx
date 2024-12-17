@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const SSEClient = ({ url }) => {
-  const [lastMessage, setLastMessage] = useState('Waiting for messages...');
+  const [messages, setMessages] = useState([]);
   const [connectionStatus, setConnectionStatus] = useState('Connecting...');
   const [error, setError] = useState(null);
 
@@ -12,30 +12,35 @@ const SSEClient = ({ url }) => {
       console.log('Attempting to connect to:', url);
       eventSource = new EventSource(url);
       
-      // Debug connection state
       eventSource.addEventListener('open', (event) => {
         console.log('Connection opened:', event);
         setConnectionStatus('Connected');
       });
 
-      // Log raw event data
       eventSource.addEventListener('message', (event) => {
-        console.log('Raw event received:', event);
-        console.log('Event data:', event.data);
-        console.log('Event type:', event.type);
+        console.log('Message received:', event.data);
         
-        setLastMessage(prevMessage => `${event.data} (Received at: ${new Date().toLocaleTimeString()})`);
+        setMessages(prevMessages => [
+          ...prevMessages,
+          {
+            text: event.data,
+            timestamp: new Date().toLocaleTimeString()
+          }
+        ]);
       });
 
-      // Specific error handling
       eventSource.addEventListener('error', (event) => {
         console.error('SSE Error:', event);
-        setError(`Connection error: ${event.type}`);
-        setConnectionStatus('Error');
+        setError(`Connection error occurred`);
+        setConnectionStatus('Error - Reconnecting...');
         
-        if (eventSource.readyState === EventSource.CLOSED) {
-          console.log('Connection was closed');
-        }
+        // Riconnessione automatica dopo 5 secondi
+        setTimeout(() => {
+          if (eventSource) {
+            eventSource.close();
+            eventSource = new EventSource(url);
+          }
+        }, 5000);
       });
 
     } catch (err) {
@@ -45,7 +50,7 @@ const SSEClient = ({ url }) => {
 
     return () => {
       if (eventSource) {
-        console.log('Closing connection...');
+        console.log('Cleaning up connection...');
         eventSource.close();
       }
     };
@@ -60,9 +65,14 @@ const SSEClient = ({ url }) => {
           <strong>Connection Status:</strong> {connectionStatus}
         </div>
         
-        <div className="bg-gray-100 p-2 rounded">
-          <strong>Last Message:</strong>
-          <pre className="mt-1 whitespace-pre-wrap">{lastMessage}</pre>
+        <div className="bg-gray-100 p-2 rounded max-h-60 overflow-y-auto">
+          <strong>Messages:</strong>
+          {messages.map((msg, index) => (
+            <div key={index} className="mt-2 p-2 bg-white rounded">
+              <div>{msg.text}</div>
+              <div className="text-sm text-gray-500">Received at: {msg.timestamp}</div>
+            </div>
+          ))}
         </div>
         
         {error && (

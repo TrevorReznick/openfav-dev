@@ -18,12 +18,23 @@ export async function GET(request) {
       sendMessage(message);
 
       // Invia un secondo messaggio di test dopo 2 secondi
-      setTimeout(() => {
+      const secondMessage = setTimeout(() => {
         sendMessage('Test message after 2 seconds');
+        console.log('Sent second test message');
       }, 2000);
-    },
-    cancel() {
-      console.log('Stream cancelled');
+
+      // Mantenere la connessione aperta con un heartbeat
+      const heartbeat = setInterval(() => {
+        sendMessage('heartbeat');
+        console.log('Sent heartbeat');
+      }, 15000);
+
+      // Cleanup function
+      request.signal.addEventListener('abort', () => {
+        clearTimeout(secondMessage);
+        clearInterval(heartbeat);
+        console.log('Connection aborted, cleaning up');
+      });
     }
   });
 
@@ -31,7 +42,8 @@ export async function GET(request) {
     headers: {
       'Connection': 'keep-alive',
       'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
+      'Cache-Control': 'no-cache, no-transform',
+      'X-Accel-Buffering': 'no', // Disabilita il buffering
       'Access-Control-Allow-Origin': '*'
     }
   });
