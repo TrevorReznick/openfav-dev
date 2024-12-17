@@ -61,8 +61,8 @@ const fetchTags = () =>
 
 /* @@ -- POST methods -- @@ */
 
-export const createPostEvent = async (data) => {
-    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', data)
+const createPostEvent = async () => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
 }
 
 /* @@ -- PUT methods -- @@ */

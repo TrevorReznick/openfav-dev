@@ -1,0 +1,50 @@
+---
+import { makeRequest } from '~/scripts/apiBuilder'
+
+import { sendApiRequest, fetchCategories, createPostEvent, fetchElements } from '~/api/apiClientV0'
+
+/*
+'getCategories'
+'getCategoriesJson'
+'getSites'
+'getSiteById'
+'getSubCategories'
+'getTags'
+'updateEvent'
+export const fetchElements = (type: string) => 
+    makeRequest(api_endpoint, type)
+*/
+
+//const areasData = await sendApiRequest(fetchAreas)
+const areasData: any = await fetchElements('getAreas')
+console.log('New Areas:', areasData.data.data)
+
+const categoriesData = await sendApiRequest(fetchCategories)
+console.log('Categories:', categoriesData);
+
+/*
+const newEventData = await sendApiRequest(createPostEvent);
+console.log('New Event:', newEventData)
+*/
+
+const newEvent = {
+    id_event_type: 1,
+    id_event_family: 2,
+}
+
+const updatedEventData = {
+    id: 5,
+    id_event_type: 8,
+    id_event_family: 2,
+}
+
+/*
+export const createPostEvent = async (data, table) => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', data)
+}
+*/
+const insertEvent = await createPostEvent(newEvent, 'insertEvent')
+console.log('test', insertEvent)
+
+
+---
