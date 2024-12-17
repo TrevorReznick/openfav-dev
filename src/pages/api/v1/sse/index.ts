@@ -1,17 +1,18 @@
-// Creiamo uno store semplice per i messaggi dato che non abbiamo un database
+// Store per l'ultimo messaggio
 let lastMessage: any = null;
 
-// Handler per i webhook di Supabase
-export async function POST(request) {
+export async function POST({ request }) {
   try {
-    const payload = await request.json()
-    console.log('Received webhook from Supabase:', payload)
+    // In Astro, dobbiamo usare Request.text() e poi parsare
+    const body = await request.text();
+    const payload = JSON.parse(body);
     
-    // Salva il messaggio più recente
+    console.log('Received webhook from Supabase:', payload);
+    
     lastMessage = {
-      event: payload.type,        // insert, update, delete
-      table: payload.table,       // nome della tabella
-      record: payload.record,     // i dati
+      event: payload.type,
+      table: payload.table,
+      record: payload.record,
       timestamp: new Date().toISOString()
     };
 
@@ -28,27 +29,23 @@ export async function POST(request) {
   }
 }
 
-// Handler SSE per i client
-export async function GET(request) {
+export async function GET() {
   const encoder = new TextEncoder();
 
   const stream = new ReadableStream({
     start(controller) {
       const sendMessage = (data) => {
-        const formattedMessage = `data: ${JSON.stringify(data)}\n\n`
-        controller.enqueue(encoder.encode(formattedMessage))
+        const formattedMessage = `data: ${JSON.stringify(data)}\n\n`;
+        controller.enqueue(encoder.encode(formattedMessage));
       };
 
-      // Invia il messaggio iniziale
-      sendMessage({ type: 'connected' })
+      sendMessage({ type: 'connected' });
 
-      // Se c'è un messaggio precedente, invialo
       if (lastMessage) {
-        sendMessage(lastMessage)
+        sendMessage(lastMessage);
       }
 
-      // Chiudi lo stream dopo 30 secondi (puoi aumentare questo tempo)
-      setTimeout(() => controller.close(), 30000)
+      setTimeout(() => controller.close(), 30000);
     }
   });
 
