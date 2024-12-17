@@ -1,3 +1,10 @@
+export function processMessage(message) {
+  // Aggiungi un "alert" al messaggio
+  const alertMessage = `ALERT: ${message}`
+  console.log('Processed message:', alertMessage)
+  return alertMessage
+}
+
 export const printFullObject = (obj) => {
   const fullString = JSON.stringify(obj, null, 2)
   console.log(fullString)
