@@ -1,42 +1,62 @@
+// Creiamo uno store semplice per i messaggi dato che non abbiamo un database
+let lastMessage: any = null;
+
+// Handler per i webhook di Supabase
+export async function POST(request) {
+  try {
+    const payload = await request.json()
+    console.log('Received webhook from Supabase:', payload)
+    
+    // Salva il messaggio più recente
+    lastMessage = {
+      event: payload.type,        // insert, update, delete
+      table: payload.table,       // nome della tabella
+      record: payload.record,     // i dati
+      timestamp: new Date().toISOString()
+    };
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (error) {
+    console.error('Webhook error:', error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+}
+
+// Handler SSE per i client
 export async function GET(request) {
-  const url = new URL(request.url);
-  const message = url.searchParams.get('message') || 'Deploy To Koyeb';
   const encoder = new TextEncoder();
 
-  console.log('Server received request. Message:', message);
-
-  const customReadable = new ReadableStream({
+  const stream = new ReadableStream({
     start(controller) {
-      // Funzione di utilità per inviare messaggi
-      const sendMessage = (msg) => {
-        const formattedMessage = `data: ${msg}\n\n`;
-        console.log('Sending formatted message:', formattedMessage);
-        controller.enqueue(encoder.encode(formattedMessage));
+      const sendMessage = (data) => {
+        const formattedMessage = `data: ${JSON.stringify(data)}\n\n`
+        controller.enqueue(encoder.encode(formattedMessage))
       };
 
       // Invia il messaggio iniziale
-      sendMessage(message);
+      sendMessage({ type: 'connected' })
 
-      // Invia il secondo messaggio dopo 2 secondi
-      setTimeout(() => {
-        sendMessage('Test message after 2 seconds');
-        console.log('Sent second test message');
-      }, 2000);
+      // Se c'è un messaggio precedente, invialo
+      if (lastMessage) {
+        sendMessage(lastMessage)
+      }
 
-      // Chiudi lo stream dopo un timeout ragionevole
-      setTimeout(() => {
-        console.log('Closing stream after timeout');
-        controller.close();
-      }, 30000); // 30 secondi
+      // Chiudi lo stream dopo 30 secondi (puoi aumentare questo tempo)
+      setTimeout(() => controller.close(), 30000)
     }
   });
 
-  return new Response(customReadable, {
+  return new Response(stream, {
     headers: {
-      'Connection': 'keep-alive',
       'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache, no-transform',
-      'X-Accel-Buffering': 'no',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
       'Access-Control-Allow-Origin': '*'
     }
   });
