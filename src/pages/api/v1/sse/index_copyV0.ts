@@ -1,13 +1,9 @@
 import * as store from '~/store'
 
 export async function GET(request) {
-
   const url = new URL(request.url)
-
   const message = url.searchParams.get('message') || 'Deploy To Koyeb'
-
   console.log('SSE caught message:', message)
-
   const encoder = new TextEncoder()
   
     
@@ -18,7 +14,7 @@ export async function GET(request) {
       console.log('Try sent message:', message)
       console.log('SSE setting store')
       store.messageStore.set(message)
-      console.log('store', store.messageStore.get())
+      console.log('SSE Get store messages', store.messageStore.get())
       await new Promise((r) => setTimeout(r, 1000))
       
       /*
