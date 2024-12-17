@@ -68,7 +68,7 @@ const SSEClient = ({ url }) => {
     };
 
     connect();
-    heartbeatInterval = setInterval(checkHeartbeat, 30000); // Controlla il heartbeat ogni 30 secondi
+    heartbeatInterval = setInterval(checkHeartbeat, 250000) // Controlla il heartbeat ogni 30 secondi
 
     return () => {
       if (eventSource) {
