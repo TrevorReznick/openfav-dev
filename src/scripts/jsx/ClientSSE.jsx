@@ -1,47 +1,79 @@
-// ~/components/SSEClient.jsx
-import { useEffect, useState } from 'react'
-import * as store from '~/store'
+import React, { useEffect, useState } from 'react';
 
 const SSEClient = ({ url }) => {
-    const [lastMessage, setLastMessage] = useState('')
+  const [lastMessage, setLastMessage] = useState('Waiting for messages...');
+  const [connectionStatus, setConnectionStatus] = useState('Connecting...');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('Connecting to SSE endpoint:', url)
-    const eventSource = new EventSource(url)
+    let eventSource;
+    
+    try {
+      console.log('Attempting to connect to:', url);
+      eventSource = new EventSource(url);
+      
+      // Debug connection state
+      eventSource.addEventListener('open', (event) => {
+        console.log('Connection opened:', event);
+        setConnectionStatus('Connected');
+      });
 
-    eventSource.onopen = () => {
-      console.log('SSE connection opened')
-    };
+      // Log raw event data
+      eventSource.addEventListener('message', (event) => {
+        console.log('Raw event received:', event);
+        console.log('Event data:', event.data);
+        console.log('Event type:', event.type);
+        
+        setLastMessage(prevMessage => `${event.data} (Received at: ${new Date().toLocaleTimeString()})`);
+      });
 
-    eventSource.onmessage = (event) => {
-        const message = event.data;
-        console.log('Client SSE received message:', message);
-        setLastMessage(message);
-
-        // Controlla se il messaggio inizia con "ALERT: "
-        if (message.startsWith('ALERT: ')) {
-            alert(message.replace('ALERT: ', ''));
+      // Specific error handling
+      eventSource.addEventListener('error', (event) => {
+        console.error('SSE Error:', event);
+        setError(`Connection error: ${event.type}`);
+        setConnectionStatus('Error');
+        
+        if (eventSource.readyState === EventSource.CLOSED) {
+          console.log('Connection was closed');
         }
-    };
+      });
 
-    eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error)
-      eventSource.close()
-    };
+    } catch (err) {
+      console.error('Error setting up EventSource:', err);
+      setError(`Setup error: ${err.message}`);
+    }
 
     return () => {
-      console.log('Closing SSE connection')
-      eventSource.close()
+      if (eventSource) {
+        console.log('Closing connection...');
+        eventSource.close();
+      }
     };
   }, [url]);
 
-    return (
-        <div>
-        <h2>SSE Client</h2>
-        <p>Last Message: {lastMessage}</p>
-        <p>Store Message: {store.messageStore.get()}</p>
+  return (
+    <div className="p-4 border rounded-lg">
+      <h2 className="text-xl font-bold mb-4">SSE Debug Client</h2>
+      
+      <div className="space-y-2">
+        <div className="bg-gray-100 p-2 rounded">
+          <strong>Connection Status:</strong> {connectionStatus}
         </div>
-    );
+        
+        <div className="bg-gray-100 p-2 rounded">
+          <strong>Last Message:</strong>
+          <pre className="mt-1 whitespace-pre-wrap">{lastMessage}</pre>
+        </div>
+        
+        {error && (
+          <div className="bg-red-100 p-2 rounded">
+            <strong>Error:</strong>
+            <pre className="mt-1 text-red-600">{error}</pre>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default SSEClient
+export default SSEClient;

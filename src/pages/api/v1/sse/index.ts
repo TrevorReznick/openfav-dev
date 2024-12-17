@@ -1,39 +1,38 @@
 export async function GET(request) {
-  const url = new URL(request.url)
-  const message = url.searchParams.get('message') || 'Deploy To Koyeb'
-  console.log('SSE caught message:', message)
-  const encoder = new TextEncoder()
+  const url = new URL(request.url);
+  const message = url.searchParams.get('message') || 'Deploy To Koyeb';
+  const encoder = new TextEncoder();
+
+  console.log('Server received request. Message:', message);
 
   const customReadable = new ReadableStream({
-    async start(controller) {
-      try {
-        // Send initial connection message
-        controller.enqueue(encoder.encode(`data: Connected to SSE server\n\n`))        
-        // Send the main message
-        controller.enqueue(encoder.encode(`data: ${message}\n\n`))        
-        // Keep connection alive with periodic heartbeat
-        const heartbeat = setInterval(() => {
-          controller.enqueue(encoder.encode(`data: heartbeat\n\n`))
-        }, 30000); // Every 30 seconds
+    start(controller) {
+      // Formatta correttamente il messaggio SSE
+      const sendMessage = (msg) => {
+        const formattedMessage = `data: ${msg}\n\n`;
+        console.log('Sending formatted message:', formattedMessage);
+        controller.enqueue(encoder.encode(formattedMessage));
+      };
 
-        // Clean up after 5 minutes
-        setTimeout(() => {
-          clearInterval(heartbeat)
-          controller.close()
-        }, 300000); // 5 minutes
-      } catch (error) {
-        controller.error(error)
-      }
+      // Invia il messaggio iniziale
+      sendMessage(message);
+
+      // Invia un secondo messaggio di test dopo 2 secondi
+      setTimeout(() => {
+        sendMessage('Test message after 2 seconds');
+      }, 2000);
+    },
+    cancel() {
+      console.log('Stream cancelled');
     }
   });
 
   return new Response(customReadable, {
     headers: {
       'Connection': 'keep-alive',
-      'Content-Encoding': 'none',
-      'Cache-Control': 'no-cache, no-transform',
-      'Content-Type': 'text/event-stream; charset=utf-8',
-      'Access-Control-Allow-Origin': '*', // Add CORS support if needed
-    },
-  })
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Access-Control-Allow-Origin': '*'
+    }
+  });
 }
