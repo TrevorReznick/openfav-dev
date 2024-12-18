@@ -239,7 +239,6 @@ const getTags = async () => {
 }
 
 /* @@ -- POST methods -- @@ */
-
 const insertEvent = async (data: any) => {
   const tableName = 'event_log'
   const result = await supabaseInsert(tableName, data)
@@ -252,6 +251,24 @@ const insertEvent = async (data: any) => {
 /* @@ -- PUT methods -- @@ */
 
 const updateEvent = async (data: any, id: string) => {
+  const tableName = 'event_log'
+  const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
+  if (!result.success) {
+    throw new Error(result.error)
+  }
+  return result.data
+}
+
+const updateElement = async (tableName: string, data: any, id: string) => {
+  //const tableName = 'event_log'
+  const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
+  if (!result.success) {
+    throw new Error(result.error)
+  }
+  return result.data
+}
+
+const updateEventCopy = async (data: any, id: string) => {
   const tableName = 'event_log'
   const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
   if (!result.success) {

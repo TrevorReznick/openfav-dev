@@ -15,68 +15,28 @@ export const sendApiRequest = async (fetchFunc) => {
     }
 };
 
-const my_id = 49;
-
-const ids = [66, 65, 64];
-
-const newEvent = {
-    id_event_type: 1,
-    id_event_family: 2,
-};
-
-const updatedEventData = {
-    id: 5,
-    id_event_type: 8,
-    id_event_family: 2,
-};
-
 /* @@ -- GET methods -- @@ */
 
 export const fetchElements = (type: string) => 
     makeRequest(api_endpoint, type)
 
 export const fetchElement = (type: string, id: number) =>
-    makeRequest(api_endpoint, type, { id });
+    makeRequest(api_endpoint, type, { id })
 
-
-/*
-export const fetchAreas = () => 
-    makeRequest(api_endpoint, 'getAreas');
-
-
-export const fetchAreasCategoriesSubCategories = () => 
-    makeRequest(api_endpoint, 'getCategoriesJson');
-
-export const fetchCategories = () => 
-    makeRequest(api_endpoint, 'getCategories');
-
-export const fetchEvents = () => 
-    makeRequest(api_endpoint, 'getEvents'); //TODO
-
-export const fetchSites = () => 
-    makeRequest(api_endpoint, 'getSites');
-
-export const fetchSiteById = (id: number) =>
-    makeRequest(api_endpoint, 'getSiteById', { id });
-
-export const fetchSubCategories = () => 
-    makeRequest(api_endpoint, 'getSubCategories');
-
-export const fetchTags = () => 
-    makeRequest(api_endpoint, 'getTags');
-*/
 
 /* @@ -- POST methods -- @@ */
 
-export const createPostEvent = (data, table) => 
-    makeRequest(api_endpoint, table, {}, 'POST', data)
+export const createPostEvent = async (data) => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', data)
+}
 
 /* @@ -- PUT methods -- @@ */
 
-export const createUpdateEvent = (data: any, table: string) => 
-    makeRequest(api_endpoint, 'updateEvent', { id: updatedEventData.id }, 'PUT', updatedEventData);
+export const createUpdateEvent = async (data: any) => {
+    return makeRequest(api_endpoint, 'updateEvent', {id: data.id }, 'PUT', data)
+}
 
 /* @@ -- DEL methods -- @@ */
 
-export const delEvent = (id: number) => 
+export const deleteEvent = (id: number) => 
     makeRequest(api_endpoint, 'deleteEvent', { id }, 'DELETE', {});
