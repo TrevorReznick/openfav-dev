@@ -44,6 +44,9 @@ const fetchAreasCategoriesSubCategories = () =>
 const fetchCategories = () => 
     makeRequest(api_endpoint, 'getCategories')
 
+    const fetchLists = () => 
+    makeRequest(api_endpoint, 'getLists')
+
 const fetchEvents = () => 
     makeRequest(api_endpoint, 'getEvents') //TODO
 
@@ -83,6 +86,7 @@ const delEvent = async (id: number) => {
 /* @@ -- GET methods -- @@ */
 export const areas = await sendApiRequest(fetchAreas)
 export const categories = await sendApiRequest(fetchCategories)
+export const lists = await sendApiRequest(fetchLists)
 export const getSites = await sendApiRequest(fetchSites)
 export const sites = await sendApiRequest(fetchSites)
 export const site = await sendApiRequest(fetchSiteById)
