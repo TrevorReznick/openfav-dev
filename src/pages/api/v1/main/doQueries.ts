@@ -388,7 +388,7 @@ const deleteEventOld1 = async (data: any) => {
 }
 
 
-const deleteEvent= async (data: any, id: any) => {
+const deleteEvent = async (data: any, id: any) => {
   console.log(data, id)
   const tableName = 'event_log'
   //const my_id = BigInt(id)
