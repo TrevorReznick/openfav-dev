@@ -1,12 +1,14 @@
 ---
 import * as f from '~/api/apiClient'
-
+import SSEClient from '~/components/jsx/ClientSSE'
+import * as store from "~/store";
 import {getSites, tags} from '~/scripts/getSites'
 
+//store.messageStore.set('test')
+
+/* testing apis */
 console.log('firts log', f.all_categories)
-
 console.log('sites refactored', getSites)
-
 console.log('debug tags', tags)
 
 //console.log('debug delete', f.deleteEvent(66))
@@ -15,3 +17,5 @@ console.log('debug tags', tags)
 ---
 
 <h1 class="text-center items-center">API Test Page</h1>
+
+<SSEClient client:load url="https://openfav-dev.vercel.app/api/v1/sse" />

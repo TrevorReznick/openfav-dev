@@ -314,6 +314,24 @@ const updateEvent = async (data: any, id: string) => {
   return result.data
 }
 
+const updateElement = async (tableName: string, data: any, id: string) => {
+  //const tableName = 'event_log'
+  const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
+  if (!result.success) {
+    throw new Error(result.error)
+  }
+  return result.data
+}
+
+const updateEventCopy = async (data: any, id: string) => {
+  const tableName = 'event_log'
+  const result = await supabaseUpdate(tableName, data, (query) => query.eq('id', parseInt(id)))
+  if (!result.success) {
+    throw new Error(result.error)
+  }
+  return result.data
+}
+
 /* @@ -- DEL methods -- @@ */
 
 export const deleteEventNew = async (id: any) => {

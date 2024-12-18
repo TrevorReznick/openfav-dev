@@ -1,0 +1,41 @@
+---
+import {fetchElements, createPostEvent, createUpdateEvent, deleteEvent} from '~/api/apiClientV0'
+
+/*
+'getSiteById'
+'updateEvent'
+*/
+
+const areasData: any = await fetchElements('getAreas')
+//console.log('New Areas:', areasData.data.data)
+
+const categoriesData: any = await fetchElements('getCategories')
+//console.log('New Categories:', categoriesData.data.data)
+
+const categoriesJsonData: any = await fetchElements('getCategoriesJson')
+//console.log('New Area Categories:', categoriesJsonData.data.data)
+
+const eventsData: any = await fetchElements('eventsData')
+//console.log('New Events:', eventsData.data.data)
+
+const sitesData: any = await fetchElements('getSites')
+//console.log('New Sites Categories:', sitesData.data.data)
+
+const subCategoriesData: any = await fetchElements('getSubCategories')
+//console.log('New Sub Categories:', subCategoriesData.data.data)
+
+const tagsData: any = await fetchElements('getTags')
+//console.log('New Tags:', tagsData.data.data)
+
+const updatedEventData = {
+    id: 235,
+    id_event_type: 3,
+    id_event_family: 2,
+}
+
+const doUpdateEvent = await createUpdateEvent(updatedEventData)
+console.log(doUpdateEvent)
+
+const doDeleteEvent = await deleteEvent(235)
+console.log(doDeleteEvent)
+---
