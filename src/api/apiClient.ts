@@ -23,7 +23,7 @@ const my_id = 49
 const ids = [66, 65 , 64]
 
 const newEvent = {
-    id_event_type: 1,
+    id_event_type: 8,
     id_event_family: 2
 }
   

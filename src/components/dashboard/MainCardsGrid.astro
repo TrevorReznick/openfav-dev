@@ -3,7 +3,7 @@
 import { twMerge } from "tailwind-merge"
 import { Icon } from 'astro-icon/components'
 import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
-import { my_test_card, my_test_card1} from '~/api/doCards'
+import { ev_urls_card, ev_lists_card} from '~/api/doCards'
 
 
 //console.log(my_test_card, )
@@ -21,8 +21,8 @@ const {
 
 const updatedItems = [  
   ...items,
-  { type: 'my_test_card' },
-  { type: 'my_test_card1' }
+  { type: 'ev_urls_card' },
+  { type: 'ev_lists_card' }
 ]
 ---
 
@@ -44,10 +44,10 @@ const updatedItems = [
     >
       {updatedItems.map((item) => (
         <div>
-          {item.type === 'my_test_card' ? (
-            <MainHeaderCard {...my_test_card} />
-          ) : item.type === 'my_test_card1' ? (
-            <MainHeaderCard {...my_test_card1} />
+          {item.type === 'ev_qurls_card' ? q(
+            <MainHeaderCard {...ev_urls_card} />
+          ) : item.type === 'ev_lists_card' ? (
+            <MainHeaderCard {...ev_lists_card} />
           ) : (
             <div
               class={twMerge(
