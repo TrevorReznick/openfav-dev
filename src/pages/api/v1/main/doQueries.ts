@@ -55,6 +55,11 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
       if (method !== 'GET') throw new Error('Invalid method for getCategories')
       const getCategoriesData = request ? await request.json() : {}
       return getCategories()
+    
+    case 'getLists':
+        if (method !== 'GET') throw new Error('Invalid method for getCategories')
+        const getListsData = request ? await request.json() : {}
+        return getLists()
   
     case 'getCategoriesJson':
       if (method !== 'GET') throw new Error('Invalid method for getCategoriesJson')
@@ -124,6 +129,23 @@ const getCategories = async () => {
     `,
     order: {
       column: 'id',
+      ascending: true
+    }
+  })
+}
+
+const getLists = async () => {
+  return await supabaseQuery('lists_users', {
+    select: `
+      id,
+      name,
+      id_user,
+      created_at,
+      modified_at,
+      public
+    `,
+    order: {
+      column: 'created_at',
       ascending: true
     }
   })
