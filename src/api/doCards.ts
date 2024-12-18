@@ -78,7 +78,7 @@ my_lists.forEach((item) => {
     item.name,
     'action',
     'action 1',
-    'enzonav'
+    'you'
   );
 })
 
