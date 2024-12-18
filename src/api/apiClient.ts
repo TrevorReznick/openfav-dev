@@ -50,8 +50,8 @@ const fetchEvents = () =>
 const fetchSites = () => 
     makeRequest(api_endpoint, 'getSites')
 
-const fetchSiteById = (id: number) =>
-    makeRequest(api_endpoint, 'getSiteById', { id: my_id })
+const fetchSiteById = (id_: number) =>
+    makeRequest(api_endpoint, 'getSiteById', { id: id_ })
 
 const fetchSubCategories = () => 
     makeRequest(api_endpoint, 'getSubCategories')

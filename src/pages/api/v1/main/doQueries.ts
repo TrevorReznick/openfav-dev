@@ -239,6 +239,7 @@ const getTags = async () => {
 }
 
 /* @@ -- POST methods -- @@ */
+
 const insertEvent = async (data: any) => {
   const tableName = 'event_log'
   const result = await supabaseInsert(tableName, data)

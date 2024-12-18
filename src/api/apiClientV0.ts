@@ -35,10 +35,14 @@ const updatedEventData = {
 export const fetchElements = (type: string) => 
     makeRequest(api_endpoint, type)
 
+export const fetchElement = (type: string, id: number) =>
+    makeRequest(api_endpoint, type, { id });
+
+
 /*
 export const fetchAreas = () => 
     makeRequest(api_endpoint, 'getAreas');
-*/
+
 
 export const fetchAreasCategoriesSubCategories = () => 
     makeRequest(api_endpoint, 'getCategoriesJson');
@@ -60,6 +64,7 @@ export const fetchSubCategories = () =>
 
 export const fetchTags = () => 
     makeRequest(api_endpoint, 'getTags');
+*/
 
 /* @@ -- POST methods -- @@ */
 
@@ -68,7 +73,7 @@ export const createPostEvent = (data, table) =>
 
 /* @@ -- PUT methods -- @@ */
 
-export const createUpdateEvent = () => 
+export const createUpdateEvent = (data: any, table: string) => 
     makeRequest(api_endpoint, 'updateEvent', { id: updatedEventData.id }, 'PUT', updatedEventData);
 
 /* @@ -- DEL methods -- @@ */
