@@ -37,15 +37,14 @@ export async function makeRequest<T = unknown>(
         const result = await response.json()
         if (!response.ok) {
             //throw new Error('Server responded but give an errror')
-            console.log('Server responded but give an errror', result)
+            console.log('Server responded but give an error', result)
         }
-
         
         return { success: true, data: result }
 
     } catch (error) {
         
-        console.error(`There was a problem with the request:`, error);
+        console.error(`Client error received:`, error);
         return { success: false, error: (error as Error).message }
     }
 }

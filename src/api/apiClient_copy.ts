@@ -19,12 +19,11 @@ export const sendApiRequest = async (fetchFunc) => {
 }
 
 const my_id = 49
-const my_id_new: number = 121
 
 const ids = [66, 65 , 64]
 
 const newEvent = {
-    id_event_type: 8,
+    id_event_type: 1,
     id_event_family: 2
 }
   
@@ -45,17 +44,14 @@ const fetchAreasCategoriesSubCategories = () =>
 const fetchCategories = () => 
     makeRequest(api_endpoint, 'getCategories')
 
-    const fetchLists = () => 
-    makeRequest(api_endpoint, 'getLists')
-
 const fetchEvents = () => 
     makeRequest(api_endpoint, 'getEvents') //TODO
 
 const fetchSites = () => 
     makeRequest(api_endpoint, 'getSites')
 
-const fetchSiteById = (id_: number) =>
-    makeRequest(api_endpoint, 'getSiteById', { id: id_ })
+const fetchSiteById = (id: number) =>
+    makeRequest(api_endpoint, 'getSiteById', { id: my_id })
 
 const fetchSubCategories = () => 
     makeRequest(api_endpoint, 'getSubCategories')
@@ -65,8 +61,8 @@ const fetchTags = () =>
 
 /* @@ -- POST methods -- @@ */
 
-export const createPostEvent = async (data) => {
-    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', data)
+const createPostEvent = async () => {
+    return makeRequest(api_endpoint, 'insertEvent', {}, 'POST', newEvent)
 }
 
 /* @@ -- PUT methods -- @@ */
@@ -77,27 +73,8 @@ const createUpdateEvent = async () => {
 
 /* @@ -- DEL methods -- @@ */
 
-const delEventNew = async (id: number) => {
-    //console.log('Client id:', id) // Debug log 5
-    
-    if (!id) {
-      throw new Error('ID is required for deletion')
-    }
-    
-    // Make sure we're passing the id in the correct format
-    const response = await makeRequest(
-      api_endpoint, 
-      'deleteEvent', 
-      { id }, // Simplified object passing
-      'DELETE'
-    );
-    
-    console.log('Client api delEvent response:', response) // Debug log 6
-    return response
-}
-
-const delEvent = async (id_) => {
-    return makeRequest(api_endpoint, 'deleteEvent', {id: id_ }, 'DELETE')
+const delEvent = async (id: number) => {
+    return makeRequest(api_endpoint, 'deleteEvent', {id: id }, 'DELETE', {})
 }
   
    
@@ -106,7 +83,6 @@ const delEvent = async (id_) => {
 /* @@ -- GET methods -- @@ */
 export const areas = await sendApiRequest(fetchAreas)
 export const categories = await sendApiRequest(fetchCategories)
-export const lists = await sendApiRequest(fetchLists)
 export const getSites = await sendApiRequest(fetchSites)
 export const sites = await sendApiRequest(fetchSites)
 export const site = await sendApiRequest(fetchSiteById)
@@ -121,12 +97,7 @@ export const insertEvent = await sendApiRequest(createPostEvent)
 export const updateEvent = await sendApiRequest(createUpdateEvent)
 
 /* @@ -- DEL methods -- @@ */
-//export const deleteEvent = await sendApiRequest(delEvent)
-//export const deleteEvent = (id: number) => sendApiRequest(() => delEvent(id))
-//await deleteEvent(66)
-
-await delEvent(my_id_new) // Pass the ID when calling
-
+export const deleteEvent = await sendApiRequest(delEvent)
   
 
 

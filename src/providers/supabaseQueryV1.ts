@@ -75,10 +75,12 @@ export async function supabaseInsert<T extends Record<string, any>>(
 }
 
 export async function supabaseUpdate<T extends Record<string, any>>(
+
     tableName: string,
     data: Partial<T>,
-    filter: (query: PostgrestFilterBuilder<T, T, any>) => PostgrestFilterBuilder<T, T, any>
+    filter: (query: PostgrestFilterBuilder<any, T, any>) => PostgrestFilterBuilder<any, T, any>
 ): Promise<ApiResponse<T>> {
+
     try {
         let query = supabase.from(tableName).update(data);
 
@@ -98,6 +100,39 @@ export async function supabaseUpdate<T extends Record<string, any>>(
     } catch (error) {
         console.error('Supabase update error:', error);
         return { success: false, error: (error as Error).message };
+    }
+}
+
+export async function supabaseDelete<T extends Record<string, any>>(
+    tableName: string,
+    filter: (query: PostgrestFilterBuilder<any, T, any>) => PostgrestFilterBuilder<any, T, any>
+): Promise<ApiResponse<T>> {
+
+    try {
+
+        let query = supabase.from(tableName).delete()
+
+        if (filter) {
+
+            query = filter(query)
+            
+        }
+
+        const { data: deletedData, error } = await query.select()
+
+        if (error) throw error
+
+        if (!deletedData || deletedData.length === 0) {
+            return { success: false, error: 'No rows were deleted' }
+        }
+
+        return { success: true, data: deletedData[0] as T }
+
+    } catch (error) {
+
+        console.error('Supabase delete error:', error)
+        return { success: false, error: (error as Error).message }
+
     }
 }
 
