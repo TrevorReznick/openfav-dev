@@ -1,6 +1,6 @@
-import type { ListType, MyIconType, ActionType, ActivityItem } from "~/types";
-import { CardGenerator } from "~/scripts/cardGenerator";
-import type { ModifiedCardProps } from "~/scripts/cardGenerator";
+import type { ListType, MyIconType, ActionType, ActivityItem } from '~/types';
+import { CardGenerator } from '~/scripts/cardGenerator';
+import type { ModifiedCardProps } from '~/scripts/cardGenerator';
 
 const cardGenerator = CardGenerator.getInstance();
 
@@ -14,7 +14,7 @@ type CardData = {
 };
 
 const createCardClosure = (initialCardData: CardData) => {
-  let cardData = { ...initialCardData };
+  let cardData = { ...initialCardData }
 
   const addActivity = (
     action: ActionType,
@@ -23,18 +23,18 @@ const createCardClosure = (initialCardData: CardData) => {
     username: string | null
   ) => {
     let actionIcon: MyIconType;
-    let url: string | null = null;
+    let url: string | null = null
 
     switch (cardData.typeList) {
-      case "urls":
-        actionIcon = "link";
+      case 'urls':
+        actionIcon = 'link';
         url = _url;
         break;
-      case "lists":
-        actionIcon = "folder";
+      case 'lists':
+        actionIcon = 'folder';
         break;
       default:
-        actionIcon = "folder";
+        actionIcon = 'folder';
     }
 
     const activity: ActivityItem = {
@@ -46,8 +46,8 @@ const createCardClosure = (initialCardData: CardData) => {
       timestamp: new Date().toISOString(),
     };
 
-    cardData.activities.push(activity);
-    return activity;
+    cardData.activities.push(activity)
+    return activity
   };
 
   return {
@@ -73,7 +73,7 @@ export const createCard = (
     typeList: type,
     cardTitle: null,
     action_url: null,
-    cardIcon: "folder",
+    cardIcon: 'folder',
     activities: [],
   };
 
@@ -83,5 +83,5 @@ export const createCard = (
 };
 
 // Example usage:
-export const createUrlsCard = (name: string) => createCard(name, "urls");
-export const createListsCard = (name: string) => createCard(name, "lists");
+export const createUrlsCard = (name: string) => createCard(name, 'urls');
+export const createListsCard = (name: string) => createCard(name, 'lists');
