@@ -23,7 +23,7 @@ export const iconMap: Record<MyIconType, React.FC<LucideProps>> = {
     star: Star
 }
 
-console.log('hey ' + cardIcon)
+console.log('debug icon ' + cardIcon)
 
 const IconComponent = iconMap[cardIcon as MyIconType] || iconMap.link
 
@@ -48,10 +48,11 @@ const IconComponent = iconMap[cardIcon as MyIconType] || iconMap.link
                 <span class="font-medium">{`${activity.name}: `}</span>{activity.action}
               </p>
               <div class="flex items-center gap-1 mt-1 text-sm text-gray-500">
-                {activity.timestamp ? (
-                  <span>{activity.timestamp}</span>
-                ) : activity.description ? (
+                {
+                  activity.description ? (
                   <span>{activity.description}</span>
+                ) : activity.timestamp ? (
+                  <span>{activity.timestamp}</span>
                 ) : 'Noting interesting'}
               </div>
             </div>

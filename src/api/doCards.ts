@@ -50,9 +50,9 @@ const listsEvents = events.filter((event) => {
 listsEvents.forEach((event) => {
   evListsCard.addActivity(
     event.event_type.event_description,
-    'action',
-    'action 1',
-    'enzonav'
+    null,
+    null,
+    null
   );
 })
 
@@ -76,9 +76,9 @@ listsCard.updateCard({
 my_lists.forEach((item) => {
   listsCard.addActivity(
     item.name,
-    'action',
-    'action 1',
-    'you'
+    item.description,
+    item.timestamp,
+    null
   );
 })
 
