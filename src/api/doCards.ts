@@ -85,7 +85,31 @@ my_lists.forEach((item) => {
 export const lists_card = listsCard.getCardData()
 
 
+const activityFeedCard = createUrlsCard('my-activity-feed-card')
+
+activityFeedCard.updateCard({
+  cardTitle: 'Activities Summary',
+  action_url: '/last-insertions',
+  cardIcon: 'activity',
+})
+
 /*
+export type ActionType = 
+    'Created List' 
+    | 'Updated List' 
+    | 'Deleted List' 
+    | 'Added link'
+    | 'Updated link'
+    | 'Deleted link'
+    | undefined
+
+export type ListType =
+    'urls'
+    | 'lists'
+    | 'favourites'
+    | 'suggestions'
+    | 'activities'
+    | undefined
 console.log(urlsCard.getCardData());
 console.log(listsCard.getCardData());
 */
