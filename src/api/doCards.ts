@@ -94,6 +94,12 @@ activityFeedCard.updateCard({
 })
 
 /*
+const addActivity = (
+  action: ActionType,
+  description: string | null,
+  _url: string | null,
+  username: string | null
+)
 export type ActionType = 
     'Created List' 
     | 'Updated List' 

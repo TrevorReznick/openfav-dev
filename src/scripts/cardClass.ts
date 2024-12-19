@@ -2,7 +2,7 @@ import type { ListType, MyIconType, ActionType, ActivityItem } from '~/types';
 import { CardGenerator } from '~/scripts/cardGenerator';
 import type { ModifiedCardProps } from '~/scripts/cardGenerator';
 
-const cardGenerator = CardGenerator.getInstance();
+const cardGenerator = CardGenerator.getInstance()
 
 type CardData = {
   cardName: string;
@@ -22,19 +22,23 @@ const createCardClosure = (initialCardData: CardData) => {
     _url: string | null,
     username: string | null
   ) => {
-    let actionIcon: MyIconType;
+    let actionIcon: MyIconType
     let url: string | null = null
 
     switch (cardData.typeList) {
       case 'urls':
-        actionIcon = 'link';
-        url = _url;
-        break;
+        actionIcon = 'link'
+        url = _url
+        break
+      case 'activities':
+          actionIcon = 'activity'
+          url = _url
+          break
       case 'lists':
-        actionIcon = 'folder';
-        break;
+        actionIcon = 'folder'
+        break
       default:
-        actionIcon = 'folder';
+        actionIcon = 'folder'
     }
 
     const activity: ActivityItem = {
@@ -83,5 +87,6 @@ export const createCard = (
 };
 
 // Example usage:
-export const createUrlsCard = (name: string) => createCard(name, 'urls');
-export const createListsCard = (name: string) => createCard(name, 'lists');
+export const createUrlsCard = (name: string) => createCard(name, 'urls')
+export const createListsCard = (name: string) => createCard(name, 'lists')
+export const createActivityCard = (name: string) => createCard(name, 'activities')
