@@ -196,7 +196,8 @@ const getLists = async () => {
       id_user,
       created_at,
       modified_at,
-      public
+      public,
+      description
     `,
     order: {
       column: 'created_at',
