@@ -72,7 +72,8 @@ const getInfo = async (url) => {
 const getEventsTest = async () => {
   return supabaseQuery('event_log', {
     select: `
-      id,      
+      id,
+      event_data,
       event_type (        
         event_type, 
         event_description

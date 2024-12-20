@@ -1,12 +1,15 @@
 import { createUrlsCard, createListsCard } from '~/scripts/cardClass'
 import * as api from '~/api/apiClient'
 import {events} from '~/api/old/doApis'
-
+import * as store from '~/store'
+import {timeManager} from '~/scripts/third-parts/dateFormatter'
 
 console.log('Featured Events:', events)
 console.log('Featured Lists:', api.lists.data)
 
 /* get @@ remote data @@ */
+
+const user_name = store.user_name.get()
 
 //const my_events: any = events
 const my_events: any = events.slice(0, 5)
@@ -28,8 +31,8 @@ urlsEvents.forEach((event) => {
   evUrlsCard.addActivity(
     event.event_type.event_description,
     'action',
-    'action 1',
-    'enzonav'
+    'action 1',//TODO
+    user_name
   )
 })
 
@@ -48,11 +51,19 @@ const listsEvents = events.filter((event) => {
 })
 
 listsEvents.forEach((event) => {
+  if (!event.created_at) {
+    console.error('Timestamp is undefined or empty for item:', event);
+    return // Salta l'elemento corrente se il timestamp è undefined o vuoto
+  }
+
+  const timestamp = event.created_at.toString();
+  const dateManager = timeManager(timestamp)
+  console.log('my date', dateManager.format('dd MMMM yyyy'))
   evListsCard.addActivity(
     event.event_type.event_description,
     null,
-    null,
-    null
+    null,//TODO
+    user_name
   );
 })
 
@@ -74,12 +85,22 @@ listsCard.updateCard({
 */
 
 my_lists.forEach((item) => {
+
+  if (!item.created_at) {
+    console.error('Timestamp is undefined or empty for item:', item);
+    return // Salta l'elemento corrente se il timestamp è undefined o vuoto
+  }
+
+  const timestamp = item.created_at.toString();
+  const dateManager = timeManager(timestamp)
+  console.log('my date', dateManager.format('dd MMMM yyyy'))
+
   listsCard.addActivity(
     item.name,
     item.description,
-    item.timestamp,
-    null
-  );
+    dateManager.format('dd MMMM yyyy'),//date.format('dd MMMM yyyy HH:mm:ss'),//TODO
+    user_name
+  )
 })
 
 export const lists_card = listsCard.getCardData()
