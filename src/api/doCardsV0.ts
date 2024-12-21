@@ -1,11 +1,11 @@
 import { createUrlsCard, createListsCard, createActivityCard } from '~/scripts/cardClass'
-import * as api from '~/api/apiClient'
+//import * as api from '~/api/old/apiClientV1'
 //import { events } from '~/api/old/doApis'
-import * as apiV0 from '~/api/apiClientV0'
+import * as api from '~/api/apiClient'
 
 
-const get_events: any = await apiV0.fetchElements('getEvents')
-const get_lists: any = await apiV0.fetchElements('getLists')
+const get_events: any = await api.fetchElements('getEvents')
+const get_lists: any = await api.fetchElements('getLists')
 
 console.log('new api consumer', get_lists.data.data)
 
