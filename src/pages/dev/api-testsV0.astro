@@ -1,6 +1,12 @@
 ---
 import {fetchElements, createPostEvent, createUpdateEvent, deleteEvent} from '~/api/apiClientV0'
 
+
+
+
+const eventsV0 = await fetchElements('getEvents')
+console.log('new api consumer', eventsV0.data)
+
 /*
 'getSiteById'
 'updateEvent'
@@ -15,7 +21,7 @@ const categoriesData: any = await fetchElements('getCategories')
 const categoriesJsonData: any = await fetchElements('getCategoriesJson')
 //console.log('New Area Categories:', categoriesJsonData.data.data)
 
-const eventsData: any = await fetchElements('eventsData')
+//const eventsData: any = await fetchElements('eventsData')
 //console.log('New Events:', eventsData.data.data)
 
 const sitesData: any = await fetchElements('getSites')

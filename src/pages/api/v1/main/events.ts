@@ -4,7 +4,9 @@ import { supabase } from "~/providers/supabase"
 export const GET: APIRoute = async () => {
   const { data, error } = await supabase.from("event_log").select(
     `
-      id,      
+      id,
+      user_id,
+      event_data,
       event_type (        
         event_type, 
         event_description

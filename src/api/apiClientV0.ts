@@ -1,6 +1,6 @@
-import { makeRequest } from '~/scripts/apiBuilder';
+import { makeRequest } from '~/scripts/apiBuilder'
 
-const api_endpoint = 'main/doQueries';
+const api_endpoint = 'main/doQueries'
 
 export const sendApiRequest = async (fetchFunc) => {
     try {
@@ -8,7 +8,7 @@ export const sendApiRequest = async (fetchFunc) => {
         if (response.success) {
             return response.data;
         } else {
-            throw new Error("Errore nella risposta dell'API");
+            throw new Error("Errore nella risposta dell'API")
         }
     } catch (error) {
         throw error;
