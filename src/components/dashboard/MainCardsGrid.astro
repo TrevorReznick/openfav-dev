@@ -3,12 +3,12 @@
 import { twMerge } from "tailwind-merge"
 import { Icon } from 'astro-icon/components'
 import MainHeaderCard from '~/components/dashboard/sub/MainHeaderCard.astro'
-import { ev_urls_card, ev_lists_card, lists_card} from '~/api/doCards'
+import { ev_urls_card, ev_lists_card, lists_card} from '~/api/doCardsV0'
 
 
 //console.log(my_test_card, )
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props
 
 const {
   container: containerClass = '',
@@ -17,7 +17,7 @@ const {
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
   action: actionClass = '',
-} = classes;
+} = classes
 
 const updatedItems = [  
   ...items,
