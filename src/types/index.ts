@@ -47,7 +47,16 @@ export interface ActivityItem {
     timestamp?: string | null
     name?: string | null
     description?: string | null
-    url?: string | null
+    url?: string | null 
+    sitesLoaded?: number
+    sitesCancelled?: number
+    sitesModified?: number
+    favoritesModified?: number
+    favoritesCancelled?: number
+    favoritesUpdated?: number
+    listsDeleted?: number
+    listsInserted?: number
+    listsModified?: number
 }
 
 /* end new */
