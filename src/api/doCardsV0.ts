@@ -3,21 +3,20 @@ import * as api from '~/api/apiClient'
 //import { events } from '~/api/old/doApis'
 import * as apiV0 from '~/api/apiClientV0'
 
-/*
-console.log('Featured Events:', events)
-console.log('Featured Lists:', api.lists.data)
-*/
-
 
 const get_events: any = await apiV0.fetchElements('getEvents')
-console.log('new api consumer', get_events.data.data)
+const get_lists: any = await apiV0.fetchElements('getLists')
+
+console.log('new api consumer', get_lists.data.data)
+
 const events = get_events.data.data
+const my_events: any = events.slice(0, 5)
 
 /* get @@ remote data @@ */
 
 // const my_events: any = events
-const my_events: any = events.slice(0, 5)
-const my_lists: any = api.lists.data
+
+const my_lists: any = get_lists.data.data
 
 /* Create URLs Card */
 const evUrlsCard = createUrlsCard('my-url-card')
