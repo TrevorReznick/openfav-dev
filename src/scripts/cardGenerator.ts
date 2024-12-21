@@ -17,7 +17,7 @@ export class CardGenerator {
     if (!CardGenerator.instance) {
       CardGenerator.instance = new CardGenerator()
     }
-    return CardGenerator.instance;
+    return CardGenerator.instance
   }
 
   public updateCard(cardName: string, updates: Partial<ModifiedCardProps>) {
