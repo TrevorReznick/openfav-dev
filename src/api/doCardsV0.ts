@@ -1,13 +1,17 @@
 import { createUrlsCard, createListsCard, createActivityCard } from '~/scripts/cardClass'
 import * as api from '~/api/apiClient'
-import { events } from '~/api/old/doApis'
+//import { events } from '~/api/old/doApis'
 import * as apiV0 from '~/api/apiClientV0'
 
+/*
 console.log('Featured Events:', events)
 console.log('Featured Lists:', api.lists.data)
+*/
 
-const eventsV0 = await apiV0.fetchElements('getElements')
-console.log('new api consumer', eventsV0)
+
+const get_events: any = await apiV0.fetchElements('getEvents')
+console.log('new api consumer', get_events.data.data)
+const events = get_events.data.data
 
 /* get @@ remote data @@ */
 
