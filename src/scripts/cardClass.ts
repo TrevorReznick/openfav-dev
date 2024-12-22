@@ -20,7 +20,8 @@ const createCardClosure = (initialCardData: CardData) => {
     action: ActionType,
     description: string | null,
     _url: string | null,
-    username: string | null
+    username: string | null,
+    timestamp: string | null | undefined
   ) => {
     let actionIcon: MyIconType
     let url: string | null = null
@@ -32,6 +33,8 @@ const createCardClosure = (initialCardData: CardData) => {
         break
       case 'lists':
         actionIcon = 'folder'
+        url = null
+        break
       case 'activities':
         actionIcon = 'clock'
         break
@@ -44,8 +47,8 @@ const createCardClosure = (initialCardData: CardData) => {
       description,
       actionIcon,
       url,
-      name: username, // Assuming we want to use cardName as the activity name
-      timestamp: new Date().toISOString(),
+      name: username,
+      timestamp // Assuming we want to use cardName as the activity name
     }
 
     cardData.activities.push(activity)

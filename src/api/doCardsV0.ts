@@ -2,12 +2,14 @@ import { createUrlsCard, createListsCard, createActivityCard } from '~/scripts/c
 //import * as api from '~/api/old/apiClientV1'
 //import { events } from '~/api/old/doApis'
 import * as api from '~/api/apiClient'
+import { timeManager } from '~/scripts/third-parts/dateFormatter'
 
 
 const get_events: any = await api.fetchElements('getEvents')
 const get_lists: any = await api.fetchElements('getLists')
 
 console.log('new api consumer', get_lists.data.data)
+console.log('new api consumer', get_events.data.data)
 
 const events = get_events.data.data
 const my_events: any = events.slice(0, 5)
@@ -31,12 +33,25 @@ const urlsEvents = my_events.filter((event) => {
   return event.event_type.event_type === 'urls'
 })
 
+/*
+action,
+description,
+actionIcon,
+url,
+name: username,
+timestamp
+*/
+
 urlsEvents.forEach((event) => {
+  const timestamp = event.event_data
+  const dateTimeManager = timeManager(timestamp)
+  const formattedDate = dateTimeManager.format('dd MMMM yyyy')
   evUrlsCard.addActivity(
     event.event_type.event_description,
-    event.event_type.event_description, // Usiamo la descrizione dell'evento come azione
-    event.event_type.event_description, // Usiamo la descrizione dell'evento come URL
-    'enzonav'
+    null, 
+    'https://www.example.com',
+    null, // Usiamo la descrizione dell'evento come URL
+    formattedDate
   )
 })
 
@@ -56,11 +71,15 @@ const listsEvents = events.filter((event) => {
 })
 
 listsEvents.forEach((event) => {
+  const timestamp = event.event_data
+  const dateTimeManager = timeManager(timestamp)
+  const formattedDate = dateTimeManager.format('dd MMMM yyyy')
   evListsCard.addActivity(
     event.event_type.event_description,
-    event.event_type.event_description, // Usiamo la descrizione dell'evento come azione
-    event.event_type.event_description, // Usiamo la descrizione dell'evento come URL
-    'enzonav'
+    null,
+    'https://www.example.com',
+    'enzonav',
+    formattedDate   
   )
 })
 
@@ -78,7 +97,7 @@ listsCard.updateCard({
 my_lists.forEach((item) => {
   listsCard.addActivity(
     item.name,
-    item.name, // Usiamo il nome dell'elemento come azione
+    item.description, // Usiamo il nome dell'elemento come azione
     item.name, // Usiamo il nome dell'elemento come URL
     'you'
   )
