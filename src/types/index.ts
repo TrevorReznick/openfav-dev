@@ -9,6 +9,7 @@ export type ActionType =
     | 'Added link'
     | 'Updated link'
     | 'Deleted link'
+    | 'Last activity'
     | undefined
 
 export type ListType =

@@ -98,9 +98,96 @@ my_lists.forEach((item) => {
   listsCard.addActivity(
     item.name,
     item.description, // Usiamo il nome dell'elemento come azione
-    item.name, // Usiamo il nome dell'elemento come URL
-    'you'
+    null, // Usiamo il nome dell'elemento come URL
+    null,
+    null
   )
 })
 
 export const lists_card = listsCard.getCardData()
+
+/* Create Summary Card */
+
+const summaryCard = createListsCard('summary-card')
+
+/*
+action,
+description,
+actionIcon,
+url,
+name: username,
+timestamp
+*/
+
+const now = new Date().toISOString();
+const formattedDate = timeManager(now).format('dd MMMM yyyy')
+
+summaryCard.updateCard({
+  cardTitle: 'Activity Summary',
+  action_url: '/activity-summary',
+  cardIcon: 'activity',
+})
+
+let urlOperations = 0;
+let listOperations = 0;
+let favoriteOperations = 0;
+let lastActivityTimestamp = ''
+
+events.forEach((event) => {
+  const timestamp = event.event_data
+  const formattedDate = timeManager(timestamp).format('dd MMMM yyyy')
+
+  if (event.event_type.event_type === 'urls') {
+    urlOperations++
+  } else if (event.event_type.event_type === 'lists') {
+    listOperations++
+  }
+
+  if (!lastActivityTimestamp || new Date(timestamp) > new Date(lastActivityTimestamp)) {
+    lastActivityTimestamp = formattedDate
+  }
+})
+
+if (!lastActivityTimestamp) {
+  lastActivityTimestamp = timeManager(new Date().toISOString()).format('dd MMMM yyyy')
+}
+
+summaryCard.updateCard({
+  cardTitle: 'Activity Summary',
+  action_url: '/activity-summary',
+  cardIcon: 'activity',
+});
+
+summaryCard.addActivity(
+  'Added link',
+  `Total URL operations: ${urlOperations}`,
+  null,
+  'you',
+  lastActivityTimestamp
+)
+
+summaryCard.addActivity(
+  'Created List',
+  `Total list operations: ${listOperations}`,
+  null,
+  'you',
+  lastActivityTimestamp
+);
+
+summaryCard.addActivity(
+  undefined,
+  `Total favorite operations: ${favoriteOperations}`,
+  null,
+  'you',
+  lastActivityTimestamp
+);
+
+summaryCard.addActivity(
+  'Last activity',
+  `Last activity on: ${lastActivityTimestamp}`,
+  null,
+  'you',
+  lastActivityTimestamp
+);
+
+export const summary_card = summaryCard.getCardData()
