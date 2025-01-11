@@ -23,7 +23,7 @@ export async function postRequest<T>(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-    });
+    })
 
     if (!response.ok) {
       return {

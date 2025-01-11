@@ -77,7 +77,9 @@ export const onRequest = defineMiddleware(
         "refreshToken": cookies.get('sb-refresh-token'),
         "userId": data.user?.id
       }
-      await postRequest(redis_payload)
+      console.log('lauch openfav-node redis api')
+      const result = await postRequest(redis_payload)
+      console.log('result', result)
 
       /*
       const accessToken = cookies.get('sb-access-token');
