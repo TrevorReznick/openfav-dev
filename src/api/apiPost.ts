@@ -31,12 +31,22 @@ export async function postRequest<T>(
         error: `HTTP Error: ${response.status} - ${response.statusText}`,
       };
     }
-
-    const data = (await response.json()) as T
-
-    return {
-      success: true,
-      data,
+    
+    const rawResponse = await response.text()
+    
+    // Try to parse as JSON first
+    try {
+      const data = JSON.parse(rawResponse)
+      return {
+        success: true,
+        data,
+      }
+    } catch {
+      // If parsing fails, treat as plain text
+      return {
+        success: true,
+        data: { message: rawResponse } as T,
+      }
     }
   } catch (error) {
     return {

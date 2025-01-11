@@ -73,11 +73,13 @@ export const onRequest = defineMiddleware(
         secure: true,
       })
       const redis_payload = {
-        "accessToken": cookies.get('sb-access-token'),
-        "refreshToken": cookies.get('sb-refresh-token'),
+        "accessToken": cookies.get('sb-access-token')?.value || null,
+        "refreshToken": cookies.get('sb-refresh-token')?.value || null,
         "userId": data.user?.id
       }
       console.log('lauch openfav-node redis api')
+      //console.log('redis payload', redis_payload)
+      console.log('Sending payload:', JSON.stringify(redis_payload, null, 2))
       const result = await postRequest(redis_payload)
       console.log('result', result)
 
