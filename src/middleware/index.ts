@@ -1,6 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { supabase } from '~/providers/supabase';
 import * as store from '~/store'
+import {postRequest} from '~/api/apiPost'
 //import { id, email, user_name, isAuthenticated, currentPath, previousPath } from '../store'
 
 const protectedRoutes = ['/protected/page', '/protected/dashboard'];
@@ -65,12 +66,23 @@ export const onRequest = defineMiddleware(
         sameSite: 'strict',
         path: '/',
         secure: true,
-      });
+      })
       cookies.set('sb-refresh-token', data?.session?.refresh_token!, {
         sameSite: 'strict',
         path: '/',
         secure: true,
-      });
+      })
+      const redis_payload = {
+        "accessToken": cookies.get('sb-access-token'),
+        "refreshToken": cookies.get('sb-refresh-token'),
+        "userId": data.user?.id
+      }
+      await postRequest(redis_payload)
+
+      /*
+      const accessToken = cookies.get('sb-access-token');
+      const refreshToken = cookies.get('sb-refresh-token');
+      */
     }
 
     if (
