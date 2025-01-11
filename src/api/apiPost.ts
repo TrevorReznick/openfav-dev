@@ -16,6 +16,7 @@ export async function postRequest<T>(
   payload: Record<string, any>
 ): Promise<ApiResponse<T>> {
   try {
+    console.log('fetching redis request')
     const url = redis_session_api_url
     const response = await fetch(url, {
       method: 'POST',
@@ -26,6 +27,7 @@ export async function postRequest<T>(
     })
 
     if (!response.ok) {
+      console.log('error response')
       return {
         success: false,
         error: `HTTP Error: ${response.status} - ${response.statusText}`,
@@ -37,18 +39,21 @@ export async function postRequest<T>(
     // Try to parse as JSON first
     try {
       const data = JSON.parse(rawResponse)
+      console.log('success set redis tokens')
       return {
         success: true,
         data,
       }
     } catch {
       // If parsing fails, treat as plain text
+      console.log('success set redis tokens')
       return {
         success: true,
         data: { message: rawResponse } as T,
       }
     }
   } catch (error) {
+    console.log('request error')
     return {
       success: false,
       error,
