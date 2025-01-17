@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 // Importazione dinamica dei componenti
 const components = {
-  GridIconComponent: (await import('~/components/dev/new/GridIconComponent.astro')).default,
+  GridIconComponent: (await import('~/components/dev/new/GridIconComponentV0.astro')).default,
   CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
 };
 
@@ -72,10 +72,10 @@ const {
     }
     <!-- Icon Blocks -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <!-- Dynamic Components -->
-        {componentList.map(({ name, props = {} }) => {
-          const Component = components[name]
-          return <Component {...props} />
-        })}
+      <!-- Dynamic Components -->
+      {componentList.map(({ name, props = {} }) => {
+        const Component = components[name]
+        return <Component {...props} />
+      })}
     </div>
 </section>
