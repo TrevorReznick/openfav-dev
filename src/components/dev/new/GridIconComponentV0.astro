@@ -1,8 +1,11 @@
-<!-- inspired by tailwindcss.com -->
+---
+import { TAGS_CHIPS } from "~/config/styleCostants";
+---
+
 <ul class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
     <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">
         <div class="flex px-3 py-3">
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <div class="max-w-sm main-border-gray-darker rounded-xl bg-bgDark3 px-6 py-4  text-center">
                 <img class="w-full" src="https://tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
@@ -12,9 +15,9 @@
                     </p>
                 </div>
                 <div class="px-6 py-4">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#photography</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
+                    <span class=`${TAGS_CHIPS}`>#photography</span>
+                    <span class=`${TAGS_CHIPS}`>#travel</span>
+                    <span class=`${TAGS_CHIPS}`>#winter</span>
                 </div>
             </div>
         </div>

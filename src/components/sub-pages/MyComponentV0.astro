@@ -3,9 +3,10 @@ import { twMerge } from "tailwind-merge";
 
 // Importazione dinamica dei componenti
 const components = {
+  NewCards: (await import('~/components/dev/new/Features1.astro')).default,
   GridIconComponent: (await import('~/components/dev/new/GridIconComponentV0.astro')).default,
   CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
-};
+}
 
 interface Props {
   user_name?: string;
@@ -32,8 +33,9 @@ const {
   content = await Astro.slots.render("content"),
   tagline = await Astro.props.tagline?.("tagline"),
   components: componentList = [
-    { name: 'GridIconComponent' },
-    { name: 'CallToActionNew' }
+    { name: 'NewCards'},
+    { name: 'GridIconComponent'},
+    { name: 'CallToActionNew'}
   ],
   classes = {},
 } = Astro.props;

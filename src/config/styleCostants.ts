@@ -235,3 +235,5 @@ export const EXAMPLES = {
         RESPONSIVE.LAYOUT.GAP.SM
     )
 };
+
+export const TAGS_CHIPS = "inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
