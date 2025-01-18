@@ -96,6 +96,9 @@ const {
       if (name === 'SiteCards') {
         return <Component {...props} sites={sites} />
       }
+      if (name === 'HeaderSearch') {
+        return <Component {...props} sites={sites}  currentView="grid" />
+      }
       return <Component {...props} sites={sites} />
     })}
   </div>
