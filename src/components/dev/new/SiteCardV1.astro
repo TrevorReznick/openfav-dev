@@ -1,0 +1,88 @@
+---
+import { Globe, Clock, Tag, ExternalLink } from 'lucide-react';
+import { CARD } from '~/config/cardCostantsNew'
+
+interface SiteData {
+  id: string;
+  description: string;
+  icon: string;
+  image: string;
+  logo: string;
+  name: string;
+  title: string;
+  url: string;
+  area: string;
+  categoria: string;
+  tags: { id: string; name: string }[];
+  ratings: any[];
+  AI_think: any;
+  AI_summary: string;
+  id_provider: string;
+}
+
+interface Props {
+  sites: SiteData[]
+}
+
+const placeholder = '/placeholder.svg'
+
+const { sites = [] } = Astro.props
+---
+
+<div class={CARD.GRID}>
+  {sites.map((site, index) => (
+    <div class={`${CARD.CONTAINER} ${CARD.COLORS.VARIANTS[index % CARD.COLORS.VARIANTS.length]}`}>
+      <div class={CARD.IMAGE.WRAPPER}>
+        <img 
+          src={site.image || placeholder} 
+          alt={site.title}
+          class={CARD.IMAGE.IMG}
+          loading="lazy"
+        />
+      </div>
+      <div class={CARD.CONTENT.WRAPPER}>
+        <div class={CARD.CONTENT.HEADER}>
+          <h3 class={CARD.TYPOGRAPHY.TITLE}>{site.title}</h3>
+          <a 
+            href={site.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <Globe className="w-5 h-5" />
+          </a>
+        </div>
+        
+        <div class={CARD.CONTENT.BODY}>
+          <p class={CARD.TYPOGRAPHY.DESCRIPTION}>{site.description}</p>
+          <div class={CARD.TAGS.CONTAINER}>
+            {site.tags.map((tag) => (
+              <span class={CARD.TAGS.TAG}>#{tag.name}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class={CARD.CONTENT.FOOTER}>
+          <div class={CARD.META.CONTAINER}>
+            <div class={CARD.META.INFO}>
+              <img 
+                src={site.logo || '/img/placeholder-logo.jpg'} 
+                alt={`${site.name} logo`}
+                class={CARD.META.LOGO}
+                loading="lazy"
+              />
+              <span class={CARD.TYPOGRAPHY.URL}>{site.name}</span>
+            </div>
+            <div class="flex items-center">
+              <Clock className="w-4 h-4 mr-1" />
+              <time class={CARD.META.DATE}>
+                {new Date().toLocaleDateString()}
+              </time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
