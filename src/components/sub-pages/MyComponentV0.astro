@@ -3,8 +3,10 @@ import { twMerge } from "tailwind-merge"
 import type {SiteData} from '~/types/siteData'
 import {getSites} from '~/scripts/getSites'
 
+
 // Importazione dinamica dei componenti
 const components = {
+  HeaderSearch: (await import('~/components/sub-pages/main-sites/sub/HeaderSearch.astro')).default,
   SiteCards: (await import('~/components/dev/new/SiteCardV1.astro')).default,  
   GridIconComponent: (await import('~/components/dev/new/GridIconComponentV0.astro')).default,
   CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
@@ -43,6 +45,7 @@ const {
   content = await Astro.slots.render("content"),
   tagline = await Astro.slots.render("tagline"),  
   components: componentList = [
+    { name : 'HeaderSearch'}, 
     { name: 'SiteCards'},
     { name: 'GridIconComponent'},
     { name: 'CallToActionNew'}
