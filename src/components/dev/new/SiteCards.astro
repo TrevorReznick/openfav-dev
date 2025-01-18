@@ -1,0 +1,62 @@
+---
+import { Globe, Clock, Tag, ExternalLink } from 'lucide-react';
+import { SITE_CARD as S } from '~/config/cardCostants'
+
+interface Site {
+  thumbnail: string;
+  title: string;
+  url: string;
+  tags: string[];
+  lastUpdated: string;
+}
+
+interface Props {
+  sites: Site[];
+}
+
+const { sites = [] } = Astro.props
+const placeholder = '~/assets/images/placeholder.svg'
+---
+
+<div>
+  {sites.map((site) => (
+    <div class={S.CONTAINER}>
+      <div class={S.CONTENT.WRAPPER}>
+        <div class={S.CONTENT.IMAGE}>
+          <img
+            src={site.thumbnail || placeholder}
+            alt={site.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class={S.CONTENT.DETAILS}>
+          <div class="flex justify-between items-start">
+            <h3 class={S.TYPOGRAPHY.TITLE}>{site.title}</h3>
+            <button class="text-secondaryText hover:text-primaryText">
+              <ExternalLink className={S.ICON.BUTTON} />
+            </button>
+          </div>
+          <div class={`flex items-center ${S.SPACING.ICON_GAP} ${S.SPACING.SECTION}`}>
+            <Globe className={S.ICON.BASE} />
+            <span class={S.TYPOGRAPHY.URL}>{site.url}</span>
+          </div>
+          <div class={`flex items-center ${S.SPACING.ICON_GAP} ${S.SPACING.SECTION}`}>
+            <Tag className={S.ICON.BASE} />
+            <div class={S.TAGS.CONTAINER}>
+              {site.tags.map((tag) => (
+                <span class={S.TAGS.TAG}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div class={`flex items-center ${S.SPACING.ICON_GAP} ${S.SPACING.SECTION}`}>
+            <Clock className={S.ICON.BASE} />
+            <span class={S.TYPOGRAPHY.LAST_UPDATED}>Last updated {site.lastUpdated}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+

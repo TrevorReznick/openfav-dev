@@ -9,6 +9,7 @@ console.log('firts log', f.all_categories)
 
 
 export const getSites = sites.map(site => {
+  
   const categoriesTags = site.categories_tags; // Ora stai mappando correttamente per ogni sito
 
   if (!categoriesTags) {

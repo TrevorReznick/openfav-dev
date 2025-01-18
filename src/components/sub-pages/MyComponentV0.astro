@@ -1,29 +1,39 @@
 ---
-import { twMerge } from "tailwind-merge";
+import { twMerge } from "tailwind-merge"
+import type {SiteData} from '~/types/siteData'
+import {getSites} from '~/scripts/getSites'
 
 // Importazione dinamica dei componenti
 const components = {
-  NewCards: (await import('~/components/dev/new/Features1.astro')).default,
+  SiteCards: (await import('~/components/dev/new/SiteCards.astro')).default,  
   GridIconComponent: (await import('~/components/dev/new/GridIconComponentV0.astro')).default,
   CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
 }
 
+interface NewSiteData {
+  thumbnail: string
+  title: string
+  url: string
+  tags: string[]
+  lastUpdated: string
+}
+
 interface Props {
-  user_name?: string;
-  title?: string;
+  user_name?: string
+  title?: string
   subtitle?: string;
   content?: string;
   tagline?: string;
   components?: Array<{
     name: keyof typeof components;
     props?: Record<string, any>;
-  }>;
+  }>,
+  sites: NewSiteData[],  
   classes?: {
     container?: string;
     title?: string;
-    subtitle?: string;
-    content?: string;
-  };
+    subtitle?: string;    
+  }
 }
 
 const {  
@@ -31,53 +41,58 @@ const {
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),
   content = await Astro.slots.render("content"),
-  tagline = await Astro.props.tagline?.("tagline"),
+  tagline = await Astro.slots.render("tagline"),  
   components: componentList = [
-    { name: 'NewCards'},
+    { name: 'SiteCards'},
     { name: 'GridIconComponent'},
     { name: 'CallToActionNew'}
   ],
   classes = {},
-} = Astro.props;
+} = Astro.props
+
+const { sites = getSites} = Astro.props
 
 const {
   container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
   title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4',
   subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
-  content: contentClass = "mb-10 text-secondaryText leading-loose",
+  /*content: contentClass = "mb-10 text-secondaryText leading-loose",*/
 } = classes;
 ---
 
 <section class={twMerge("flex flex-col items-center", containerClass)}>
-    {
-        tagline && (
-        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
-            {tagline}
-        </p>
-        )
-    }
-    {
-        title && (
-        <h1
-            class={twMerge(
-            "font-extrabold tracking-tight text-primary",
-            titleClass
-            )}
-            set:html={title}
-        />
-        )
-    }
-    {
-        subtitle && (
-        <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome ${user_name}`} />
-        )
-    }
-    <!-- Icon Blocks -->
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      <!-- Dynamic Components -->
-      {componentList.map(({ name, props = {} }) => {
-        const Component = components[name]
-        return <Component {...props} />
-      })}
-    </div>
+  {
+    tagline && (
+      <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+        {tagline}
+      </p>
+    )
+  }
+  {
+    title && (
+      <h1
+        class={twMerge(
+          "font-extrabold tracking-tight text-primary",
+          titleClass
+        )}
+        set:html={title}
+      />
+    )
+  }
+  {
+    subtitle && (
+      <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome ${user_name}`} />
+    )
+  }
+  <!-- Icon Blocks -->
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Dynamic Components -->
+    {componentList.map(({ name, props = {} }) => {
+      const Component = components[name]
+      if (name === 'SiteCards') {
+        return <Component {...props} sites={sites} />
+      }
+      return <Component {...props} />
+    })}
+  </div>
 </section>
