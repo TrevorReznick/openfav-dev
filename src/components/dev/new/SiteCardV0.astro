@@ -1,0 +1,67 @@
+---
+import { CARD, SITE_CARDS_GRID } from '~/config/cardCostantsNew'
+import { Globe, Clock } from 'lucide-react';
+
+interface SiteData {
+  id: string;
+  description: string;
+  icon: string;
+  image: string;
+  logo: string;
+  name: string;
+  title: string;
+  url: string;
+  area: string;
+  categoria: string;
+  tags: { id: string; name: string }[];
+  ratings: any[];
+  AI_think: any;
+  AI_summary: string;
+  id_provider: string;
+}
+
+interface Props {
+  sites: SiteData[];
+}
+
+const { sites = [] } = Astro.props;
+---
+
+<div class={SITE_CARDS_GRID}>
+    {sites.map((site) => (
+        <div class={CARD.CONTAINER}>
+        <div 
+            class={CARD.IMAGE} 
+            style={`background-image: url('${site.image || '/img/placeholder.jpg'}')`}
+            title={site.title}
+        >
+        </div>
+        <div class={CARD.CONTENT}>
+            <div class="mb-8">
+            <p class="text-sm text-gray-600 flex items-center mb-2">
+                <Globe className="w-4 h-4 mr-2" />
+                {site.url}
+            </p>
+            <div class={CARD.TITLE}>{site.title}</div>
+            <p class={CARD.DESCRIPTION}>{site.description}</p>
+            </div>
+            <div class={CARD.META.CONTAINER}>
+            <img class={CARD.META.IMAGE} src={site.logo || '/img/placeholder-logo.jpg'} alt={`Logo of ${site.name}`} />
+            <div class="text-sm">
+                <p class={CARD.META.NAME}>{site.name}</p>
+                <p class={CARD.META.DATE}>
+                <Clock className="w-4 h-4 inline mr-1" />
+                Last updated: {new Date().toLocaleDateString()}
+                </p>
+            </div>
+            </div>
+            <div class={CARD.TAGS.CONTAINER}>
+            {site.tags.map((tag) => (
+                <span class={CARD.TAGS.TAG}>#{tag.name}</span>
+            ))}
+            </div>
+        </div>
+        </div>
+    ))}
+</div>
+
