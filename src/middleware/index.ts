@@ -4,8 +4,8 @@ import * as store from '~/store'
 import {postRequest} from '~/api/apiPost'
 //import { id, email, user_name, isAuthenticated, currentPath, previousPath } from '../store'
 
-const protectedRoutes = ['/protected/page', '/protected/dashboard'];
-const redirectRoutes = ['/login', '/register', '/auth-error-page'];
+const protectedRoutes = ['/protected/dashboard', '/protected/page', '/protected/pageV0']
+const redirectRoutes = ['/login', '/register', '/auth-error-page']
 
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
@@ -93,13 +93,13 @@ export const onRequest = defineMiddleware(
       redirectRoutes.includes(url.pathname) ||
       redirectRoutes.includes(url.pathname.replace(/\/$/, ''))
     ) {
-      const accessToken = cookies.get('sb-access-token');
-      const refreshToken = cookies.get('sb-refresh-token');
+      const accessToken = cookies.get('sb-access-token')
+      const refreshToken = cookies.get('sb-refresh-token')
 
       if (accessToken && refreshToken) {
-        return redirect('/protected/dashboard');
+        return redirect('/protected/dashboard')
       }
     }
-    return next();
+    return next()
   }
 );
