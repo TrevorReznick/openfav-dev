@@ -3,21 +3,21 @@ import { Globe, Clock, Tag, ExternalLink } from 'lucide-react';
 import { CARD } from '~/config/cardCostantsNew'
 
 interface SiteData {
-  id: string;
-  description: string;
-  icon: string;
-  image: string;
-  logo: string;
-  name: string;
-  title: string;
-  url: string;
-  area: string;
-  categoria: string;
-  tags: { id: string; name: string }[];
-  ratings: any[];
-  AI_think: any;
-  AI_summary: string;
-  id_provider: string;
+  id: string
+  description: string
+  icon: string
+  image: string
+  logo: string
+  name: string
+  title: string
+  url: string
+  area: string
+  categoria: string
+  tags: { id: string; name: string }[]
+  ratings: any[]
+  AI_think: any
+  AI_summary: string
+  id_provider: string
 }
 
 interface Props {
@@ -65,12 +65,14 @@ const { sites = [] } = Astro.props
         <div class={CARD.CONTENT.FOOTER}>
           <div class={CARD.META.CONTAINER}>
             <div class={CARD.META.INFO}>
+              {/*
               <img 
                 src={site.logo || '/img/placeholder-logo.jpg'} 
                 alt={`${site.name} logo`}
                 class={CARD.META.LOGO}
                 loading="lazy"
               />
+              */}
               <span class={CARD.TYPOGRAPHY.URL}>{site.name}</span>
             </div>
             <div class="flex items-center">

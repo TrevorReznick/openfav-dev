@@ -1,12 +1,11 @@
 ---
-import { twMerge } from "tailwind-merge"
-import type {SiteData} from '~/types/siteData'
+import { twMerge } from 'tailwind-merge'
 import {getSites} from '~/scripts/getSites'
 
+//import type {SiteData} from '~/types/siteData'
 
-// Importazione dinamica dei componenti
 const components = {
-  HeaderSearch: (await import('~/components/sub-pages/main-sites/sub/HeaderSearch.astro')).default,
+  HeaderSearch: (await import('~/components/main-sites/sub/HeaderSearch.astro')).default,
   SiteCards: (await import('~/components/dev/new/SiteCardV1.astro')).default,  
   GridIconComponent: (await import('~/components/dev/new/GridIconComponentV0.astro')).default,
   CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
@@ -21,14 +20,15 @@ interface NewSiteData {
 }
 
 interface Props {
+  email?: string,
   user_name?: string
   title?: string
   subtitle?: string;
   content?: string;
   tagline?: string;
   components?: Array<{
-    name: keyof typeof components;
-    props?: Record<string, any>;
+    name: keyof typeof components
+    props?: Record<string, any>
   }>,
   sites: NewSiteData[],  
   classes?: {
@@ -38,11 +38,11 @@ interface Props {
   }
 }
 
-const {  
+const {
+  email,
   user_name,
   title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  content = await Astro.slots.render("content"),
+  subtitle = await Astro.slots.render("subtitle"),  
   tagline = await Astro.slots.render("tagline"),  
   components: componentList = [
     { name : 'HeaderSearch'}, 
@@ -54,7 +54,6 @@ const {
 } = Astro.props
 
 const { sites = getSites} = Astro.props
-const placeholder = '/assets/images/placeholder.svg'
 
 const {
   container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
