@@ -1,6 +1,11 @@
 ---
 import { Globe, Clock, MoreVertical } from 'lucide-react';
 import { CARD } from '~/config/cardCostantsNew'
+import * as api from '~/api/apiClient'
+
+const deleteSite = api.deleteEvent
+
+
 
 interface SiteData {
   id: string
@@ -122,36 +127,36 @@ const { sites = [] } = Astro.props
     let draggedCard: HTMLElement | null = null;
 
     cardGrid.addEventListener('dragstart', (e: DragEvent) => {
-      if (!(e.target instanceof HTMLElement)) return;
-      draggedCard = e.target.closest('[draggable="true"]');
-      if (!draggedCard) return;
-      e.dataTransfer?.setData('text/plain', draggedCard.dataset.id || '');
+      if (!(e.target instanceof HTMLElement)) return
+      draggedCard = e.target.closest('[draggable="true"]')
+      if (!draggedCard) return
+      e.dataTransfer?.setData('text/plain', draggedCard.dataset.id || '')
       setTimeout(() => {
-        if (draggedCard) draggedCard.style.opacity = '0.5';
-      }, 0);
-    });
+        if (draggedCard) draggedCard.style.opacity = '0.5'
+      }, 0)
+    })
 
     cardGrid.addEventListener('dragend', () => {
       if (draggedCard) {
         draggedCard.style.opacity = '1';
         draggedCard = null;
       }
-    });
+    })
 
     cardGrid.addEventListener('dragover', (e: DragEvent) => {
       e.preventDefault();
       if (!(e.target instanceof HTMLElement)) return;
       const card = e.target.closest('[draggable="true"]');
       if (card instanceof HTMLElement && draggedCard && card !== draggedCard) {
-        const rect = card.getBoundingClientRect();
+        const rect = card.getBoundingClientRect()
         const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
-        cardGrid.insertBefore(draggedCard, next ? card.nextSibling : card);
+        cardGrid.insertBefore(draggedCard, next ? card.nextSibling : card)
       }
-    });
+    })
 
     cardGrid.addEventListener('drop', (e: DragEvent) => {
       e.preventDefault();
-    });
+    })
   }
 
   function initMenuHandlers() {
@@ -192,6 +197,7 @@ const { sites = [] } = Astro.props
         if (!(e.currentTarget instanceof HTMLElement)) return;
         const id = e.currentTarget.dataset.id;
         console.log('Edit site:', id);
+        //TODO
         if (activeMenu) {
           activeMenu.classList.add('hidden');
           activeMenu = null;
@@ -205,6 +211,7 @@ const { sites = [] } = Astro.props
         if (!(e.currentTarget instanceof HTMLElement)) return;
         const id = e.currentTarget.dataset.id;
         console.log('Delete site:', id);
+        // TODO
         if (activeMenu) {
           activeMenu.classList.add('hidden');
           activeMenu = null;
