@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { currentView = 'grid' } = Astro.props
-
 ---
 
 <div class="w-full max-w-4xl mx-auto mb-8 px-4">
@@ -19,6 +18,7 @@ const { currentView = 'grid' } = Astro.props
       </div>
       <input
         type="search"
+        id="search-input"
         class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                bg-white dark:bg-bgDark2 text-gray-900 dark:text-gray-100 
                placeholder-gray-500 dark:placeholder-gray-400
@@ -29,22 +29,26 @@ const { currentView = 'grid' } = Astro.props
     </div>
     <div class="flex items-center space-x-2 bg-gray-100 dark:bg-bgDark2 rounded-lg p-1">
       <button
+        id="grid-button"
         class={`p-2 rounded-md transition-colors duration-200 ${
           currentView === 'grid'
             ? 'bg-white dark:bg-bgDark3 text-primaryColor shadow-sm'
             : 'text-gray-500 dark:text-gray-400 hover:text-primaryColor dark:hover:text-primaryColor'
         }`}
         aria-label="Grid view"
+        data-view="grid"
       >
         <LayoutGrid className="h-5 w-5" />
       </button>
       <button
+        id="list-button"
         class={`p-2 rounded-md transition-colors duration-200 ${
           currentView === 'list'
             ? 'bg-white dark:bg-bgDark3 text-primaryColor shadow-sm'
             : 'text-gray-500 dark:text-gray-400 hover:text-primaryColor dark:hover:text-primaryColor'
         }`}
         aria-label="List view"
+        data-view="list"
       >
         <List className="h-5 w-5" />
       </button>
@@ -53,34 +57,71 @@ const { currentView = 'grid' } = Astro.props
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.querySelector('input[type="search"]')
-    const gridButton = document.querySelector('[aria-label="Grid view"]')
-    const listButton = document.querySelector('[aria-label="List view"]')
-    const cardsContainer = document.querySelector('.site-cards-container')
+type ViewType = 'grid' | 'list';
+
+const initializeViewToggle = () => {
+  const searchInput = document.getElementById('search-input') as HTMLInputElement
+  const gridButton = document.getElementById('grid-button')
+  const listButton = document.getElementById('list-button')
+  const cardsContainer = document.querySelector('.site-cards-container') as HTMLElement
   
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const query = (e.target as HTMLInputElement).value.toLowerCase()
-        // Implement search functionality
-      });
+  let currentView: ViewType = 'grid'
+
+  const updateButtonStyles = (view: ViewType) => {
+    const activeButton = view === 'grid' ? gridButton : listButton
+    const inactiveButton = view === 'grid' ? listButton : gridButton
+    
+    if (activeButton && inactiveButton) {
+      activeButton.classList.add('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
+      inactiveButton.classList.remove('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
     }
-  
-    if (gridButton && listButton && cardsContainer) {
-      gridButton.addEventListener('click', () => {
+  }
+
+  const handleViewChange = (view: ViewType) => {
+    console.log(`Changing view mode to: ${view}`)
+    currentView = view
+    
+    if (cardsContainer) {
+      if (view === 'grid') {
         cardsContainer.classList.remove('view-list')
         cardsContainer.classList.add('view-grid')
-        gridButton.classList.add('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
-        listButton.classList.remove('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
-      })
-  
-      listButton.addEventListener('click', () => {
+      } else {
         cardsContainer.classList.remove('view-grid')
         cardsContainer.classList.add('view-list')
-        listButton.classList.add('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
-        gridButton.classList.remove('bg-white', 'dark:bg-bgDark3', 'text-primaryColor', 'shadow-sm')
-      })
+      }
     }
-  })
-</script>
+    
+    updateButtonStyles(view)
+  }
 
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = (e.target as HTMLInputElement).value.toLowerCase()
+      console.log(`Search query: ${query}`)
+      // Implement search functionality here
+    })
+  }
+
+  if (gridButton && listButton) {
+    gridButton.addEventListener('click', () => {
+      const view = gridButton.dataset.view as ViewType
+      if (view === 'grid' || view === 'list') {
+        handleViewChange(view)
+      }
+    })
+    
+    listButton.addEventListener('click', () => {
+      const view = listButton.dataset.view as ViewType
+      if (view === 'grid' || view === 'list') {
+        handleViewChange(view)
+      }
+    })
+    
+    // Initialize with current view
+    handleViewChange(currentView)
+  }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeViewToggle)
+</script>
