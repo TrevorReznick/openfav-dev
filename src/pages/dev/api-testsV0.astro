@@ -1,5 +1,5 @@
 ---
-import {fetchElements, createPostEvent, createUpdateEvent, deleteEvent} from '~/api/apiClient'
+import {fetchElements, createPostEvent, createUpdateEvent, deleteSite, deleteEvent} from '~/api/apiClient'
 
 
 
@@ -41,6 +41,9 @@ const updatedEventData = {
 
 const doUpdateEvent = await createUpdateEvent(updatedEventData)
 console.log(doUpdateEvent)
+
+const doDeleteSite = await deleteSite(97)
+console.log('yeah', doDeleteSite)
 
 const doDeleteEvent = await deleteEvent(234)
 console.log('yeah', doDeleteEvent)
