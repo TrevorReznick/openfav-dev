@@ -9,28 +9,28 @@ const redirectRoutes = ['/login', '/register', '/auth-error-page']
 
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
+
     /* @@ manage paths @@ */
 
-    store.previousPath.set(store.currentPath.get());
-    store.currentPath.set(url.pathname);
+    store.previousPath.set(store.currentPath.get())
+    store.currentPath.set(url.pathname)
 
-    const from = store.previousPath.get();
-    const to = store.currentPath.get();
+    const from = store.previousPath.get()
+    const to = store.currentPath.get()
 
     if (from === '/' && to === '/login') {
-      return redirect('/login');
+      return redirect('/login')
     }
     if (from === '/login' && to === '/register') {
-      return redirect('/register');
+      return redirect('/register')
     }
     if (from === '/api/v1/auth/signout') {
-      return redirect('/login');
+      return redirect('/login')
     }
 
     if (protectedRoutes.includes(url.pathname)) {
-      const accessToken = cookies.get('sb-access-token');
-      const refreshToken = cookies.get('sb-refresh-token');
-
+      const accessToken = cookies.get('sb-access-token')
+      const refreshToken = cookies.get('sb-refresh-token')
       if (!accessToken || !refreshToken) {
         return redirect('/login');
       }

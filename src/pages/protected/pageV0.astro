@@ -1,13 +1,15 @@
 ---
 import Layout from '~/layouts/Layout.astro'
-import IsComponent from '~/components/sub-pages/MyComponentV0.astro'
+import IsComponent from '~/components/main-sites/MyCompontentV0'
 import { getCategories } from '~/scripts/requests'
-
-import { email, user_name } from '~/store'
+import { email, user_name, currentPath } from '~/store'
 import { numElements } from '~/scripts/oopps'
 
 const _email = email.get()
 const _user_name = user_name.get()
+const path = currentPath.get()
+
+console.log('path', path)
 
 /* fetch db */
 const categories = await getCategories()
