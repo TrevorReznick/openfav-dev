@@ -19,7 +19,7 @@ export const CARD = {
     FOOTER: "mt-2.5"
   },
   TYPOGRAPHY: {
-    TITLE: "text-[13px] sm:text-sm font-semibold text-white",
+    TITLE: "text-[13px] sm:text-sm font-semibold",
     DESCRIPTION: "text-[11.5px] text-gray-600 dark:text-gray-300 line-clamp-2",
     URL: "text-[11.5px] font-medium"
   },
