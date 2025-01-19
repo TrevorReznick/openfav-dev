@@ -2,8 +2,8 @@ import type { APIRoute } from 'astro'
 import { createClient } from '@supabase/supabase-js'
 import { supabaseUpdate, supabaseQuery, supabaseInsert, supabaseDelete } from '~/providers/supabaseQueryV1'
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -159,6 +159,14 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
       const deleteData = params ?  params.id : {}
       console.log('uhmm', deleteData)
       return deleteEvent(deleteData, deleteData.id)
+
+      case 'deleteSite':
+        if (method !== 'DELETE') throw new Error('Invalid method for deleteEvent')
+        const deleteSiteData = params ?  params.id : {}
+        console.log('debug delete site id', deleteSiteData)
+        return deleteSite(deleteSiteData)
+
+    
   
     default:
       throw new Error('Unknown API request type')
@@ -388,6 +396,7 @@ export const deleteEventNew = async (id: any) => {
   }
 
   const numericId = Number(id)
+
   console.log('Converted numericId:', numericId) // Debug log
 
   if (isNaN(numericId)) {
@@ -395,6 +404,32 @@ export const deleteEventNew = async (id: any) => {
   }
 
   const tableName = 'event_log'
+  console.log('siamo arrivati fino a qui')
+  const result = await supabaseDelete(tableName, (query) => {
+    console.log('Building query with ID:', numericId) // Debug log
+    return query.eq('id', numericId)
+  })
+
+  return result.data
+}
+
+export const deleteSite = async (id: any) => {
+
+  console.log('deleteSite called with id:', id) //FIXME
+
+  if (!id) {
+    throw new Error('ID parameter is required but was undefined')
+  }
+
+  const numericId = Number(id)
+  
+  console.log('Converted numericId:', numericId) // Debug log
+
+  if (isNaN(numericId)) {
+    throw new Error(`Invalid ID format: ${id}`)
+  }
+
+  const tableName = 'main_table'
   console.log('siamo arrivati fino a qui')
   const result = await supabaseDelete(tableName, (query) => {
     console.log('Building query with ID:', numericId) // Debug log

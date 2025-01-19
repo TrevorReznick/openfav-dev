@@ -39,4 +39,7 @@ export const createUpdateEvent = async (data: any) => {
 /* @@ -- DEL methods -- @@ */
 
 export const deleteEvent = (id: number) => 
-    makeRequest(api_endpoint, 'deleteEvent', { id }, 'DELETE', {});
+    makeRequest(api_endpoint, 'deleteEvent', { id }, 'DELETE', {})
+
+export const deleteSite = (id: number) => 
+    makeRequest(api_endpoint, 'deleteSite', { id }, 'DELETE', {})
