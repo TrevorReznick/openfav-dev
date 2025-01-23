@@ -117,6 +117,8 @@ const { sites = [] } = Astro.props
 </div>
 
 <script>
+import { IdCard } from "lucide-react";
+
   function initDragAndDrop() {
     const cardGrid = document.getElementById('card-grid');
     if (!cardGrid) {
@@ -207,22 +209,53 @@ const { sites = [] } = Astro.props
 
     // Delete button handler
     document.querySelectorAll('.delete-button').forEach(button => {
-      button.addEventListener('click', (e) => {
-        if (!(e.currentTarget instanceof HTMLElement)) return;
-        const id = e.currentTarget.dataset.id;
-        console.log('Delete site:', id);
-        // TODO
+      button.addEventListener('click', async (e) => {
+        if (!(e.currentTarget instanceof HTMLElement)) return
+        const id = e.currentTarget.dataset.id
+        //console.log('Delete site:', id)
         if (activeMenu) {
           activeMenu.classList.add('hidden');
           activeMenu = null;
         }
-      });
-    });
+        await makeRequest('deleteSite', id)
+      })
+    })
   }
 
   // Initialize both drag and drop and menu handlers
   document.addEventListener('DOMContentLoaded', () => {
     initDragAndDrop();
     initMenuHandlers();
-  });
+  })
+
+  const makeRequest = async (type, id, ) => {
+    try {
+      const urlParams = new URLSearchParams({ type, id }).toString()
+      //http://localhost:4321/api/v1/main/doQueries?type=deleteSite&id=97
+      //makeRequest(api_endpoint, 'deleteSite', { id }, 'DELETE', {})
+
+      const url = `http://localhost:4321/api/v1/main/doQueries?type=${type}&id=${id}`
+      console.log('Request URL:', url);
+
+      const options: RequestInit = {
+        method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+      }
+
+      const response = await fetch(url, options)
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Server responded but gave an error', result);
+        return { success: false, error: result }
+      }
+      console.log('site deleted: ', id)
+      return { success: true, data: result }
+    } catch (error) {
+      console.error('Client error received:', error)
+      return { success: false, error: error.message }
+    }
+  }
 </script>
