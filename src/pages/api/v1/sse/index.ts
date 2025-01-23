@@ -49,16 +49,17 @@ export async function GET() {
 
       // Imposta un intervallo per l'heartbeat
       const heartbeatInterval = setInterval(() => {
-        sendMessage({ type: 'heartbeat', timestamp: new Date().toISOString() });
-      }, 30000); // Invia un heartbeat ogni 30 secondi
+        sendMessage({ type: 'heartbeat', timestamp: new Date().toISOString() })
+      }, 5000) // Invia un heartbeat ogni 30 secondi
 
       // Chiudi il controller dopo 5 minuti (300000 ms) per evitare connessioni aperte indefinitamente
-      setTimeout(() => {
+      /*setTimeout(() => {
         clearInterval(heartbeatInterval);
         controller.close();
-      }, 300000);
+      }, 5000)
+      */
     }
-  });
+  })
 
   return new Response(stream, {
     headers: {
@@ -67,5 +68,5 @@ export async function GET() {
       'Connection': 'keep-alive',
       'Access-Control-Allow-Origin': '*'
     }
-  });
+  })
 }
