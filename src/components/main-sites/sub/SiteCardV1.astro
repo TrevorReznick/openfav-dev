@@ -5,6 +5,10 @@ import * as api from '~/api/apiClient'
 
 const deleteSite = api.deleteEvent
 
+const api_prod = import.meta.env.PUBLIC_PROD_API_URL
+const api_dev = import.meta.env.PUBLIC_DEV_API_URL
+export const api_url = import.meta.env.MODE == 'production' ? api_prod : api_dev
+
 
 
 interface SiteData {
@@ -117,6 +121,9 @@ const { sites = [] } = Astro.props
 </div>
 
 <script>
+  
+  const apiUrl = '{api_url}'
+
   function initDragAndDrop() {
     const cardGrid = document.getElementById('card-grid');
     if (!cardGrid) {
