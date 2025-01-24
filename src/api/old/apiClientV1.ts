@@ -125,7 +125,7 @@ export const updateEvent = await sendApiRequest(createUpdateEvent)
 //export const deleteEvent = (id: number) => sendApiRequest(() => delEvent(id))
 //await deleteEvent(66)
 
-await delEvent(my_id_new) // Pass the ID when calling
+//await delEvent(my_id_new) // Pass the ID when calling
 
   
 
