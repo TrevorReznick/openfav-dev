@@ -5,7 +5,10 @@ import * as api from '~/api/apiClient'
 
 const deleteSite = api.deleteEvent
 
+export const api_prod = import.meta.env.PUBLIC_PROD_API_URL
+export const api_dev = import.meta.env.PUBLIC_DEV_API_URL
 
+export const api_url = import.meta.env.MODE == 'production' ? api_prod : api_dev
 
 interface SiteData {
   id: string
@@ -116,8 +119,9 @@ const { sites = [] } = Astro.props
   ))}
 </div>
 
-<script>
-import { IdCard } from "lucide-react";
+<script define:vars={{api_url}}>
+
+  const apiUrl = api_url;
 
   function initDragAndDrop() {
     const cardGrid = document.getElementById('card-grid');
@@ -126,9 +130,9 @@ import { IdCard } from "lucide-react";
       return;
     }
 
-    let draggedCard: HTMLElement | null = null;
+    let draggedCard = null
 
-    cardGrid.addEventListener('dragstart', (e: DragEvent) => {
+    cardGrid.addEventListener('dragstart', (e) => {
       if (!(e.target instanceof HTMLElement)) return
       draggedCard = e.target.closest('[draggable="true"]')
       if (!draggedCard) return
@@ -145,7 +149,7 @@ import { IdCard } from "lucide-react";
       }
     })
 
-    cardGrid.addEventListener('dragover', (e: DragEvent) => {
+    cardGrid.addEventListener('dragover', (e) => {
       e.preventDefault();
       if (!(e.target instanceof HTMLElement)) return;
       const card = e.target.closest('[draggable="true"]');
@@ -156,13 +160,13 @@ import { IdCard } from "lucide-react";
       }
     })
 
-    cardGrid.addEventListener('drop', (e: DragEvent) => {
+    cardGrid.addEventListener('drop', (e) => {
       e.preventDefault();
     })
   }
 
   function initMenuHandlers() {
-    let activeMenu: HTMLElement | null = null;
+    let activeMenu = null
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
@@ -217,7 +221,7 @@ import { IdCard } from "lucide-react";
           activeMenu.classList.add('hidden');
           activeMenu = null;
         }
-        await makeRequest('deleteSite', id)
+        await makeRequest('deleteSite', id, apiUrl)
       })
     })
   }
@@ -228,16 +232,16 @@ import { IdCard } from "lucide-react";
     initMenuHandlers();
   })
 
-  const makeRequest = async (type, id, ) => {
+  const makeRequest = async (type, id, api_url) => {
     try {
       const urlParams = new URLSearchParams({ type, id }).toString()
       //http://localhost:4321/api/v1/main/doQueries?type=deleteSite&id=97
       //makeRequest(api_endpoint, 'deleteSite', { id }, 'DELETE', {})
 
-      const url = `http://localhost:4321/api/v1/main/doQueries?type=${type}&id=${id}`
+      const url = `${api_url}main/doQueries?type=${type}&id=${id}`
       console.log('Request URL:', url);
 
-      const options: RequestInit = {
+      const options = {
         method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
