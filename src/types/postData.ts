@@ -26,4 +26,11 @@ export type postData = {
     url: string
     user_id: string
     valid_url: boolean
+    /* classification data */
+    site_id: number,
+    context_id: number,
+    function_id: number,
+    resource_id: number,
 }
+
+

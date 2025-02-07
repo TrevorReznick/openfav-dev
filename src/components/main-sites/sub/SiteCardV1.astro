@@ -1,5 +1,5 @@
 ---
-import { Globe, Clock, MoreVertical } from 'lucide-react';
+import { Globe, Clock, MoreVertical } from 'lucide-react'
 import { CARD } from '~/config/cardCostantsNew'
 import * as api from '~/api/apiClient'
 
@@ -34,7 +34,7 @@ interface Props {
 
 const placeholder = '/placeholder.svg'
 
-const { sites = [] } = Astro.props
+export const { sites = [] } = Astro.props
 ---
 
 <div id="card-grid" class={CARD.GRID}>
@@ -216,12 +216,18 @@ const { sites = [] } = Astro.props
       button.addEventListener('click', async (e) => {
         if (!(e.currentTarget instanceof HTMLElement)) return
         const id = e.currentTarget.dataset.id
+        //const siteName = sites.find(site => site.id === id)?.name || 'questo sito'
+        const siteName = 'questo sito'
         //console.log('Delete site:', id)
         if (activeMenu) {
           activeMenu.classList.add('hidden');
           activeMenu = null;
         }
-        await makeRequest('deleteSite', id, apiUrl)
+        const confirmDelete = confirm(`Vuoi eliminare ${siteName}?`)
+        if (confirmDelete) {
+          await makeRequest('deleteSite', id, apiUrl)
+        }
+        
       })
     })
   }

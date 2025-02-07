@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { supabase } from "~/providers/supabase";
-import type { postData } from "~/types/postData";
+import type { postData, ClassificationPostData } from "~/types/postData";
 
 export const GET: APIRoute = async () => {
   const { data, error } = await supabase.from("main_table").select(`
@@ -48,8 +48,10 @@ export const GET: APIRoute = async () => {
   }
 
   return new Response(JSON.stringify(data));
-};
+}
+
 export const POST: APIRoute = async ({ request }) => {
+  
   const {
     /* @@ main_table @@ */
 
@@ -87,9 +89,15 @@ export const POST: APIRoute = async ({ request }) => {
     AI_think,
 
     /* @@ common @@ */
-
     id_src,
-  }: postData = await request.json();
+    /* @@ classification post data @@ */
+    site_id,
+    context_id,
+    function_id,
+    resource_id,
+  }: postData = await request.json()
+
+  
 
   /* @@ post main_table @@ */
 
@@ -129,18 +137,18 @@ export const POST: APIRoute = async ({ request }) => {
     valid_url: valid_url ? true : false,
     status_code,
     secure: secure ? true : false,
-  };
+  }
 
-  const { data: __data, error: __error } = await supabase
+  const { data: __data, error: _error_ } = await supabase
 
     .from("sub_main_table")
     .insert(payload_sub_main_table)
     .select();
 
-  if (__error) {
+  if (_error_) {
     return new Response(
       JSON.stringify({
-        error: __error.message,
+        error: _error_.message,
       }),
       { status: 501 }
     );
@@ -158,13 +166,13 @@ export const POST: APIRoute = async ({ request }) => {
     ratings,
     AI_think,
     AI_Summary,
-  };
+  }
 
   const { data: ___data, error: ___error } = await supabase
 
     .from("categories_tags")
     .insert(payload)
-    .select();
+    .select()
 
   if (___error) {
     return new Response(
@@ -172,8 +180,29 @@ export const POST: APIRoute = async ({ request }) => {
         error: ___error.message,
       }),
       { status: 501 }
-    );
+    )
   }
 
-  return new Response(JSON.stringify({ msg: msg }), { status: 200 });
-};
+  const { data: _data_, error: __error_ } = await supabase  
+
+    .from('site_classifications')
+    .insert({
+      site_id: _id_src,
+      context_id,
+      function_id,
+      resource_id,
+    })
+    .select()
+
+  if(__error_) {
+    return new Response(
+      JSON.stringify({
+        error: __error_.message,
+      }),
+      { status: 501 }
+    )
+  }
+
+  return new Response(JSON.stringify({ msg: msg }), { status: 200 })
+  
+}
