@@ -5,12 +5,13 @@ import * as utils from '~/scripts/getSitesUtils'
 const sites = f.sites.data
 
 console.log('firts log', f.all_categories)
+console.log('sites log', sites)
 
 
 
 export const getSites = sites.map(site => {
   
-  const categoriesTags = site.categories_tags; // Ora stai mappando correttamente per ogni sito
+  const categoriesTags = site.categories_tags // Ora stai mappando correttamente per ogni sito
 
   if (!categoriesTags) {
     console.log(`Site with id ${site.id} has no categories_tags`);

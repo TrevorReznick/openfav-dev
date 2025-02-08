@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { supabase } from "~/providers/supabase";
-import type { postData, ClassificationPostData } from "~/types/postData";
+import type { postData} from "~/types/postData";
 
 export const GET: APIRoute = async () => {
   const { data, error } = await supabase.from("main_table").select(`
@@ -35,7 +35,7 @@ export const GET: APIRoute = async () => {
         type,
         AI
       )
-    `);
+    `)
   //.order("id", { ascending: true });
 
   if (error) {
