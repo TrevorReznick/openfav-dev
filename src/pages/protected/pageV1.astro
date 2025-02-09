@@ -1,28 +1,27 @@
 ---
-import Layout from '~/layouts/Layout.astro'
-import IsComponent from '~/components/main-sites/MyComponentV1.astro'
-import { getCategories } from '~/scripts/requests'
-import { email, user_name, currentPath } from '~/store'
-import { numElements } from '~/scripts/oopps'
+import Layout from "~/layouts/Layout.astro";
+import IsComponent from "~/components/main-sites/MyComponentV1.astro";
+import { getCategories } from "~/scripts/requests";
+import { email, user_name, currentPath } from "~/store";
+import { numElements } from "~/scripts/oopps";
 
-const _email = email.get()
-const _user_name = user_name.get()
-const path = currentPath.get()
+const _email = email.get();
+const _user_name = user_name.get();
+const path = currentPath.get();
 
-console.log('path', path)
+console.log("path", path);
 
 /* fetch db */
-const categories = await getCategories()
+const categories = await getCategories();
 
 /* map results */
-const areas = [...new Set(categories.map(category => category.area))]
+const areas = [...new Set(categories.map((category) => category.area))];
 
 /* num elements */
 
-const numAreas = numElements(areas)
+const numAreas = numElements(areas);
 
-console.log('numero aree', numAreas)
-
+console.log("numero aree", numAreas);
 ---
 
 <Layout title="Login">
@@ -30,7 +29,6 @@ console.log('numero aree', numAreas)
     email={_email}
     user_name={_user_name}
     tagline="Test Page"
-    title="Dev Page"        
+    title="Dev Page"
   />
-
 </Layout>
