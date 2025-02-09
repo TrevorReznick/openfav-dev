@@ -1,4 +1,5 @@
 import { makeRequest } from '~/scripts/apiBuilder'
+import type {ApiResponse} from '~/types/siteData'
 
 const api_endpoint = 'main/doQueries'
 
@@ -16,6 +17,19 @@ export const sendApiRequest = async (fetchFunc) => {
 };
 
 /* @@ -- GET methods -- @@ */
+
+export const fetchElementsV0 = async <T>(
+    type: string,
+    params?: Record<string, any>
+): Promise<ApiResponse<T>> => {
+    try {
+        // Chiamata a makeRequest con endpoint fisso e metodo GET
+        return await makeRequest<T>(api_endpoint, type, params, 'GET');
+    } catch (error) {
+        console.error('Error in fetchElements:', error);
+        throw error; // Rilancia l'errore per permettere al chiamante di gestirlo
+    }
+}
 
 export const fetchElements = (type: string) => 
     makeRequest(api_endpoint, type)

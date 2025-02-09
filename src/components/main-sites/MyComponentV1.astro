@@ -1,0 +1,106 @@
+---
+import { twMerge } from 'tailwind-merge'
+import {getSites} from '~/scripts/getSites'
+import * as api from '~/api/apiClient'
+import type {SiteDataV0} from '~/types/siteData'
+
+const apiResponse = await api.fetchElementsV0<SiteDataV0[]>('getSites')
+const myStes = apiResponse.data
+    
+
+const components = {
+  HeaderSearch: (await import('~/components/main-sites/sub/HeaderSearch.astro')).default,
+  SiteCards: (await import('~/components/main-sites/sub/SiteCardV1.astro')).default,  
+  CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
+}
+
+interface NewSiteData {
+  thumbnail: string
+  title: string
+  url: string
+  tags: string[]
+  lastUpdated: string
+}
+
+interface Props {
+  email?: string,
+  user_name?: string
+  title?: string
+  subtitle?: string;
+  content?: string;
+  tagline?: string;
+  components?: Array<{
+    name: keyof typeof components
+    props?: Record<string, any>
+  }>,
+  sites: NewSiteData[],  
+  classes?: {
+    container?: string;
+    title?: string;
+    subtitle?: string;    
+  }
+}
+
+const {
+  email,
+  user_name,
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),  
+  tagline = await Astro.slots.render("tagline"),  
+  components: componentList = [
+    { name : 'HeaderSearch'}, 
+    { name: 'SiteCards'},
+    { name: 'CallToActionNew'}
+  ],
+  classes = {},
+} = Astro.props
+
+const { sites = getSites} = Astro.props
+
+const {
+  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
+  title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4',
+  subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+  /*content: contentClass = "mb-10 text-secondaryText leading-loose",*/
+} = classes;
+---
+
+<section class={twMerge("flex flex-col items-center", containerClass)}>
+  {
+    tagline && (
+      <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+        {tagline}
+      </p>
+    )
+  }
+  {
+    title && (
+      <h1
+        class={twMerge(
+          "font-extrabold tracking-tight text-primary",
+          titleClass
+        )}
+        set:html={title}
+      />
+    )
+  }
+  {
+    subtitle && (
+      <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome ${user_name}`} />
+    )
+  }
+  <!-- Icon Blocks -->
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Dynamic Components -->
+    {componentList.map(({ name, props = {} }) => {
+      const Component = components[name]
+      if (name === 'SiteCards') {
+        return <Component {...props} sites={sites} />
+      }
+      if (name === 'HeaderSearch') {
+        return <Component {...props} sites={sites}  currentView="grid" />
+      }
+      return <Component {...props} sites={sites} />
+    })}
+  </div>
+</section>

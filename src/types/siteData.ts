@@ -1,3 +1,20 @@
+export interface SiteDataV0 {
+  id: string;
+  title: string;
+  url: string;
+  tags: string[];
+  // Aggiungi altre proprietà qui...
+}
+
+// Definisci il tipo per la risposta API
+export interface ApiResponse<T> {
+  success: boolean;
+  data: {
+    success: boolean;
+    data: T[]; // Array di oggetti di tipo T
+  };
+}
+
 // Define types for subsidiary structures
 type Tag = {
     // Add properties for tag objects here
