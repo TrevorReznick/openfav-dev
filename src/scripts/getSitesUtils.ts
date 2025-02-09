@@ -1,5 +1,5 @@
 
-import * as f from '~/api/old/apiClientV1'
+import * as f from '~/api/apiClientV1'
 
 const sites = f.sites.data
 const areas = f.areas.data

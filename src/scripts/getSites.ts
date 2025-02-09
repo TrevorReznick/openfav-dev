@@ -1,5 +1,5 @@
 
-import * as f from '~/api/old/apiClientV1'
+import * as f from '~/api/apiClientV1'
 import * as utils from '~/scripts/getSitesUtils'
 
 const sites = f.sites.data
