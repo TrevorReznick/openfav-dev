@@ -14,7 +14,7 @@ export const getSites = sites.map(site => {
   const categoriesTags = site.categories_tags // Ora stai mappando correttamente per ogni sito
 
   if (!categoriesTags) {
-    console.log(`Site with id ${site.id} has no categories_tags`);
+    console.log(`Site with id ${site.id} has no categories_tags`)
     return {
       id: site.id,
       description: site.description,
