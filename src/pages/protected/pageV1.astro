@@ -1,27 +1,17 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import IsComponent from "~/components/main-sites/MyComponentV1.astro";
-import { getCategories } from "~/scripts/requests";
-import { email, user_name, currentPath } from "~/store";
-import { numElements } from "~/scripts/oopps";
+import Layout from "~/layouts/Layout.astro"
+import IsComponent from "~/components/main-sites/MyComponentV2.astro"
 
-const _email = email.get();
-const _user_name = user_name.get();
-const path = currentPath.get();
+import { email, user_name, currentPath } from "~/store"
 
-console.log("path", path);
 
-/* fetch db */
-const categories = await getCategories();
+const _email = email.get()
+const _user_name = user_name.get()
+const path = currentPath.get()
 
-/* map results */
-const areas = [...new Set(categories.map((category) => category.area))];
+console.log('path', path)
 
-/* num elements */
 
-const numAreas = numElements(areas);
-
-console.log("numero aree", numAreas);
 ---
 
 <Layout title="Login">
