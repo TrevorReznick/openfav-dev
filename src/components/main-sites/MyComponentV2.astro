@@ -1,18 +1,18 @@
 ---
 import { twMerge } from 'tailwind-merge'
 import * as api from '~/api/apiClient'
-import type {ApiResponse} from '~/types/siteData'
+import type {ApiResponse, SiteData} from '~/types/siteData'
 /* old imports */
 import { getCategories } from '~/scripts/requests'
 import { numElements } from '~/scripts/oopps'
+import { DEFAULT_HASH_PROPS } from 'node_modules/astro/dist/assets/consts'
 
-const sites: apiResponse = await api.fetchElements('getSites')
+const sites: ApiResponse<unknown> = await api.fetchElements('getSites')
 
-//console.log(sites.data.slice(0, 5))
-
-console.log(sites.data.data.slice(0, 5))
+console.log(sites.data)
 
 interface Props {
+  my_test?: string,
   email?: string,
   user_name?: string
   title?: string
@@ -29,8 +29,9 @@ interface Props {
   }
 }
 
-const {
-  email,
+
+
+const {   
   user_name,
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),  
@@ -66,6 +67,9 @@ const numAreas = numElements(areas)
 //console.log('numero aree', numAreas)
 */
 
+const my_test = Astro.props
+
+
 ---
 
 <section class={twMerge("flex flex-col items-center", containerClass)}>
@@ -100,12 +104,12 @@ const numAreas = numElements(areas)
             const Component = components[name]
             console.log('component name', name)
             if (name === 'SiteCards') {
-                return <Component {...props} my_name="test" />
+                return <Component {...props}  my_test="Hello from parent"/>
             }
             if (name === 'HeaderSearch') {
-                return <Component {...props} currentView="grid" />
+                return <Component {...props} currentView="grid" my_test="Hello from parent" />
             }
-            return <Component {...props} />
+            return <Component {...props} my_test="Hello from parent"/>
         })}
     </div>
 </section>

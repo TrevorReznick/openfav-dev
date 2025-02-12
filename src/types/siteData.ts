@@ -1,18 +1,9 @@
-export interface SiteDataV0 {
-  id: string;
-  title: string;
-  url: string;
-  tags: string[];
-  // Aggiungi altre proprietà qui...
-}
+export interface ApiResponse<T = unknown> {
 
-// Definisci il tipo per la risposta API
-export interface ApiResponse<T> {
   success: boolean
-  data: {
-    success: boolean
-    data: T[] // Array di oggetti di tipo T
-  }
+  data?: T
+  error?: any
+  
 }
 
 // Define types for subsidiary structures

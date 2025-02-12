@@ -1,14 +1,7 @@
-const api_prod = import.meta.env.PUBLIC_PROD_API_URL;
-const api_dev = import.meta.env.PUBLIC_DEV_API_URL;
-const api_url = import.meta.env.MODE === 'production' ? api_prod : api_dev;
-
-interface ApiResponse<T = unknown> {
-
-  success: boolean
-  data?: T
-  error?: any
-  
-}
+const api_prod = import.meta.env.PUBLIC_PROD_API_URL
+const api_dev = import.meta.env.PUBLIC_DEV_API_URL
+const api_url = import.meta.env.MODE === 'production' ? api_prod : api_dev
+import type {ApiResponse, SiteData} from '~/types/siteData'
 
 export async function makeRequest<T = unknown>(
     endpoint: string,
