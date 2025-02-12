@@ -9,7 +9,7 @@ import { DEFAULT_HASH_PROPS } from 'node_modules/astro/dist/assets/consts'
 
 const sites: ApiResponse<unknown> = await api.fetchElements('getSites')
 
-console.log(sites.data)
+//console.log('hello from main', main)
 
 interface Props {
   my_test?: string,
@@ -21,7 +21,8 @@ interface Props {
   components?: Array<{
     name: keyof typeof components
     props?: Record<string, any>
-  }>,  
+  }>,
+  main: unknown,
   classes?: {
     container?: string
     title?: string
@@ -41,6 +42,7 @@ const {
     { name: 'SiteCards'},
     { name: 'CallToActionNew'}
   ],
+  main = sites?.data,
   classes = {},
 } = Astro.props
 
@@ -104,12 +106,12 @@ const my_test = Astro.props
             const Component = components[name]
             console.log('component name', name)
             if (name === 'SiteCards') {
-                return <Component {...props}  my_test="Hello from parent"/>
+                return <Component {...props}  main={main} my_test="Hello from parent"/>
             }
             if (name === 'HeaderSearch') {
-                return <Component {...props} currentView="grid" my_test="Hello from parent" />
+                return <Component {...props} currentView="grid" main={main} my_test="Hello from parent" />
             }
-            return <Component {...props} my_test="Hello from parent"/>
+            return <Component {...props} my_test="Hello from parent" main={main} />
         })}
     </div>
 </section>
