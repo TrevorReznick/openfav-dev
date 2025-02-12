@@ -8,11 +8,11 @@ export interface SiteDataV0 {
 
 // Definisci il tipo per la risposta API
 export interface ApiResponse<T> {
-  success: boolean;
+  success: boolean
   data: {
-    success: boolean;
-    data: T[]; // Array di oggetti di tipo T
-  };
+    success: boolean
+    data: T[] // Array di oggetti di tipo T
+  }
 }
 
 // Define types for subsidiary structures

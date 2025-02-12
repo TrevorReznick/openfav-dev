@@ -1,9 +1,16 @@
 ---
 import { twMerge } from 'tailwind-merge'
 import * as api from '~/api/apiClient'
+import type {ApiResponse} from '~/types/siteData'
 /* old imports */
 import { getCategories } from '~/scripts/requests'
 import { numElements } from '~/scripts/oopps'
+
+const sites: apiResponse = await api.fetchElements('getSites')
+
+//console.log(sites.data.slice(0, 5))
+
+console.log(sites.data.data.slice(0, 5))
 
 interface Props {
   email?: string,
