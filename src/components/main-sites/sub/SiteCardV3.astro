@@ -6,15 +6,14 @@ import TestApisV2 from '~/pages/dev/test-apisV2.astro'
 
 const deleteSite = api.deleteEvent
 
-
 interface Props {
     my_test: string,
     main: unknown
 }
 
+const {my_test, main} = Astro.props
 
-const {my_test} = Astro.props
-
+console.log('received data', main)
 console.log('my name', TestApisV2)
 
 ---
