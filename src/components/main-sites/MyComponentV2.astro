@@ -23,7 +23,7 @@ interface Props {
     props?: Record<string, any>
   }>,
   //main: unknown,
-  main,
+  main?: { success: boolean; data: any[] },
   classes?: {
     container?: string
     title?: string
@@ -101,11 +101,14 @@ const my_test = Astro.props
     }
     <!-- Icon Blocks -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      
       <!-- Dynamic Components -->
     
         {componentList.map(({ name, props = {} }) => {
+
             const Component = components[name]
             console.log('component name', name)
+            
             if (name === 'SiteCards') {
                 return <Component {...props}  main={main} my_test="Hello from parent"/>
             }
