@@ -10,6 +10,6 @@ export const navbarAuthLinks = [
     { label: 'Home', href: '/', ariaLabel: 'Home' },
     { label: 'Dashboard', href: '/protected/dashboard', ariaLabel: 'Features' },
     { label: 'Links Showcase', href: '/dev/sites-list', ariaLabel: 'Pricing' },
-    { label: 'Test Page', href: '/protected/pageV0', ariaLabel: 'About' },
+    { label: 'Main Sites', href: '/protected/pageV1', ariaLabel: 'About' },
     { label: 'Contacts', href: '/dev/feedback', ariaLabel: 'FAQ' },
 ]
