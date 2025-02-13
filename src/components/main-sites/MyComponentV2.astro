@@ -9,8 +9,8 @@ import { DEFAULT_HASH_PROPS } from 'node_modules/astro/dist/assets/consts'
 
 const sites: ApiResponse<unknown> = await api.fetchElements('getSites')
 
+const main = sites?.data as { success: boolean; data: any[] }
 //console.log('hello from main', main)
-
 interface Props {
   my_test?: string,
   email?: string,
@@ -22,7 +22,8 @@ interface Props {
     name: keyof typeof components
     props?: Record<string, any>
   }>,
-  main: unknown,
+  //main: unknown,
+  main,
   classes?: {
     container?: string
     title?: string
@@ -42,7 +43,7 @@ const {
     { name: 'SiteCards'},
     { name: 'CallToActionNew'}
   ],
-  main = sites?.data,
+  //main = sites?.data ? sites?.data : '[]',
   classes = {},
 } = Astro.props
 

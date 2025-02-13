@@ -3,19 +3,28 @@ import { Globe, Clock, MoreVertical } from 'lucide-react'
 import { CARD } from '~/config/cardCostantsNew'
 import * as api from '~/api/apiClient'
 import TestApisV2 from '~/pages/dev/test-apisV2.astro'
+import Card1 from '~/components/main-sites/sub/card1.astro'
+import Card2 from '~/components/main-sites/sub/card2.astro'
+import CardsTags from '~/components/main-sites/sub/cardsTags.astro'
 
 const deleteSite = api.deleteEvent
 
 interface Props {
     my_test: string,
-    main: unknown
+    main: any
 }
 
 const {my_test, main} = Astro.props
 
-console.log('received data', main)
+console.log('received data', main.data)
 console.log('my name', TestApisV2)
 
 ---
+<Card1 />
+<Card2 />
+<CardsTags />
 <div class="text-white">{my_test}</div>
+<pre class="text-white p-2 rounded mb-4">
+    {JSON.stringify(main.data, null, 2)}
+</pre>
 
