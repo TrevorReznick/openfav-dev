@@ -16,21 +16,6 @@ export const sendApiRequest = async (fetchFunc) => {
     }
 };
 
-/* @@ -- GET methods -- @@ */
-
-export const fetchElementsV0 = async <T>(
-    type: string,
-    params?: Record<string, any>
-): Promise<ApiResponse<T>> => {
-    try {
-        // Chiamata a makeRequest con endpoint fisso e metodo GET
-        return await makeRequest<T>(api_endpoint, type, params, 'GET');
-    } catch (error) {
-        console.error('Error in fetchElements:', error);
-        throw error; // Rilancia l'errore per permettere al chiamante di gestirlo
-    }
-}
-
 export const fetchElements = (type: string) => 
     makeRequest(api_endpoint, type)
 
@@ -57,3 +42,18 @@ export const deleteEvent = (id: number) =>
 
 export const deleteSite = (id: number) => 
     makeRequest(api_endpoint, 'deleteSite', { id }, 'DELETE', {})
+
+/* @@ -- GET methods -- @@ */
+
+export const fetchElementsV0 = async <T>(
+    type: string,
+    params?: Record<string, any>
+): Promise<ApiResponse<T>> => {
+    try {
+        // Chiamata a makeRequest con endpoint fisso e metodo GET
+        return await makeRequest<T>(api_endpoint, type, params, 'GET');
+    } catch (error) {
+        console.error('Error in fetchElements:', error);
+        throw error; // Rilancia l'errore per permettere al chiamante di gestirlo
+    }
+}

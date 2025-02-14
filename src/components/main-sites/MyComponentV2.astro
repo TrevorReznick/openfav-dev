@@ -1,0 +1,123 @@
+---
+import { twMerge } from 'tailwind-merge'
+import * as api from '~/api/apiClient'
+import type {ApiResponse, SiteData} from '~/types/siteData'
+/* old imports */
+import { getCategories } from '~/scripts/requests'
+import { numElements } from '~/scripts/oopps'
+import { DEFAULT_HASH_PROPS } from 'node_modules/astro/dist/assets/consts'
+
+const sites: ApiResponse<unknown> = await api.fetchElements('getSites')
+
+const main = sites?.data as { success: boolean; data: any[] }
+//console.log('hello from main', main)
+interface Props {
+  my_test?: string,
+  email?: string,
+  user_name?: string
+  title?: string
+  subtitle?: string  
+  tagline?: string
+  components?: Array<{
+    name: keyof typeof components
+    props?: Record<string, any>
+  }>,
+  //main: unknown,
+  main?: { success: boolean; data: any[] },
+  classes?: {
+    container?: string
+    title?: string
+    subtitle?: string  
+  }
+}
+
+
+
+const {   
+  user_name,
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),  
+  tagline = await Astro.slots.render("tagline"),  
+  components: componentList = [
+    { name : 'HeaderSearch'}, 
+    { name: 'SiteCards'},
+    { name: 'CallToActionNew'}
+  ],
+  //main = sites?.data ? sites?.data : '[]',
+  classes = {},
+} = Astro.props
+
+const components = {
+    HeaderSearch: (await import('~/components/main-sites/sub/HeaderSearch.astro')).default,
+    SiteCards: (await import('~/components/main-sites/sub/SiteCardV3.astro')).default,  
+    CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
+}
+
+const {
+  container: containerClass = "w-screen flex justify-center items-center bg-bgDark1 mb-[28vw] md:mb-[18vw] lg:mb-[10vw] xl:mb-[13vw] 2xl:mb-60 hero-bg-gradient pb-24 sm:pb-32 md:pb-44 lg:pb-0",
+  title: titleClass = 'text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-bold tracking-wide text-primaryText px-8 sm:px-8 md:px-20 lg:px-4',
+  subtitle: subtitleClass = "text-secondaryText text-sm lg:text-base xl:text-lg sm:text-base mt-10 px-12 sm:px-48",
+  /*content: contentClass = "mb-10 text-secondaryText leading-loose",*/
+} = classes
+
+/* @@ new api @@ */
+
+
+/* @@ old apis
+const categories = await getCategories()
+const areas = [...new Set(categories.map((category) => category.area))]
+const numAreas = numElements(areas)
+//console.log('numero aree', numAreas)
+*/
+
+const my_test = Astro.props
+
+
+---
+
+<section class={twMerge("flex flex-col items-center", containerClass)}>
+    {
+      tagline && (
+        <p class="text-secondaryColor text-sm sm:text-base mb-6 sm:mt-32 mt-16 font-bold">
+          {tagline}
+        </p>
+      )
+    }
+    {
+      title && (
+        <h1
+          class={twMerge(
+            "font-extrabold tracking-tight text-primary",
+            titleClass
+          )}
+          set:html={title}
+        />
+      )
+    }
+    {
+      subtitle && (
+        <h2 class={twMerge("mt-2", subtitleClass)} set:html={`welcome ${user_name}`} />
+      )
+    }
+    <!-- Icon Blocks -->
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      
+      <!-- Dynamic Components -->
+    
+        {componentList.map(({ name, props = {} }) => {
+
+            const Component = components[name]
+            console.log('component name', name)
+            
+            if (name === 'SiteCards') {
+                return <Component {...props}  main={main} my_test="Hello from parent"/>
+            }
+            if (name === 'HeaderSearch') {
+                return <Component {...props} currentView="grid" main={main} my_test="Hello from parent" />
+            }
+            return <Component {...props} my_test="Hello from parent" main={main} />
+        })}
+    </div>
+</section>
+
+

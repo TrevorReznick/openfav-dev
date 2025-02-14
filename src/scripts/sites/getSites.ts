@@ -1,10 +1,10 @@
 
 import * as f from '~/api/apiClientV1'
-import * as utils from '~/scripts/getSitesUtils'
+import * as utils from '~/scripts/sites/getSitesUtils'
 
 const sites = f.sites.data
 
-console.log('firts log', f.all_categories)
+console.log('firsts log', f.all_categories)
 console.log('sites log', sites)
 
 
