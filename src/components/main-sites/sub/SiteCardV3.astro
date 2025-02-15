@@ -3,12 +3,6 @@ import * as api from '~/api/apiClient'
 import TestApisV2 from '~/pages/dev/test-apisV2.astro'
 import '~/assets/css/SiteCard.css'
 
-import { Globe, Clock, MoreVertical } from 'lucide-react'
-import { CARD } from '~/config/cardCostantsNew'
-import Card1 from '~/components/main-sites/sub/old/card1.astro'
-import Card2 from '~/components/main-sites/sub/card2.astro'
-import CardsTags from '~/components/main-sites/sub/cardsTags.astro'
-
 const deleteSite = api.deleteEvent
 
 interface Props {
@@ -19,6 +13,8 @@ interface Props {
 const {my_test, main, ...props} = Astro.props
 
 const sites = Array.isArray(main?.data) ? main.data : []
+
+const placeholder = '/placeholder.svg'
 
 console.log('received data', main.data)
 console.log('my name', TestApisV2)
@@ -33,7 +29,14 @@ console.log('my name', TestApisV2)
                     aria-label="Abstract gradient background"
                     role="img"
                     class="card-image"
-                ></div>
+                >
+                    <img
+                        src={site.image || placeholder}
+                        alt={site.title}
+                        class="card-image__img"
+                        loading="lazy"
+                    />
+                </div>
                 <div class="card-content">
                     <p class="card-title">{site.title}</p>
                     <p class="card-description">{site.description}</p>

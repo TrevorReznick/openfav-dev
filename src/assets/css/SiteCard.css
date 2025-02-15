@@ -19,6 +19,31 @@
   overflow: hidden;
 }
 
+.card-image {
+  width: 100%; /* Dimensioni del contenitore */
+  height: 200px; /* Altezza fissa o dinamica */
+
+  position: relative; /* Permette il posizionamento assoluto dell'immagine */
+  overflow: hidden; /* Nasconde eventuali overflow */
+  border-radius: 8px; /* Opzionale: arrotonda gli angoli */
+}
+
+.card-image__img {
+  width: 100%; /* Occupa tutta la larghezza del contenitore */
+  height: 100%; /* Occupa tutta l'altezza del contenitore */
+  object-fit: cover; /* Mantieni le proporzioni dell'immagine */
+  position: absolute; /* Sovrappone l'immagine al div */
+  top: 0;
+  left: 0;
+  opacity: 1; /* Opacità iniziale visibile */
+  transition: opacity 0.3s ease-in-out; /* Effetto di transizione */
+}
+
+/* Se l'immagine non è disponibile, nascondila e mostra il background */
+.card-image img[src=""] {
+  opacity: 0; /* Nasconde l'immagine vuota */
+}
+
 .card-image::before {
   content: "";
   position: absolute;
