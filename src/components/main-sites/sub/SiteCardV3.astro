@@ -43,31 +43,31 @@ console.log('my name', TestApisV2)
                     />
                 </div>
                 <div class="absolute top-2 right-2 z-10">
-        <button
-          class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors menu-trigger"
-          data-index={index}
-        >
-          <MoreVertical className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-        </button>
-        
-        <div 
-          class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700 menu-content"
-          data-index={index}
-        >
-          <button
-            class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 edit-button"
-            data-id={site.id}
-          >
-            Edit
-          </button>
-          <button
-            class="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 delete-button"
-            data-id={site.id}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+                    <button
+                        class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors menu-trigger"
+                        data-index={index}
+                    >
+                    <MoreVertical className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                    </button>
+                    
+                    <div 
+                        class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700 menu-content"
+                        data-index={index}
+                    >
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 edit-button"
+                        data-id={site.id}
+                    >
+                        Edit
+                    </button>
+                    <button
+                        class="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 delete-button"
+                        data-id={site.id}
+                    >
+                        Delete
+                    </button>
+                    </div>
+                </div>
                 <div class="card-content">
                     <p class="card-title">{site.name}</p>
                     <p class="card-description">{site.title}</p>
@@ -76,6 +76,7 @@ console.log('my name', TestApisV2)
                         <span class="card-tag">CSS</span>
                         <span class="card-tag">HTML</span>
                     </div>
+                    {/*
                     <div class="card-footer">
                         <div class="card-stats">
                             <span class="card-stat">
@@ -103,8 +104,9 @@ console.log('my name', TestApisV2)
                                 18
                             </span>
                         </div>
-                    <a class="card-button" href="#">Explore</a>
+                        <a class="card-button" href="#">Explore</a>
                     </div>
+                     */}
                 </div>
             </div>
         ))}
