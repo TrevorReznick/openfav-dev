@@ -9,7 +9,7 @@ export const navbarLinks = [
 export const navbarAuthLinks = [
     { label: 'Home', href: '/', ariaLabel: 'Home' },
     { label: 'Dashboard', href: '/protected/dashboard', ariaLabel: 'Features' },
-    { label: 'Main Sites 1', href: '/protected/pageV0', ariaLabel: 'Pricing' },
+    { label: 'Main Sites 1', href: '/protected/pageV2', ariaLabel: 'Pricing' },
     { label: 'Main Sites 2', href: '/protected/pageV1', ariaLabel: 'About' },
     { label: 'Contacts', href: '/dev/feedback', ariaLabel: 'FAQ' },
 ]
