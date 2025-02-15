@@ -5,9 +5,9 @@ import type {ApiResponse, SiteData} from '~/types/siteData'
 /* old imports */
 import { numElements } from '~/scripts/oopps'
 
-const my_site: any = await api.fetchElement('getSiteById', 110)
-const main_site = my_site?.data as { success: boolean; data: any[] }
-console.log('ahhhhhh', main_site)
+const filtered_sites: any = await api.fetchElements('getSitesByUserId', '9446217e-49e8-49f9-84dc-822ed8df969b')
+const main_sites = filtered_sites?.data as { success: boolean; data: any[] }
+console.log('ahhhhhh', main_sites)
 
 
 const sites: ApiResponse<unknown> = await api.fetchElements('getSites')

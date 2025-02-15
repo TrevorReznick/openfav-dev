@@ -16,11 +16,15 @@ export const sendApiRequest = async (fetchFunc) => {
     }
 };
 
-export const fetchElements = (type: string) => 
-    makeRequest(api_endpoint, type)
+export const fetchElements = (type: string, user_id?: string | {}) => 
+    makeRequest(api_endpoint, type, {user_id})
 
-export const fetchElement = (type: string, id: number) =>
+export const fetchElement = (type: string, id?: number) => {
+
     makeRequest(api_endpoint, type, { id })
+
+}
+    
 
 
 /* @@ -- POST methods -- @@ */

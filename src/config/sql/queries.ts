@@ -1,3 +1,16 @@
+export const getSiteQueryByUserId = `
+    user_id,
+    id_src,
+    main_table (
+        description,
+        icon,
+        image,
+        logo,
+        name,
+        title,
+        url  
+    )
+`
 export const getSiteQuery = `
     id,
     description,

@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro'
 import { createClient } from '@supabase/supabase-js'
 import { supabaseUpdate, supabaseQuery, supabaseInsert, supabaseDelete } from '~/providers/supabaseQueryV1'
-import {getSiteQuery} from '~/config/sql/queries.ts'
+import {getSiteQuery, getSiteQueryByUserId} from '~/config/sql/queries.ts'
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY
@@ -128,6 +128,13 @@ const handleApiRequest = async (method: string, type: string, params: any, reque
       const { id } = params
       if (!id) throw new Error('ID is required for getSiteById')
       return getSite(id)
+
+    //getSitesByUserId
+    case 'getSitesByUserId':
+      if (method !== 'GET') throw new Error('Invalid method for getSiteById')
+      const {user_id} = params
+      if (!user_id) throw new Error('ID is required for getSitesByUserId')
+      return getSitesByUserId(user_id)
   
     case 'getSubCategories':
       if (method !== 'GET') throw new Error('Invalid method for getSubCategories')
@@ -283,8 +290,15 @@ const getSites = async () => {
   })
 }
 
-const getSitesByUserId = async(id) => {
-
+const getSitesByUserId = async(user_id) => {
+  return await supabaseQuery('sub_main_table', {
+    select: getSiteQueryByUserId,
+    order: {
+      column: 'id',
+      ascending: false
+    },
+    filter: (query) => query.eq('user_id', user_id)
+  })
 }
 
 const getSubCategories = async () => {
