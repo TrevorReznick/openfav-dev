@@ -3,9 +3,12 @@ import { twMerge } from 'tailwind-merge'
 import * as api from '~/api/apiClient'
 import type {ApiResponse, SiteData} from '~/types/siteData'
 /* old imports */
-import { getCategories } from '~/scripts/requests'
 import { numElements } from '~/scripts/oopps'
-import { DEFAULT_HASH_PROPS } from 'node_modules/astro/dist/assets/consts'
+
+const my_site: any = await api.fetchElement('getSiteById', 110)
+const main_site = my_site?.data as { success: boolean; data: any[] }
+console.log('ahhhhhh', main_site)
+
 
 const sites: ApiResponse<unknown> = await api.fetchElements('getSites')
 

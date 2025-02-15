@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { createClient } from '@supabase/supabase-js'
 import { supabaseUpdate, supabaseQuery, supabaseInsert, supabaseDelete } from '~/providers/supabaseQueryV1'
+import {getSiteQuery} from '~/config/sql/queries.ts'
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY
@@ -274,44 +275,16 @@ const getSite = async (id: string | number) => {
 
 const getSites = async () => {
   return await supabaseQuery('main_table', {
-    select: `
-      id,
-      description,
-      icon,
-      image,
-      logo,
-      name,
-      title,
-      url,
-      categories_tags ( 
-        id_area,
-        id_cat,
-        tag_3,
-        tag_4,
-        tag_5,
-        id_provider,
-        ratings,
-        AI_think,
-        AI_summary
-      ),
-      sub_main_table (
-        user_id,
-        accessible,
-        domain_exists,
-        html_content_exists,
-        is_public,
-        secure, 
-        status_code,
-        valid_url,
-        type,
-        AI
-      )
-    `,
+    select: getSiteQuery,
     order: {
       column: 'id',
       ascending: false
     }
   })
+}
+
+const getSitesByUserId = async(id) => {
+
 }
 
 const getSubCategories = async () => {
