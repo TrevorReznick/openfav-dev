@@ -18,6 +18,7 @@ interface Props {
   title?: string
   subtitle?: string  
   tagline?: string
+  sub?: string
   components?: Array<{
     name: keyof typeof components
     props?: Record<string, any>
@@ -39,7 +40,8 @@ const {
   subtitle = await Astro.slots.render("subtitle"),  
   tagline = await Astro.slots.render("tagline"),  
   components: componentList = [
-    { name : 'HeaderSearch'}, 
+    { name : 'HeaderSearch'},
+    { name : 'SubHeader'},
     { name: 'SiteCards'},
     { name: 'CallToActionNew'}
   ],
@@ -48,6 +50,7 @@ const {
 } = Astro.props
 
 const components = {
+    SubHeader: (await import('~/components/main-sites/sub/SubHeader.astro')).default,  
     HeaderSearch: (await import('~/components/main-sites/sub/HeaderSearch.astro')).default,
     SiteCards: (await import('~/components/main-sites/sub/SiteCardV3.astro')).default,  
     CallToActionNew: (await import('~/components/dev/new/CalltToActionNew.astro')).default
@@ -100,24 +103,24 @@ const my_test = Astro.props
       )
     }
     <!-- Icon Blocks -->
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
       
       <!-- Dynamic Components -->
-    
-        {componentList.map(({ name, props = {} }) => {
-
-            const Component = components[name]
-            console.log('component name', name)
-            
-            if (name === 'SiteCards') {
-                return <Component {...props}  main={main} my_test="Hello from parent"/>
-            }
-            if (name === 'HeaderSearch') {
-                return <Component {...props} currentView="grid" main={main} my_test="Hello from parent" />
-            }
-            return <Component {...props} my_test="Hello from parent" main={main} />
-        })}
-    </div>
+      {componentList.map(({ name, props = {} }) => {
+        const Component = components[name]
+        console.log('component name', name)
+        if (name === 'SiteCards') {
+          return <Component {...props}  main={main} my_test="Hello from parent"/>
+        }
+        if (name === 'HeaderSearch') {
+          return <Component {...props} currentView="grid" main={main} my_test="Hello from parent" />
+        }
+        if (name === 'SubHeader') {
+          return <Component {...props}  main={main} my_test="Hello from parent" sub="Hello Developer"/>
+        }
+        return <Component {...props} my_test="Hello from parent" main={main} />
+      })}
+  </div>
 </section>
 
 
