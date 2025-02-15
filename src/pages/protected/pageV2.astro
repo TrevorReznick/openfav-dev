@@ -1,0 +1,24 @@
+---
+import Layout from "~/layouts/Layout.astro"
+import IsComponent from "~/components/main-sites/MyComponentV3.astro"
+
+import { email, user_name, currentPath } from "~/store"
+
+
+const _email: any = email.get()
+const _user_name: any = user_name.get()
+const path = currentPath.get()
+
+console.log('path', path)
+
+
+---
+
+<Layout title="Login">
+  <IsComponent
+    email={_email}
+    user_name={_user_name}
+    tagline="Test Page"
+    title="Dev Page"      
+  />
+</Layout>
