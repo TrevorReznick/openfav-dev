@@ -2,8 +2,13 @@
 import * as api from '~/api/apiClient'
 import TestApisV2 from '~/pages/dev/test-apisV2.astro'
 import '~/assets/css/SiteCard.css'
+import { Globe, Clock, MoreVertical } from 'lucide-react'
 
 const deleteSite = api.deleteEvent
+
+export const api_prod = import.meta.env.PUBLIC_PROD_API_URL
+export const api_dev = import.meta.env.PUBLIC_DEV_API_URL
+export const api_url = import.meta.env.MODE == 'production' ? api_prod : api_dev
 
 interface Props {
     my_test: string,
@@ -23,7 +28,7 @@ console.log('my name', TestApisV2)
 {sites.length > 0 ? (
     // Card Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {sites.map((site) => (
+        {sites.map((site, index) => (
             <div class="card">
                 <div
                     aria-label="Abstract gradient background"
@@ -37,9 +42,35 @@ console.log('my name', TestApisV2)
                         loading="lazy"
                     />
                 </div>
+                <div class="absolute top-2 right-2 z-10">
+        <button
+          class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors menu-trigger"
+          data-index={index}
+        >
+          <MoreVertical className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+        </button>
+        
+        <div 
+          class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700 menu-content"
+          data-index={index}
+        >
+          <button
+            class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 edit-button"
+            data-id={site.id}
+          >
+            Edit
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 delete-button"
+            data-id={site.id}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
                 <div class="card-content">
-                    <p class="card-title">{site.title}</p>
-                    <p class="card-description">{site.description}</p>
+                    <p class="card-title">{site.name}</p>
+                    <p class="card-description">{site.title}</p>
                     <div class="card-tags">
                         <span class="card-tag">Design</span>
                         <span class="card-tag">CSS</span>
@@ -90,5 +121,104 @@ console.log('my name', TestApisV2)
     {JSON.stringify(main.data, null, 2)}
 </pre>
  -->
+<script define:vars={{api_url}}>
+
+function initMenuHandlers() {
+    let activeMenu = null
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!(e.target instanceof HTMLElement)) return
+      if (!e.target.closest('.menu-trigger') && !e.target.closest('.menu-content')) {
+        if (activeMenu) {
+          activeMenu.classList.add('hidden')
+          activeMenu = null;
+        }
+      }
+    })
+
+    // Menu trigger handlers
+    document.querySelectorAll('.menu-trigger').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        if (!(e.currentTarget instanceof HTMLElement)) return
+        const index = e.currentTarget.dataset.index
+        const menu = document.querySelector(`.menu-content[data-index="${index}"]`)
+        
+        if (menu instanceof HTMLElement) {
+          if (activeMenu && activeMenu !== menu) {
+            activeMenu.classList.add('hidden')
+          }
+          
+          menu.classList.toggle('hidden');
+          activeMenu = menu.classList.contains('hidden') ? null : menu
+        }
+      })
+    })
+
+    // Edit button handler
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            if (!(e.currentTarget instanceof HTMLElement)) return
+                const id = e.currentTarget.dataset.id
+                console.log('Edit site:', id)
+            //TODO
+            if (activeMenu) {
+                activeMenu.classList.add('hidden')
+                activeMenu = null
+            }
+        })
+    });
+
+    // Delete button handler
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', async (e) => {
+            if (!(e.currentTarget instanceof HTMLElement)) return
+                const id = e.currentTarget.dataset.id
+                //console.log('Delete site:', id)
+            if (activeMenu) {
+                activeMenu.classList.add('hidden')
+                activeMenu = null
+            }
+            await makeRequest('deleteSite', id, apiUrl)
+        })
+    })
+  }
+
+  // Initialize both drag and drop and menu handlers
+  document.addEventListener('DOMContentLoaded', () => {    
+    initMenuHandlers()
+  })
+
+  const makeRequest = async (type, id, api_url) => {
+    try {
+      const urlParams = new URLSearchParams({ type, id }).toString()
+      //http://localhost:4321/api/v1/main/doQueries?type=deleteSite&id=97
+      //makeRequest(api_endpoint, 'deleteSite', { id }, 'DELETE', {})
+
+      const url = `${api_url}main/doQueries?type=${type}&id=${id}`
+      console.log('Request URL:', url);
+
+      const options = {
+        method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+      }
+
+      const response = await fetch(url, options)
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Server responded but gave an error', result);
+        return { success: false, error: result }
+      }
+      console.log('site deleted: ', id)
+      return { success: true, data: result }
+    } catch (error) {
+      console.error('Client error received:', error)
+      return { success: false, error: error.message }
+    }
+  }
+</script>
  
 
