@@ -24,8 +24,6 @@ export const fetchElement = (type: string, id?: number) => {
     makeRequest(api_endpoint, type, { id })
 
 }
-    
-
 
 /* @@ -- POST methods -- @@ */
 
